@@ -52,6 +52,17 @@ def resume(task: TaskSpec, traj: Trajectory, cut: int, policy: Policy) -> Valida
     return task.validate(world)
 
 
+def scripted_policy(continuation: list[Message]) -> Policy:
+    """A policy that plays back a recorded continuation (e.g. a model's captured tool calls)."""
+
+    tail = list(continuation)
+
+    def _policy(_prefix: Trajectory, _env: Environment) -> list[Message]:
+        return tail
+
+    return _policy
+
+
 def replay_tail_policy(original: Trajectory, cut: int) -> Policy:
     """A deterministic oracle policy: replay the original trajectory's messages after `cut`.
 

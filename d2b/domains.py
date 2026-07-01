@@ -34,11 +34,12 @@ def _t_search_flights(_a: dict, _w: World) -> str:
 
 
 def _t_book_flight(a: dict, w: World) -> str:
-    f = _FLIGHTS.get(a.get("id", ""))
+    fid = a.get("id") or a.get("flight")  # tolerate common arg-name synonyms
+    f = _FLIGHTS.get(fid or "")
     if f is None:
-        return f"ERROR: unknown flight {a.get('id')}"
-    w["booked"] = {"id": a.get("id"), **f}
-    return f"Booked {a.get('id')}. Confirmation QX4821."
+        return f"ERROR: unknown flight {fid}"
+    w["booked"] = {"id": fid, **f}
+    return f"Booked {fid}. Confirmation QX4821."
 
 
 def _travel_env() -> Environment:

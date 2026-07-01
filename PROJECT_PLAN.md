@@ -36,7 +36,7 @@ stop and re-align.
   model family generates and grades (R6, documented limitation) — mitigated because ground truth
   comes from *injection*, not a model, and attribution runs on the redacted `.public` trace in
   fresh-context subagents. Scale (5 domains at $0) is the other risk — rate limits force batching.
-- **Latest handoff:** `handoffs/0006-m1b-domains.md`
+- **Latest handoff:** `handoffs/0007-m2-first-cell.md`
 
 ---
 
@@ -293,3 +293,9 @@ a detect→rollback loop recovers — the C4/v0.1 headline metric), **irreversib
   constraint pinning, memory/context-editing) and defer it to v0.2. **Do not freeze the fault enum** —
   freeze the *manifest* (`test_smoke` now asserts presence, not closure). Leaderboard / multi-agent /
   recovery-runtime stay OUT.
+- **D-014 (2026-06-30, M2 exp01 design lessons — from the first real cell):** (a) **a dropped
+  constraint only causes damage if it was BINDING** — the first cell (travel + constraint_drop) gave
+  Δ=0 because the model intrinsically avoids red-eyes and the violation saved only $50. Fixtures used
+  to measure `constraint_drop` (and other decision faults) must make violating the rule TEMPTING
+  (cheaper/only-viable shortcut). (b) `render_prefix` must include **tool arg schemas** (agents
+  guessed `{"flight":...}` vs the expected `{"id":...}`). Both are prerequisites before scaling exp01.

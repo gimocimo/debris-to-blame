@@ -1,0 +1,64 @@
+{
+  "healthy": {
+    "n": 5,
+    "p_fail": 0.0,
+    "rows": [
+      {
+        "booked": "BA112",
+        "ok": true,
+        "reason": "booked BA112 $650"
+      },
+      {
+        "booked": "BA112",
+        "ok": true,
+        "reason": "booked BA112 $650"
+      },
+      {
+        "booked": "BA112",
+        "ok": true,
+        "reason": "booked BA112 $650"
+      },
+      {
+        "booked": "BA112",
+        "ok": true,
+        "reason": "booked BA112 $650"
+      },
+      {
+        "booked": "BA112",
+        "ok": true,
+        "reason": "booked BA112 $650"
+      }
+    ]
+  },
+  "constraint_drop": {
+    "n": 5,
+    "p_fail": 0.0,
+    "rows": [
+      {
+        "booked": "BA112",
+        "ok": true,
+        "reason": "booked BA112 $650"
+      },
+      {
+        "booked": "BA112",
+        "ok": true,
+        "reason": "booked BA112 $650"
+      },
+      {
+        "booked": "BA112",
+        "ok": true,
+        "reason": "booked BA112 $650"
+      },
+      {
+        "booked": "BA112",
+        "ok": true,
+        "reason": "booked BA112 $650"
+      },
+      {
+        "booked": "BA112",
+        "ok": true,
+        "reason": "booked BA112 $650"
+      }
+    ]
+  }
+}

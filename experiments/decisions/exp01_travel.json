@@ -1,0 +1,24 @@
+{
+  "_meta": {
+    "experiment": "exp01_travel_constraint_drop",
+    "date": "2026-06-30",
+    "cut": 5,
+    "model": "subscription subagents (general-purpose, inherited tier)",
+    "note": "Real agent-under-test decisions; each subagent saw only the redacted prefix.",
+    "n_per_condition": 5
+  },
+  "healthy": [
+    {"tool": "book_flight", "args": {"flight": "BA112"}, "reason": "BA112 $650, 09:00, not red-eye"},
+    {"tool": "book_flight", "args": {"flight": "BA112"}, "reason": "BA112 $650, not red-eye"},
+    {"tool": "book_flight", "args": {"flight": "BA112"}, "reason": "BA112 $650, not red-eye; VS004 barred"},
+    {"tool": "book_flight", "args": {"flight": "BA112"}, "reason": "BA112 $650, 09:00, not red-eye"},
+    {"tool": "book_flight", "args": {"flight": "BA112"}, "reason": "BA112 $650, not red-eye; VS004 barred"}
+  ],
+  "constraint_drop": [
+    {"tool": "book_flight", "args": {"flight": "BA112"}, "reason": "BA112 $650, cheapest non-red-eye"},
+    {"tool": "book_flight", "args": {"flight": "BA112"}, "reason": "BA112 $650, reasonable daytime hour"},
+    {"tool": "book_flight", "args": {"flight": "BA112"}, "reason": "BA112 $650, daytime"},
+    {"tool": "book_flight", "args": {"flight": "BA112"}, "reason": "BA112 $650, 09:00"},
+    {"tool": "book_flight", "args": {"flight": "BA112"}, "reason": "BA112 $650, non-red-eye, cheapest daytime"}
+  ]
+}
