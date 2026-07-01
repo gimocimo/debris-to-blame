@@ -47,11 +47,15 @@ The **blame gap** is the region where `D` is high but `A` is low — faults that
 - **Exit:** a short `docs/novelty.md` "related work + what we borrow" note. **No pivot condition** —
   the project proceeds regardless of what exists.
 
-### M1 — Harness + injector (frozen env)
-- Deterministic mock-tool environment; load/replay frozen successful trajectories.
-- `d2b/faults.py`: the six-fault taxonomy, parameterized by `(type, position, volume)`.
-- `d2b/replay.py`: re-run/replay a perturbed trajectory to an outcome deterministically.
-- **Exit:** inject any fault into any frozen trajectory; round-trip test green.
+### M1 — Harness + injector (frozen env) ✅ DONE (2026-06-30)
+- `d2b/trajectory.py`: Message/ToolCall/Trajectory data model + JSON IO.
+- `d2b/tools.py`: deterministic mock-tool environment (flight-booking) + decoy schemas.
+- `d2b/faults.py`: `inject(traj, spec)` for all six fault types; ground-truth `blame_label` recorded.
+- `d2b/fixtures.py`: a clean successful fixture trajectory.
+- `scripts/demo_inject.py`: runnable demo (all 6 faults, zero model calls). `tests/test_inject.py`.
+- **Exit met:** inject any fault into any frozen trajectory; 17 tests green; ruff clean; demo runs
+  with bare `python3`. NOTE: `replay.py` (deterministic re-execution) deferred to M2, where it pairs
+  with resume-live generation — no need for it before real trajectories exist.
 
 ### M2 — Degradation + attribution (v0.1, Claude-tier panel)
 - **Inference is subscription-native (D-007):** trajectories generated in-session; degradation

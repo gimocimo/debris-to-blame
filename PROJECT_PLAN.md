@@ -19,9 +19,9 @@ stop and re-align.
 - **Date of last update:** 2026-06-30 (Session 2 — subscription-native + novelty deprioritized)
 - **Lead framing:** Claim C1 — *injection-grounded attribution* (see §3), positioned as **the
   measurement floor under recoverable long-horizon agents** (see §2a).
-- **Milestones complete:** none yet. Scaffold only.
-- **Next milestone:** **M0 — novelty kill** (confirm no injection-grounded attribution benchmark
-  exists; run the dedicated tool-use-limits prior-art search the research flagged as under-covered).
+- **Milestones complete:** M0 (light related-work scan) ✅ · **M1 (injector + mock env + demo)** ✅
+- **Next milestone:** **M2 — degradation + attribution (v0.1)** on a Claude-tier panel,
+  subscription-native. First real empirical claim.
 - **Repo health:** scaffold committed + pushed; **public** at `github.com/gimocimo/debris-to-blame`
   (D-008). Smoke tests pass.
 - **Headline result so far:** none. No claim is real until M2 lands on a real (Claude-tier) panel.
@@ -30,7 +30,7 @@ stop and re-align.
 - **Biggest open risk:** now **execution + validity**, not novelty. Chief validity risk: the same
   model family generates and grades — mitigated because ground truth comes from *injection*, not a
   model, and attribution runs in fresh-context subagents (R6).
-- **Latest handoff:** `handoffs/0003-subscription-native.md`
+- **Latest handoff:** `handoffs/0004-m1-injector.md`
 
 ---
 

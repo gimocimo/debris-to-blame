@@ -88,7 +88,20 @@ Systems"* — Zhang et al., ICML 2025 Spotlight.
 
 ---
 
-## M0 exit checklist
+## What we borrow (M0 closure — copying is fine, D-006)
+- **From ConstraintRot (2606.22528):** the `constraint_drop` fault framing + "Constraint Pinning" as
+  a C4 mitigation baseline; their LLM-judge violation-scoring recipe.
+- **From ReliabilityBench (2601.06112):** `pass^k` as our reliability metric; the idea of injecting
+  faults + perturbations (we repurpose it for attribution ground truth, not stress-testing).
+- **From Who&When (2505.00212):** its three attributor methods (all-at-once / step-by-step /
+  binary-search) become our attribution baselines in exp02.
+- **From TRAIL (2505.08638):** its error taxonomy to cross-check our six fault types; joint-accuracy
+  metric (category + location).
+- **From HORIZON (2604.11978):** the 7-category failure vocabulary as a naming cross-check.
+
+**M0 status: CLOSED (light scan, non-gating).** No pivot triggered. Proceeding to M1.
+
+## M0 exit checklist (historical — superseded by the borrow-list above)
 - [ ] Read ConstraintRot 2606.22528 in full; confirm the 5-axis diff holds.
 - [ ] Dedicated search: does any 2025–2026 work inject faults to get attribution ground truth?
       (search terms: "synthetic fault injection failure attribution agent", "controlled error
