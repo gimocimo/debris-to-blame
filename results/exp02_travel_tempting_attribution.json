@@ -1,0 +1,17 @@
+{
+  "blind_failed": {
+    "n": 5,
+    "detect": 0.4,
+    "attributed": 0.0
+  },
+  "blind_clean": {
+    "n": 3,
+    "detect": 1.0,
+    "attributed": 0.0
+  },
+  "with_policy_failed": {
+    "n": 5,
+    "detect": 1.0,
+    "attributed": 1.0
+  }
+}
