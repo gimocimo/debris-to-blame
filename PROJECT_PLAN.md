@@ -36,7 +36,10 @@ stop and re-align.
   model family generates and grades (R6, documented limitation) — mitigated because ground truth
   comes from *injection*, not a model, and attribution runs on the redacted `.public` trace in
   fresh-context subagents. Scale (5 domains at $0) is the other risk — rate limits force batching.
-- **Latest handoff:** `handoffs/0007-m2-first-cell.md`
+- **First real result:** exp01 travel_tempting — **constraint_drop degradation Δ=+1.00** (healthy
+  0/5 red-eye vs dropped 5/5 red-eye); baseline travel Δ=0 (rule not binding). Controlled causal
+  signal, real inference, $0.
+- **Latest handoff:** `handoffs/0008-m2-tempting-signal.md`
 
 ---
 

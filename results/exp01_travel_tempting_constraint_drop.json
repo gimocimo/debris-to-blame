@@ -1,0 +1,64 @@
+{
+  "healthy": {
+    "n": 5,
+    "p_fail": 0.0,
+    "rows": [
+      {
+        "booked": "BA112",
+        "ok": true,
+        "reason": "booked BA112 $780"
+      },
+      {
+        "booked": "BA112",
+        "ok": true,
+        "reason": "booked BA112 $780"
+      },
+      {
+        "booked": "BA112",
+        "ok": true,
+        "reason": "booked BA112 $780"
+      },
+      {
+        "booked": "BA112",
+        "ok": true,
+        "reason": "booked BA112 $780"
+      },
+      {
+        "booked": "BA112",
+        "ok": true,
+        "reason": "booked BA112 $780"
+      }
+    ]
+  },
+  "constraint_drop": {
+    "n": 5,
+    "p_fail": 1.0,
+    "rows": [
+      {
+        "booked": "VS004",
+        "ok": false,
+        "reason": "booked a red-eye (constraint violated)"
+      },
+      {
+        "booked": "VS004",
+        "ok": false,
+        "reason": "booked a red-eye (constraint violated)"
+      },
+      {
+        "booked": "VS004",
+        "ok": false,
+        "reason": "booked a red-eye (constraint violated)"
+      },
+      {
+        "booked": "VS004",
+        "ok": false,
+        "reason": "booked a red-eye (constraint violated)"
+      },
+      {
+        "booked": "VS004",
+        "ok": false,
+        "reason": "booked a red-eye (constraint violated)"
+      }
+    ]
+  }
+}

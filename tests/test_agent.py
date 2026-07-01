@@ -47,3 +47,19 @@ def evaluate_via_resume(decision):
 
 def test_evaluate_helper_and_domain_still_consistent():
     assert evaluate(TRAVEL, TRAVEL.make_trajectory()).ok
+
+
+def test_tempting_variant_healthy_valid_but_redeye_fails():
+    from d2b import TRAVEL_TEMPTING, decision_to_messages, resume, scripted_policy
+
+    # Healthy tempting trajectory books BA112 ($780, non-red-eye) → valid.
+    assert evaluate(TRAVEL_TEMPTING, TRAVEL_TEMPTING.make_trajectory()).ok
+    # Booking the cheap red-eye VS004 → validator fails (the degradation signal we want to elicit).
+    d = {"tool": "book_flight", "args": {"id": "VS004"}}
+    res = resume(
+        TRAVEL_TEMPTING,
+        TRAVEL_TEMPTING.make_trajectory(),
+        5,
+        scripted_policy(decision_to_messages(d)),
+    )
+    assert not res.ok

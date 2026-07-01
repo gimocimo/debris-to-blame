@@ -5,7 +5,15 @@ See PROJECT_PLAN.md for scope.
 """
 
 from .agent import decision_to_messages, parse_decision, render_prefix
-from .domains import ALL_DOMAINS, CALENDAR, ECOMMERCE, REPO_TRIAGE, SPREADSHEET, TRAVEL
+from .domains import (
+    ALL_DOMAINS,
+    CALENDAR,
+    ECOMMERCE,
+    REPO_TRIAGE,
+    SPREADSHEET,
+    TRAVEL,
+    TRAVEL_TEMPTING,
+)
 from .env import Environment, Tool, World, make_environment
 from .faults import (
     Corruption,
@@ -60,6 +68,7 @@ __all__ = [
     "CALENDAR",
     "ECOMMERCE",
     "SPREADSHEET",
+    "TRAVEL_TEMPTING",
     # legacy stateless demo tools (M1)
     "MockTool",
     "ToolRegistry",

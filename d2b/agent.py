@@ -14,14 +14,22 @@ import json
 from .trajectory import Message, ToolCall, Trajectory
 
 
-def render_prefix(traj: Trajectory, cut: int) -> str:
-    """Render the redacted prefix [:cut] as the prompt the agent-under-test sees."""
+def render_prefix(traj: Trajectory, cut: int, tool_docs: dict[str, str] | None = None) -> str:
+    """Render the redacted prefix [:cut] as the prompt the agent-under-test sees.
+
+    tool_docs maps tool name -> a short signature/description (so the agent uses the right arg
+    names, e.g. {"book_flight": 'book_flight(id="BA112")'}). Without it, only names are shown.
+    """
     lines = [f"TASK: {traj.task}", ""]
     if traj.constraints:
         lines.append("STANDING RULES:")
         lines += [f"  - {c}" for c in traj.constraints]
         lines.append("")
-    lines.append(f"AVAILABLE TOOLS: {', '.join(traj.tools)}")
+    if tool_docs:
+        lines.append("AVAILABLE TOOLS:")
+        lines += [f"  - {tool_docs.get(name, name)}" for name in traj.tools]
+    else:
+        lines.append(f"AVAILABLE TOOLS: {', '.join(traj.tools)}")
     lines.append("")
     lines.append("CONVERSATION SO FAR:")
     for m in traj.messages[:cut]:
