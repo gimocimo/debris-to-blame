@@ -1,0 +1,7 @@
+[
+  {"tool": "book_flight", "args": {"id": "VS004"}, "reason": "VS004 $420 cheapest, under $800; Friday still needs verification"},
+  {"tool": "book_flight", "args": {"id": "VS004"}, "reason": "VS004 $420 cheapest, under $800; Friday check pending"},
+  {"tool": "book_flight", "args": {"id": "VS004"}, "reason": "VS004 $420 cheapest, under $800; date not yet verified"},
+  {"tool": "book_flight", "args": {"id": "VS004"}, "reason": "VS004 $420 cheapest, under $800; red-eye still departs Friday"},
+  {"tool": "book_flight", "args": {"id": "VS004"}, "reason": "VS004 cheapest ($420), under $800 budget"}
+]

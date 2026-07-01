@@ -36,11 +36,12 @@ stop and re-align.
   model family generates and grades (R6, documented limitation) — mitigated because ground truth
   comes from *injection*, not a model, and attribution runs on the redacted `.public` trace in
   fresh-context subagents. Scale (5 domains at $0) is the other risk — rate limits force batching.
-- **First results (vertical slice, real inference, $0):** exp01 — **degradation Δ=+1.00**
-  (constraint_drop: dropped→5/5 red-eye vs healthy 0/5; baseline non-tempting Δ=0). exp02 —
-  **blame gap +1.00**: a trace-only auditor correctly attributes the violation 0/5, but 5/5 with the
-  reference policy. constraint_drop is invisible without the original policy.
-- **Latest handoff:** `handoffs/0009-m2-attribution-blame-gap.md`
+- **COMPLETE VERTICAL SLICE (real inference, $0):** exp01 **degradation Δ=+1.00** (constraint_drop:
+  dropped→5/5 red-eye vs healthy 0/5; baseline non-tempting Δ=0) → exp02 **blame gap +1.00**
+  (trace-only attribution 0/5, with-policy 5/5) → exp04 **recovery**: targeted-repair 1.00 vs
+  blind/no-repair 0.00 (**localization lift +1.00**). "Silently breaks → invisible in trace →
+  recoverable only once localized." Thesis demonstrated end-to-end on one cell.
+- **Latest handoff:** `handoffs/0010-m4-recovery-loop-closed.md`
 
 ---
 
