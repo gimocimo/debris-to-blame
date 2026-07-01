@@ -1,25 +1,23 @@
-"""Smoke tests — keep the scaffold honest until M1 lands real logic."""
+"""Smoke tests — package sanity + the fault manifest (idea space is NOT frozen, D-013)."""
 
 import d2b
-from d2b.faults import FaultSpec, FaultType
+from d2b.faults import FaultType
+
+# The v0 manifest: the six fault types we ship experiments for. New types may be ADDED without
+# breaking this test — we assert these exist, not that the enum is closed (Codex cut-list, D-013).
+V0_MANIFEST = {
+    "debris",
+    "staleness",
+    "contradiction",
+    "wrong_tool",
+    "constraint_drop",
+    "tool_forgetting",
+}
 
 
 def test_version():
     assert d2b.__version__ == "0.0.0"
 
 
-def test_fault_taxonomy_frozen():
-    # The six v0 fault types are the frozen contract (PROJECT_PLAN §5).
-    assert {f.value for f in FaultType} == {
-        "debris",
-        "staleness",
-        "contradiction",
-        "wrong_tool",
-        "constraint_drop",
-        "tool_forgetting",
-    }
-
-
-def test_blame_label_is_type_and_position():
-    spec = FaultSpec(type=FaultType.WRONG_TOOL, position=7, volume=2.0)
-    assert spec.blame_label == ("wrong_tool", 7)
+def test_v0_manifest_present():
+    assert V0_MANIFEST <= {f.value for f in FaultType}

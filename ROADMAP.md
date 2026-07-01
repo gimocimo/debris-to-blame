@@ -39,13 +39,8 @@ The **blame gap** is the region where `D` is high but `A` is low — faults that
 
 ## 2. Milestones
 
-### M0 — Related-work scan (NEXT, NOT a gate) 🟡
-- **Downgraded from novelty-kill to a light scan (D-006).** Novelty is no longer required; we
-  optimize for execution + impressiveness. Skim ConstraintRot (2606.22528) and ReliabilityBench
-  (2601.06112) enough to *cite and borrow* from them, not to prove we differ.
-- Grab any reusable pieces (fault vocab, metrics, task ideas) — copying is fine.
-- **Exit:** a short `docs/novelty.md` "related work + what we borrow" note. **No pivot condition** —
-  the project proceeds regardless of what exists.
+### M0 — Related-work scan (NOT a gate) ✅ DONE (2026-06-30)
+- Closed as a light, non-gating scan (D-006). Borrow-list written in `docs/novelty.md`; no pivot.
 
 ### M1 — Harness + injector (frozen env) ✅ DONE (2026-06-30)
 - `d2b/trajectory.py`: Message/ToolCall/Trajectory data model + JSON IO.
@@ -57,40 +52,45 @@ The **blame gap** is the region where `D` is high but `A` is low — faults that
   with bare `python3`. NOTE: `replay.py` (deterministic re-execution) deferred to M2, where it pairs
   with resume-live generation — no need for it before real trajectories exist.
 
-### M2 — Degradation + attribution (v0.1, Claude-tier panel)
-- **Inference is subscription-native (D-007):** trajectories generated in-session; degradation
-  resumed by subagents; attribution by fresh-context subagents. Panel = Opus 4.8 / Sonnet / Haiku.
-- exp01: degradation surfaces `D(f,p,v)` per fault type × tier (tests the death-spiral-hits-weaker-
-  tiers hypothesis).
-- exp02: attribution `A(f,p,v)` — LLM-judge + ≥2 Who&When-style methods vs known labels.
-- Metrics: step accuracy, fault-type accuracy, joint accuracy (TRAIL-style); pass^k across tiers.
-- Scale: ~40–60 curated trajectories, done in batches within rate limits.
-- **Exit:** ≥1 clean degradation curve + a measurable attribution gap on the Claude-tier panel.
-  **First real claim.** Tag v0.1.
+### M1b — Domains + validators + resume (foundation for v0.1) — NEXT
+- **5-domain suite (D-011):** travel-booking (have), calendar/email, ecommerce, repo-triage,
+  spreadsheet/DB. Each = mock tools + a hand-authored successful trajectory + a **stateful
+  `validator`** (validate final state, not prose).
+- `d2b/validate.py`: `TaskSpec(goal, tools, validator)`; `d2b/replay.py`: deterministic re-exec +
+  resume-live from an injection point (subscription-native subagent).
+- **Exit:** all 5 domains inject + resume + validate deterministically; tests green.
 
-### M3 — The blame gap (the headline)
-- exp03: blame-gap map `damage × (1 − detectability)` per fault type × model family.
-- **Exit:** ≥1 high-damage / low-detectability fault across ≥3 families → headline figure.
+### M2 — Degradation + attribution (v0.1) — 3 Claude tiers, subscription-native
+- **Inference (D-007/D-012):** trajectories generated in-session; degradation resumed by subagents;
+  attribution by **fresh-context subagents on the redacted `.public` trace**. Panel = 3 tiers.
+- exp01 (C2): degradation surfaces `D(f,p,v)` per fault × tier × domain, **each vs a paired sham
+  control**; **bootstrap CIs** by base trajectory. Tests the death-spiral-hits-weaker-tiers axis.
+- exp02 (C1): attribution vs known labels — **dumb baselines first** (recency / first-anomaly /
+  random / diff-oracle / counterfactual-ablation), then LLM/Who&When-style methods. Metrics: step /
+  type / joint accuracy (TRAIL-style).
+- Scale: ~40–60 curated trajectories across 5 domains, batched within rate limits.
+- **Exit:** ≥1 sham-controlled degradation curve + a measurable attribution gap in ≥3 domains.
+  **First real claim.**
 
-### M4 — Mitigation Pareto (module, v0.2)
-- exp04: for each mitigation (truncation, compaction, RAG-over-history, memory-tool, context-editing,
-  sub-agent isolation) measure success-per-1k-tokens AND attribution-recoverability.
-- Include provider-native baselines (Constraint Pinning, O(1)-reconstruction).
-- **Exit:** one Pareto frontier figure unifying cost / quality / detectability. Tag v0.2.
+### M3 — The blame gap (v0.1)
+- exp03 (C3): blame-gap map `damage × (1 − detectability)` per fault × tier.
+- **Exit:** ≥1 high-damage / low-detectability fault across ≥3 tiers → one headline figure.
 
-### M5 — Paper + artifact + leaderboard
-- Short paper (workshop-length); release injected test-set + harness; optional public leaderboard
-  (RefuseBench-style publishing loop).
+### M4 — Recovery (v0.1 HEADLINE, D-010)
+- exp04 (C4): close the loop — detect → roll back to a pre-fault checkpoint → resume → validate.
+  Compare **correct-localization rollback vs blind/random rollback**.
+- Metrics: **recovery rate**, irreversible-error rate, unnecessary-escalation rate, rollback cost.
+- **Exit:** "agents recover X% more when attribution is correct," across ≥3 tiers. Tag v0.1. This is
+  the money result. Replay-based rollback in the mock env only — NOT a runtime.
 
-### M6 — Recovery probe (the bridge to the "recoverable runtime" vision) — STRETCH
-- The bounded gesture at recoverability (D-004), NOT a runtime build. Because injected faults have
-  known ground truth, we can close the loop: **detect the fault → roll back to a pre-fault
-  checkpoint → resume generation → did task success return?**
-- Metrics: **recovery rate**, **irreversible-error rate**, **unnecessary-escalation rate**, cost
-  overhead of checkpoint/rollback.
-- **Exit:** a recovery-rate number per fault type — the natural sequel-paper hook ("attribution is
-  the floor; here's what recovery buys once you have it"). Explicitly out of scope to build a
-  general transactional runtime; we replay checkpoints in the mock env only.
+### M5 — Mitigation frontier (v0.2 module, TRIMMED — D-013)
+- exp05 (C5): truncation, constraint pinning, structured memory/context-editing only (not all six).
+  Measure success-per-1k-tokens × attribution-recoverability. Baselines: Constraint Pinning,
+  O(1)-reconstruction. **Exit:** one frontier figure. Tag v0.2.
+
+### M6 — Paper + artifact
+- Short paper (workshop-length); release the leakage-free test-set + harness. Optional leaderboard
+  (RefuseBench-style) stays OUT for now.
 
 ---
 
@@ -109,22 +109,25 @@ The **blame gap** is the region where `D` is high but `A` is low — faults that
 
 | id | claim | one-line | status |
 |---|---|---|---|
-| exp01 | C2 | degradation surfaces per fault type | ⬜ |
-| exp02 | C1 | attribution recovery vs known labels | ⬜ |
+| exp01 | C2 | degradation surfaces per fault, vs sham control, bootstrap CIs | ⬜ |
+| exp02 | C1 | attribution vs known labels: dumb baselines + LLM methods | ⬜ |
 | exp03 | C3 | blame-gap map | ⬜ |
-| exp04 | C4 | mitigation cost–quality–detectability Pareto | ⬜ |
+| exp04 | C4 | recovery: correct-localization vs blind rollback (HEADLINE) | ⬜ |
+| exp05 | C5 | mitigation frontier (v0.2, trimmed to 3) | ⬜ |
 
 ---
 
 ## 5. Risk register
 
-- **R1 — gap already closed.** A 2026 paper may already inject for attribution ground truth. M0 gates
-  everything. Mitigation: C4 is a fallback lead.
-- **R2 — replay validity.** Injecting into a *frozen* trajectory and replaying may not reflect how a
-  live agent would react. Mitigation: validate a subset against live re-runs; report the delta.
-- **R3 — LLM-judge attribution circularity.** Using an LLM to attribute faults an LLM caused. Mitigation:
-  known ground truth breaks the circularity (we never rely on the judge to *define* truth, only to
-  *recover* it).
+- **R1 — novelty (RETIRED).** Deprioritized (D-006); non-gating. No longer a project risk.
+- **R2 — replay validity.** Injecting into a *frozen* trajectory and resuming may not reflect how a
+  live agent would react. Mitigation: validate a subset against fully-live re-runs; report the delta.
+- **R3 — same-family generate+grade circularity (documented limitation, R6/D-012).** Generator and
+  attributor are both Claude. Mitigation: truth comes from *injection* (not a model); attribution
+  reads only the redacted `.public` trace in fresh-context subagents; leakage-free enforced by test.
+  A <$50 cross-provider smoke test is a v0.2 option to quantify residual bias.
+- **R7 — answer leakage (RESOLVED, M1/D-009).** Fixed by the public/private split
+  (`redact_for_attribution`); a per-fault test asserts `.public` carries no markers or label meta.
 - **R4 — cost blowup.** Mitigation: Batch API + caching + cached outcomes (see PROJECT_PLAN §6).
 - **R5 — ReliabilityBench overlap (2601.06112).** It already injects faults (chaos-engineering) to
   measure reliability. Mitigation: our object is *attribution ground truth + the blame gap*, not

@@ -1,4 +1,5 @@
-"""Demo — watch each of the six faults corrupt a clean trajectory, with its ground-truth label.
+"""Demo — inject each of the six faults, show the private label, and prove the public trace is
+leakage-free (no injection markers reach an attributor).
 
 Runs with zero model calls / zero cost:  python scripts/demo_inject.py
 """
@@ -49,22 +50,33 @@ def main() -> None:
         FaultSpec(FaultType.DEBRIS, position=3, volume=1),
         FaultSpec(FaultType.STALENESS, position=5, volume=1),
         FaultSpec(FaultType.CONTRADICTION, position=3, volume=1),
-        FaultSpec(FaultType.WRONG_TOOL, position=5, volume=1),
+        FaultSpec(FaultType.WRONG_TOOL, position=5, volume=2),
         FaultSpec(FaultType.CONSTRAINT_DROP, position=0, volume=1),
         FaultSpec(FaultType.TOOL_FORGETTING, position=5, volume=4),
     ]
 
     print("\n" + "-" * 84)
-    print("  INJECTIONS  (each is one edit at a KNOWN locus — that locus IS the answer key)")
+    print(
+        "  INJECTIONS  (each edit's locus IS the answer key — held PRIVATELY, never in the trace)"
+    )
     print("-" * 84)
     for spec in specs:
-        corrupted = inject(base, spec)
-        _show(corrupted, f"{spec.type.value.upper()}  @pos={spec.position} vol={spec.volume}")
-        print(f"    ground-truth blame_label = {tuple(corrupted.meta['blame_label'])}")
-        if "dropped_constraint" in corrupted.meta:
-            print(f'    dropped: "{corrupted.meta["dropped_constraint"]}"')
+        c = inject(base, spec)
+        _show(c.corrupted, f"{spec.type.value.upper()}  @pos={spec.position} vol={spec.volume}")
+        print(f"    private blame_label = {c.label.blame_label}")
+        if c.label.extra.get("dropped_constraint"):
+            print(f"    dropped: {c.label.extra['dropped_constraint']}")
 
-    print("\n  original is untouched:", base.meta.get("success") is True, "\n")
+    print("\n" + "-" * 84)
+    print("  LEAKAGE CHECK  (what an attributor actually receives — .public)")
+    print("-" * 84)
+    c = inject(base, FaultSpec(FaultType.DEBRIS, position=3))
+    pub = c.public
+    _show(pub, "PUBLIC (redacted) DEBRIS trace — note: no <-- injected markers anywhere")
+    leaked = [m for m in pub.messages if m.injected is not None]
+    leak_meta = [k for k in pub.meta if k in {"fault", "blame_label", "corrupted"}]
+    print(f"\n    markers leaked: {len(leaked)}   label-meta leaked: {leak_meta}   (must be 0/[])")
+    print("    original untouched:", base.meta.get("success") is True, "\n")
 
 
 if __name__ == "__main__":

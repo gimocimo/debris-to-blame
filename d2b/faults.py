@@ -1,16 +1,19 @@
-"""Fault taxonomy (v0) + the injector.
+"""Fault taxonomy (v0) + the injector + the leakage-safe public/private split.
 
-The taxonomy pins the *vocabulary* (PROJECT_PLAN §5); `inject()` is the operator Phi(tau, spec) that
-edits a frozen successful trajectory at a KNOWN locus — so the blame label is correct by design.
+`inject()` edits a frozen successful trajectory at a KNOWN locus and returns a `Corruption` holding
+BOTH the internally-marked corrupted trajectory AND a private `FaultRecord` (the ground truth).
+Attributors must only ever see `Corruption.public` — a redacted trace with the injection markers and
+all label metadata stripped — so the answer key can never leak into the input (Codex audit, D-009).
 
-Insert/modify faults act on `Trajectory.messages`; `constraint_drop` acts on `constraints`;
-`tool_forgetting` acts on `tools`. `position` indexes the relevant list (documented per fault).
+Honesty note (D-009): the injected *site* is known by construction; that it *caused* the failure is
+established separately by paired sham controls + the resume actually failing (see ROADMAP). We label
+this "known injected-site + causal-effect validation", not "perfect causal labels".
 """
 
 from __future__ import annotations
 
 import copy
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import StrEnum
 
 from .tools import decoy_tool_names
@@ -18,7 +21,8 @@ from .trajectory import Message, Trajectory
 
 
 class FaultType(StrEnum):
-    """The six v0 fault types. Adding/removing a member requires a PROJECT_PLAN §9 decision."""
+    """The six v0 fault types. This is the *current* idea space, NOT frozen — the benchmark
+    *manifest* is what gets frozen, not the enum (Codex cut-list, D-013)."""
 
     DEBRIS = "debris"  # irrelevant tool output injected into context
     STALENESS = "staleness"  # a superseded tool result lingers, must be recency-overridden
@@ -29,25 +33,78 @@ class FaultType(StrEnum):
 
 
 @dataclass(frozen=True)
-class FaultSpec:
-    """A fully-specified injection. The (type, position) pair IS the ground-truth blame label.
+class FaultSite:
+    """Kind-tagged, redaction-stable locus of a fault (replaces the ambiguous raw int, D-009).
 
-    position semantics by type:
-      debris/staleness/contradiction : index in `messages` where the fault message is inserted.
-      wrong_tool                     : index in `messages` of the assistant step to corrupt.
-      constraint_drop                : index in `constraints` of the rule to evict.
-      tool_forgetting                : index in `messages` of the step that needs the buried tool.
-    volume: fault-specific magnitude (# debris msgs or # decoy tools; see each injector).
+    kind: "message" | "constraint" | "tool".
+    ref:  message index in the PUBLIC (redacted) trace | constraint index | tool name.
+    """
+
+    kind: str
+    ref: str
+
+
+@dataclass(frozen=True)
+class FaultSpec:
+    """A fully-specified injection request.
+
+    position: where to inject — index in `messages` (insert/modify faults), or in `constraints`
+              (constraint_drop), or the step that needs the buried tool (tool_forgetting).
+    volume:   severity knob, meaningful for EVERY fault type (see each injector).
     """
 
     type: FaultType
     position: int
     volume: float = 1.0
 
+
+@dataclass(frozen=True)
+class FaultRecord:
+    """The PRIVATE ground-truth label. Never serialized into a public trace."""
+
+    fault_type: FaultType
+    site: FaultSite
+    volume: float
+    extra: dict = field(default_factory=dict)
+
     @property
-    def blame_label(self) -> tuple[str, int]:
-        """The causal ground-truth label this injection guarantees by construction."""
-        return (self.type.value, self.position)
+    def blame_label(self) -> tuple[str, str, str]:
+        """(fault_type, site.kind, site.ref) — what an attributor is graded against."""
+        return (self.fault_type.value, self.site.kind, self.site.ref)
+
+
+# meta keys that would leak the answer key; stripped by redact_for_attribution().
+LEAKAGE_META_KEYS = {"fault", "blame_label", "dropped_constraint", "buried_step", "corrupted"}
+
+
+def redact_for_attribution(traj: Trajectory) -> Trajectory:
+    """Return a leakage-free copy: injection markers cleared, label metadata removed.
+
+    This is the ONLY trace form an attribution harness may consume. Injected messages become
+    indistinguishable from originals (no marker), which also makes the faults realistic.
+    """
+
+    t = copy.deepcopy(traj)
+    for m in t.messages:
+        m.injected = None
+    t.meta = {k: v for k, v in t.meta.items() if k not in LEAKAGE_META_KEYS}
+    return t
+
+
+@dataclass
+class Corruption:
+    """The result of one injection: the internally-marked trace + its private label.
+
+    `.corrupted` retains markers/meta for OUR use (degradation, demo). `.public` is the redacted,
+    leakage-free trace attributors see. `.label` is the private ground truth.
+    """
+
+    corrupted: Trajectory
+    label: FaultRecord
+
+    @property
+    def public(self) -> Trajectory:
+        return redact_for_attribution(self.corrupted)
 
 
 _DEBRIS_TEXT = (
@@ -56,19 +113,23 @@ _DEBRIS_TEXT = (
 )
 
 
-def inject(traj: Trajectory, spec: FaultSpec) -> Trajectory:
-    """Return a corrupted deep copy of `traj` with one typed fault at `spec`'s known locus.
+def inject(traj: Trajectory, spec: FaultSpec) -> Corruption:
+    """Return a Corruption (public/private split) with one typed fault at `spec`'s known locus.
 
-    The original is never mutated. The returned trajectory records the fault in `.meta["fault"]`
-    and the ground-truth label in `.meta["blame_label"]`.
+    The original is never mutated. `.corrupted.meta` carries internal-only fault info (redacted out
+    of `.public`); `.label` is the private FaultRecord graded against.
     """
 
     t = copy.deepcopy(traj)
-    _DISPATCH[spec.type](t, spec)
-    t.meta["fault"] = {"type": spec.type.value, "position": spec.position, "volume": spec.volume}
-    t.meta["blame_label"] = list(spec.blame_label)
+    site, extra = _DISPATCH[spec.type](t, spec)
+    t.meta["fault"] = {
+        "type": spec.type.value,
+        "site": [site.kind, site.ref],
+        "volume": spec.volume,
+    }
     t.meta["corrupted"] = True
-    return t
+    t.meta.update(extra)  # e.g. dropped_constraint / buried_step — internal only, redacted out
+    return Corruption(corrupted=t, label=FaultRecord(spec.type, site, spec.volume, extra))
 
 
 def _check_msg_index(t: Trajectory, pos: int, *, insert: bool) -> None:
@@ -77,62 +138,83 @@ def _check_msg_index(t: Trajectory, pos: int, *, insert: bool) -> None:
         raise ValueError(f"position {pos} out of range for messages (len={len(t.messages)})")
 
 
-def _inject_debris(t: Trajectory, spec: FaultSpec) -> None:
+def _inject_debris(t: Trajectory, spec: FaultSpec) -> tuple[FaultSite, dict]:
+    # volume = number of debris messages inserted.
     _check_msg_index(t, spec.position, insert=True)
     junk = [
         Message(role="tool", tool_name="web_search", content=_DEBRIS_TEXT, injected="debris")
         for _ in range(max(1, int(spec.volume)))
     ]
     t.messages[spec.position : spec.position] = junk
+    return FaultSite("message", str(spec.position)), {}
 
 
-def _inject_staleness(t: Trajectory, spec: FaultSpec) -> None:
+def _inject_staleness(t: Trajectory, spec: FaultSpec) -> tuple[FaultSite, dict]:
+    # volume = staleness magnitude (how wrong the superseded price is).
     _check_msg_index(t, spec.position, insert=True)
+    price = 650 + int(130 * spec.volume)
     stale = Message(
         role="tool",
         tool_name="search_flights",
-        content="[BA112 $780 dep 09:00 | VS004 $600 dep 23:50 (red-eye)]",  # superseded price
+        content=f"[BA112 ${price} dep 09:00 | VS004 $600 dep 23:50 (red-eye)]",
         injected="staleness",
     )
     t.messages.insert(spec.position, stale)
+    return FaultSite("message", str(spec.position)), {}
 
 
-def _inject_contradiction(t: Trajectory, spec: FaultSpec) -> None:
+def _inject_contradiction(t: Trajectory, spec: FaultSpec) -> tuple[FaultSite, dict]:
+    # volume = contradiction strength (how far the injected budget is from the real $800).
     _check_msg_index(t, spec.position, insert=True)
+    budget = max(0, int(800 - 400 * spec.volume))
     contra = Message(
         role="tool",
         tool_name="check_budget",
-        content="Remaining budget: $400.",  # contradicts the real $800
+        content=f"Remaining budget: ${budget}.",
         injected="contradiction",
     )
     t.messages.insert(spec.position, contra)
+    return FaultSite("message", str(spec.position)), {}
 
 
-def _inject_wrong_tool(t: Trajectory, spec: FaultSpec) -> None:
+def _inject_wrong_tool(t: Trajectory, spec: FaultSpec) -> tuple[FaultSite, dict]:
+    # volume = semantic distance of the wrong tool (near -> far).
     _check_msg_index(t, spec.position, insert=False)
     msg = t.messages[spec.position]
     if msg.role != "assistant" or msg.tool_call is None:
         raise ValueError(f"wrong_tool needs an assistant tool-call at position {spec.position}")
-    msg.tool_call.name = "check_weather"  # plausible-but-wrong neighbour
+    wrong, out = (
+        ("search_hotels", "[Hilton $210/night]")
+        if spec.volume <= 1
+        else ("check_weather", "Sunny, 18C.")
+    )
+    msg.tool_call.name = wrong
     msg.tool_call.args = {}
     msg.injected = "wrong_tool"
     nxt = t.messages[spec.position + 1] if spec.position + 1 < len(t.messages) else None
     if nxt is not None and nxt.role == "tool":
-        nxt.tool_name = "check_weather"
-        nxt.content = "Sunny, 18C."
+        nxt.tool_name = wrong
+        nxt.content = out
         nxt.injected = "wrong_tool"
+    return FaultSite("message", str(spec.position)), {}
 
 
-def _inject_constraint_drop(t: Trajectory, spec: FaultSpec) -> None:
+def _inject_constraint_drop(t: Trajectory, spec: FaultSpec) -> tuple[FaultSite, dict]:
+    # volume = number of constraints dropped, starting at position.
     if not (0 <= spec.position < len(t.constraints)):
         raise ValueError(f"constraint_drop position {spec.position} out of range")
-    t.meta["dropped_constraint"] = t.constraints.pop(spec.position)
+    dropped = []
+    for _ in range(max(1, int(spec.volume))):
+        if spec.position < len(t.constraints):
+            dropped.append(t.constraints.pop(spec.position))
+    return FaultSite("constraint", str(spec.position)), {"dropped_constraint": dropped}
 
 
-def _inject_tool_forgetting(t: Trajectory, spec: FaultSpec) -> None:
-    # Bury the real tools under `volume` decoy schemas (prepend so real tools sink down the list).
+def _inject_tool_forgetting(t: Trajectory, spec: FaultSpec) -> tuple[FaultSite, dict]:
+    # volume = number of decoy schemas prepended (buries the real tools deeper).
+    _check_msg_index(t, spec.position, insert=False)
     t.tools[:0] = decoy_tool_names(max(1, int(spec.volume)))
-    t.meta["buried_step"] = spec.position
+    return FaultSite("message", str(spec.position)), {"buried_step": spec.position}
 
 
 _DISPATCH = {

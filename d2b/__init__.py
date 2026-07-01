@@ -4,7 +4,15 @@ failure attribution.
 See PROJECT_PLAN.md for scope.
 """
 
-from .faults import FaultSpec, FaultType, inject
+from .faults import (
+    Corruption,
+    FaultRecord,
+    FaultSite,
+    FaultSpec,
+    FaultType,
+    inject,
+    redact_for_attribution,
+)
 from .fixtures import successful_flight_trajectory
 from .tools import MockTool, ToolRegistry, demo_registry
 from .trajectory import Message, ToolCall, Trajectory
@@ -12,9 +20,13 @@ from .trajectory import Message, ToolCall, Trajectory
 __version__ = "0.0.0"
 
 __all__ = [
+    "Corruption",
+    "FaultRecord",
+    "FaultSite",
     "FaultSpec",
     "FaultType",
     "inject",
+    "redact_for_attribution",
     "successful_flight_trajectory",
     "MockTool",
     "ToolRegistry",

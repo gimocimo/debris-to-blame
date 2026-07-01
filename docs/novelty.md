@@ -5,7 +5,7 @@
 > reference, NOT a kill-gate. Nothing below can sink the project; it just tells us whom to cite and
 > what to reuse.
 
-*Status: 🟡 M0 (light related-work scan) in progress.* All arxiv IDs below were **verified real on 2026-06-30** by fetching the
+*Status: ✅ M0 (light related-work scan) CLOSED — see the borrow-list below. Non-gating.* All arxiv IDs below were **verified real on 2026-06-30** by fetching the
 abstract pages (titles quoted verbatim). The headline gap-claim is **not yet kill-tested** — that is
 the M0 exit condition.
 

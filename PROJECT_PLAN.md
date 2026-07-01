@@ -16,21 +16,27 @@ stop and re-align.
 
 ## 1. Current status (pinned — update every session)
 
-- **Date of last update:** 2026-06-30 (Session 2 — subscription-native + novelty deprioritized)
-- **Lead framing:** Claim C1 — *injection-grounded attribution* (see §3), positioned as **the
-  measurement floor under recoverable long-horizon agents** (see §2a).
-- **Milestones complete:** M0 (light related-work scan) ✅ · **M1 (injector + mock env + demo)** ✅
-- **Next milestone:** **M2 — degradation + attribution (v0.1)** on a Claude-tier panel,
-  subscription-native. First real empirical claim.
+- **Date of last update:** 2026-06-30 (Session 3 — Codex audit adopted + recovery-headline reframe)
+- **Lead framing:** **Claim C4 — localization enables recovery** ("agents recover X% more when
+  attribution works"), supported by C1 injection-grounded attribution. The measurement floor under
+  recoverable long-horizon agents (§2a).
+- **Milestones complete:** M0 (light related-work scan) ✅ · **M1** ✅ (injector + mock env + demo,
+  now hardened per Codex: leakage-safe public/private split, kind-tagged `FaultSite`, real `volume`
+  for all 6 faults; 25 tests green)
+- **Next milestone:** **M2 — degradation + attribution + recovery (v0.1)** across the 5-domain suite
+  on the 3-Claude-tier panel, subscription-native. Recovery (C4) is the headline. First real claim.
+- **Scope bar (D-010/D-011):** raised — recovery-headline + 5 domains + validators + sham controls +
+  dumb baselines + bootstrap CIs. Cost held at $0 (D-012).
 - **Repo health:** scaffold committed + pushed; **public** at `github.com/gimocimo/debris-to-blame`
   (D-008). Smoke tests pass.
 - **Headline result so far:** none. No claim is real until M2 lands on a real (Claude-tier) panel.
 - **Optimize for:** *impressive, interesting, well-executed* over *novel/niche* (D-006). Copying an
   existing idea is fine; a clean headline figure + a working demo beats a defensible-but-dull gap.
 - **Biggest open risk:** now **execution + validity**, not novelty. Chief validity risk: the same
-  model family generates and grades — mitigated because ground truth comes from *injection*, not a
-  model, and attribution runs in fresh-context subagents (R6).
-- **Latest handoff:** `handoffs/0004-m1-injector.md`
+  model family generates and grades (R6, documented limitation) — mitigated because ground truth
+  comes from *injection*, not a model, and attribution runs on the redacted `.public` trace in
+  fresh-context subagents. Scale (5 domains at $0) is the other risk — rate limits force batching.
+- **Latest handoff:** `handoffs/0005-codex-audit.md`
 
 ---
 
@@ -68,33 +74,46 @@ gap" 2602.22755; SLEIGHT-Bench's 11 blind-spot classes 2605.16626).
 
 ## 3. Paper framing — the claims
 
-A paper is cited for a **claim**, not an artifact. We carry four; we **lead with C1**.
+A paper is cited for a **claim**, not an artifact. We carry five; we **lead with C4 (recovery)**,
+supported by C1 — the story is *"agents recover measurably more when attribution works."*
 
-- **Claim C1 — injection-grounded attribution (LEAD).** Controlled fault injection yields *causal*
-  ground truth for failure attribution, where all prior benchmarks (Who&When 2505.00212, TRAIL
-  2505.08638, TraceElephant 2604.22708) rely on post-hoc human *annotation*. We release the first
-  attribution test-set with by-construction labels and re-measure SOTA attributors against it.
-- **Claim C2 — fault-resolved degradation.** Holding the task constant and varying only the injected
-  fault (type × volume × position) decouples *rot* from *difficulty* — the controlled-injection
-  wedge. We report P[failure] surfaces per fault type, extending the static context-rot literature
-  (Chroma, NoLiMa 2502.05167) into the agentic tool-use setting.
-- **Claim C3 — the "blame gap" (the novel framing).** Cross degradation (C2) with detectability
-  (C1) to expose faults that **break runs but evade attribution**: damage × (1 − detectability).
-  This quadrant is, to our knowledge, un-named in the literature and is the safety-relevant payoff.
-- **Claim C4 — unified mitigation frontier (module).** Score truncation / compaction / RAG-over-
-  history / memory-tool / context-editing / sub-agent-isolation on one frontier of *success-per-
-  token × attribution-recoverability* — which no single benchmark unifies today.
+- **Claim C1 — injection-grounded attribution.** Controlled fault injection yields **known
+  injected-site labels**, where prior benchmarks (Who&When 2505.00212, TRAIL 2505.08638,
+  TraceElephant 2604.22708) rely on post-hoc human *annotation*. We release the first **leakage-free**
+  attribution test-set with by-construction labels and re-measure attributors (incl. dumb baselines)
+  against it. *Honesty (D-009): the injected site is known by construction; that it CAUSED the failure
+  is established separately by paired sham controls + the resume failing — we claim "known
+  injected-site + causal-effect validation", NOT "perfect causal labels".*
+- **Claim C2 — fault-resolved degradation.** Vary only the injected fault (type × volume × position)
+  with the task held constant, and use **paired sham controls** (same-volume neutral injection) to
+  separate fault *damage* from generic context bloat. P[failure] surfaces per fault type, extending
+  static context-rot (Chroma, NoLiMa 2502.05167) into agentic tool-use.
+- **Claim C3 — the "blame gap".** Cross degradation (C2) with detectability (C1): faults that
+  **break runs but evade attribution** = damage × (1 − detectability). Connects to monitor-blind-spot
+  work (AuditBench 2602.22755, SLEIGHT-Bench 2605.16626) in the field's own language.
+- **Claim C4 — localization enables recovery (LEAD, D-010).** Close the loop: detect → roll back to
+  a pre-fault checkpoint → resume. Show **recovery rate is materially higher when attribution is
+  correct** than under blind/random rollback — turning "synthetic labels are neat" into "debuggable
+  agents recover X% more." Recovery is done by **replay in the mock env, NOT a general runtime**.
+- **Claim C5 — mitigation frontier (v0.2 module, TRIMMED per D-013).** Score truncation, constraint
+  pinning, and structured memory/context-editing on success-per-token × attribution-recoverability.
+  Deferred until C1–C4 land (don't broaden before one trusted result).
 
 ---
 
 ## 4. Scope — IN vs OUT (the anti-drift contract)
 
 **IN (we build this):**
-- A deterministic, mock/frozen **tool-use environment** + **fault injector** (typed, parameterized
-  by position and volume) operating on **frozen successful trajectories**.
-- An **attribution harness** that runs existing attributors (LLM-judge, Who&When all-at-once /
-  step-by-step / binary-search methods, trace-fed long-context models) against injected ground truth.
-- **Degradation curves** (C2), the **blame-gap map** (C3), and the **mitigation Pareto** (C4).
+- A deterministic **tool-use environment across 5 task domains** (D-011: travel-booking,
+  calendar/email, ecommerce, repo-triage, spreadsheet/DB) with **stateful validators** — degradation
+  is judged on final *state*, not LLM-judged prose.
+- The **leakage-safe injector** (done, M1): typed faults × position × real volume, returning a
+  `.public` (redacted) trace + a private label (`FaultRecord`).
+- An **attribution harness**: **dumb baselines first** (recency / first-anomaly / random / diff-oracle
+  / counterfactual-ablation) + LLM/Who&When-style attributors, all graded on the leakage-free
+  `.public` trace vs known labels, with **bootstrap CIs** by base trajectory.
+- **Degradation curves + paired sham controls** (C2), the **blame-gap map** (C3), the **recovery
+  loop** (C4, headline), and (v0.2) the trimmed **mitigation frontier** (C5).
 - Public artifacts: the injected-fault test-set + the harness + a short paper.
 
 **OUT (explicitly deferred — adding these requires a §9 Decision-Log entry):**
@@ -106,10 +125,11 @@ A paper is cited for a **claim**, not an artifact. We carry four; we **lead with
 - **A new general agent benchmark.** We reuse frozen trajectories; we do not chase task coverage.
 - **Multi-agent orchestration research.** Single-agent tool-use trajectories first; multi-agent
   only if M0 shows it's needed for attribution realism.
-- **The "recoverable runtime" / agent-OS itself** (transactions, checkpointing, permission &
-  information-flow enforcement). Explicitly DECLINED as a build (D-003): it is a systems megaproject,
-  not a laptop-scale measured claim, and it contradicts "avoid another agent framework." We measure
-  the primitive it depends on and gesture at recovery via the bounded **M6 recovery-probe** only.
+- **The "recoverable runtime" / agent-OS itself** (transactions, persistent checkpointing, permission
+  & information-flow enforcement). DECLINED as a build (D-003): a systems megaproject, not a
+  laptop-scale measured claim. NOTE: the **C4 recovery loop IS in scope** and is now the v0.1 headline
+  (D-010) — but it is **replay-based rollback in the mock env measuring recovery rate**, a
+  *measurement*, not a runtime.
 - **Capability-security / prompt-injection defense** and **memory-as-continual-learning** — real
   frontier problems, but different skillsets/projects. Noted, not pursued here.
 
@@ -129,13 +149,18 @@ frozen successful trajectory  ──►  fault injector  ──►  (re)run / re
                                         compare guess vs known label
                                         │
                           C3 blame-gap = damage × (1 − detectability)
-                          C4 Pareto    = success/token × recoverability under each mitigation
+                          C4 recovery  = detect → rollback → resume; recovers X% more when localized
+                          C5 (v0.2)    = mitigation frontier: success/token × recoverability
 ```
 
-**Fault taxonomy (v0 — frozen in `d2b/faults.py`):**
+Attribution consumes only the **redacted `.public` trace** (markers + labels stripped); the private
+`FaultRecord` is the answer key (D-009). Degradation uses **paired sham controls** to isolate damage.
+
+**Fault manifest (v0 — in `d2b/faults.py`; the idea space is NOT frozen, D-013):**
 `debris` (irrelevant tool output), `staleness` (superseded result lingers), `contradiction`
 (conflicting retrieval), `wrong_tool` (plausible-wrong call swap), `constraint_drop` (policy evicted
-— the ConstraintRot special case), `tool_forgetting` (schema buried under volume).
+— the ConstraintRot special case), `tool_forgetting` (schema buried under volume). Every fault now
+has a real `volume` severity knob.
 
 ---
 
@@ -151,13 +176,14 @@ We make Claude (this session + fan-out subagents) the experiment's model:
 - **Inject / score / plot** are deterministic code — free regardless.
 
 **Consequences of going subscription-native (design constraints, not blockers):**
-- **Scale = small & curated** (~40–60 trajectories, 6 faults, few positions) — rate limits forbid
-  thousands of automated calls; done in batches across sessions. A hand-curated eval set is a
-  feature, not a weakness.
-- **Panel = Claude tiers** (Opus 4.8 / Sonnet / Haiku via model-switch), which doubles as a real
-  research axis: *does the self-poisoning death-spiral hit weaker tiers harder?* Cross-provider
-  (GPT/Gemini/DeepSeek) is **not** available from the subscription — optional API top-up (<$50) only
-  if a cross-provider supplementary panel is wanted.
+- **Scale = small & curated** (~40–60 trajectories across 5 domains, 6 faults, few positions) — rate
+  limits forbid thousands of automated calls; done in batches across sessions. A hand-curated eval
+  set is a feature, not a weakness.
+- **Panel = 3 Claude TIERS** (Opus 4.8 / Sonnet / Haiku), which doubles as a real research axis:
+  *does the self-poisoning death-spiral hit weaker tiers harder?* **We call them tiers, not "model
+  families" (D-012)** — cross-provider is declined for v0.1 ($0). The generator-and-grader-are-both-
+  Claude **circularity is documented as a limitation** (R6), mitigated by fresh-context attributor
+  subagents + injection-defined truth; a <$50 cross-provider smoke test is a v0.2 option.
 - **Reproducibility** preserved by freezing + releasing the trajectory dataset + injector + analysis;
   users replay the artifact deterministically even though generation was subscription-native.
 
@@ -168,10 +194,12 @@ prompt caching (~0.1× reads) + cached outcomes — still applies, but is **not*
 
 ## 7. Success criteria
 
-- **M2 (v0.1):** at least one fault type shows a statistically clean degradation curve AND a
-  measurable attribution-recovery gap vs the known label, on a real model panel (not synthetic).
-- **Paper-ready:** the blame-gap map (C3) shows ≥1 fault type that is high-damage + low-detectability
-  across ≥3 model families — the headline figure.
+- **M2 (v0.1):** at least one fault type shows a statistically clean (bootstrap-CI) degradation curve
+  vs its **sham control** AND a measurable attribution gap vs the known label, on the 3-Claude-tier
+  panel, in ≥3 of the 5 domains. Traces are leakage-free (done).
+- **Headline (C4 recovery):** recovery rate is **higher under correct localization than blind/random
+  rollback**, across ≥3 tiers — "agents recover X% more when attribution works." This is the money
+  figure, alongside the blame-gap map (C3).
 - **Artifact:** the test-set + harness are reproducible from a single `make` / script with cached
   outcomes checked in.
 - **Impressiveness (D-006, co-equal with the above):** a striking single headline figure (the blame-
@@ -181,7 +209,7 @@ prompt caching (~0.1× reads) + cached outcomes — still applies, but is **not*
 **Metrics vocabulary (dependability-native — `pass@1` is dead).** We adopt the reliability-era
 metrics so the work is legible to the METR/Anthropic evals audience: **pass^k** (task succeeds on
 all k independent resamples — reliability, not luck), **recovery rate** (fraction of injected faults
-a detect→rollback loop recovers, measured in M6), **irreversible-error rate**, and
+a detect→rollback loop recovers — the C4/v0.1 headline metric), **irreversible-error rate**, and
 **unnecessary-escalation rate**. These slot directly onto the degradation and blame-gap maps.
 
 ---
@@ -190,11 +218,13 @@ a detect→rollback loop recovers, measured in M6), **irreversible-error rate**,
 
 | Claim | Needs (evidence) | Experiment | Status |
 |---|---|---|---|
-| C1 injection-grounded attribution | attributor accuracy vs known label, per method | exp02 | ⬜ not started |
-| C2 fault-resolved degradation | P[fail] surface per fault type | exp01 | ⬜ not started |
+| C1 injection-grounded attribution | attributor acc vs known label; dumb baselines; leakage-free | exp02 | ⬜ not started |
+| C2 fault-resolved degradation | P[fail] surface per fault + sham control; bootstrap CIs | exp01 | ⬜ not started |
 | C3 blame gap | damage × (1−detectability) map | exp03 | ⬜ not started |
-| C4 mitigation frontier | success/token × recoverability per mitigation | exp04 | ⬜ not started |
-| novelty | no prior injection-grounded attribution bench | M0 / `docs/novelty.md` | 🟡 in progress |
+| **C4 recovery (LEAD)** | recovery rate: correct-localization vs blind rollback | exp04 | ⬜ not started |
+| C5 mitigation frontier (v0.2) | success/token × recoverability, trimmed set | exp05 | ⬜ deferred |
+| infra: leakage-safe split + FaultSite + volume knobs | public/private + kind-tagged labels + severity | M1 | ✅ done |
+| related-work scan (non-gating) | borrow-list, no pivot | M0 / `docs/novelty.md` | ✅ closed |
 
 ---
 
@@ -243,3 +273,23 @@ a detect→rollback loop recovers, measured in M6), **irreversible-error rate**,
   commit — stakes an early public claim; scaffold-only visibility is fine. (b) v0.1 panel = **Claude
   tiers only** (Opus 4.8 / Sonnet / Haiku), $0; cross-provider top-up NOT taken for v0.1 (revisit at
   v0.2 if a broader claim is wanted).
+- **D-009 (2026-06-30, Codex audit adopted):** An adversarial repo audit (OpenAI Codex) surfaced
+  real, experiment-independent flaws — all fixed in M1: (1) **answer leakage** — `inject()` now
+  returns a public/private split (`Corruption.public` is redacted; `FaultRecord` holds the label);
+  (2) **kind-tagged `FaultSite`** replaces the ambiguous raw-int position; (3) **real `volume`
+  severity** for all six faults (was a no-op for four); (4) **honest reframe** — "known injected-site
+  + causal-effect validation via sham controls", not "perfect causal labels". Also adopted for M2:
+  deterministic **validators**, **dumb baselines**, **paired sham controls**, **bootstrap CIs**.
+- **D-010 (2026-06-30, owner directive — RAISE THE BAR):** **Recovery elevated from a stretch probe
+  to the v0.1 HEADLINE (Claim C4).** Story = "agents recover X% more when attribution works." Still
+  replay-based rollback in the mock env, NOT a runtime. Supersedes D-004's "M6 recovery-probe only".
+- **D-011 (2026-06-30, owner directive):** v0.1 spans a **5-domain suite** (travel, calendar/email,
+  ecommerce, repo-triage, spreadsheet/DB) — escapes the single-fixture "toy" critique. Fixture stays
+  as the deterministic test double.
+- **D-012 (2026-06-30, owner directive):** **Stay $0 Claude-tiers-only.** Call them **tiers, not
+  families**; document the same-family generate+grade **circularity as a limitation** (R6) rather
+  than buy a cross-provider panel. A <$50 cross-provider smoke test is a v0.2 option.
+- **D-013 (2026-06-30, Codex cut-list):** **Trim the mitigation frontier to 3** (truncation,
+  constraint pinning, memory/context-editing) and defer it to v0.2. **Do not freeze the fault enum** —
+  freeze the *manifest* (`test_smoke` now asserts presence, not closure). Leaderboard / multi-agent /
+  recovery-runtime stay OUT.

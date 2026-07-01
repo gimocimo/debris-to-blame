@@ -1,10 +1,18 @@
-"""M1 tests — injection round-trips, ground-truth labels, and original-immutability per fault."""
+"""M1 tests — injection, kind-tagged labels, per-fault volume, and the leakage-free guarantee."""
 
 import copy
 
 import pytest
 
-from d2b import FaultSpec, FaultType, Trajectory, inject, successful_flight_trajectory
+from d2b import (
+    FaultSpec,
+    FaultType,
+    Trajectory,
+    inject,
+    redact_for_attribution,
+    successful_flight_trajectory,
+)
+from d2b.faults import LEAKAGE_META_KEYS
 
 
 def test_fixture_is_clean_and_successful():
@@ -18,60 +26,99 @@ def test_inject_never_mutates_original():
     base = successful_flight_trajectory()
     snapshot = copy.deepcopy(base.to_dict())
     inject(base, FaultSpec(FaultType.DEBRIS, position=3))
-    assert base.to_dict() == snapshot  # original untouched
+    assert base.to_dict() == snapshot
 
 
 @pytest.mark.parametrize("ftype", list(FaultType))
-def test_blame_label_matches_spec(ftype):
+def test_blame_label_is_kind_tagged(ftype):
     base = successful_flight_trajectory()
     pos = 0 if ftype is FaultType.CONSTRAINT_DROP else 5 if ftype is FaultType.WRONG_TOOL else 3
-    spec = FaultSpec(ftype, position=pos, volume=2)
-    corrupted = inject(base, spec)
-    assert tuple(corrupted.meta["blame_label"]) == spec.blame_label
-    assert corrupted.meta["corrupted"] is True
+    c = inject(base, FaultSpec(ftype, position=pos, volume=1))
+    kind, ref = c.label.site.kind, c.label.site.ref
+    assert c.label.blame_label == (ftype.value, kind, ref)
+    assert kind in {"message", "constraint", "tool"}
 
 
-def test_debris_inserts_volume_messages_and_marks_them():
+# ---- the leakage-free guarantee (Codex audit, D-009) -------------------------------------------
+
+
+@pytest.mark.parametrize("ftype", list(FaultType))
+def test_public_trace_has_no_leakage(ftype):
     base = successful_flight_trajectory()
-    n = len(base.messages)
-    corrupted = inject(base, FaultSpec(FaultType.DEBRIS, position=3, volume=3))
-    assert len(corrupted.messages) == n + 3
-    injected = [m for m in corrupted.messages if m.injected == "debris"]
-    assert len(injected) == 3
+    pos = 0 if ftype is FaultType.CONSTRAINT_DROP else 5 if ftype is FaultType.WRONG_TOOL else 3
+    pub = inject(base, FaultSpec(ftype, position=pos, volume=2)).public
+    assert all(m.injected is None for m in pub.messages)  # no injection markers
+    assert not (set(pub.meta) & LEAKAGE_META_KEYS)  # no label metadata
+    # and it must not accidentally serialize a marker either:
+    assert "injected" not in pub.to_dict()["messages"][pos] if pos < len(pub.messages) else True
 
 
-def test_wrong_tool_swaps_the_call():
+def test_redact_is_idempotent_and_pure():
     base = successful_flight_trajectory()
-    assert base.messages[5].tool_call.name == "book_flight"
-    corrupted = inject(base, FaultSpec(FaultType.WRONG_TOOL, position=5))
-    assert corrupted.messages[5].tool_call.name == "check_weather"
-    assert corrupted.messages[5].injected == "wrong_tool"
+    c = inject(base, FaultSpec(FaultType.STALENESS, position=5))
+    once = redact_for_attribution(c.corrupted)
+    twice = redact_for_attribution(once)
+    assert once.to_dict() == twice.to_dict()
+    assert any(m.injected == "staleness" for m in c.corrupted.messages)  # original marks intact
+
+
+# ---- volume is a real severity knob for every fault type ----------------------------------------
+
+
+def test_debris_volume_controls_count():
+    base = successful_flight_trajectory()
+    c = inject(base, FaultSpec(FaultType.DEBRIS, position=3, volume=3))
+    assert sum(m.injected == "debris" for m in c.corrupted.messages) == 3
+
+
+def test_staleness_volume_controls_price():
+    base = successful_flight_trajectory()
+    low = inject(base, FaultSpec(FaultType.STALENESS, position=5, volume=1)).corrupted.messages[5]
+    high = inject(base, FaultSpec(FaultType.STALENESS, position=5, volume=3)).corrupted.messages[5]
+    assert "$780" in low.content and "$1040" in high.content
+
+
+def test_contradiction_volume_controls_strength():
+    base = successful_flight_trajectory()
+    low = inject(base, FaultSpec(FaultType.CONTRADICTION, position=3, volume=1)).corrupted.messages[
+        3
+    ]
+    high = inject(
+        base, FaultSpec(FaultType.CONTRADICTION, position=3, volume=2)
+    ).corrupted.messages[3]
+    assert "$400" in low.content and "$0" in high.content
+
+
+def test_wrong_tool_volume_controls_distance():
+    base = successful_flight_trajectory()
+    near = inject(base, FaultSpec(FaultType.WRONG_TOOL, position=5, volume=1)).corrupted
+    far = inject(base, FaultSpec(FaultType.WRONG_TOOL, position=5, volume=3)).corrupted
+    assert near.messages[5].tool_call.name == "search_hotels"
+    assert far.messages[5].tool_call.name == "check_weather"
+
+
+def test_constraint_drop_volume_drops_multiple():
+    base = successful_flight_trajectory()
+    c = inject(base, FaultSpec(FaultType.CONSTRAINT_DROP, position=0, volume=2))
+    assert c.corrupted.constraints == []
+    assert len(c.label.extra["dropped_constraint"]) == 2
+
+
+def test_tool_forgetting_volume_controls_burial_depth():
+    base = successful_flight_trajectory()
+    c = inject(base, FaultSpec(FaultType.TOOL_FORGETTING, position=5, volume=5))
+    assert len(c.corrupted.tools) == len(base.tools) + 5
+    assert c.corrupted.tools.index("book_flight") >= 5
 
 
 def test_wrong_tool_rejects_non_toolcall_step():
     base = successful_flight_trajectory()
     with pytest.raises(ValueError):
-        inject(base, FaultSpec(FaultType.WRONG_TOOL, position=0))  # position 0 is a user message
-
-
-def test_constraint_drop_removes_the_rule():
-    base = successful_flight_trajectory()
-    corrupted = inject(base, FaultSpec(FaultType.CONSTRAINT_DROP, position=0))
-    assert "Never book a red-eye flight." not in corrupted.constraints
-    assert corrupted.meta["dropped_constraint"] == "Never book a red-eye flight."
-
-
-def test_tool_forgetting_buries_real_tools():
-    base = successful_flight_trajectory()
-    corrupted = inject(base, FaultSpec(FaultType.TOOL_FORGETTING, position=5, volume=5))
-    assert len(corrupted.tools) == len(base.tools) + 5
-    assert "book_flight" in corrupted.tools  # still present, just buried
-    assert corrupted.tools.index("book_flight") >= 5  # sunk below the decoys
+        inject(base, FaultSpec(FaultType.WRONG_TOOL, position=0))
 
 
 def test_json_round_trip_survives_injection():
     base = successful_flight_trajectory()
-    corrupted = inject(base, FaultSpec(FaultType.STALENESS, position=5))
-    restored = Trajectory.from_dict(corrupted.to_dict())
-    assert restored.to_dict() == corrupted.to_dict()
-    assert tuple(restored.meta["blame_label"]) == ("staleness", 5)
+    c = inject(base, FaultSpec(FaultType.STALENESS, position=5))
+    restored = Trajectory.from_dict(c.corrupted.to_dict())
+    assert restored.to_dict() == c.corrupted.to_dict()
