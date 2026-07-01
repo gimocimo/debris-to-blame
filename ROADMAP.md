@@ -52,13 +52,16 @@ The **blame gap** is the region where `D` is high but `A` is low — faults that
   with bare `python3`. NOTE: `replay.py` (deterministic re-execution) deferred to M2, where it pairs
   with resume-live generation — no need for it before real trajectories exist.
 
-### M1b — Domains + validators + resume (foundation for v0.1) — NEXT
-- **5-domain suite (D-011):** travel-booking (have), calendar/email, ecommerce, repo-triage,
-  spreadsheet/DB. Each = mock tools + a hand-authored successful trajectory + a **stateful
-  `validator`** (validate final state, not prose).
-- `d2b/validate.py`: `TaskSpec(goal, tools, validator)`; `d2b/replay.py`: deterministic re-exec +
-  resume-live from an injection point (subscription-native subagent).
-- **Exit:** all 5 domains inject + resume + validate deterministically; tests green.
+### M1b — Domains + validators + resume (foundation for v0.1) ✅ DONE (2026-06-30)
+- **5-domain suite (D-011):** travel, repo-triage, calendar, ecommerce, spreadsheet — each with a
+  **stateful `Environment`** (`d2b/env.py`), a hand-authored successful trajectory, and a
+  deterministic state **validator** (`d2b/validate.py: TaskSpec`).
+- `d2b/replay.py`: deterministic `replay`/`evaluate` (static) + the `resume`/`Policy` interface for
+  resume-live (M2 wires the model; an oracle policy tests the harness at $0).
+- `wrong_tool` generalized to swap for a real in-domain tool (domain-agnostic, more realistic).
+- **Exit met:** all 5 domains — healthy trajectory validates ✅, `wrong_tool` at the critical step
+  breaks the state validator ✅, context-only faults leave static replay valid (documents the
+  two-mode design) ✅. 47 tests green; ruff clean. Only the model-backed resume policy is left → M2.
 
 ### M2 — Degradation + attribution (v0.1) — 3 Claude tiers, subscription-native
 - **Inference (D-007/D-012):** trajectories generated in-session; degradation resumed by subagents;

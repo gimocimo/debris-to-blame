@@ -178,23 +178,23 @@ def _inject_contradiction(t: Trajectory, spec: FaultSpec) -> tuple[FaultSite, di
 
 
 def _inject_wrong_tool(t: Trajectory, spec: FaultSpec) -> tuple[FaultSite, dict]:
-    # volume = semantic distance of the wrong tool (near -> far).
+    # Swap the call for a REAL but wrong in-domain tool (realistic, domain-agnostic).
+    # volume = semantic distance: near = first alternative, far = last alternative.
     _check_msg_index(t, spec.position, insert=False)
     msg = t.messages[spec.position]
     if msg.role != "assistant" or msg.tool_call is None:
         raise ValueError(f"wrong_tool needs an assistant tool-call at position {spec.position}")
-    wrong, out = (
-        ("search_hotels", "[Hilton $210/night]")
-        if spec.volume <= 1
-        else ("check_weather", "Sunny, 18C.")
-    )
+    candidates = [x for x in t.tools if x != msg.tool_call.name]
+    if not candidates:
+        raise ValueError("wrong_tool needs >=1 alternative tool in trajectory.tools")
+    wrong = candidates[0] if spec.volume <= 1 else candidates[-1]
     msg.tool_call.name = wrong
     msg.tool_call.args = {}
     msg.injected = "wrong_tool"
     nxt = t.messages[spec.position + 1] if spec.position + 1 < len(t.messages) else None
     if nxt is not None and nxt.role == "tool":
         nxt.tool_name = wrong
-        nxt.content = out
+        nxt.content = f"[{wrong}] (unexpected/irrelevant result)"
         nxt.injected = "wrong_tool"
     return FaultSite("message", str(spec.position)), {}
 

@@ -89,12 +89,14 @@ def test_contradiction_volume_controls_strength():
     assert "$400" in low.content and "$0" in high.content
 
 
-def test_wrong_tool_volume_controls_distance():
-    base = successful_flight_trajectory()
+def test_wrong_tool_swaps_to_a_real_in_domain_tool():
+    base = successful_flight_trajectory()  # tools = [check_budget, search_flights, book_flight]
     near = inject(base, FaultSpec(FaultType.WRONG_TOOL, position=5, volume=1)).corrupted
     far = inject(base, FaultSpec(FaultType.WRONG_TOOL, position=5, volume=3)).corrupted
-    assert near.messages[5].tool_call.name == "search_hotels"
-    assert far.messages[5].tool_call.name == "check_weather"
+    # pos 5 = book_flight; candidates = [check_budget, search_flights]
+    assert near.messages[5].tool_call.name == "check_budget"  # nearest alternative
+    assert far.messages[5].tool_call.name == "search_flights"  # farthest alternative
+    assert near.messages[5].tool_call.name != far.messages[5].tool_call.name
 
 
 def test_constraint_drop_volume_drops_multiple():

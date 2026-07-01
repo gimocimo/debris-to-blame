@@ -20,11 +20,11 @@ stop and re-align.
 - **Lead framing:** **Claim C4 — localization enables recovery** ("agents recover X% more when
   attribution works"), supported by C1 injection-grounded attribution. The measurement floor under
   recoverable long-horizon agents (§2a).
-- **Milestones complete:** M0 (light related-work scan) ✅ · **M1** ✅ (injector + mock env + demo,
-  now hardened per Codex: leakage-safe public/private split, kind-tagged `FaultSite`, real `volume`
-  for all 6 faults; 25 tests green)
+- **Milestones complete:** M0 ✅ · **M1** ✅ (leakage-safe injector, `FaultSite`, real `volume`) ·
+  **M1b** ✅ (5 stateful domains + validators + replay/resume harness; 47 tests green)
 - **Next milestone:** **M2 — degradation + attribution + recovery (v0.1)** across the 5-domain suite
-  on the 3-Claude-tier panel, subscription-native. Recovery (C4) is the headline. First real claim.
+  on the 3-Claude-tier panel, subscription-native. Needs the model-backed resume `Policy`. Recovery
+  (C4) is the headline. First real claim.
 - **Scope bar (D-010/D-011):** raised — recovery-headline + 5 domains + validators + sham controls +
   dumb baselines + bootstrap CIs. Cost held at $0 (D-012).
 - **Repo health:** scaffold committed + pushed; **public** at `github.com/gimocimo/debris-to-blame`
@@ -36,7 +36,7 @@ stop and re-align.
   model family generates and grades (R6, documented limitation) — mitigated because ground truth
   comes from *injection*, not a model, and attribution runs on the redacted `.public` trace in
   fresh-context subagents. Scale (5 domains at $0) is the other risk — rate limits force batching.
-- **Latest handoff:** `handoffs/0005-codex-audit.md`
+- **Latest handoff:** `handoffs/0006-m1b-domains.md`
 
 ---
 
