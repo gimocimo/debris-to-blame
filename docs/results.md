@@ -77,9 +77,12 @@ recovery baseline, and it makes the headline concrete: **localization enables re
 | Attribute | blind / with-policy | 0.00 / 1.00 | [0.00, 0.43] / [0.57, 1.00] |
 | Recover | no+blind repair / targeted | 0.00 / 1.00 | [0.00, 0.43] / [0.57, 1.00] |
 
-The intervals **don't overlap** in any stage — the *direction* of each effect is real at n=5 — but they
-are wide, so the *magnitude* (a clean 0-vs-1) is not yet established. Scaling (faults × tiers ×
-domains, more samples, sham controls) is what tightens them.
+A two-sided **Fisher exact** test on each stage's two conditions gives **p = 0.008** (degrade,
+attribute, recover alike) — the 0-vs-1 gaps are individually significant. **But** the samples are
+**5 resamples of ONE base trajectory/prompt**, not independent task draws, so a small p means "a
+large effect *in this cell*", **not** a task-population claim. (CI *non-overlap* is not itself a test;
+we report the difference test instead.) Getting to a real claim needs multiple **task variants** —
+i.e. a multi-step task — not just more resamples of the same prompt.
 
 ## Breadth — sham control × 3 Claude tiers (`experiments/grid.py`)
 
@@ -100,23 +103,34 @@ Two axes on the same cell, run via a Workflow fan-out (36 agent-under-test decis
    anyway) causes **zero** violations across all tiers, while dropping the *binding* rule degrades.
    So the damage is the **specific** dropped rule, not "dropping any rule" or generic perturbation —
    exactly what the sham arm is designed to isolate.
-2. **Not a clean death-spiral.** The effect is present across tiers, but it is **not monotonic in
-   capability**: Sonnet resisted the temptation half the time (2/4) even with the rule gone, while
-   both Opus and Haiku booked the red-eye every time (4/4). At n=4 this is noisy, but it cautions
-   against a simple "weaker tier → more violations" story — an honest surprise worth following up.
+2. **No significant tier difference (yet).** Sonnet booked the red-eye 2/4 vs Opus/Haiku 4/4, but a
+   two-sided **Fisher exact** test on Opus-vs-Sonnet is **p = 0.43** — *not* significant at n=4
+   (pooling Opus+Haiku 8/8 vs Sonnet 2/4 is still only p = 0.09). So this is **not** yet evidence of
+   a non-monotonic "death-spiral"; it's a hint that would need ~16–20 samples/tier (and ideally
+   multiple task variants) to test. We flag it, we do not claim it.
 
-(One Sonnet/sham sample was lost to a structured-output failure, hence n=3 there.)
+One **Sonnet/sham** decision was lost to a **structured-output parse failure** — itself a tool-use
+failure mode that should be counted as an outcome (`parse_fail`), not silently dropped. Here it only
+reduced that cell to n=3; future runs log parse failures explicitly.
 
 ## Caveats (why this is a proof of mechanism, not a claim)
 
-- **Saturated effects at small n.** Every number is 0-vs-1 at n=5, which is clean but under-powered.
-  Before any claim: **bootstrap CIs** by base trajectory.
-- **One tier.** Subagents ran on a single inherited Claude tier — not the 3-tier panel.
-- **One fault, one domain.** Only `constraint_drop` in travel. The other five faults and five
-  domains exist in the harness but haven't been run through the loop.
-- **No sham controls yet.** Degradation should be compared against a same-volume neutral injection.
-- **Toy-env artifact.** The mock `search_flights` ignores the date, which inflates exp02's
-  clean-trace false-positive rate. Fix before quoting that number.
+- **Single-decision, single-domain, single-fault toy cell — the biggest threat.** The whole slice is
+  one base trajectory: remove a rule, show a much-cheaper red-eye, observe a red-eye booking, restore
+  the rule, recover. That proves the *mechanism* but is close to tautological and is **not a
+  benchmark**. The fix is to rerun the loop on a genuinely **multi-step task** with multiple
+  independent task variants (see ROADMAP).
+- **Not independent samples.** n is resamples of one prompt (§ "Confidence intervals"), so the
+  per-cell Fisher p-values describe *the cell*, not a task population.
+- **Sham validity is not uniform.** Several shams are imperfect controls: `constraint_drop`'s sham
+  (drop the budget rule) is non-binding *only because both flights are under budget* (domain-specific,
+  not general); `wrong_tool`'s sham (duplicate the correct call) doesn't match the fault's trace shape
+  or state effect; the insert-fault shams (a short benign note) don't match token length / tool name /
+  plausibility. A per-domain **sham plan** declaring which constraints are binding is the fix (TODO).
+- **exp02 numbers are STALE — do not quote until rerun.** The env date fix ("dep Fri") changed the
+  trace, so the cached exp02 detective verdicts (which hallucinated a "missing date filter") predate
+  it. exp02 must be rerun on the date-fixed trace; the blame-gap direction should hold but the
+  clean-trace false-positive rate will change.
 - **Same-family generate + grade.** Generator and detective are both Claude (documented limitation
   R6); truth comes from *injection*, not a model, and the detective sees only the redacted trace.
 

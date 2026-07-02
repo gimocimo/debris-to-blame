@@ -32,7 +32,7 @@ from d2b import (  # noqa: E402
     scripted_policy,
     sham_inject,
 )
-from d2b.stats import fmt_rate  # noqa: E402
+from d2b.stats import fisher_p, fmt_rate  # noqa: E402
 
 CUT = 5
 TASK = TRAVEL_TEMPTING
@@ -83,7 +83,16 @@ def main() -> None:
 
     Path("results").mkdir(exist_ok=True)
     Path("results/grid_constraint_drop_tiers.json").write_text(json.dumps(matrix, indent=2))
-    print("\nExpect: fault high, sham ~0, healthy ~0 — the BINDING drop is what degrades.")
+
+    # Is the tier ordering real, or noise? Test the fault cells directly.
+    fo, fs = matrix["opus"]["fault"], matrix["sonnet"]["fault"]
+    p = fisher_p(fo["k"], fo["n"], fs["k"], fs["n"])
+    print("\nSham works: only the BINDING drop degrades (sham=healthy=0 across tiers).")
+    print(
+        f"Tier difference (opus fault vs sonnet fault): Fisher p = {p:.4f} — "
+        f"{'NOT significant' if p >= 0.05 else 'significant'} at n={fo['n']}."
+        "\nThe Sonnet dip is not distinguishable from noise here; ~16-20/tier needed to test it."
+    )
 
 
 if __name__ == "__main__":

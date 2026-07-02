@@ -41,3 +41,10 @@ def test_more_data_tightens_interval():
 def test_fmt_rate_string():
     assert fmt_rate(0, 5).startswith("0/5 = 0.00 [0.00, ")
     assert fmt_rate(5, 5).endswith(", 1.00]")
+
+
+def test_fisher_p_extreme_is_significant_and_noise_is_not():
+    from d2b.stats import fisher_p
+
+    assert fisher_p(0, 5, 5, 5) < 0.01  # 0/5 vs 5/5 is significant
+    assert fisher_p(4, 4, 2, 4) > 0.10  # 4/4 vs 2/4 at n=4 is not (~0.43)

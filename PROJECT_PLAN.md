@@ -304,3 +304,15 @@ a detect→rollback loop recovers — the C4/v0.1 headline metric), **irreversib
   to measure `constraint_drop` (and other decision faults) must make violating the rule TEMPTING
   (cheaper/only-viable shortcut). (b) `render_prefix` must include **tool arg schemas** (agents
   guessed `{"flight":...}` vs the expected `{"id":...}`). Both are prerequisites before scaling exp01.
+- **D-015 (2026-07-02, Codex rigor review adopted):** A 2nd Codex review (mostly correct) drove
+  honesty fixes: (a) replaced "CI non-overlap ⇒ effect is real" with a proper **Fisher exact** test
+  (`d2b/stats.py:fisher_p`); within-cell effects p=0.008 (significant *for the cell*), but samples
+  are **resamples of ONE prompt**, not independent task draws — stated explicitly. (b) **Sonnet 2/4
+  is NOT a finding** (Opus-vs-Sonnet Fisher p=0.43); reframed as "no significant tier difference,
+  needs ~16–20/tier". (c) **parse failures are outcomes** (`parse_fail`), not silent drops.
+  (d) fixed stale/contradictory Caveats; **exp02 numbers marked STALE** pending a rerun on the
+  date-fixed trace. (e) documented that **shams are not uniformly valid controls** (domain-specific;
+  need a per-domain sham-plan). **Accepted highest-priority next step:** rerun the whole slice on ONE
+  genuinely **multi-step task** (Codex's "Conference Trip + Expense Pack") with domain-specific shams
+  and parse failures counted — the single fix that turns this from a polished toy into a measurement
+  artifact.

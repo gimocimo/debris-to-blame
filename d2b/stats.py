@@ -26,3 +26,16 @@ def fmt_rate(k: int, n: int) -> str:
     lo, hi = wilson_ci(k, n)
     rate = (k / n) if n else 0.0
     return f"{k}/{n} = {rate:.2f} [{lo:.2f}, {hi:.2f}]"
+
+
+def fisher_p(k1: int, n1: int, k2: int, n2: int) -> float:
+    """Two-sided Fisher exact p-value for the difference between two proportions.
+
+    Tests the DIFFERENCE directly (unlike comparing whether two CIs overlap, which is not a test).
+    NOTE: valid only if the samples are independent draws — here they are resamples of ONE base
+    trajectory/prompt, so a small p means "a large effect here", not a task-population claim.
+    """
+    from scipy.stats import fisher_exact
+
+    _, p = fisher_exact([[k1, n1 - k1], [k2, n2 - k2]])
+    return float(p)

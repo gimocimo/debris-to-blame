@@ -17,7 +17,7 @@ D = ROOT / "experiments" / "decisions"
 import sys  # noqa: E402
 
 sys.path.insert(0, str(ROOT))
-from d2b.stats import fmt_rate  # noqa: E402
+from d2b.stats import fisher_p, fmt_rate  # noqa: E402
 
 
 def _n(path: str, key: str | None = None) -> int:
@@ -40,20 +40,34 @@ def main() -> None:
     def row(label: str, k: int, n: int) -> str:
         return f"  {label:34} {fmt_rate(k, n)}"
 
+    k_deg_h, k_deg_d = (
+        round(deg["healthy"]["p_fail"] * n_h),
+        round(deg["constraint_drop"]["p_fail"] * n_d),
+    )
+    k_att_b = round(att["blind_failed"]["attributed"] * n_bf)
+    k_att_w = round(att["with_policy_failed"]["attributed"] * n_wf)
+    k_rec_n, k_rec_t = round(rec["no_repair"] * n_d), round(rec["targeted_repair"] * n_h)
+
     print("Debris->Blame — vertical slice (constraint_drop, travel_tempting), 95% Wilson CIs\n")
     print("1. DEGRADE  P[books red-eye]")
-    print(row("rule present", round(deg["healthy"]["p_fail"] * n_h), n_h))
-    print(row("rule dropped", round(deg["constraint_drop"]["p_fail"] * n_d), n_d))
+    print(row("rule present", k_deg_h, n_h))
+    print(row("rule dropped", k_deg_d, n_d))
     print("\n2. ATTRIBUTE  correctly blames the fault")
-    print(row("trace only (blind)", round(att["blind_failed"]["attributed"] * n_bf), n_bf))
-    print(row("trace + policy", round(att["with_policy_failed"]["attributed"] * n_wf), n_wf))
+    print(row("trace only (blind)", k_att_b, n_bf))
+    print(row("trace + policy", k_att_w, n_wf))
     print("\n3. RECOVER  task recovered")
-    print(row("no_repair", round(rec["no_repair"] * n_d), n_d))
+    print(row("no_repair", k_rec_n, n_d))
     print(row("blind_repair", round(rec["blind_repair"] * n_br), n_br))
-    print(row("targeted_repair", round(rec["targeted_repair"] * n_h), n_h))
+    print(row("targeted_repair", k_rec_t, n_h))
+
+    print("\nDifference tests (two-sided Fisher exact):")
+    print(f"  degrade   present vs dropped : p = {fisher_p(k_deg_h, n_h, k_deg_d, n_d):.4f}")
+    print(f"  attribute blind vs +policy   : p = {fisher_p(k_att_b, n_bf, k_att_w, n_wf):.4f}")
+    print(f"  recover   no_repair vs target: p = {fisher_p(k_rec_n, n_d, k_rec_t, n_h):.4f}")
     print(
-        "\nEffects are saturated (0-vs-1) at small n — direction is clear, magnitude is uncertain."
-        "\nScaling (faults x tiers x domains, sham controls) tightens these intervals."
+        "\nCaveat: samples are resamples of ONE base trajectory/prompt, not independent task"
+        "\ndraws — a small p means 'a large effect in THIS cell', not a task-population claim."
+        "\nReal power needs multiple task variants (a multi-step task), not more resamples."
     )
 
 
