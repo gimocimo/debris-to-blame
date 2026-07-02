@@ -1,10 +1,17 @@
-"""Attribution driver — render a FAILED interactive rollout for a detective, blind vs with-policy.
+"""Attribution driver — render a FAILED interactive rollout for a detective, in several arms.
 
 For a constraint_drop failure the dropped rule is GONE from the agent's trace, so a blind auditor
-may not see the violation (the blame gap). The reference policy should restore detectability.
+may not see the violation (the blame gap). We separate three arms to keep the metric HONEST:
+  blind   — trace as-seen (post-deletion standing rules); no reference.
+  deleak  — trace + the full rulebook MINUS the specific dropped line (a control: for a deletion
+            fault this adds no new information, so it should land ~= blind).
+  policy  — trace + the FULL original policy incl. the dropped line. This is an ORACLE UPPER BOUND
+            on attribution (the auditor is handed the complete pre-deletion spec), not a realistic
+            detector; the blind-vs-policy gap for a deletion fault is near-tautological by design.
 
   python experiments/attribute.py <state.json> blind    # -> detective prompt (trace as-seen)
-  python experiments/attribute.py <state.json> policy   # -> + the reference policy
+  python experiments/attribute.py <state.json> deleak   # -> + rulebook minus the dropped line
+  python experiments/attribute.py <state.json> policy   # -> + the full policy (oracle upper bound)
   python experiments/attribute.py <state.json> rule     # -> the dropped rule (for scoring)
 """
 
@@ -56,7 +63,16 @@ def main() -> None:
     if mode == "rule":
         print(dropped or "(no dropped rule)")
         return
-    ref = task.data["policy"] if mode == "policy" else None
+    ref = None
+    if mode == "policy":
+        ref = task.data["policy"]  # oracle: the full pre-deletion spec
+    elif mode == "deleak":
+        pol = task.data["policy"]
+        if state["condition"].startswith("cdrop:"):
+            k = int(state["condition"].split(":", 1)[1])
+            ref = [r for i, r in enumerate(pol) if i != k]  # rulebook minus the dropped line
+        else:
+            ref = pol
     print(INSTR + render_trace_for_detective(traj, reference_policy=ref))
 
 

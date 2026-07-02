@@ -28,6 +28,17 @@ def fmt_rate(k: int, n: int) -> str:
     return f"{k}/{n} = {rate:.2f} [{lo:.2f}, {hi:.2f}]"
 
 
+def cluster_by_variant(per_variant: dict[int, tuple[int, int]]) -> tuple[int, int]:
+    """Collapse per-variant (k_fail, n) reps to the VARIANT as the independent unit.
+
+    Reps of the same task variant are correlated (resamples of one prompt), so pooling them as
+    independent draws overstates n. We report the number of variants where the effect shows in the
+    majority of reps, out of the number of variants — the honest independent-n for a Fisher test.
+    """
+    affected = sum(1 for (k, n) in per_variant.values() if n and k / n > 0.5)
+    return affected, len(per_variant)
+
+
 def fisher_p(k1: int, n1: int, k2: int, n2: int) -> float:
     """Two-sided Fisher exact p-value for the difference between two proportions.
 

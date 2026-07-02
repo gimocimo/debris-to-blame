@@ -49,6 +49,14 @@ def setup_and_injectors(condition: str, variant: int = 0):
     if condition == "sham":
         spec = FaultSpec(FaultType.CONSTRAINT_DROP, position=0)
         return sham_inject(task.make_trajectory(), spec).public, (), task
+    if condition.startswith("forget:"):
+        # tool_forgetting: a REQUIRED tool is missing from the visible toolset (the agent "forgot"
+        # it exists). No rule is dropped, so the requirement is still stated — a high-damage fault
+        # that stays attributable (contrast to constraint_drop's blame gap).
+        tool = condition.split(":", 1)[1]
+        setup = redact(task.make_trajectory())
+        setup.tools = [t for t in setup.tools if t != tool]
+        return setup, (), task
     if condition.startswith("blindrepair:"):
         # recovery baseline: drop rule k, then add a plausible-but-WRONG repair rule (misdiagnosis)
         k = int(condition.split(":", 1)[1])

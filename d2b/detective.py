@@ -109,15 +109,20 @@ def grade_attribution(verdict: dict, record) -> dict:
     """Grade attribution against the SPECIFIC injected fault (Codex issue 7).
 
     For a constraint_drop, the culprit must name a DISTINGUISHING word of the actual dropped rule
-    (e.g. 'refundable' vs 'red-eye') — not just 'a constraint was dropped'. For a sham (no real
-    fault), correct = the detective did NOT flag a problem.
+    (e.g. 'refundable' vs 'red-eye') — not just 'a constraint was dropped'. For other faults, the
+    caller supplies the distinguishing tokens via record.extra['attr_keys'] (e.g. staleness ->
+    'stale'/'cached', tool_forgetting -> 'expense'/'report'). For a sham (no real fault), correct =
+    the detective did NOT flag a problem.
     """
     problem = bool(verdict.get("problem"))
     culprit = str(verdict.get("culprit", "")).lower()
     if getattr(record, "sham", False):
         return {"problem": problem, "attributed": False, "correct": not problem}
-    rule = " ".join(record.extra.get("dropped_constraint") or []).lower()
-    tokens = [w.strip(".,()") for w in rule.split()]
-    keys = [w for w in tokens if len(w) > 3 and w not in _GENERIC]
+    keys = record.extra.get("attr_keys")
+    if not keys:
+        rule = " ".join(record.extra.get("dropped_constraint") or []).lower()
+        tokens = [w.strip(".,()") for w in rule.split()]
+        keys = [w for w in tokens if len(w) > 3 and w not in _GENERIC]
+    keys = [str(k).lower() for k in keys]
     attributed = problem and any(k in culprit for k in keys)
     return {"problem": problem, "attributed": attributed, "correct": problem}
