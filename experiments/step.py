@@ -6,12 +6,13 @@ stays ground truth. State is just the decision list (+ condition), so parallel r
 files with no races; each `act` replays the decisions so far to produce the next observation.
 
 Usage:
-  python experiments/step.py <state.json> init <condition>        # -> prints the initial prompt
-  python experiments/step.py <state.json> act <tool> [k=v ...]    # -> prints OBSERVATION + STATUS
-  python experiments/step.py <state.json> act finish              # -> STATUS: done + RESULT
-  python experiments/step.py <state.json> result                 # -> authoritative PASS/FAIL
+  python experiments/step.py <state.json> init <condition> [variant]  # -> prints the initial prompt
+  python experiments/step.py <state.json> act <tool> [k=v ...]        # -> OBSERVATION + STATUS
+  python experiments/step.py <state.json> act finish                  # -> STATUS: done + RESULT
+  python experiments/step.py <state.json> result                     # -> authoritative PASS/FAIL
 
 conditions: healthy | staleness | contradiction | cdrop:<rule_index> | sham
+variant: index into d2b.CONFERENCE_VARIANTS (default 0)
 """
 
 from __future__ import annotations
@@ -24,7 +25,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import d2b  # noqa: E402
 
-CT = d2b.CONFERENCE_TRIP
+VARIANTS = d2b.CONFERENCE_VARIANTS
 FaultSpec, FaultType = d2b.FaultSpec, d2b.FaultType
 inject, sham_inject, redact = d2b.inject, d2b.sham_inject, d2b.redact_for_attribution
 interactive_rollout, scripted_policy_fn = d2b.interactive_rollout, d2b.scripted_policy_fn
@@ -33,19 +34,21 @@ staleness_injector, contradiction_injector = d2b.staleness_injector, d2b.contrad
 MAX_STEPS = 14
 
 
-def setup_and_injectors(condition: str):
+def setup_and_injectors(condition: str, variant: int = 0):
+    """Return (setup_trajectory, injectors, task) for the given condition + variant."""
+    task = VARIANTS[variant]
     if condition == "healthy":
-        return redact(CT.make_trajectory()), ()
+        return redact(task.make_trajectory()), (), task
     if condition == "staleness":
-        return redact(CT.make_trajectory()), (staleness_injector(),)
+        return redact(task.make_trajectory()), (staleness_injector(task),), task
     if condition == "contradiction":
-        return redact(CT.make_trajectory()), (contradiction_injector(),)
+        return redact(task.make_trajectory()), (contradiction_injector(task),), task
     if condition.startswith("cdrop:"):
         spec = FaultSpec(FaultType.CONSTRAINT_DROP, position=int(condition.split(":", 1)[1]))
-        return inject(CT.make_trajectory(), spec).public, ()
+        return inject(task.make_trajectory(), spec).public, (), task
     if condition == "sham":
         spec = FaultSpec(FaultType.CONSTRAINT_DROP, position=0)
-        return sham_inject(CT.make_trajectory(), spec).public, ()
+        return sham_inject(task.make_trajectory(), spec).public, (), task
     raise SystemExit(f"unknown condition: {condition}")
 
 
@@ -66,10 +69,10 @@ def render_initial(setup) -> str:
 
 
 def replay(state: dict):
-    setup, inj = setup_and_injectors(state["condition"])
+    setup, inj, task = setup_and_injectors(state["condition"], state.get("variant", 0))
     decs = [dict(d) for d in state["decisions"]]
     n = max(1, len(decs))
-    return interactive_rollout(CT, scripted_policy_fn(decs), setup, injectors=inj, max_steps=n)
+    return interactive_rollout(task, scripted_policy_fn(decs), setup, injectors=inj, max_steps=n)
 
 
 def main() -> None:
@@ -78,15 +81,16 @@ def main() -> None:
 
     if cmd == "init":
         condition = sys.argv[3]
-        setup, _ = setup_and_injectors(condition)
-        path.write_text(json.dumps({"condition": condition, "decisions": []}))
+        variant = int(sys.argv[4]) if len(sys.argv) > 4 else 0
+        setup, _, _ = setup_and_injectors(condition, variant)
+        path.write_text(json.dumps({"condition": condition, "variant": variant, "decisions": []}))
         print(render_initial(setup))
         return
 
     state = json.loads(path.read_text())
 
     if cmd == "start":  # print the initial prompt WITHOUT revealing the condition (no leak)
-        setup, _ = setup_and_injectors(state["condition"])
+        setup, _, _ = setup_and_injectors(state["condition"], state.get("variant", 0))
         print(render_initial(setup))
         return
 

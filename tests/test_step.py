@@ -8,8 +8,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "experiments"))
 import step  # noqa: E402
 
 
-def _run(condition, decisions):
-    state = {"condition": condition, "decisions": decisions}
+def _run(condition, decisions, variant=0):
+    state = {"condition": condition, "variant": variant, "decisions": decisions}
     return step.replay(state)
 
 
@@ -45,11 +45,17 @@ def test_staleness_shows_cached_but_validator_uses_truth():
 
 
 def test_constraint_drop_condition_removes_the_rule_from_the_prompt():
-    setup, _ = step.setup_and_injectors("cdrop:2")  # drop "hotel must be refundable"
+    setup, _, _ = step.setup_and_injectors("cdrop:2")  # drop "hotel must be refundable"
     assert not any("refundable" in c for c in setup.constraints)
 
 
 def test_start_prompt_does_not_name_the_condition():
-    setup, _ = step.setup_and_injectors("staleness")
+    setup, _, _ = step.setup_and_injectors("staleness")
     prompt = step.render_initial(setup)
     assert "staleness" not in prompt.lower() and "inject" not in prompt.lower()
+
+
+def test_variant_index_selects_a_different_catalog():
+    setup0, _, t0 = step.setup_and_injectors("healthy", 0)
+    setup1, _, t1 = step.setup_and_injectors("healthy", 1)
+    assert t0.name != t1.name and t0.data["route"] != t1.data["route"]
