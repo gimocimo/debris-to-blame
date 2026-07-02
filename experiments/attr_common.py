@@ -1,6 +1,6 @@
 """Shared attribution helpers: build the ground-truth FaultRecord for a rollout condition.
 
-Both the LLM-detective scorer (attr_score) and the dumb-baseline ladder (attr_baselines) grade a
+Both the LLM-detective scorer (conf_attr_score) and the dumb-baseline ladder (attr_baselines) grade a
 `culprit` against the SAME record via d2b.detective.grade_attribution, so the two are comparable.
 """
 

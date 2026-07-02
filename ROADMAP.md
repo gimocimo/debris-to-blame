@@ -74,6 +74,12 @@ The **blame gap** is the region where `D` is high but `A` is low — faults that
 - Scale: ~40–60 curated trajectories across 5 domains, batched within rate limits.
 - **Exit:** ≥1 sham-controlled degradation curve + a measurable attribution gap in ≥3 domains.
   **First real claim.**
+- **Status (2026-07-02, D-018): PARTIALLY MET — on ONE domain only.** On the multi-step CONFERENCE_TRIP
+  task (+4 variants) we have a sham-controlled, variant-clustered degradation surface AND a
+  de-contaminated, dumb-baseline-anchored, cross-tier attribution map (M3's blame-gap map is effectively
+  delivered here too). **What is NOT met: the ≥3-domain bar.** The other five domains remain single-step
+  static fixtures, not wired into the interactive rollout. **M2 stays OPEN until a second (then third)
+  domain is ported to `step.py`'s interactive loop.** Do not describe M2/v0.1 as closed.
 
 ### M3 — The blame gap (v0.1)
 - exp03 (C3): blame-gap map `damage × (1 − detectability)` per fault × tier.

@@ -28,33 +28,47 @@ constraint pinning, memory/context-editing) on a cost–quality–detectability 
 `debris` · `staleness` · `contradiction` · `wrong_tool` · `constraint_drop` · `tool_forgetting`
 — each with a real `volume` severity knob.
 
-### Headline — the whole loop on a multi-step task, with significance
+### Headline — the blame-gap map: same damage, different attributability
 
-![conf headline](assets/conf_headline.png)
+![blame-gap map](assets/conf_blamegap.png)
 
-The complete **degrade → attribute → recover** loop on the multi-step **CONFERENCE_TRIP** task (a 10+
-step book-flight-and-hotel-then-file-and-send workflow), via **real interactive (ReAct) rollouts**
-across **4 independent task variants** (distinct cities/prices/surges, so n is *task-level*, not
-resamples of one prompt), all at **$0** through subscription subagents:
+On the multi-step **CONFERENCE_TRIP** task (a 10+ step book-then-file-then-send workflow), driven by
+**sincere agents** in **real interactive (ReAct) rollouts** across independent task variants, all at
+**$0** through subscription subagents. Three faults each break the task ~always — but they are
+*attributable* to completely different degrees, which is the whole point:
 
-| stage | result | reading |
-|---|---|---|
-| **1. Degrade** | `constraint_drop` P[fail] = **1.00**, Fisher **p = 0.0002** | drop a binding rule → every agent violates it (red-eye *and* refundable); staleness a partial 0.50; contradiction + sham null |
-| **2. Attribute** | correct blame **0.00 → 0.88** (blind → w/ policy) | **blame gap +0.88** — the deletion is invisible in the trace, fully attributable once the reference policy is supplied |
-| **3. Recover** | recovery **0.00 / 0.06 / 1.00** (none / blind / targeted) | **localization lift +0.94** — a misdiagnosed repair is worthless; restoring the *correct* rule recovers every task |
+| fault | damage | blind auditor | + full policy (oracle) | what kind of gap |
+|---|---|---|---|---|
+| **constraint_drop** (refundable) | 0.88 | **0.00** (de-leak 0.00) | **1.00** | a **deletion gap** — attributable only by re-supplying the exact deleted rule |
+| **staleness** (stale quote) | 1.00 | **0.00** | **0.00** | a **deception gap** — the policy does *not* close it; the corrupted quote fools the auditor too |
+| **tool_forgetting** (missing tool) | 1.00 | **1.00** | 0.88 | **visible** — the requirement is still stated; no gap |
 
-> A dropped constraint **silently breaks** the agent, is **invisible in the trace**, and is
-> **recoverable only once you can localize it** — now shown on a multi-step task, with statistical
-> significance across independent variants. ([full results + caveats](docs/results.md))
+> Some faults **silently break** an agent and are **invisible in the trace**; whether the reference
+> policy makes them attributable **depends on the fault type** — a deletion gap closes, a deception gap
+> does not. Dumb baselines (grep/recency) floor at ~0 recall / 100% false-positive, so the LLM
+> auditor's oracle result is real work, not token-matching. Recovery follows attribution: restoring
+> the correctly localized rule recovers **8/8** vs **0/8** for a misdiagnosed repair (localization lift
+> **+1.00**). ([full results, arms, and caveats](docs/results.md))
+
+<details><summary>Method note — why "sincere agents" and "oracle upper bound" matter</summary>
+
+An earlier pass drove rollouts with *scripted oracle* policies and reported `constraint_drop 8/8,
+p = 0.0002` + a `blame gap +0.88`. Re-collecting with **sincere** agents overturned it: dropping "no
+red-eye" causes **zero** failures (capable agents avoid red-eyes anyway — the rule was redundant), and
+the `with-policy` arm is an **oracle upper bound** (the auditor handed the full spec), not a realistic
+detector. The `de-leak` control (rulebook minus the deleted line ⇒ still 0.00) is what proves the
+deletion gap is real rather than an artifact of handing over the answer. See
+[docs/results.md](docs/results.md).
+
+</details>
 
 <details><summary>The original proof-of-mechanism (single travel cell, n=5)</summary>
 
 ![headline](assets/headline.png)
 
 The first vertical slice: the same loop on one fault (`constraint_drop`, travel), 5 samples/cell.
-Saturated 0-vs-1 effects — a convincing *proof of mechanism*, but one base trajectory. The
-multi-step result above is what de-toys it (interactive rollouts, event-log validator, 4 variants,
-real significance).
+Saturated 0-vs-1 effects — a proof of mechanism on one base trajectory, superseded by the multi-step
+canonical dataset above.
 
 </details>
 
@@ -65,10 +79,14 @@ python3 scripts/make_figure.py     # regenerate the figure above from results/
 ```
 
 ### Status
-🚧 Early. **M0 (related-work scan) and M1 (leakage-safe injector + mock env + demo, 25 tests) done.**
-Next: **M2 — degradation + attribution + recovery (v0.1)** across 5 task domains on a 3-Claude-tier
-panel. No empirical claim is real until M2. See [`PROJECT_PLAN.md`](PROJECT_PLAN.md) (scope + claims),
-[`ROADMAP.md`](ROADMAP.md) (milestones), [`docs/novelty.md`](docs/novelty.md) (related work).
+🚧 Active. **M0/M1 done; the full degrade → attribute → recover loop is demonstrated on ONE multi-step
+task family** (CONFERENCE_TRIP + 4 variants), with a de-contaminated blame-gap map, dumb-baseline
+floor, cross-tier robustness check, and honest variant-level statistics (124 tests). **M2 is not yet
+met**: its bar is a measurable attribution gap in **≥3 domains**, and only CONFERENCE_TRIP is wired
+into the interactive loop — the other domains are still single-step static fixtures. Next: port a
+second domain to the interactive loop; a true cross-provider grader; larger n. See
+[`PROJECT_PLAN.md`](PROJECT_PLAN.md) (scope + claims), [`ROADMAP.md`](ROADMAP.md) (milestones),
+[`docs/results.md`](docs/results.md) (results + caveats).
 
 ### Design constraints
 Laptop-scale, **subscription-native** (inference runs through a Claude Code agent + subagents on an

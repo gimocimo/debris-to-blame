@@ -148,6 +148,10 @@ experiment — that is the next step.
 
 ## Interactive degradation on the multi-step task (`experiments/step.py`)
 
+> **⚠ Superseded.** This n=3 smoke and the "Scaled degradation surface" below used small n and/or
+> scripted-oracle policies. They are kept for history; the authoritative numbers are in
+> [the canonical-dataset section](#the-multi-step-task-done-honestly--canonical-dataset-supersedes-the-runs-above).
+
 The loop is now run on CONFERENCE_TRIP with **real agents driving full interactive rollouts** — each
 agent takes one action at a time through a tool CLI, reacting to each (possibly corrupted)
 observation, and is never told its condition. n=3 per condition.
@@ -172,96 +176,134 @@ stayed ground truth while only the *observation* was corrupted.
 Next: scale n and add parameterized task variants (so n is task-level, not resamples of one prompt),
 then wire attribution + recovery on this task.
 
-## Scaled degradation surface — 6 faults × 4 task variants (`experiments/conf_score.py`)
+## The multi-step task, done honestly — canonical dataset (SUPERSEDES the runs above)
 
-48 real interactive rollouts (6 conditions × **4 independent task variants** × 2 reps). Because the
-variants are distinct catalogs (different cities/prices/surges), n is now **task-level**, not
-resamples of one prompt — so the significant results below are real claims, not just a cell.
+The two sections above used **scripted oracle** policies (decisions hand-written to take the trap).
+That inflates `constraint_drop`: a scripted policy books the red-eye because it was *told* to. The
+results below **re-collect everything with sincere agents** — each rollout is driven by a fresh
+subagent that sincerely tries to complete the task, blind to its condition, one action at a time. 56
+committed, replayable rollout states (`experiments/decisions/states/`): 7 conditions × 4 variants × 2
+reps, plus a de-contaminated attribution pass. This is the honest artifact; quote these numbers.
+
+### 1. Degradation is fault-specific and *conditional* (`experiments/conf_score.py`)
+
+Reported at the **variant level** — variants are the independent unit; reps of one variant are
+correlated, so we do **not** pool 8 reps as 8 independent draws (this retires the earlier pooled
+`p = 0.0002`, which the code's own docstring disowned).
 
 ![conf grid](../assets/conf_grid.png)
 
-| condition | P[fails] (95% Wilson) | Fisher vs healthy | reading |
-|---|---|---|---|
-| healthy | 0/8 = 0.00 [0.00, 0.32] | — | baseline |
-| staleness | 4/8 = 0.50 [0.22, 0.78] | p = 0.077 | **partial** — half re-quote and dodge the trap |
-| contradiction | 0/8 = 0.00 | p = 1.0 | agents ignore the fake "budget raised" note |
-| constraint_drop:red-eye | **8/8 = 1.00** [0.68, 1.00] | **p = 0.0002** | drop the rule → every agent books a red-eye |
-| constraint_drop:refundable | **8/8 = 1.00** [0.68, 1.00] | **p = 0.0002** | drop the rule → every agent books the non-refundable hotel |
-| sham (drop inert rule) | 0/8 = 0.00 | p = 1.0 | control holds |
+| condition | pooled P[fails] | variants failing | clustered Fisher vs healthy | reading |
+|---|---|---|---|---|
+| healthy | 0/8 | 0/4 | — | baseline |
+| staleness | 8/8 | 4/4 | **p = 0.029** | all lured by the cached cheap quote → book over budget |
+| forget:expense | 8/8 | 4/4 | **p = 0.029** | a required tool is missing → the report is never filed |
+| cdrop:refundable | 7/8 | 3/4 | p = 0.14 | dropping "refundable" tempts the cheaper non-refundable hotel |
+| cdrop:red-eye | **0/8** | 0/4 | n.s. | **NULL** — the rule is redundant with agent preference |
+| contradiction | 1/8 | 0/4 | n.s. | agents respect the true budget |
+| sham (drop inert rule) | 0/8 | 0/4 | — | control holds |
 
-**A real degradation surface, with significance.** Constraint-drops on *binding* rules reliably
-break agents (100%, **p = 0.0002** across 4 independent variants — a genuine claim, not a saturated
-cell). Staleness is *partial* (50%): the "confirm the latest quote" rule + the "(cached)" tell let
-about half the agents re-verify and dodge the surge — an honest, interesting middle. Contradiction
-(a fake budget-hike note) and the sham control are both null — agents respect the true budget, and
-dropping the inert rule changes nothing. This differentiation across fault types is exactly the
-signal the blame-gap map is built on.
+**Honest reversal.** With sincere agents, dropping "never book a red-eye" causes **zero** failures —
+capable agents avoid red-eyes anyway, so the rule was redundant (exactly D-014: a dropped rule bites
+only if it is *binding AND non-redundant*). Dropping "refundable" *does* bite (the non-refundable
+hotel is cheaper). The strongest, cleanest faults are **staleness** (a corrupted observation) and
+**forget:expense** (a missing tool) — both variant-significant. Even at n = 4 variants, `cdrop:
+refundable` is only p = 0.14: honestly underpowered, not a saturated cell.
 
-## The full loop on the multi-step task (`assets/conf_headline.png`)
+### 2. The blame-gap map — three high-damage faults, three attribution profiles
 
-The three experiments below close the **degrade → attribute → recover** loop on the *de-toyed*
-CONFERENCE_TRIP task — a 10+ step booking workflow, real interactive rollouts, 4 independent variants.
-This is the headline: one fault type (`constraint_drop`) that is *damaging*, *invisible in the trace*,
-and *recoverable only once localized*.
+The money figure. Detective subagents audit each failed trace in separate arms, each verdict graded
+against the *specific* fault. `oracle` is the auditor handed the **full** original spec — an **upper
+bound**, labelled as such, not a realistic detector. `de-leak` gives the rulebook **minus the one
+deleted line** (a control).
 
-![conf headline](../assets/conf_headline.png)
+![blame-gap map](../assets/conf_blamegap.png)
 
-## Attribute — the blame gap on the multi-step task (`experiments/attr_score.py`)
+| fault | damage | blind | de-leak | oracle | what kind of gap |
+|---|---|---|---|---|---|
+| cdrop:refundable | 0.88 | 0.00 | 0.00 | 1.00 | **deletion gap** — closed only by re-supplying the deleted rule |
+| staleness | 1.00 | 0.00 | — | 0.00 | **deception gap** — the policy does NOT close it |
+| forget:expense | 1.00 | 1.00 | — | 0.88 | **visible** — the requirement is still stated; no gap |
+| healthy | — | 0.00 FP | — | 0.00 FP | auditor does not cry wolf |
+| sham | — | 0.00 FP | — | 0.00 FP | inert-drop control holds |
 
-16 detective subagents audited the 8 failed `constraint_drop` traces (red-eye + refundable × 4
-variants), each in two modes: **blind** (only the redacted trace as the agent saw it) and
-**with-policy** (the same trace plus the reference standing rules). Each verdict is graded against the
-*specific* dropped rule with `grade_attribution` — naming "a red-eye" only counts on the red-eye-drop
-traces, not the refundable ones.
+Three findings the old saturated "+0.88" hid:
+- **cdrop is a deletion gap, and the de-leak control proves it.** blind 0 → oracle 1.0 — but `de-leak`
+  (the full rulebook *minus* the deleted line) is also **0.00**. Giving the auditor the general policy
+  adds nothing; only re-supplying the *exact* deleted rule restores attribution. So the effect is the
+  specific deletion, not general observability — and the oracle number is an upper bound, not a
+  realistic detector.
+- **staleness is a *different* gap that the policy does not close.** blind 0 **and** oracle 0: the
+  cached "$1050" quote in the trace deceives the *auditor* as much as the agent — both read it as
+  within budget. Attributing staleness needs **ground-truth state**, not the policy. A qualitatively
+  different observability requirement.
+- **forget is not a gap at all.** blind 1.0: the task still says "file the expense report", so a
+  trace-only auditor sees the omission immediately. High damage, fully attributable. This contrast is
+  what makes the blame gap a *fault-type property*, not a universal law.
 
-| mode | detects a problem | correctly attributes | reading |
-|---|---|---|---|
-| blind (trace only) | 0/8 = 0.00 | **0/8 = 0.00** | the trace looks clean — nothing to point at |
-| with-policy | 7/8 = 0.88 | **7/8 = 0.88** | given the rule, the detective finds the exact violation |
+**Why this is not "copying a printed word".** The dumb-baseline floor (`experiments/attr_baselines.py`
+— random / recency / a grep-for-suspicious-tokens auditor) scores **~0 recall and 100% false-positive**
+(the token "red-eye" is in *every* flight listing, so a grep auditor fires on healthy traces too). The
+LLM oracle's 1.0 recall with **0** false-positives on cdrop is therefore real cross-referencing work,
+and the de-leak control shows it depends on the specific rule being present, not on any token echoed.
 
-**BLAME GAP = +0.88.** The dropped-rule fault is almost perfectly *invisible* from the trace alone
-(0/8) yet almost perfectly *attributable* once the reference policy is supplied (7/8) — the one miss
-is a detective that judged the refundable violation a "reference-only rule, not an agent error." This
-is the money result: the fault's damage (100%) and its blind detectability (0%) are maximally far
-apart, which is precisely the regime where naive log-only failure attribution silently fails.
+### 3. Cross-tier robustness — the gap is not a grader artifact (`experiments/conf_attr_score.py`)
 
-## Recover — localization enables recovery (`experiments/conf_recover_score.py`)
+Re-auditing the cdrop traces with **Haiku** and **Sonnet** as the detective (not just Opus) gives the
+same profile — blind **0/7** → oracle **1.0** at every tier. The blame gap is stable across the Claude
+family: a within-family **lower bound** on the generate-and-grade circularity (R6). A true
+cross-provider grader remains future work.
 
-The same `constraint_drop` failure, repaired three ways, scored by re-running the full validator:
+### 4. Recovery — localization enables recovery (`experiments/conf_recover_score.py`)
 
-| repair policy | P[task recovered] (95% Wilson) | what it is |
+On the binding `cdrop:refundable` fault, sincere agents, three repairs:
+
+| repair | P[recovered] (95% Wilson) | what it is |
 |---|---|---|
-| no_repair | 0/16 = 0.00 [0.00, 0.19] | leave the rule dropped (the Phase-B cdrop cells) |
-| blind_repair | 1/16 = 0.06 [0.01, 0.28] | add a *plausible-but-wrong* rule (e.g. "prefer free breakfast") |
+| no_repair | 1/8 = 0.12 [0.02, 0.47] | leave the rule dropped |
+| blind_repair | 0/8 = 0.00 [0.00, 0.32] | add a *wrong* rule ("prefer free breakfast") |
 | targeted_repair | 8/8 = 1.00 [0.68, 1.00] | restore the actual dropped rule |
 
-**LOCALIZATION LIFT = +0.94.** A misdiagnosed repair is worthless (0.06 — the lone success is one
-variant whose agent avoided the red-eye anyway); restoring the *correctly localized* rule recovers the
-task every time (1.00). Recovery is gated on attribution, and attribution needs the reference — closing
-the loop the blame gap opened. The 16 `blind_repair` rollouts are real interactive rollouts run this
-pass (workflow `conf-recovery-blindrepair`, 16 agents); `no_repair`/`targeted_repair` reuse the Phase-B
-cdrop/healthy cells (same task, same validator).
+**Localization lift = +1.00.** A misdiagnosed repair recovers nothing; restoring the correctly
+localized rule recovers every task. Recovery is gated on correct attribution.
 
-## Caveats (why this is a proof of mechanism, not a claim)
+### 5. External validity — an honest null (`experiments/decisions/organic_*`)
 
-- **Single-decision, single-domain, single-fault toy cell — the biggest threat.** The whole slice is
-  one base trajectory: remove a rule, show a much-cheaper red-eye, observe a red-eye booking, restore
-  the rule, recover. That proves the *mechanism* but is close to tautological and is **not a
-  benchmark**. The fix is to rerun the loop on a genuinely **multi-step task** with multiple
-  independent task variants (see ROADMAP).
-- **Not independent samples.** n is resamples of one prompt (§ "Confidence intervals"), so the
-  per-cell Fisher p-values describe *the cell*, not a task population.
-- **Sham validity is not uniform.** Several shams are imperfect controls: `constraint_drop`'s sham
-  (drop the budget rule) is non-binding *only because both flights are under budget* (domain-specific,
-  not general); `wrong_tool`'s sham (duplicate the correct call) doesn't match the fault's trace shape
-  or state effect; the insert-fault shams (a short benign note) don't match token length / tool name /
-  plausibility. A per-domain **sham plan** declaring which constraints are binding is the fix (TODO).
-- **exp02 numbers are STALE — do not quote until rerun.** The env date fix ("dep Fri") changed the
-  trace, so the cached exp02 detective verdicts (which hallucinated a "missing date filter") predate
-  it. exp02 must be rerun on the date-fixed trace; the blame-gap direction should hold but the
-  clean-trace false-positive rate will change.
-- **Same-family generate + grade.** Generator and detective are both Claude (documented limitation
-  R6); truth comes from *injection*, not a model, and the detective sees only the redacted trace.
+The load-bearing assumption is that *injected* faults resemble *organic* ones. We tried to elicit
+organic failures with a weaker agent (Haiku) on the healthy task and on a deliberately hard,
+tight-margin variant (`conference_hard`): **0/22 organic failures** — capable agents don't fail this
+task at toy scale, so a direct organic-vs-injected comparison is **not yet possible** (R2 remains
+partly open). What we *can* say: under every injected fault the agent's *actions* stay sincere and
+on-task — only the *environment* is perturbed (a corrupted observation, a deleted spec line, a missing
+tool) — so the induced failures are the task's **natural** failure modes (over-budget, non-refundable,
+missing step), each mapping to a real agent-failure category. Face validity by construction; a measured
+organic comparison is future work.
+
+## Caveats (what this is and is not)
+
+The canonical multi-step results (the section above) are an honest measurement on **one task family**.
+They are not yet a cross-domain benchmark.
+
+- **Single task family — M2's ≥3-domain bar is NOT met.** The full loop is shown on CONFERENCE_TRIP
+  and its variants only. The other five domains exist as single-step *static fixtures*, not wired into
+  the interactive rollout — so do **not** read the loop as "closed across domains". Porting a second
+  domain to the interactive loop is the next real milestone (see ROADMAP).
+- **Small n (4 task variants).** Reported at the variant level (reps of one variant are correlated, so
+  they are not pooled as independent). Staleness and forget reach clustered p = 0.029; `cdrop:
+  refundable` is only p = 0.14 — honestly underpowered, not a saturated cell.
+- **The oracle attribution arm is an UPPER BOUND, not a detector.** The `with-policy`/oracle number is
+  the auditor handed the complete pre-deletion spec; for a deletion fault the blind→oracle gap is
+  near-tautological by design. The `de-leak` control (rulebook minus the deleted line ⇒ 0.00) and the
+  dumb-baseline floor (~0 recall / 100% FP) bound the realistic number from below.
+- **Same-family generate + grade (R6).** Generator and detective are both Claude. Bounded across the
+  Claude family (Haiku/Sonnet/Opus give the same profile, §3) but a true **cross-provider** grader is
+  future work. Truth comes from *injection*, not a model, and the detective sees only the redacted trace.
+- **External validity partly open (R2).** Organic failures could not be elicited at toy scale (§5), so
+  the organic-vs-injected comparison is future work; face validity rests on the structural argument
+  that injection perturbs only the environment, leaving agent behaviour natural.
+- **The travel-cell and scripted-oracle sections above are SUPERSEDED** and kept only for history. The
+  scripted `constraint_drop 8/8, p = 0.0002` and `blame gap +0.88` were artifacts of oracle policies
+  told to take the trap; the sincere-agent numbers replace them.
 
 ## Reproduce
 
@@ -270,18 +312,25 @@ python experiments/exp01_degradation.py travel_tempting experiments/decisions/ex
 python experiments/exp02_attribution.py experiments/decisions/exp02_travel_tempting_verdicts.json
 python experiments/exp04_recovery.py    experiments/decisions/exp04_blind_repair.json
 python experiments/grid.py               experiments/decisions/grid_constraint_drop_tiers.json
-python scripts/make_figure.py            # headline.png + grid.png + conf_grid.png + conf_headline.png
+python scripts/make_figure.py            # legacy headline.png + grid.png (travel cell)
 python scripts/report.py                 # consolidated slice + 95% Wilson CIs
 ```
 
-Multi-step CONFERENCE_TRIP loop (interactive rollouts driven via `experiments/step.py`; the cached
-`state`/`decisions` JSONs replay deterministically and free):
+**Canonical multi-step CONFERENCE_TRIP loop** (the authoritative results). Interactive rollouts were
+driven via `experiments/step.py`; every rollout `state` and detective `verdict` is committed, so all
+scoring below replays **deterministically and free** — no model calls:
 
 ```
-python experiments/conf_score.py         "<states>/*.json"          # degradation surface (Fisher vs healthy)
-python experiments/attr_score.py         experiments/decisions/conf_attribution.json   # blame gap +0.88
-python experiments/conf_recover_score.py "experiments/decisions/recovery_states/br_*.json"  # localization lift +0.94
+# degradation surface (variant-clustered Fisher; 56 committed rollout states)
+python experiments/conf_score.py         "experiments/decisions/states/*.json"
+# the de-contaminated blame-gap map (blind / de-leak / oracle + Haiku/Sonnet cross-tier)
+python experiments/conf_attr_score.py    experiments/decisions/conf_attribution.json
+# the dumb-baseline floor (random / recency / keyword; recall + false-positive)
+python experiments/attr_baselines.py     "experiments/decisions/states/*.json"
+# recovery on the binding fault (localization lift +1.00)
+python experiments/conf_recover_score.py "experiments/decisions/recovery2/br2_*.json"
+python scripts/make_figure.py            # conf_grid.png + conf_blamegap.png + conf_recovery.png
 ```
 
-The `experiments/decisions/*.json` files are the cached model decisions (the subscription-native
-inference outcomes); scoring them is deterministic and free.
+The `experiments/decisions/**` files are the cached rollout states + detective verdicts (the
+subscription-native inference outcomes); scoring them is deterministic and free.

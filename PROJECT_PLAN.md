@@ -346,3 +346,27 @@ a detect→rollback loop recovers — the C4/v0.1 headline metric), **irreversib
   proof-of-mechanism. Recovery replays from committed `experiments/decisions/recovery_states/br_*.json`.
   113 tests green, ruff clean. **This closes the "de-toy" arc — the loop now holds on a multi-step task
   with significance.** Next scope: enlarge (more variants / other domains / mitigation frontier M5).
+- **D-018 (2026-07-02, owner directive "do all steps 1-7 + fix every issue" — DE-CONTAMINATION &
+  HONEST REGIME):** A self-run next-steps workflow (adversarially verified in-code) found the D-017
+  headline was CONTAMINATED: `attribute.py` handed the detective the full policy *including the dropped
+  rule*, so `blind→with-policy 0→0.88` largely measured answer-copying, and the degradation used
+  *scripted-oracle* policies that were told to take the trap. Fixed all seven review items + the
+  contamination, re-collecting a **canonical sincere-agent dataset** (56 committed rollout states, 4
+  variants × 2 reps × 7 conditions). Outcomes (all replayable, $0): **(1)** honest degradation —
+  staleness 8/8 and forget:expense 8/8 (variant-clustered p=0.029), cdrop:refundable 7/8 (p=0.14),
+  **cdrop:red-eye 0/8 NULL** (rule redundant with agent preference — the scripted 8/8 was an artifact;
+  validates D-014). **(2)** de-contaminated **blame-gap map**: `blind`/`de-leak`(rulebook minus the
+  line)/`oracle`(full spec = labelled UPPER BOUND) arms → cdrop is a *deletion gap* (blind 0, de-leak
+  0, oracle 1.0 — only re-supplying the exact rule attributes it); **staleness is a *deception gap*
+  (blind 0 AND oracle 0 — the cached quote fools the auditor too; needs ground-truth state, not
+  policy)**; forget is *visible* (blind 1.0, no gap). Dumb baselines (random/recency/keyword) floor at
+  ~0 recall / 100% FP → the LLM oracle is real work. **(3)** cross-tier: Haiku/Sonnet/Opus all give
+  blind 0 → oracle 1.0 (R6 within-family lower bound). **(4)** recovery re-collected on the binding
+  fault: localization lift +1.00. **(5)** external validity: 0/22 organic failures elicitable (Haiku
+  on healthy + a hard tight-margin variant) → documented R2 limitation + structural face-validity
+  argument. New code: `attribute.py` de-leak arm, `attr_baselines.py`, `attr_common.record_for`,
+  `stats.cluster_by_variant`, `step.py forget:<tool>`, `conf_attr_score.py`, `conference_hard` variant.
+  Docs de-inflated (README leads with the blame-gap map; results.md marks the old numbers SUPERSEDED;
+  **M2's ≥3-domain bar explicitly NOT claimed met** — only CONFERENCE_TRIP is wired). 124 tests green,
+  ruff clean. **The honest artifact is stronger than the contaminated one: a fault-type-resolved
+  observability map, not a single saturated number.**
