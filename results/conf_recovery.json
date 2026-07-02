@@ -1,0 +1,14 @@
+{
+  "no_repair": {
+    "k_ok": 0,
+    "n": 16
+  },
+  "blind_repair": {
+    "k_ok": 1,
+    "n": 16
+  },
+  "targeted_repair": {
+    "k_ok": 8,
+    "n": 8
+  }
+}

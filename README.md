@@ -28,25 +28,35 @@ constraint pinning, memory/context-editing) on a cost–quality–detectability 
 `debris` · `staleness` · `contradiction` · `wrong_tool` · `constraint_drop` · `tool_forgetting`
 — each with a real `volume` severity knob.
 
-### First result — the whole thesis on one cell
+### Headline — the whole loop on a multi-step task, with significance
 
-![headline](assets/headline.png)
+![conf headline](assets/conf_headline.png)
 
-A proof-of-mechanism run of the complete loop on one fault (`constraint_drop`, travel domain), with
-real inference through subscription subagents at **$0**, 5 samples per cell:
+The complete **degrade → attribute → recover** loop on the multi-step **CONFERENCE_TRIP** task (a 10+
+step book-flight-and-hotel-then-file-and-send workflow), via **real interactive (ReAct) rollouts**
+across **4 independent task variants** (distinct cities/prices/surges, so n is *task-level*, not
+resamples of one prompt), all at **$0** through subscription subagents:
 
 | stage | result | reading |
 |---|---|---|
-| **1. Degrade** (exp01) | P[fail] `0.00 → 1.00` | drop the "no red-eye" rule → the agent silently books the cheaper red-eye |
-| **2. Attribute** (exp02) | correct blame `0.00 → 1.00` (w/ policy) | a **trace-only** auditor can't see the violation — a deletion leaves no trace |
-| **3. Recover** (exp04) | recovery `0.00` blind → `1.00` targeted | the task recovers **only** when the fault is correctly localized |
+| **1. Degrade** | `constraint_drop` P[fail] = **1.00**, Fisher **p = 0.0002** | drop a binding rule → every agent violates it (red-eye *and* refundable); staleness a partial 0.50; contradiction + sham null |
+| **2. Attribute** | correct blame **0.00 → 0.88** (blind → w/ policy) | **blame gap +0.88** — the deletion is invisible in the trace, fully attributable once the reference policy is supplied |
+| **3. Recover** | recovery **0.00 / 0.06 / 1.00** (none / blind / targeted) | **localization lift +0.94** — a misdiagnosed repair is worthless; restoring the *correct* rule recovers every task |
 
 > A dropped constraint **silently breaks** the agent, is **invisible in the trace**, and is
-> **recoverable only once you can localize it.** ([full results + caveats](docs/results.md))
+> **recoverable only once you can localize it** — now shown on a multi-step task, with statistical
+> significance across independent variants. ([full results + caveats](docs/results.md))
 
-**Honest caveat:** these effects are saturated (0-vs-1) at n=5, one tier, one fault, one domain —
-a convincing *proof of mechanism*, not yet a paper claim. Scaling (faults × tiers × domains, sham
-controls, bootstrap CIs) is the next milestone.
+<details><summary>The original proof-of-mechanism (single travel cell, n=5)</summary>
+
+![headline](assets/headline.png)
+
+The first vertical slice: the same loop on one fault (`constraint_drop`, travel), 5 samples/cell.
+Saturated 0-vs-1 effects — a convincing *proof of mechanism*, but one base trajectory. The
+multi-step result above is what de-toys it (interactive rollouts, event-log validator, 4 variants,
+real significance).
+
+</details>
 
 ### Demo (zero model calls, ~instant)
 ```

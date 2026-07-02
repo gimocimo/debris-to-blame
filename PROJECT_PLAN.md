@@ -331,3 +331,18 @@ a detect→rollback loop recovers — the C4/v0.1 headline metric), **irreversib
   genuinely **multi-step task** (Codex's "Conference Trip + Expense Pack") with domain-specific shams
   and parse failures counted — the single fix that turns this from a polished toy into a measurement
   artifact.
+- **D-017 (2026-07-02, owner directive "do everything, ambitiously" — FULL LOOP ON THE MULTI-STEP
+  TASK):** Executed the multi-phase program that D-016 left open. (A) **Variant factory** —
+  `make_conference(cfg)` + 4 independent catalogs (`CONFERENCE_VARIANTS`); n is now *task-level*.
+  (B) **Degradation surface** (`experiments/conf_score.py`, 48 interactive rollouts): `constraint_drop`
+  on binding rules = **8/8, Fisher p = 0.0002** (red-eye *and* refundable, across 4 variants — a real
+  claim, not a saturated cell); staleness **partial 0.50** (quote re-verification lets ~half dodge the
+  surge); contradiction + sham **null**. (C) **Attribution / blame gap** (`experiments/attr_score.py`,
+  16 detective subagents, graded against the *specific* dropped rule): blind **0/8 → with-policy 7/8**,
+  **blame gap +0.88**. (D) **Recovery** (`experiments/conf_recover_score.py`, 16 `blind_repair`
+  interactive rollouts): no_repair **0.00** / blind_repair **0.06** / targeted_repair **1.00**,
+  **localization lift +0.94** — recovery is gated on correct localization. Combined headline
+  `assets/conf_headline.png` promoted to the README lead; the travel cell demoted to a `<details>`
+  proof-of-mechanism. Recovery replays from committed `experiments/decisions/recovery_states/br_*.json`.
+  113 tests green, ruff clean. **This closes the "de-toy" arc — the loop now holds on a multi-step task
+  with significance.** Next scope: enlarge (more variants / other domains / mitigation frontier M5).

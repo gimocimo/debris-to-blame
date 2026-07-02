@@ -197,6 +197,51 @@ about half the agents re-verify and dodge the surge — an honest, interesting m
 dropping the inert rule changes nothing. This differentiation across fault types is exactly the
 signal the blame-gap map is built on.
 
+## The full loop on the multi-step task (`assets/conf_headline.png`)
+
+The three experiments below close the **degrade → attribute → recover** loop on the *de-toyed*
+CONFERENCE_TRIP task — a 10+ step booking workflow, real interactive rollouts, 4 independent variants.
+This is the headline: one fault type (`constraint_drop`) that is *damaging*, *invisible in the trace*,
+and *recoverable only once localized*.
+
+![conf headline](../assets/conf_headline.png)
+
+## Attribute — the blame gap on the multi-step task (`experiments/attr_score.py`)
+
+16 detective subagents audited the 8 failed `constraint_drop` traces (red-eye + refundable × 4
+variants), each in two modes: **blind** (only the redacted trace as the agent saw it) and
+**with-policy** (the same trace plus the reference standing rules). Each verdict is graded against the
+*specific* dropped rule with `grade_attribution` — naming "a red-eye" only counts on the red-eye-drop
+traces, not the refundable ones.
+
+| mode | detects a problem | correctly attributes | reading |
+|---|---|---|---|
+| blind (trace only) | 0/8 = 0.00 | **0/8 = 0.00** | the trace looks clean — nothing to point at |
+| with-policy | 7/8 = 0.88 | **7/8 = 0.88** | given the rule, the detective finds the exact violation |
+
+**BLAME GAP = +0.88.** The dropped-rule fault is almost perfectly *invisible* from the trace alone
+(0/8) yet almost perfectly *attributable* once the reference policy is supplied (7/8) — the one miss
+is a detective that judged the refundable violation a "reference-only rule, not an agent error." This
+is the money result: the fault's damage (100%) and its blind detectability (0%) are maximally far
+apart, which is precisely the regime where naive log-only failure attribution silently fails.
+
+## Recover — localization enables recovery (`experiments/conf_recover_score.py`)
+
+The same `constraint_drop` failure, repaired three ways, scored by re-running the full validator:
+
+| repair policy | P[task recovered] (95% Wilson) | what it is |
+|---|---|---|
+| no_repair | 0/16 = 0.00 [0.00, 0.19] | leave the rule dropped (the Phase-B cdrop cells) |
+| blind_repair | 1/16 = 0.06 [0.01, 0.28] | add a *plausible-but-wrong* rule (e.g. "prefer free breakfast") |
+| targeted_repair | 8/8 = 1.00 [0.68, 1.00] | restore the actual dropped rule |
+
+**LOCALIZATION LIFT = +0.94.** A misdiagnosed repair is worthless (0.06 — the lone success is one
+variant whose agent avoided the red-eye anyway); restoring the *correctly localized* rule recovers the
+task every time (1.00). Recovery is gated on attribution, and attribution needs the reference — closing
+the loop the blame gap opened. The 16 `blind_repair` rollouts are real interactive rollouts run this
+pass (workflow `conf-recovery-blindrepair`, 16 agents); `no_repair`/`targeted_repair` reuse the Phase-B
+cdrop/healthy cells (same task, same validator).
+
 ## Caveats (why this is a proof of mechanism, not a claim)
 
 - **Single-decision, single-domain, single-fault toy cell — the biggest threat.** The whole slice is
@@ -225,8 +270,17 @@ python experiments/exp01_degradation.py travel_tempting experiments/decisions/ex
 python experiments/exp02_attribution.py experiments/decisions/exp02_travel_tempting_verdicts.json
 python experiments/exp04_recovery.py    experiments/decisions/exp04_blind_repair.json
 python experiments/grid.py               experiments/decisions/grid_constraint_drop_tiers.json
-python scripts/make_figure.py            # headline.png + grid.png
+python scripts/make_figure.py            # headline.png + grid.png + conf_grid.png + conf_headline.png
 python scripts/report.py                 # consolidated slice + 95% Wilson CIs
+```
+
+Multi-step CONFERENCE_TRIP loop (interactive rollouts driven via `experiments/step.py`; the cached
+`state`/`decisions` JSONs replay deterministically and free):
+
+```
+python experiments/conf_score.py         "<states>/*.json"          # degradation surface (Fisher vs healthy)
+python experiments/attr_score.py         experiments/decisions/conf_attribution.json   # blame gap +0.88
+python experiments/conf_recover_score.py "experiments/decisions/recovery_states/br_*.json"  # localization lift +0.94
 ```
 
 The `experiments/decisions/*.json` files are the cached model decisions (the subscription-native

@@ -87,6 +87,49 @@ def main() -> None:
     if gpath.exists():
         _degrade_grid_figure(json.loads(gpath.read_text()))
 
+    ap, rp = R / "conf_attribution.json", R / "conf_recovery.json"
+    if gpath.exists() and ap.exists() and rp.exists():
+        _conf_headline_figure(
+            json.loads(gpath.read_text()), json.loads(ap.read_text()), json.loads(rp.read_text())
+        )
+
+
+def _bars(ax, labels, vals, colors, title):
+    ax.bar(labels, vals, color=colors, width=0.62)
+    ax.set_ylim(0, 1.12)
+    ax.set_yticks([0, 0.5, 1.0])
+    ax.set_title(title, fontsize=10)
+    ax.spines[["top", "right"]].set_visible(False)
+    for p in ax.patches:
+        ax.text(p.get_x() + p.get_width() / 2, p.get_height() + 0.02, f"{p.get_height():.2f}",
+                ha="center", fontsize=9, fontweight="bold")
+
+
+def _conf_headline_figure(deg: dict, att: dict, rec: dict) -> None:
+    fig, axes = plt.subplots(1, 3, figsize=(14, 4.4))
+    fig.suptitle(
+        "Debris→Blame on the multi-step CONFERENCE_TRIP  ·  "
+        "real interactive rollouts, 4 task variants",
+        fontsize=11, y=1.02,
+    )
+    dord = ["healthy", "staleness", "cdrop:0", "cdrop:2"]
+    dl = {"cdrop:0": "cdrop\nred-eye", "cdrop:2": "cdrop\nrefund",
+          "staleness": "stale", "healthy": "ok"}
+    dv = [deg[c]["k_fail"] / deg[c]["n"] for c in dord]
+    _bars(axes[0], [dl[c] for c in dord], dv, [GOOD, "#e08a3c", BAD, BAD],
+          "1. Degrade\nP[task fails]")
+    av = [att["blind"]["attr"] / att["blind"]["n"], att["policy"]["attr"] / att["policy"]["n"]]
+    _bars(axes[1], ["trace\nonly", "trace +\npolicy"], av, [BAD, GOOD],
+          "2. Attribute\ncorrectly blames fault")
+    rord = ["no_repair", "blind_repair", "targeted_repair"]
+    rv = [rec[c]["k_ok"] / rec[c]["n"] for c in rord]
+    _bars(axes[2], ["no\nrepair", "blind\nrepair", "targeted\nrepair"], rv,
+          [BAD, BAD, GOOD], "3. Recover\ntask recovered")
+    fig.tight_layout()
+    out = ROOT / "assets" / "conf_headline.png"
+    fig.savefig(out, dpi=140, bbox_inches="tight")
+    print(f"wrote {out.relative_to(ROOT)}")
+
 
 def _degrade_grid_figure(m: dict) -> None:
     order = ["healthy", "staleness", "contradiction", "cdrop:0", "cdrop:2", "sham"]
