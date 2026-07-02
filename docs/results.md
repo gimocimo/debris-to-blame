@@ -67,6 +67,20 @@ recovery baseline, and it makes the headline concrete: **localization enables re
 
 ---
 
+## Confidence intervals (honest small-n)
+
+95% Wilson intervals on every rate above (`python scripts/report.py`):
+
+| stage | condition | rate | 95% CI |
+|---|---|---|---|
+| Degrade | rule present / dropped | 0.00 / 1.00 | [0.00, 0.43] / [0.57, 1.00] |
+| Attribute | blind / with-policy | 0.00 / 1.00 | [0.00, 0.43] / [0.57, 1.00] |
+| Recover | no+blind repair / targeted | 0.00 / 1.00 | [0.00, 0.43] / [0.57, 1.00] |
+
+The intervals **don't overlap** in any stage — the *direction* of each effect is real at n=5 — but they
+are wide, so the *magnitude* (a clean 0-vs-1) is not yet established. Scaling (faults × tiers ×
+domains, more samples, sham controls) is what tightens them.
+
 ## Caveats (why this is a proof of mechanism, not a claim)
 
 - **Saturated effects at small n.** Every number is 0-vs-1 at n=5, which is clean but under-powered.
@@ -87,6 +101,7 @@ python experiments/exp01_degradation.py travel_tempting experiments/decisions/ex
 python experiments/exp02_attribution.py experiments/decisions/exp02_travel_tempting_verdicts.json
 python experiments/exp04_recovery.py    experiments/decisions/exp04_blind_repair.json
 python scripts/make_figure.py
+python scripts/report.py                 # consolidated slice + 95% Wilson CIs
 ```
 
 The `experiments/decisions/*.json` files are the cached model decisions (the subscription-native
