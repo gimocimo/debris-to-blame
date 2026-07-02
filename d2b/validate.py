@@ -31,3 +31,5 @@ class TaskSpec:
     # Optional domain-aware sham plan, e.g. {"constraint_drop_index": 7} = the inert (non-binding)
     # rule to drop for a constraint_drop sham. The trajectory also stamps its meta.
     sham_plan: dict | None = None
+    # Optional domain config (e.g. a conference variant's catalog), read by injectors/experiments.
+    data: dict | None = None

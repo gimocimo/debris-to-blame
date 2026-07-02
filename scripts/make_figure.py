@@ -95,8 +95,14 @@ def _conf_figure(matrix: dict) -> None:
     ax.set_title("CONFERENCE_TRIP — interactive rollout degradation (n=3, real agents)")
     ax.spines[["top", "right"]].set_visible(False)
     for p in ax.patches:
-        ax.text(p.get_x() + p.get_width() / 2, p.get_height() + 0.02, f"{p.get_height():.2f}",
-                ha="center", fontsize=10, fontweight="bold")
+        ax.text(
+            p.get_x() + p.get_width() / 2,
+            p.get_height() + 0.02,
+            f"{p.get_height():.2f}",
+            ha="center",
+            fontsize=10,
+            fontweight="bold",
+        )
     fig.tight_layout()
     out = ROOT / "assets" / "conf_degrade.png"
     fig.savefig(out, dpi=140, bbox_inches="tight")
