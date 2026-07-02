@@ -84,14 +84,14 @@ def main() -> None:
         _conf_figure(json.loads(conf_path.read_text()))
 
     gpath = R / "conf_degrade_grid.json"
+    apath = R / "conf_attribution.json"
     if gpath.exists():
         _degrade_grid_figure(json.loads(gpath.read_text()))
-
-    ap, rp = R / "conf_attribution.json", R / "conf_recovery.json"
-    if gpath.exists() and ap.exists() and rp.exists():
-        _conf_headline_figure(
-            json.loads(gpath.read_text()), json.loads(ap.read_text()), json.loads(rp.read_text())
-        )
+    if gpath.exists() and apath.exists():
+        _blamegap_map_figure(json.loads(gpath.read_text()), json.loads(apath.read_text()))
+    rpath = R / "conf_recovery.json"
+    if rpath.exists():
+        _recovery_figure(json.loads(rpath.read_text()))
 
 
 def _bars(ax, labels, vals, colors, title):
@@ -105,35 +105,68 @@ def _bars(ax, labels, vals, colors, title):
                 ha="center", fontsize=9, fontweight="bold")
 
 
-def _conf_headline_figure(deg: dict, att: dict, rec: dict) -> None:
-    fig, axes = plt.subplots(1, 3, figsize=(14, 4.4))
-    fig.suptitle(
-        "Debris→Blame on the multi-step CONFERENCE_TRIP  ·  "
-        "real interactive rollouts, 4 task variants",
-        fontsize=11, y=1.02,
-    )
-    dord = ["healthy", "staleness", "cdrop:0", "cdrop:2"]
-    dl = {"cdrop:0": "cdrop\nred-eye", "cdrop:2": "cdrop\nrefund",
-          "staleness": "stale", "healthy": "ok"}
-    dv = [deg[c]["k_fail"] / deg[c]["n"] for c in dord]
-    _bars(axes[0], [dl[c] for c in dord], dv, [GOOD, "#e08a3c", BAD, BAD],
-          "1. Degrade\nP[task fails]")
-    av = [att["blind"]["attr"] / att["blind"]["n"], att["policy"]["attr"] / att["policy"]["n"]]
-    _bars(axes[1], ["trace\nonly", "trace +\npolicy"], av, [BAD, GOOD],
-          "2. Attribute\ncorrectly blames fault")
-    rord = ["no_repair", "blind_repair", "targeted_repair"]
-    rv = [rec[c]["k_ok"] / rec[c]["n"] for c in rord]
-    _bars(axes[2], ["no\nrepair", "blind\nrepair", "targeted\nrepair"], rv,
-          [BAD, BAD, GOOD], "3. Recover\ntask recovered")
+def _blamegap_map_figure(deg: dict, att: dict) -> None:
+    """The money figure: three high-damage faults, three DIFFERENT attribution profiles."""
+    faults = [
+        ("cdrop:2", "cdrop", "cdrop\nrefundable"),
+        ("staleness", "staleness", "staleness"),
+        ("forget:file_expense_report", "forget", "forget\nexpense-tool"),
+    ]
+
+    def arate(fam: str, arm: str) -> float:
+        c = att[fam]["opus"][arm]
+        return c["attr"] / c["n"]
+
+    dmg = [deg[fk]["k_fail"] / deg[fk]["n"] for fk, _, _ in faults]
+    blind = [arate(fam, "blind") for _, fam, _ in faults]
+    oracle = [arate(fam, "policy") for _, fam, _ in faults]
+
+    fig, ax = plt.subplots(figsize=(10, 4.8))
+    w = 0.26
+    xs = list(range(len(faults)))
+    groups = [
+        (dmg, "#6b7280", "damage  P[task fails]", -w),
+        (blind, BAD, "attributed — trace only (blind)", 0.0),
+        (oracle, GOOD, "attributed — + full policy (ORACLE upper bound)", w),
+    ]
+    for vals, color, label, off in groups:
+        bars = ax.bar([x + off for x in xs], vals, width=w, color=color, label=label)
+        for p in bars:
+            ax.text(p.get_x() + p.get_width() / 2, p.get_height() + 0.02,
+                    f"{p.get_height():.2f}", ha="center", fontsize=8.5, fontweight="bold")
+    ax.set_xticks(xs)
+    ax.set_xticklabels([lbl for _, _, lbl in faults])
+    ax.set_ylim(0, 1.2)
+    ax.set_yticks([0, 0.5, 1.0])
+    ax.set_title("CONFERENCE_TRIP blame-gap map — same damage, three attribution profiles\n"
+                 "policy closes the deletion gap (cdrop) but NOT the deception gap (staleness); "
+                 "forget is visible outright", fontsize=10)
+    ax.spines[["top", "right"]].set_visible(False)
+    ax.legend(frameon=False, ncol=3, loc="upper center", fontsize=8)
     fig.tight_layout()
-    out = ROOT / "assets" / "conf_headline.png"
+    out = ROOT / "assets" / "conf_blamegap.png"
+    fig.savefig(out, dpi=140, bbox_inches="tight")
+    print(f"wrote {out.relative_to(ROOT)}")
+
+
+def _recovery_figure(rec: dict) -> None:
+    order = ["no_repair", "blind_repair", "targeted_repair"]
+    labels = ["no\nrepair", "blind repair\n(wrong rule)", "targeted repair\n(restore rule)"]
+    vals = [rec[c]["k_ok"] / rec[c]["n"] for c in order]
+    fig, ax = plt.subplots(figsize=(6.8, 4.4))
+    _bars(ax, labels, vals, [BAD, BAD, GOOD],
+          "Recovery on cdrop:refundable — localization enables recovery\nP[task recovered]")
+    fig.tight_layout()
+    out = ROOT / "assets" / "conf_recovery.png"
     fig.savefig(out, dpi=140, bbox_inches="tight")
     print(f"wrote {out.relative_to(ROOT)}")
 
 
 def _degrade_grid_figure(m: dict) -> None:
-    order = ["healthy", "staleness", "contradiction", "cdrop:0", "cdrop:2", "sham"]
-    nice = {"cdrop:0": "cdrop\nred-eye", "cdrop:2": "cdrop\nrefundable"}
+    order = ["healthy", "staleness", "contradiction", "cdrop:0", "cdrop:2", "sham",
+             "forget:file_expense_report"]
+    nice = {"cdrop:0": "cdrop\nred-eye", "cdrop:2": "cdrop\nrefundable",
+            "forget:file_expense_report": "forget\nexpense"}
     order = [c for c in order if c in m]
     vals = [m[c]["k_fail"] / m[c]["n"] for c in order]
     colors = [
@@ -141,22 +174,20 @@ def _degrade_grid_figure(m: dict) -> None:
         for c, v in zip(order, vals, strict=True)
     ]
     colors[order.index("healthy")] = GOOD
-    fig, ax = plt.subplots(figsize=(9, 4.4))
+    fig, ax = plt.subplots(figsize=(10, 4.6))
     ax.bar([nice.get(c, c) for c in order], vals, color=colors, width=0.62)
-    ax.set_ylim(0, 1.12)
+    ax.set_ylim(0, 1.16)
     ax.set_ylabel("P[task fails]")
     n = m[order[0]]["n"]
-    ax.set_title(f"CONFERENCE_TRIP degradation by fault (n={n}/cond across 4 task variants)")
+    ax.set_title(f"CONFERENCE_TRIP degradation by fault — sincere agents "
+                 f"(n={n}/cond across 4 task variants)")
     ax.spines[["top", "right"]].set_visible(False)
-    for p in ax.patches:
-        ax.text(
-            p.get_x() + p.get_width() / 2,
-            p.get_height() + 0.02,
-            f"{p.get_height():.2f}",
-            ha="center",
-            fontsize=10,
-            fontweight="bold",
-        )
+    for c, p in zip(order, ax.patches, strict=True):
+        vf = m[c].get("variants_failing")
+        nv = m[c].get("n_variants")
+        tag = f"\n{vf}/{nv} var" if vf is not None and nv else ""
+        ax.text(p.get_x() + p.get_width() / 2, p.get_height() + 0.02,
+                f"{p.get_height():.2f}{tag}", ha="center", fontsize=9, fontweight="bold")
     fig.tight_layout()
     out = ROOT / "assets" / "conf_grid.png"
     fig.savefig(out, dpi=140, bbox_inches="tight")

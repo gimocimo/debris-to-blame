@@ -39,11 +39,13 @@ def main() -> None:
     blind_k, blind_n = success_rate(br)
 
     grid = json.loads(GRID.read_text())
-    # targeted = restore the rule = healthy; no_repair = the cdrop cells (pooled over the two rules)
+    # targeted = restore the rule = healthy; no_repair = the BINDING cdrop cell (cdrop:2).
+    # cdrop:0 (red-eye) is excluded: with sincere agents it is redundant with agent preference, so
+    # it does not degrade (0/8) and there is nothing to recover.
     h = grid["healthy"]
     targeted_k, targeted_n = h["n"] - h["k_fail"], h["n"]
     no_k = no_n = 0
-    for c in ("cdrop:0", "cdrop:2"):
+    for c in ("cdrop:2",):
         if c in grid:
             no_k += grid[c]["n"] - grid[c]["k_fail"]
             no_n += grid[c]["n"]

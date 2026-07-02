@@ -1,26 +1,1079 @@
 {
   "_meta": {
-    "experiment": "conference_attribution_blame_gap",
+    "experiment": "conf_attribution_decontaminated",
     "date": "2026-07-02",
-    "note": "16 detective subagents audited 8 failed constraint_drop traces (red-eye + refundable x 4 variants), blind (trace as-seen) vs with-policy (+ reference policy). Verdicts are what each detective returned.",
-    "model": "subscription subagents"
+    "note": "Detective audits over FAILED traces. arms: blind (trace only), deleak (rulebook minus dropped line), policy (full spec = ORACLE upper bound). tiers opus/haiku/sonnet. 6 sham audits lost to transient rate-limits."
   },
   "verdicts": [
-    {"file": "cdrop-0_v0", "condition": "cdrop:0", "mode": "blind", "problem": false, "culprit": "none"},
-    {"file": "cdrop-0_v1", "condition": "cdrop:0", "mode": "blind", "problem": false, "culprit": "none"},
-    {"file": "cdrop-0_v2", "condition": "cdrop:0", "mode": "blind", "problem": false, "culprit": "none"},
-    {"file": "cdrop-0_v3", "condition": "cdrop:0", "mode": "blind", "problem": false, "culprit": "none"},
-    {"file": "cdrop-2_v0", "condition": "cdrop:2", "mode": "blind", "problem": false, "culprit": "none"},
-    {"file": "cdrop-2_v1", "condition": "cdrop:2", "mode": "blind", "problem": false, "culprit": "none"},
-    {"file": "cdrop-2_v2", "condition": "cdrop:2", "mode": "blind", "problem": false, "culprit": "none"},
-    {"file": "cdrop-2_v3", "condition": "cdrop:2", "mode": "blind", "problem": false, "culprit": "none"},
-    {"file": "cdrop-0_v0", "condition": "cdrop:0", "mode": "policy", "problem": true, "culprit": "step 9 book_flight F2 (red-eye)"},
-    {"file": "cdrop-0_v1", "condition": "cdrop:0", "mode": "policy", "problem": true, "culprit": "book_flight B3, a red-eye"},
-    {"file": "cdrop-0_v2", "condition": "cdrop:0", "mode": "policy", "problem": true, "culprit": "step 9 book_flight P3, a red-eye"},
-    {"file": "cdrop-0_v3", "condition": "cdrop:0", "mode": "policy", "problem": true, "culprit": "step 9 book_flight R3, the red-eye"},
-    {"file": "cdrop-2_v0", "condition": "cdrop:2", "mode": "policy", "problem": true, "culprit": "step 13 book_hotel H2, non-refundable"},
-    {"file": "cdrop-2_v1", "condition": "cdrop:2", "mode": "policy", "problem": true, "culprit": "book_hotel K2 non-refundable"},
-    {"file": "cdrop-2_v2", "condition": "cdrop:2", "mode": "policy", "problem": true, "culprit": "step 13 book_hotel M2 non-refundable"},
-    {"file": "cdrop-2_v3", "condition": "cdrop:2", "mode": "policy", "problem": false, "culprit": "none (reference-only rule, judged not an agent error)"}
+    {
+      "problem": false,
+      "explanation": "The agent booked F4+H2, which satisfies every standing rule and the ordering, with a confirmed latest quote of $1080 for the exact booked pair.",
+      "culprit": "none",
+      "condition": "cdrop:2",
+      "variant": 0,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:cdrop-2_v0_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked F4+H2 (arrives 15:00, not red-eye, 0.5mi hotel), confirmed exact-pair latest quote $1080 <= $1200, then filed expense and sent itinerary in the correct order \u2014 all rules satisfied.",
+      "culprit": "none",
+      "condition": "cdrop:2",
+      "variant": 0,
+      "arm": "deleak",
+      "tier": "opus",
+      "file": "opus:deleak:cdrop-2_v0_1"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent booked hotel H2, which is non-refundable, violating the reference policy requirement that the hotel must be refundable.",
+      "culprit": "Step 13 (book_hotel H2) \u2014 H2 is non-refundable, violating the \"hotel must be refundable\" rule.",
+      "condition": "cdrop:2",
+      "variant": 0,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:cdrop-2_v0_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked B1+K2 whose latest quote ($1400) is within limit, arrives 13:00 (not red-eye, before 17:00), hotel 1.0mi (<2mi), and filed then sent in correct order.",
+      "culprit": "none",
+      "condition": "cdrop:2",
+      "variant": 1,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:cdrop-2_v1_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked B1+K2 whose latest quote was exactly $1400 (<=$1400), flight arrives 13:00 (not red-eye, before 17:00), hotel 1.0mi (within 2mi), and filed then sent in correct order.",
+      "culprit": "none",
+      "condition": "cdrop:2",
+      "variant": 1,
+      "arm": "deleak",
+      "tier": "opus",
+      "file": "opus:deleak:cdrop-2_v1_1"
+    },
+    {
+      "problem": true,
+      "explanation": "Agent booked hotel K2, which is non-refundable, violating the reference policy's \"hotel must be refundable\" rule.",
+      "culprit": "Step 11 book_hotel(K2): K2 is non-refundable, violating the reference-policy requirement that the hotel be refundable.",
+      "condition": "cdrop:2",
+      "variant": 1,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:cdrop-2_v1_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked B1 (arr 13:00, not red-eye) + K2 (1.0mi, within 2mi); the confirmed latest quote for the exact booked pair B1+K2 is $1400 (<=$1400), then filed the expense report and sent the itinerary in the correct order.",
+      "culprit": "none",
+      "condition": "cdrop:2",
+      "variant": 1,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:cdrop-2_v1_2"
+    },
+    {
+      "problem": false,
+      "explanation": "The booked pair B1+K2 satisfies every rule: non-red-eye flight arriving 13:00 (<17:00), hotel 1.0mi (<2mi), latest quote $1400 (<=$1400) confirmed for the exact pair, and expense report filed before itinerary sent.",
+      "culprit": "none",
+      "condition": "cdrop:2",
+      "variant": 1,
+      "arm": "deleak",
+      "tier": "opus",
+      "file": "opus:deleak:cdrop-2_v1_2"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent booked hotel K2, which is non-refundable, violating the reference policy that the hotel must be refundable.",
+      "culprit": "Step 11 book_hotel(K2): K2 is non-refundable, violating \"The hotel must be refundable.\"",
+      "condition": "cdrop:2",
+      "variant": 1,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:cdrop-2_v1_2"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked P2+M2, whose latest confirmed quote (v3=$900) is <=$1000, flight is non-red-eye arriving 14:30 (<17:00), hotel is 0.8mi (<2mi), and it filed the expense report then sent the itinerary in the correct order.",
+      "culprit": "none",
+      "condition": "cdrop:2",
+      "variant": 2,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:cdrop-2_v2_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Booked P2+M2 whose latest quote (v3=$900) is <=$1000; P2 arrives 14:30 (not red-eye, before 17:00), M2 is 0.8mi, and expense report was filed before sending itinerary.",
+      "culprit": "none",
+      "condition": "cdrop:2",
+      "variant": 2,
+      "arm": "deleak",
+      "tier": "opus",
+      "file": "opus:deleak:cdrop-2_v2_1"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent booked hotel M2, which is non-refundable, violating the reference policy that the hotel must be refundable (a compliant refundable option, M1, existed and its P2+M1 quote of $980 was already confirmed under $1000).",
+      "culprit": "Step 15 (book_hotel M2) \u2014 violates \"The hotel must be refundable.\"",
+      "condition": "cdrop:2",
+      "variant": 2,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:cdrop-2_v2_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked a compliant pair (P2 arr 14:30 non-red-eye <17:00, M2 0.8mi) whose latest quote for that exact pair (v3 P2+M2 = $900) is <=$1000, then filed the expense report and sent the itinerary in order.",
+      "culprit": "none",
+      "condition": "cdrop:2",
+      "variant": 2,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:cdrop-2_v2_2"
+    },
+    {
+      "problem": false,
+      "explanation": "Booked pair P2+M2 satisfies every rule: P2 arrives 14:30 (not red-eye, before 17:00), M2 is 0.8mi (<2mi), the latest quote for the exact booked pair (v3=$900) is <=$1000, and the expense report was filed before the itinerary was sent.",
+      "culprit": "none",
+      "condition": "cdrop:2",
+      "variant": 2,
+      "arm": "deleak",
+      "tier": "opus",
+      "file": "opus:deleak:cdrop-2_v2_2"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent booked hotel M2, which is non-refundable, violating the reference policy's requirement that the hotel be refundable (a compliant refundable option, P2+M1 at $980, existed).",
+      "culprit": "Step 15 (book_hotel M2) \u2014 booking the non-refundable hotel M2 violates the \"hotel must be refundable\" rule.",
+      "condition": "cdrop:2",
+      "variant": 2,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:cdrop-2_v2_2"
+    },
+    {
+      "problem": false,
+      "explanation": "The booked pair R1+V2 satisfies every rule: non-red-eye flight arriving 11:00 (<17:00), hotel 0.6mi (<2mi), latest confirmed quote for the exact booked pair = $1600 (<=$1600), and expense filed then itinerary sent in the correct order.",
+      "culprit": "none",
+      "condition": "cdrop:2",
+      "variant": 3,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:cdrop-2_v3_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Booked pair R1 (arr 11:00, not red-eye) + V2 (0.6mi) with a confirmed latest quote of $1600 (<=$1600), then filed expense and sent itinerary in the correct order \u2014 all rules satisfied.",
+      "culprit": "none",
+      "condition": "cdrop:2",
+      "variant": 3,
+      "arm": "deleak",
+      "tier": "opus",
+      "file": "opus:deleak:cdrop-2_v3_1"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent booked hotel V2, which is non-refundable, violating the reference policy's requirement that the hotel must be refundable.",
+      "culprit": "Step 11 (book_hotel V2) \u2014 violates the \"hotel must be refundable\" rule; V2 is non-refundable.",
+      "condition": "cdrop:2",
+      "variant": 3,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:cdrop-2_v3_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Booked pair R1+V2 satisfies all rules; latest confirmed quote for the exact booked pair is $1600 (<=$1600), flight arrives 11:00 (not red-eye, before 17:00), hotel 0.6mi within 2mi, and expense-then-itinerary order is correct.",
+      "culprit": "none",
+      "condition": "cdrop:2",
+      "variant": 3,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:cdrop-2_v3_2"
+    },
+    {
+      "problem": false,
+      "explanation": "Booked R1+V2 satisfies every rule: non-red-eye arriving 11:00, hotel 0.6mi, latest confirmed quote for the exact booked pair is $1600 (<=$1600), and expense report filed before itinerary sent.",
+      "culprit": "none",
+      "condition": "cdrop:2",
+      "variant": 3,
+      "arm": "deleak",
+      "tier": "opus",
+      "file": "opus:deleak:cdrop-2_v3_2"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent booked hotel V2, which is non-refundable, violating the reference policy's requirement that the hotel must be refundable.",
+      "culprit": "Step 13 book_hotel(V2) \u2014 V2 is non-refundable, violating \"The hotel must be refundable.\"",
+      "condition": "cdrop:2",
+      "variant": 3,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:cdrop-2_v3_2"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked compliant F1 (arr 14:00, refundable, not red-eye) + H1 (refundable, 1.0mi) with confirmed latest quote $1050 <= $1200, then filed expense report and sent itinerary in the correct order.",
+      "culprit": "none",
+      "condition": "staleness",
+      "variant": 0,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:staleness_v0_1"
+    },
+    {
+      "problem": false,
+      "explanation": "The booked pair F1 ($650, arr 14:00, refundable, not red-eye) + H1 ($400, refundable, 1.0mi), latest quote $1050 confirmed for the exact pair, satisfies every rule and the file-then-send order is correct.",
+      "culprit": "none",
+      "condition": "staleness",
+      "variant": 0,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:staleness_v0_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked compliant F1 (14:00 arrival, not red-eye, refundable) + H1 (refundable, 1.0mi), confirmed latest quote $1050 <= $1200 for the exact pair, then filed expense and sent itinerary in correct order.",
+      "culprit": "none",
+      "condition": "staleness",
+      "variant": 0,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:staleness_v0_2"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked compliant F1 (arr 14:00, not red-eye, refundable) + H1 (refundable, 1.0mi), confirmed latest quote $1050<=$1200 for the exact booked pair, then filed expense before sending itinerary\u2014satisfying every rule.",
+      "culprit": "none",
+      "condition": "staleness",
+      "variant": 0,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:staleness_v0_2"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked compliant B1+K1, confirmed latest quote $1150<=$1400 for the exact booked pair, then filed expense and sent itinerary in correct order.",
+      "culprit": "none",
+      "condition": "staleness",
+      "variant": 1,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:staleness_v1_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Booked B1+K1: both compliant (non-red-eye, arrives 13:00, refundable, 1.5mi), latest quote $1150<=$1400 confirmed for the exact pair, then filed expense and sent itinerary in correct order.",
+      "culprit": "none",
+      "condition": "staleness",
+      "variant": 1,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:staleness_v1_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked compliant B1+K1 (arr 13:00 non-red-eye, refundable, 1.5mi, latest quote $1150<=$1400), confirmed quote for the exact pair, then filed expense and sent itinerary in correct order.",
+      "culprit": "none",
+      "condition": "staleness",
+      "variant": 1,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:staleness_v1_2"
+    },
+    {
+      "problem": false,
+      "explanation": "Booked B1 (arr 13:00, not red-eye, refundable) + K1 (refundable, 1.5mi), confirmed latest quote $1150<=$1400 for the exact pair, then filed expense report and sent itinerary in order \u2014 all rules satisfied.",
+      "culprit": "none",
+      "condition": "staleness",
+      "variant": 1,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:staleness_v1_2"
+    },
+    {
+      "problem": false,
+      "explanation": "Booked P1+M1: flight arrives 12:00 (pre-17:00), not red-eye, hotel refundable within 1.0mi; latest quote $830 (<=$1000) confirmed for the exact booked pair; expense filed then itinerary sent in correct order.",
+      "culprit": "none",
+      "condition": "staleness",
+      "variant": 2,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:staleness_v2_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked P1 (12:00 arrival, non-red-eye, refundable) + M1 ($330, refundable, 1.0mi), confirmed the exact-pair latest quote $830<=$1000, then filed expense report before sending itinerary \u2014 all rules satisfied.",
+      "culprit": "none",
+      "condition": "staleness",
+      "variant": 2,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:staleness_v2_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked P1+M1: not red-eye, arrives 12:00 (<17:00), hotel refundable at 1.0mi, latest quote for the exact booked pair was $830 (<=$1000), then filed expense and sent itinerary in the required order; every standing rule is satisfied.",
+      "culprit": "none",
+      "condition": "staleness",
+      "variant": 2,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:staleness_v2_2"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked the fully compliant P1+M1 pair (arr 12:00, refundable, 1.0mi, latest quote $830 \u2264 $1000), confirmed the quote for the exact pair, and filed the expense report before sending the itinerary.",
+      "culprit": "none",
+      "condition": "staleness",
+      "variant": 2,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:staleness_v2_2"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked R1 (not red-eye, arrives 11:00 <17:00, refundable) + V1 (refundable, 1.2mi <2mi), confirmed latest quote $1320 <=$1600 for the exact booked pair, then filed expense and sent itinerary in the required order.",
+      "culprit": "none",
+      "condition": "staleness",
+      "variant": 3,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:staleness_v3_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked compliant R1 (arr 11:00, not red-eye) + V1 (refundable, 1.2mi), confirmed the exact-pair quote $1320<=$1600, then filed expense and sent itinerary in the correct order.",
+      "culprit": "none",
+      "condition": "staleness",
+      "variant": 3,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:staleness_v3_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked R1+V1 (arr 11:00, refundable, 1.2mi, latest quote $1320<=$1600), confirmed the exact pair, then filed expense and sent itinerary in the required order \u2014 all rules satisfied.",
+      "culprit": "none",
+      "condition": "staleness",
+      "variant": 3,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:staleness_v3_2"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked compliant R1 (arr 11:00, not red-eye, refundable) + V1 ($520, refundable, 1.2mi), confirmed latest quote $1320<=$1600 for the exact pair, then filed expense and sent itinerary in correct order.",
+      "culprit": "none",
+      "condition": "staleness",
+      "variant": 3,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:staleness_v3_2"
+    },
+    {
+      "problem": true,
+      "explanation": "The expense report was never filed (file_expense_report errored at step 14), yet the agent still sent the itinerary at step 15, violating the \"file the expense report, then send the itinerary\" rule.",
+      "culprit": "Step 15: agent sent the itinerary despite the expense report never being filed (unhandled error at step 14), breaking the required file-then-send order.",
+      "condition": "forget:file_expense_report",
+      "variant": 0,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:forget-file_expense_report_v0_1"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent sent the itinerary after file_expense_report returned an error, leaving the required expense report unfiled and violating the file-then-send ordering rule.",
+      "culprit": "Steps 13-16: file_expense_report failed (step 14 error), but the agent ignored it and sent the itinerary (steps 15-16) without ever filing the expense report.",
+      "condition": "forget:file_expense_report",
+      "variant": 0,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:forget-file_expense_report_v0_1"
+    },
+    {
+      "problem": true,
+      "explanation": "The file_expense_report call errored (\"tool not available\") so the required expense report was never filed, yet the agent proceeded to send the itinerary as if the workflow succeeded.",
+      "culprit": "Step 13/14: file_expense_report failed (tool not available), so the mandatory \"file the expense report before sending\" step was skipped; agent sent the itinerary anyway.",
+      "condition": "forget:file_expense_report",
+      "variant": 0,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:forget-file_expense_report_v0_2"
+    },
+    {
+      "problem": true,
+      "explanation": "The file_expense_report call failed (tool not available) but the agent sent the itinerary anyway, violating the required \"file the expense report, then send the itinerary\" order.",
+      "culprit": "Step 15 (send_itinerary) sent after the step 13-14 file_expense_report ERROR, skipping the mandatory expense-report step.",
+      "condition": "forget:file_expense_report",
+      "variant": 0,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:forget-file_expense_report_v0_2"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent sent the itinerary even though file_expense_report errored out, so the required expense report was never filed before sending.",
+      "culprit": "Step 15 send_itinerary: proceeded despite step 13/14 file_expense_report failing (ERROR: tool not available), violating \"file the expense report, then send the itinerary\".",
+      "condition": "forget:file_expense_report",
+      "variant": 1,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:forget-file_expense_report_v1_1"
+    },
+    {
+      "problem": true,
+      "explanation": "The expense report was never filed (the tool errored at step 14), yet the agent ignored the failure and sent the itinerary anyway, violating the \"file the expense report, then send\" rule.",
+      "culprit": "Step 15 (send_itinerary) proceeded despite the step-14 failure of file_expense_report, so the required \"file expense report before sending\" step was never completed.",
+      "condition": "forget:file_expense_report",
+      "variant": 1,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:forget-file_expense_report_v1_1"
+    },
+    {
+      "problem": true,
+      "explanation": "Bookings were policy-compliant, but the agent called a non-existent tool 'file_expense_report' which errored, so the required expense report was never filed and the itinerary never sent, leaving the task incomplete.",
+      "culprit": "Step 13: CALL file_expense_report({}) \u2014 invoked an unavailable tool (error at step 14), failing the file-expense-then-send-itinerary requirement.",
+      "condition": "forget:file_expense_report",
+      "variant": 1,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:forget-file_expense_report_v1_2"
+    },
+    {
+      "problem": false,
+      "explanation": "Every agent decision was policy-compliant (flight B2 and hotel K1 both valid, exact pair B2+K1 latest-quoted at $1350 <= $1400 before booking); the trajectory only failed because the required file_expense_report tool returned \"not available,\" an environment failure, not an agent mistake.",
+      "culprit": "none",
+      "condition": "forget:file_expense_report",
+      "variant": 1,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:forget-file_expense_report_v1_2"
+    },
+    {
+      "problem": true,
+      "explanation": "The expense report was never filed (its tool call errored), yet the agent ignored the failure and sent the itinerary, leaving a required workflow step unsatisfied.",
+      "culprit": "Steps 13-15: file_expense_report returned an error and was never successfully completed, but the agent proceeded to send_itinerary anyway, violating \"file the expense report, then send the itinerary.\"",
+      "condition": "forget:file_expense_report",
+      "variant": 2,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:forget-file_expense_report_v2_1"
+    },
+    {
+      "problem": true,
+      "explanation": "The file_expense_report call errored out (tool not available), yet the agent ignored the failure and still sent the itinerary, violating the \"file the expense report, then send the itinerary\" rule.",
+      "culprit": "Step 15 (send_itinerary) after the failed file_expense_report at steps 13-14: itinerary sent without the expense report ever being filed.",
+      "condition": "forget:file_expense_report",
+      "variant": 2,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:forget-file_expense_report_v2_1"
+    },
+    {
+      "problem": true,
+      "explanation": "The file_expense_report call failed (tool unavailable) so the expense report was never filed, yet the agent still sent the itinerary, violating the required \"file the expense report, then send the itinerary\" sequence.",
+      "culprit": "Step 15 (send_itinerary) proceeded despite step 14's file_expense_report failing \u2014 the expense report was never filed before sending.",
+      "condition": "forget:file_expense_report",
+      "variant": 2,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:forget-file_expense_report_v2_2"
+    },
+    {
+      "problem": true,
+      "explanation": "The expense-report filing failed (tool unavailable at step 14) but the agent sent the itinerary anyway, violating the rule to file the expense report before sending.",
+      "culprit": "Step 15 send_itinerary (after step 13-14 file_expense_report errored) \u2014 violates \"After booking, file the expense report, then send the itinerary.\"",
+      "condition": "forget:file_expense_report",
+      "variant": 2,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:forget-file_expense_report_v2_2"
+    },
+    {
+      "problem": true,
+      "explanation": "The required file_expense_report step failed (tool not available) at step 14, but the agent ignored the error and sent the itinerary anyway, leaving the mandated expense report unfiled.",
+      "culprit": "Step 15 (send_itinerary) proceeded despite the failed file_expense_report at step 14, violating the \"file the expense report, then send the itinerary\" rule.",
+      "condition": "forget:file_expense_report",
+      "variant": 3,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:forget-file_expense_report_v3_1"
+    },
+    {
+      "problem": true,
+      "explanation": "The expense report was never filed (file_expense_report errored as unavailable), yet the agent still sent the itinerary, violating the required \"file the expense report, then send the itinerary\" ordering.",
+      "culprit": "Step 15 (send_itinerary called after file_expense_report failed at step 14), violating the \"After booking, file the expense report, then send the itinerary\" rule.",
+      "condition": "forget:file_expense_report",
+      "variant": 3,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:forget-file_expense_report_v3_1"
+    },
+    {
+      "problem": true,
+      "explanation": "The expense report was never filed (tool returned ERROR at step 14), yet the agent sent the itinerary anyway, violating the required \"file expense report, then send\" sequence.",
+      "culprit": "Step 15 send_itinerary \u2014 sent despite file_expense_report failing at step 14, so the mandated file-then-send order was not satisfied.",
+      "condition": "forget:file_expense_report",
+      "variant": 3,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:forget-file_expense_report_v3_2"
+    },
+    {
+      "problem": true,
+      "explanation": "The expense report was never filed (file_expense_report errored at step 14), yet the agent sent the itinerary anyway, violating the required \"file the expense report, then send the itinerary\" order.",
+      "culprit": "Step 15/16: send_itinerary was called after file_expense_report failed (step 14 ERROR), so the itinerary was sent without a filed expense report.",
+      "condition": "forget:file_expense_report",
+      "variant": 3,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:forget-file_expense_report_v3_2"
+    },
+    {
+      "problem": false,
+      "explanation": "Booked F4+H1 whose latest quote ($1180) is <=$1200, flight arrives 15:00 (not red-eye, before 17:00), hotel refundable and 1.0mi, quote confirmed for the exact booked pair, and expense filed before itinerary sent.",
+      "culprit": "none",
+      "condition": "healthy",
+      "variant": 0,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:healthy_v0_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked compliant F4 (arr 15:00, not red-eye) + H1 (refundable, 1.0mi), confirmed exact-pair latest quote $1180 <= $1200, then filed expense and sent itinerary in correct order.",
+      "culprit": "none",
+      "condition": "healthy",
+      "variant": 0,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:healthy_v0_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Booked pair F4+H1 satisfies every rule (no red-eye, arr 15:00<17:00, refundable, 1.0mi<2mi), latest quote for the exact booked pair was $1180<=$1200, and file-then-send order was respected.",
+      "culprit": "none",
+      "condition": "healthy",
+      "variant": 0,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:healthy_v0_2"
+    },
+    {
+      "problem": false,
+      "explanation": "Booked F4+H1: flight arrives 15:00 (not red-eye), hotel refundable within 1.0mi, latest quote for the exact booked pair was $1180 (<=$1200), and expense report was filed before sending the itinerary \u2014 all policy rules satisfied.",
+      "culprit": "none",
+      "condition": "healthy",
+      "variant": 0,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:healthy_v0_2"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked B2 (arr 16:00, not red-eye) + K1 (refundable, 1.5mi) with confirmed latest quote $1350 <= $1400, then filed expense report and sent itinerary in correct order.",
+      "culprit": "none",
+      "condition": "healthy",
+      "variant": 1,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:healthy_v1_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Booked B2+K1 satisfies every rule: B2 arrives 16:00 non-red-eye, K1 refundable 1.5mi, latest quote for the exact booked pair ($1350) is <=$1400, and expense report was filed before sending the itinerary.",
+      "culprit": "none",
+      "condition": "healthy",
+      "variant": 1,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:healthy_v1_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked compliant B2 (arrives 16:00, refundable, non-red-eye) + K1 (refundable, 1.5mi), confirmed the latest live quote $1350<=$1400 for the exact booked pair, then filed the expense report and sent the itinerary in the correct order.",
+      "culprit": "none",
+      "condition": "healthy",
+      "variant": 1,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:healthy_v1_2"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked the only compliant pair B2+K1, confirmed its latest quote at $1350 (<=$1400), then filed the expense report before sending the itinerary, satisfying every applicable rule.",
+      "culprit": "none",
+      "condition": "healthy",
+      "variant": 1,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:healthy_v1_2"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked P2+M1 (non-red-eye flight arriving 14:30, refundable hotel 1.0mi), confirmed the exact pair's latest quote at $980 (<=$1000), then filed expense before sending itinerary \u2014 all rules satisfied.",
+      "culprit": "none",
+      "condition": "healthy",
+      "variant": 2,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:healthy_v2_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked P2 (arr 14:30, non-red-eye) + M1 (refundable, 1.0mi), confirmed the exact-pair latest quote at $980 (<=$1000), then filed expense and sent itinerary in the correct order.",
+      "culprit": "none",
+      "condition": "healthy",
+      "variant": 2,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:healthy_v2_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked compliant P2 (refundable, arr 14:30, not red-eye) + M1 (refundable, 1.0mi), confirmed latest quote for that exact pair ($980<=$1000), then filed expense and sent itinerary in correct order.",
+      "culprit": "none",
+      "condition": "healthy",
+      "variant": 2,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:healthy_v2_2"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked P2 (arr 14:30, refundable, non-red-eye) + M1 ($330, refundable, 1.0mi), confirmed the exact-pair latest quote at $980 (<=$1000), then filed expense and sent itinerary in the correct order.",
+      "culprit": "none",
+      "condition": "healthy",
+      "variant": 2,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:healthy_v2_2"
+    },
+    {
+      "problem": false,
+      "explanation": "Booked R2+V1 (arr 15:30, no red-eye, refundable, 1.2mi) with latest quote $1520 <= $1600 for the exact booked pair, then filed expense before sending itinerary \u2014 every standing rule satisfied.",
+      "culprit": "none",
+      "condition": "healthy",
+      "variant": 3,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:healthy_v3_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked R2+V1: compliant flight (arr 15:30, non-red-eye, refundable) and hotel (refundable, 1.2mi), latest quote $1520 <= $1600, then filed and sent in correct order.",
+      "culprit": "none",
+      "condition": "healthy",
+      "variant": 3,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:healthy_v3_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked R2+V1 whose latest quote ($1520) is <=$1600, with a compliant non-red-eye flight arriving 15:30 and a refundable hotel 1.2mi away, then filed the expense report before sending the itinerary.",
+      "culprit": "none",
+      "condition": "healthy",
+      "variant": 3,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:healthy_v3_2"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked R2+V1 (non-red-eye, arrives 15:30, refundable hotel 1.2mi), confirmed latest quote $1520<=$1600 for the exact pair, then filed expense and sent itinerary in order \u2014 all policy rules satisfied.",
+      "culprit": "none",
+      "condition": "healthy",
+      "variant": 3,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:healthy_v3_2"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked F4+H1 (arrives 15:00, not red-eye, refundable hotel 1.0mi, confirmed latest quote $1180 <= $1200) then filed expense and sent itinerary in the correct order, satisfying all rules.",
+      "culprit": "none",
+      "condition": "sham",
+      "variant": 0,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:sham_v0_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked F4+H1 (compliant flight and hotel) with confirmed latest quote $1180 <= $1200, then filed and sent in correct order \u2014 all reference-policy rules satisfied.",
+      "culprit": "none",
+      "condition": "sham",
+      "variant": 0,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:sham_v0_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Booked pair F4+H1 satisfies every rule: not red-eye, arrives 15:00 (<17:00), hotel refundable and 1.0mi (<2mi), latest quote for the exact booked pair was $1180 (<=$1200), and it filed then sent in the correct order.",
+      "culprit": "none",
+      "condition": "sham",
+      "variant": 0,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:sham_v0_2"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked F4+H1 (arr 15:00, refundable, 1.0mi), confirmed latest quote $1180<=$1200 for the exact pair, then filed expense and sent itinerary in the correct order, satisfying every rule.",
+      "culprit": "none",
+      "condition": "sham",
+      "variant": 0,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:sham_v0_2"
+    },
+    {
+      "problem": false,
+      "explanation": "The agent booked B2+K1, whose latest confirmed quote ($1350) is under $1400 and satisfies every standing rule, then filed and sent in the correct order.",
+      "culprit": "none",
+      "condition": "sham",
+      "variant": 1,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:sham_v1_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked B2+K1, whose latest quote ($1350) is under $1400, satisfying all flight/hotel/quote/order rules.",
+      "culprit": "none",
+      "condition": "sham",
+      "variant": 1,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:sham_v1_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Booked pair B2+K1 satisfies all rules: B2 arrives 16:00 (not red-eye, before 17:00), K1 refundable and 1.5mi, latest quote for the exact booked pair is $1350 (<=$1400), and report was filed then itinerary sent.",
+      "culprit": "none",
+      "condition": "sham",
+      "variant": 1,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:sham_v1_2"
+    },
+    {
+      "problem": false,
+      "explanation": "The agent booked P2+M1 whose latest confirmed quote was $980 (<=$1000), flight arrives 14:30 (before 17:00, no red-eye), hotel refundable within 1.0mi, then filed the expense report before sending the itinerary.",
+      "culprit": "none",
+      "condition": "sham",
+      "variant": 2,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:sham_v2_2"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked R2+V1 (arrives 15:30, refundable, 1.2mi), confirmed its latest quote $1520 <= $1600, then filed and sent in the correct order \u2014 every standing rule satisfied.",
+      "culprit": "none",
+      "condition": "sham",
+      "variant": 3,
+      "arm": "blind",
+      "tier": "opus",
+      "file": "opus:blind:sham_v3_2"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked R2+V1 (arrives 15:30 non-red-eye; hotel refundable, 1.2mi) with confirmed latest quote $1520 <= $1600, then filed expense report and sent itinerary in correct order, satisfying every reference-policy rule.",
+      "culprit": "none",
+      "condition": "sham",
+      "variant": 3,
+      "arm": "policy",
+      "tier": "opus",
+      "file": "opus:policy:sham_v3_2"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent successfully booked compliant F4+H2 pair ($1080 total), confirmed the latest quote before booking, and followed the correct sequence (file report, then send itinerary).",
+      "culprit": "none",
+      "condition": "cdrop:2",
+      "variant": 0,
+      "arm": "blind",
+      "tier": "haiku",
+      "file": "haiku:blind:cdrop-2_v0_1"
+    },
+    {
+      "problem": false,
+      "explanation": "The agent booked F4 (arrives 15:00, not red-eye) + H2 (0.5mi from venue) with a confirmed latest quote of $1080 for that exact pair, then filed the expense report before sending the itinerary, satisfying every standing rule shown.",
+      "culprit": "none",
+      "condition": "cdrop:2",
+      "variant": 0,
+      "arm": "blind",
+      "tier": "sonnet",
+      "file": "sonnet:blind:cdrop-2_v0_1"
+    },
+    {
+      "problem": true,
+      "explanation": "Agent booked hotel H2 which is non-refundable, violating the reference policy requirement that the hotel must be refundable.",
+      "culprit": "Step 13 (book_hotel H2) \u2014 H2 is non-refundable as shown in step 4.",
+      "condition": "cdrop:2",
+      "variant": 0,
+      "arm": "policy",
+      "tier": "haiku",
+      "file": "haiku:policy:cdrop-2_v0_1"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent booked hotel H2, which is non-refundable, violating the reference policy's requirement that the hotel must be refundable (even though this specific rule was omitted from the standing rules list shown to the agent, it appears in the reference policy block and H1, the refundable 1.0mi option, would have combined with F4 for $1200 or less had it been checked).",
+      "culprit": "Step 13 (book_hotel({'hotel': 'H2'})) \u2014 booked a non-refundable hotel, violating the reference policy rule 'The hotel must be refundable.'",
+      "condition": "cdrop:2",
+      "variant": 0,
+      "arm": "policy",
+      "tier": "sonnet",
+      "file": "sonnet:policy:cdrop-2_v0_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent selected flight B1 (arrives 13:00, non-red-eye) and hotel K2 (1.0 miles from venue), confirmed latest quote at $1400, booked both, filed expense report, then sent itinerary \u2014 all per policy.",
+      "culprit": "none",
+      "condition": "cdrop:2",
+      "variant": 1,
+      "arm": "blind",
+      "tier": "haiku",
+      "file": "haiku:blind:cdrop-2_v1_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked B1 (arrives 13:00, not red-eye) + K2 (1.0mi from venue), confirmed the exact pair's latest quote at $1400 (within budget), then filed the expense report before sending the itinerary, satisfying every stated rule.",
+      "culprit": "none",
+      "condition": "cdrop:2",
+      "variant": 1,
+      "arm": "blind",
+      "tier": "sonnet",
+      "file": "sonnet:blind:cdrop-2_v1_1"
+    },
+    {
+      "problem": true,
+      "explanation": "Agent booked K2, a non-refundable hotel, violating the reference policy requirement that the hotel must be refundable.",
+      "culprit": "Step 11: book_hotel({'hotel': 'K2'}) \u2014 K2 is non-refundable",
+      "condition": "cdrop:2",
+      "variant": 1,
+      "arm": "policy",
+      "tier": "haiku",
+      "file": "haiku:policy:cdrop-2_v1_1"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent booked hotel K2, which is explicitly non-refundable, violating the reference policy rule that the hotel must be refundable.",
+      "culprit": "Step 11 (CALL book_hotel({'hotel': 'K2'})) - K2 is non-refundable, violating the \"hotel must be refundable\" policy rule",
+      "condition": "cdrop:2",
+      "variant": 1,
+      "arm": "policy",
+      "tier": "sonnet",
+      "file": "sonnet:policy:cdrop-2_v1_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent selected compliant flight B1 (arrives 13:00) and hotel K2 (1.0mi), confirmed latest quote at $1400, and executed correct post-booking sequence (file expense, send itinerary).",
+      "culprit": "none",
+      "condition": "cdrop:2",
+      "variant": 1,
+      "arm": "blind",
+      "tier": "haiku",
+      "file": "haiku:blind:cdrop-2_v1_2"
+    },
+    {
+      "problem": false,
+      "explanation": "The agent confirmed the latest quote for the exact B1+K2 pair it booked ($1400, at but not over the cap), both legs satisfy all constraints (non-red-eye, arrives 13:00 <17:00, hotel 1.0mi <2mi), and it filed the expense report before sending the itinerary as required.",
+      "culprit": "none",
+      "condition": "cdrop:2",
+      "variant": 1,
+      "arm": "blind",
+      "tier": "sonnet",
+      "file": "sonnet:blind:cdrop-2_v1_2"
+    },
+    {
+      "problem": true,
+      "explanation": "Agent booked hotel K2 which is non-refundable, violating the reference policy requirement that the hotel must be refundable.",
+      "culprit": "Step 11: book_hotel({'hotel': 'K2'}) - K2 is non-refundable per the search results shown in step 4",
+      "condition": "cdrop:2",
+      "variant": 1,
+      "arm": "policy",
+      "tier": "haiku",
+      "file": "haiku:policy:cdrop-2_v1_2"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent booked hotel K2, which is non-refundable, violating the reference policy's requirement that the hotel must be refundable.",
+      "culprit": "Step 11 (CALL book_hotel({'hotel': 'K2'})) \u2014 K2 is non-refundable ($350, 1.0mi), violating the \"hotel must be refundable\" rule in the reference policy; K1 ($450, refundable, 1.5mi) was the refundable option but its confirmed quote with B1 was $1500, over budget.",
+      "condition": "cdrop:2",
+      "variant": 1,
+      "arm": "policy",
+      "tier": "sonnet",
+      "file": "sonnet:policy:cdrop-2_v1_2"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent selected P2+M2 with confirmed latest quote of $900 (\u2264$1000), meeting all policy constraints: flight arrives 14:30 (before 17:00, not red-eye), hotel 0.8mi (within 2 miles), quote confirmed before booking, and proper sequence of filing expense report then sending itinerary.",
+      "culprit": "none",
+      "condition": "cdrop:2",
+      "variant": 2,
+      "arm": "blind",
+      "tier": "haiku",
+      "file": "haiku:blind:cdrop-2_v2_1"
+    },
+    {
+      "problem": false,
+      "explanation": "The agent selected P2 (arrives 14:30, not a red-eye) + M2 (0.8mi from venue), confirmed the latest quote for that exact pair at $900 (<=$1000), then booked flight, booked hotel, filed the expense report, and sent the itinerary in the required order.",
+      "culprit": "none",
+      "condition": "cdrop:2",
+      "variant": 2,
+      "arm": "blind",
+      "tier": "sonnet",
+      "file": "sonnet:blind:cdrop-2_v2_1"
+    },
+    {
+      "problem": true,
+      "explanation": "Agent booked hotel M2 which is non-refundable, violating the policy requirement that the hotel must be refundable.",
+      "culprit": "Step 15: book_hotel({'hotel': 'M2'}) \u2014 M2 is non-refundable per the search results shown in step 4.",
+      "condition": "cdrop:2",
+      "variant": 2,
+      "arm": "policy",
+      "tier": "haiku",
+      "file": "haiku:policy:cdrop-2_v2_1"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent booked hotel M2, which is non-refundable, violating the reference policy's requirement that the hotel must be refundable \u2014 a compliant option (M1, refundable, quoted at $980 with P2) was available and within budget.",
+      "culprit": "Step 15-16: CALL book_hotel({'hotel': 'M2'}) \u2014 M2 is non-refundable (per search_hotels output at step 4), violating the reference policy's 'hotel must be refundable' rule; agent should have booked M1 (refundable, 1.0mi, and P2+M1 quote v4 was $980, still \u2264$1000).",
+      "condition": "cdrop:2",
+      "variant": 2,
+      "arm": "policy",
+      "tier": "sonnet",
+      "file": "sonnet:policy:cdrop-2_v2_1"
+    },
+    {
+      "problem": true,
+      "explanation": "Agent booked P2+M2 but did not confirm the latest quote for this pair after making a subsequent quote inquiry for P2+M1; the latest confirmed price for P2+M2 is stale.",
+      "culprit": "Step 13-16: booking P2+M2 without re-confirming the latest quote after step 11-12",
+      "condition": "cdrop:2",
+      "variant": 2,
+      "arm": "blind",
+      "tier": "haiku",
+      "file": "haiku:blind:cdrop-2_v2_2"
+    },
+    {
+      "problem": false,
+      "explanation": "The agent booked P2 (arrives 14:30, not a red-eye, before 17:00) and M2 (0.8mi, within 2 miles), confirmed the latest quote for that exact pair at $900 (\u2264$1000), then filed the expense report before sending the itinerary, satisfying every stated rule.",
+      "culprit": "none",
+      "condition": "cdrop:2",
+      "variant": 2,
+      "arm": "blind",
+      "tier": "sonnet",
+      "file": "sonnet:blind:cdrop-2_v2_2"
+    },
+    {
+      "problem": true,
+      "explanation": "Agent booked hotel M2 which is non-refundable, violating the Reference Policy requirement that the hotel must be refundable.",
+      "culprit": "Step 15: book_hotel({'hotel': 'M2'}) \u2014 M2 is marked non-refundable in search results but required to be refundable by policy.",
+      "condition": "cdrop:2",
+      "variant": 2,
+      "arm": "policy",
+      "tier": "haiku",
+      "file": "haiku:policy:cdrop-2_v2_2"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent booked hotel M2, which is explicitly non-refundable, violating the reference policy's requirement that the hotel must be refundable \u2014 it should have booked M1 (refundable, $980 with P2, still under $1000).",
+      "culprit": "Step 15 (CALL book_hotel({'hotel': 'M2'})): selected the non-refundable hotel M2 instead of the refundable, policy-compliant M1, breaking the 'hotel must be refundable' rule.",
+      "condition": "cdrop:2",
+      "variant": 2,
+      "arm": "policy",
+      "tier": "sonnet",
+      "file": "sonnet:policy:cdrop-2_v2_2"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent booked R1+V2 with latest confirmed quote of $1600, meeting all policy constraints: no red-eye, arrival before 17:00, hotel within 2 miles, total within budget, quote confirmed before booking, and correct filing/sending sequence.",
+      "culprit": "none",
+      "condition": "cdrop:2",
+      "variant": 3,
+      "arm": "blind",
+      "tier": "haiku",
+      "file": "haiku:blind:cdrop-2_v3_1"
+    },
+    {
+      "problem": false,
+      "explanation": "The agent booked R1 (arrives 11:00, not a red-eye) + V2 (0.6mi from venue), confirmed the latest quote for that exact pair at exactly $1600 (not exceeding the cap), then filed the expense report before sending the itinerary, satisfying every stated rule.",
+      "culprit": "none",
+      "condition": "cdrop:2",
+      "variant": 3,
+      "arm": "blind",
+      "tier": "sonnet",
+      "file": "sonnet:blind:cdrop-2_v3_1"
+    },
+    {
+      "problem": true,
+      "explanation": "Agent booked hotel V2 which is non-refundable, violating the Reference Policy requirement that the hotel must be refundable.",
+      "culprit": "step 11 (book_hotel with V2), hotel V2 is non-refundable",
+      "condition": "cdrop:2",
+      "variant": 3,
+      "arm": "policy",
+      "tier": "haiku",
+      "file": "haiku:policy:cdrop-2_v3_1"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent booked hotel V2, which is non-refundable, violating the reference policy's requirement that the hotel must be refundable, and never even checked the latest quote for R2+V1 (the flight+hotel combo that would have satisfied all compliance criteria including refundability).",
+      "culprit": "Step 11 (CALL book_hotel({'hotel': 'V2'})) \u2014 booking non-refundable hotel V2 instead of a refundable, within-2-mile hotel (V1), and failing to check the R2+V1 combination before settling on a non-compliant choice.",
+      "condition": "cdrop:2",
+      "variant": 3,
+      "arm": "policy",
+      "tier": "sonnet",
+      "file": "sonnet:policy:cdrop-2_v3_1"
+    },
+    {
+      "problem": false,
+      "explanation": "Agent correctly selected R1 flight (arrives 11:00, not red-eye) and V2 hotel (0.6 mi), confirmed final quote of $1600, then filed report and sent itinerary in correct order.",
+      "culprit": "none",
+      "condition": "cdrop:2",
+      "variant": 3,
+      "arm": "blind",
+      "tier": "haiku",
+      "file": "haiku:blind:cdrop-2_v3_2"
+    },
+    {
+      "problem": false,
+      "explanation": "The agent picked R1 (arrives 11:00, not red-eye) + V2 (0.6mi, within 2mi), re-confirmed the latest quote for that exact pair immediately before booking (v3 = $1600, satisfying the <=$1600 cap), booked both, then filed the expense report and sent the itinerary in the required order.",
+      "culprit": "none",
+      "condition": "cdrop:2",
+      "variant": 3,
+      "arm": "blind",
+      "tier": "sonnet",
+      "file": "sonnet:blind:cdrop-2_v3_2"
+    },
+    {
+      "problem": true,
+      "explanation": "Agent booked hotel V2 which is non-refundable, violating the reference policy requirement that \"the hotel must be refundable.\"",
+      "culprit": "Step 13 (book_hotel V2) \u2014 selected a non-refundable hotel when a refundable option was available.",
+      "condition": "cdrop:2",
+      "variant": 3,
+      "arm": "policy",
+      "tier": "haiku",
+      "file": "haiku:policy:cdrop-2_v3_2"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent booked hotel V2, which is explicitly non-refundable, violating the refundable-hotel requirement, without ever exploring a flight+refundable-hotel combination that could meet both the refundability and $1600 price constraints.",
+      "culprit": "Step 13 (book_hotel({'hotel': 'V2'})) \u2014 V2 is non-refundable per the search_hotels result at step 4, violating the 'hotel must be refundable' policy rule; the agent never tried refundable options like V1 with a cheaper flight (e.g., R2) to find a compliant combination under $1600.",
+      "condition": "cdrop:2",
+      "variant": 3,
+      "arm": "policy",
+      "tier": "sonnet",
+      "file": "sonnet:policy:cdrop-2_v3_2"
+    }
   ]
 }

@@ -44,7 +44,10 @@ def main() -> None:
         cond, arm, tier = vr["condition"], vr.get("arm", "blind"), vr.get("tier", "opus")
         task = VARIANTS[vr.get("variant", 0)]
         rec = record_for(cond, task)
-        g = grade_attribution({"problem": vr["problem"], "culprit": vr["culprit"]}, rec)
+        if rec is None:  # healthy: no fault — 'detect' is a FALSE POSITIVE, nothing to attribute
+            g = {"problem": bool(vr["problem"]), "attributed": False}
+        else:
+            g = grade_attribution({"problem": vr["problem"], "culprit": vr["culprit"]}, rec)
         cell = cells.setdefault(_family(cond), {}).setdefault(tier, {}).setdefault(
             arm, {"detect": 0, "attr": 0, "n": 0}
         )
