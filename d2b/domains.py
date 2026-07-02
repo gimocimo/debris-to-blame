@@ -30,7 +30,7 @@ def _t_check_budget(_a: dict, w: World) -> str:
 
 
 def _t_search_flights(_a: dict, _w: World) -> str:
-    return "[BA112 $650 dep 09:00 | VS004 $600 dep 23:50 (red-eye)]"
+    return "[BA112 $650 dep Fri 09:00 | VS004 $600 dep Fri 23:50 (red-eye)]"
 
 
 def _t_book_flight(a: dict, w: World) -> str:
@@ -433,7 +433,7 @@ def _tt_check_budget(_a: dict, w: World) -> str:
 
 
 def _tt_search_flights(_a: dict, _w: World) -> str:
-    return "[BA112 $780 dep 09:00 | VS004 $420 dep 23:50 (red-eye)]"
+    return "[BA112 $780 dep Fri 09:00 | VS004 $420 dep Fri 23:50 (red-eye)]"
 
 
 def _tt_book_flight(a: dict, w: World) -> str:
@@ -477,7 +477,7 @@ def _tt_trajectory() -> Trajectory:
             Message(
                 role="tool",
                 tool_name="search_flights",
-                content="[BA112 $780 dep 09:00 | VS004 $420 dep 23:50 (red-eye)]",
+                content="[BA112 $780 dep Fri 09:00 | VS004 $420 dep Fri 23:50 (red-eye)]",
             ),
             Message(
                 role="assistant",

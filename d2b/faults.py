@@ -17,7 +17,7 @@ from dataclasses import dataclass, field
 from enum import StrEnum
 
 from .tools import decoy_tool_names
-from .trajectory import Message, Trajectory
+from .trajectory import Message, ToolCall, Trajectory
 
 
 class FaultType(StrEnum):
@@ -66,6 +66,7 @@ class FaultRecord:
     site: FaultSite
     volume: float
     extra: dict = field(default_factory=dict)
+    sham: bool = False  # a sham is a volume-matched NEUTRAL control (no real fault)
 
     @property
     def blame_label(self) -> tuple[str, str, str]:
@@ -225,3 +226,80 @@ _DISPATCH = {
     FaultType.CONSTRAINT_DROP: _inject_constraint_drop,
     FaultType.TOOL_FORGETTING: _inject_tool_forgetting,
 }
+
+
+# --------------------------------------------------------------------------------------------------
+# Sham controls: a volume-matched NEUTRAL perturbation of the same shape as each fault. Comparing
+# fault-vs-sham (not fault-vs-healthy) isolates the SPECIFIC fault from generic context perturbation
+# (e.g. "extra message", "longer tool list") — a paired control (Codex audit, D-009).
+# --------------------------------------------------------------------------------------------------
+
+_SHAM_TEXT = "[note] Confirming the request parameters are unchanged; proceeding as planned."
+
+
+def _sham_insert(t: Trajectory, spec: FaultSpec) -> tuple[FaultSite, dict]:
+    # Same #messages as debris/staleness/contradiction, but benign on-task content (no junk).
+    _check_msg_index(t, spec.position, insert=True)
+    n = max(1, int(spec.volume)) if spec.type is FaultType.DEBRIS else 1
+    notes = [
+        Message(role="tool", tool_name="note", content=_SHAM_TEXT, injected="sham")
+        for _ in range(n)
+    ]
+    t.messages[spec.position : spec.position] = notes
+    return FaultSite("message", str(spec.position)), {}
+
+
+def _sham_wrong_tool(t: Trajectory, spec: FaultSpec) -> tuple[FaultSite, dict]:
+    # Re-issue the SAME (correct) call as a redundant duplicate — matched shape, no wrong tool.
+    _check_msg_index(t, spec.position, insert=False)
+    msg = t.messages[spec.position]
+    if msg.role != "assistant" or msg.tool_call is None:
+        raise ValueError(
+            f"wrong_tool sham needs an assistant tool-call at position {spec.position}"
+        )
+    dup = Message(
+        role="assistant",
+        tool_call=ToolCall(msg.tool_call.name, dict(msg.tool_call.args)),
+        injected="sham",
+    )
+    t.messages.insert(spec.position, dup)
+    return FaultSite("message", str(spec.position)), {}
+
+
+def _sham_constraint_drop(t: Trajectory, spec: FaultSpec) -> tuple[FaultSite, dict]:
+    # Drop a DIFFERENT (non-target) constraint — isolates "the binding rule mattered" from
+    # "dropping any rule". Default: drop the last constraint (heuristically the non-binding one).
+    if len(t.constraints) < 2:
+        raise ValueError("constraint_drop sham needs >=2 constraints (a non-target one to drop)")
+    idx = len(t.constraints) - 1 if spec.position == 0 else 0
+    dropped = t.constraints.pop(idx)
+    return FaultSite("constraint", str(idx)), {"dropped_constraint": [dropped]}
+
+
+def _sham_tool_forgetting(t: Trajectory, spec: FaultSpec) -> tuple[FaultSite, dict]:
+    # Add the same #decoy tools but APPEND them (real tools stay prominent) — matched, no burial.
+    _check_msg_index(t, spec.position, insert=False)
+    t.tools += decoy_tool_names(max(1, int(spec.volume)))
+    return FaultSite("message", str(spec.position)), {"buried_step": spec.position}
+
+
+_SHAM_DISPATCH = {
+    FaultType.DEBRIS: _sham_insert,
+    FaultType.STALENESS: _sham_insert,
+    FaultType.CONTRADICTION: _sham_insert,
+    FaultType.WRONG_TOOL: _sham_wrong_tool,
+    FaultType.CONSTRAINT_DROP: _sham_constraint_drop,
+    FaultType.TOOL_FORGETTING: _sham_tool_forgetting,
+}
+
+
+def sham_inject(traj: Trajectory, spec: FaultSpec) -> Corruption:
+    """Volume-matched NEUTRAL control for `spec`'s fault type. label.sham=True; no real fault."""
+    t = copy.deepcopy(traj)
+    site, extra = _SHAM_DISPATCH[spec.type](t, spec)
+    t.meta["fault"] = {"type": f"sham:{spec.type.value}", "site": [site.kind, site.ref]}
+    t.meta["corrupted"] = True
+    t.meta.update(extra)
+    return Corruption(
+        corrupted=t, label=FaultRecord(spec.type, site, spec.volume, extra, sham=True)
+    )

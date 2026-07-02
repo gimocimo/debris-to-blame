@@ -27,7 +27,7 @@ def successful_flight_trajectory() -> Trajectory:
             Message(
                 role="tool",
                 tool_name="search_flights",
-                content="[BA112 $650 dep 09:00 | VS004 $600 dep 23:50 (red-eye)]",
+                content="[BA112 $650 dep Fri 09:00 | VS004 $600 dep Fri 23:50 (red-eye)]",
             ),
             Message(
                 role="assistant",

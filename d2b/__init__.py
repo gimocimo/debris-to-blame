@@ -23,6 +23,7 @@ from .faults import (
     FaultType,
     inject,
     redact_for_attribution,
+    sham_inject,
 )
 from .fixtures import successful_flight_trajectory
 from .replay import Policy, evaluate, replay, replay_tail_policy, resume, scripted_policy
@@ -40,6 +41,7 @@ __all__ = [
     "FaultSpec",
     "FaultType",
     "inject",
+    "sham_inject",
     "redact_for_attribution",
     # trajectory
     "Message",
