@@ -75,6 +75,41 @@ def main() -> None:
     fig.savefig(out, dpi=140, bbox_inches="tight")
     print(f"wrote {out.relative_to(ROOT)}")
 
+    grid_path = R / "grid_constraint_drop_tiers.json"
+    if grid_path.exists():
+        _grid_figure(json.loads(grid_path.read_text()))
+
+
+def _grid_figure(matrix: dict) -> None:
+    tiers = list(matrix)
+    conds = ["healthy", "fault", "sham"]
+    colors = {"healthy": GOOD, "fault": BAD, "sham": "#c9a227"}
+    fig, ax = plt.subplots(figsize=(8, 4.4))
+    w = 0.25
+    xs = range(len(tiers))
+    for i, cond in enumerate(conds):
+        vals = [matrix[t][cond]["k"] / matrix[t][cond]["n"] for t in tiers]
+        bars = ax.bar([x + i * w for x in xs], vals, width=w, label=cond, color=colors[cond])
+        for b in bars:
+            ax.text(
+                b.get_x() + w / 2,
+                b.get_height() + 0.02,
+                f"{b.get_height():.2f}",
+                ha="center",
+                fontsize=9,
+            )
+    ax.set_xticks([x + w for x in xs])
+    ax.set_xticklabels(tiers)
+    ax.set_ylim(0, 1.12)
+    ax.set_ylabel("P[task fails]")
+    ax.set_title("constraint_drop degradation by Claude tier (sham = drop a non-binding rule)")
+    ax.spines[["top", "right"]].set_visible(False)
+    ax.legend(frameon=False, ncol=3, loc="upper center")
+    fig.tight_layout()
+    out = ROOT / "assets" / "grid.png"
+    fig.savefig(out, dpi=140, bbox_inches="tight")
+    print(f"wrote {out.relative_to(ROOT)}")
+
 
 if __name__ == "__main__":
     main()

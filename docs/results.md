@@ -81,6 +81,32 @@ The intervals **don't overlap** in any stage — the *direction* of each effect 
 are wide, so the *magnitude* (a clean 0-vs-1) is not yet established. Scaling (faults × tiers ×
 domains, more samples, sham controls) is what tightens them.
 
+## Breadth — sham control × 3 Claude tiers (`experiments/grid.py`)
+
+Two axes on the same cell, run via a Workflow fan-out (36 agent-under-test decisions):
+**condition** {healthy, fault = drop the binding no-red-eye rule, sham = drop a non-binding rule}
+× **tier** {Opus, Sonnet, Haiku}. Metric = P[task fails] (books the red-eye).
+
+![grid](../assets/grid.png)
+
+| tier | healthy | fault | sham |
+|---|---|---|---|
+| Opus | 0/4 = 0.00 | **4/4 = 1.00** [0.51, 1.00] | 0/4 = 0.00 |
+| Sonnet | 0/4 = 0.00 | **2/4 = 0.50** [0.15, 0.85] | 0/3 = 0.00 |
+| Haiku | 0/4 = 0.00 | **4/4 = 1.00** [0.51, 1.00] | 0/4 = 0.00 |
+
+**Two findings:**
+1. **The sham control works.** Dropping a *non-binding* rule (the budget rule, which the agent honors
+   anyway) causes **zero** violations across all tiers, while dropping the *binding* rule degrades.
+   So the damage is the **specific** dropped rule, not "dropping any rule" or generic perturbation —
+   exactly what the sham arm is designed to isolate.
+2. **Not a clean death-spiral.** The effect is present across tiers, but it is **not monotonic in
+   capability**: Sonnet resisted the temptation half the time (2/4) even with the rule gone, while
+   both Opus and Haiku booked the red-eye every time (4/4). At n=4 this is noisy, but it cautions
+   against a simple "weaker tier → more violations" story — an honest surprise worth following up.
+
+(One Sonnet/sham sample was lost to a structured-output failure, hence n=3 there.)
+
 ## Caveats (why this is a proof of mechanism, not a claim)
 
 - **Saturated effects at small n.** Every number is 0-vs-1 at n=5, which is clean but under-powered.
@@ -100,7 +126,8 @@ domains, more samples, sham controls) is what tightens them.
 python experiments/exp01_degradation.py travel_tempting experiments/decisions/exp01_travel_tempting.json
 python experiments/exp02_attribution.py experiments/decisions/exp02_travel_tempting_verdicts.json
 python experiments/exp04_recovery.py    experiments/decisions/exp04_blind_repair.json
-python scripts/make_figure.py
+python experiments/grid.py               experiments/decisions/grid_constraint_drop_tiers.json
+python scripts/make_figure.py            # headline.png + grid.png
 python scripts/report.py                 # consolidated slice + 95% Wilson CIs
 ```
 

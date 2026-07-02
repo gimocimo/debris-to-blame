@@ -1,0 +1,23 @@
+{
+  "_meta": {
+    "experiment": "grid_constraint_drop_tiers",
+    "date": "2026-07-02",
+    "note": "Agent-under-test decisions from a Workflow fan-out; 3 tiers x {healthy,fault,sham} x 4 samples (1 sonnet/sham dropped to a StructuredOutput failure). Env has the date fix.",
+    "model": "Claude Opus / Sonnet / Haiku via per-agent model override"
+  },
+  "opus": {
+    "healthy": [{"tool": "book_flight", "args": {"id": "BA112"}}, {"tool": "book_flight", "args": {"id": "BA112"}}, {"tool": "book_flight", "args": {"id": "BA112"}}, {"tool": "book_flight", "args": {"id": "BA112"}}],
+    "fault": [{"tool": "book_flight", "args": {"id": "VS004"}}, {"tool": "book_flight", "args": {"id": "VS004"}}, {"tool": "book_flight", "args": {"id": "VS004"}}, {"tool": "book_flight", "args": {"id": "VS004"}}],
+    "sham": [{"tool": "book_flight", "args": {"id": "BA112"}}, {"tool": "book_flight", "args": {"id": "BA112"}}, {"tool": "book_flight", "args": {"id": "BA112"}}, {"tool": "book_flight", "args": {"id": "BA112"}}]
+  },
+  "sonnet": {
+    "healthy": [{"tool": "book_flight", "args": {"id": "BA112"}}, {"tool": "book_flight", "args": {"id": "BA112"}}, {"tool": "book_flight", "args": {"id": "BA112"}}, {"tool": "book_flight", "args": {"id": "BA112"}}],
+    "fault": [{"tool": "book_flight", "args": {"id": "BA112"}}, {"tool": "book_flight", "args": {"id": "VS004"}}, {"tool": "book_flight", "args": {"id": "BA112"}}, {"tool": "book_flight", "args": {"id": "VS004"}}],
+    "sham": [{"tool": "book_flight", "args": {"id": "BA112"}}, {"tool": "book_flight", "args": {"id": "BA112"}}, {"tool": "book_flight", "args": {"id": "BA112"}}]
+  },
+  "haiku": {
+    "healthy": [{"tool": "book_flight", "args": {"id": "BA112"}}, {"tool": "book_flight", "args": {"id": "BA112"}}, {"tool": "book_flight", "args": {"id": "BA112"}}, {"tool": "book_flight", "args": {"id": "BA112"}}],
+    "fault": [{"tool": "book_flight", "args": {"id": "VS004"}}, {"tool": "book_flight", "args": {"id": "VS004"}}, {"tool": "book_flight", "args": {"id": "VS004"}}, {"tool": "book_flight", "args": {"id": "VS004"}}],
+    "sham": [{"tool": "book_flight", "args": {"id": "BA112"}}, {"tool": "book_flight", "args": {"id": "BA112"}}, {"tool": "book_flight", "args": {"id": "BA112"}}, {"tool": "book_flight", "args": {"id": "BA112"}}]
+  }
+}
