@@ -50,15 +50,16 @@ def setup_and_injectors(condition: str, variant: int = 0):
         spec = FaultSpec(FaultType.CONSTRAINT_DROP, position=0)
         return sham_inject(task.make_trajectory(), spec).public, (), task
     if condition.startswith("blindrepair:"):
-        # recovery baseline: drop rule k, then add a plausible-but-WRONG repair rule (a misdiagnosis)
+        # recovery baseline: drop rule k, then add a plausible-but-WRONG repair rule (misdiagnosis)
         k = int(condition.split(":", 1)[1])
-        setup = inject(task.make_trajectory(), FaultSpec(FaultType.CONSTRAINT_DROP, position=k)).public
+        spec = FaultSpec(FaultType.CONSTRAINT_DROP, position=k)
+        setup = inject(task.make_trajectory(), spec).public
         setup.constraints = [*setup.constraints, MISDIAGNOSIS.get(k, "Double-check all details.")]
         return setup, (), task
     raise SystemExit(f"unknown condition: {condition}")
 
 
-# plausible-but-wrong "repairs" for the recovery blind_repair baseline (do NOT restore the real rule)
+# plausible-but-wrong "repairs" for the recovery blind_repair baseline (never restore the real rule)
 MISDIAGNOSIS = {
     0: "Prefer flights with extra legroom.",
     2: "Prefer hotels that include free breakfast.",
