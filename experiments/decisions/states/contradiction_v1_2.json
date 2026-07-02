@@ -1,0 +1,1 @@
+{"condition": "contradiction", "variant": 1, "decisions": [{"tool": "search_flights", "args": {}}, {"tool": "search_hotels", "args": {}}, {"tool": "latest_quote", "args": {"flight": "B1", "hotel": "K1"}}, {"finish": true}]}

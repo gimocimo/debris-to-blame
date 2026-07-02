@@ -18,10 +18,12 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import step  # noqa: E402
 
-from d2b.stats import fisher_p, fmt_rate  # noqa: E402
+from d2b.stats import cluster_by_variant, fisher_p, fmt_rate  # noqa: E402
 
-ORDER = ["healthy", "staleness", "contradiction", "cdrop:0", "cdrop:2", "sham"]
-NICE = {"cdrop:0": "cdrop:red-eye", "cdrop:2": "cdrop:refundable"}
+ORDER = ["healthy", "staleness", "contradiction", "cdrop:0", "cdrop:2", "sham",
+         "forget:file_expense_report"]
+NICE = {"cdrop:0": "cdrop:red-eye", "cdrop:2": "cdrop:refundable",
+        "forget:file_expense_report": "forget:expense"}
 
 
 def score(files: list[str]) -> dict:
@@ -31,10 +33,12 @@ def score(files: list[str]) -> dict:
         cond = st["condition"]
         r = step.replay(st) if st["decisions"] else None
         ok = bool(r and r.result.ok)
-        d = by.setdefault(cond, {"k_fail": 0, "n": 0, "variants": set()})
+        d = by.setdefault(cond, {"k_fail": 0, "n": 0, "pv": {}})
         d["n"] += 1
         d["k_fail"] += 0 if ok else 1
-        d["variants"].add(st.get("variant", 0))
+        v = st.get("variant", 0)
+        pk, pn = d["pv"].get(v, (0, 0))
+        d["pv"][v] = (pk + (0 if ok else 1), pn + 1)
     return by
 
 
@@ -44,28 +48,33 @@ def main() -> None:
     conds = [c for c in ORDER if c in by] + [c for c in by if c not in ORDER]
 
     print(f"CONFERENCE_TRIP interactive degradation — {len(files)} rollouts across task variants\n")
-    print(f"{'condition':20} {'P[task fails]  (95% Wilson)':32} {'variants':>8}")
+    print(f"{'condition':22} {'P[task fails] pooled (95% Wilson)':34} {'variants failing':>16}")
     for c in conds:
         d = by[c]
-        print(f"{NICE.get(c, c):20} {fmt_rate(d['k_fail'], d['n']):32} {len(d['variants']):>8}")
+        aff, nv = cluster_by_variant(d["pv"])
+        print(f"{NICE.get(c, c):22} {fmt_rate(d['k_fail'], d['n']):34} {f'{aff}/{nv}':>16}")
 
     if "healthy" in by:
         h = by["healthy"]
-        print("\nFisher exact vs healthy:")
+        h_aff, h_nv = cluster_by_variant(h["pv"])
+        print("\nVariant-clustered Fisher vs healthy (variants = the independent unit, not reps):")
         for c in conds:
             if c == "healthy":
                 continue
-            d = by[c]
-            p = fisher_p(h["k_fail"], h["n"], d["k_fail"], d["n"])
-            print(f"  {NICE.get(c, c):20} p = {p:.4f}")
+            aff, nv = cluster_by_variant(by[c]["pv"])
+            p = fisher_p(aff, nv, h_aff, h_nv)
+            print(f"  {NICE.get(c, c):22} {aff}/{nv} variants vs {h_aff}/{h_nv}  p = {p:.4f}")
 
     Path("results").mkdir(exist_ok=True)
-    out = {
-        c: {"k_fail": d["k_fail"], "n": d["n"], "n_variants": len(d["variants"])}
-        for c, d in by.items()
-    }
+    out = {}
+    for c, d in by.items():
+        aff, nv = cluster_by_variant(d["pv"])
+        out[c] = {
+            "k_fail": d["k_fail"], "n": d["n"], "n_variants": len(d["pv"]),
+            "variants_failing": aff, "per_variant": {str(k): v for k, v in d["pv"].items()},
+        }
     Path("results/conf_degrade_grid.json").write_text(json.dumps(out, indent=2))
-    print("\nwrote results/conf_degrade_grid.json")
+    print("\nwrote results/conf_degrade_grid.json (with per-variant counts)")
 
 
 if __name__ == "__main__":

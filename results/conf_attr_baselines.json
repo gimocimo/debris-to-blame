@@ -1,0 +1,32 @@
+{
+  "random": {
+    "recall": [
+      1,
+      24
+    ],
+    "false_pos": [
+      16,
+      16
+    ]
+  },
+  "recency": {
+    "recall": [
+      1,
+      24
+    ],
+    "false_pos": [
+      16,
+      16
+    ]
+  },
+  "keyword": {
+    "recall": [
+      0,
+      24
+    ],
+    "false_pos": [
+      16,
+      16
+    ]
+  }
+}

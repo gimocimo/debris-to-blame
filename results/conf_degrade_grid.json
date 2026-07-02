@@ -1,32 +1,170 @@
 {
   "cdrop:0": {
-    "k_fail": 8,
-    "n": 8,
-    "n_variants": 4
-  },
-  "cdrop:2": {
-    "k_fail": 8,
-    "n": 8,
-    "n_variants": 4
-  },
-  "contradiction": {
     "k_fail": 0,
     "n": 8,
-    "n_variants": 4
+    "n_variants": 4,
+    "variants_failing": 0,
+    "per_variant": {
+      "0": [
+        0,
+        2
+      ],
+      "1": [
+        0,
+        2
+      ],
+      "2": [
+        0,
+        2
+      ],
+      "3": [
+        0,
+        2
+      ]
+    }
+  },
+  "cdrop:2": {
+    "k_fail": 7,
+    "n": 8,
+    "n_variants": 4,
+    "variants_failing": 3,
+    "per_variant": {
+      "0": [
+        1,
+        2
+      ],
+      "1": [
+        2,
+        2
+      ],
+      "2": [
+        2,
+        2
+      ],
+      "3": [
+        2,
+        2
+      ]
+    }
+  },
+  "contradiction": {
+    "k_fail": 1,
+    "n": 8,
+    "n_variants": 4,
+    "variants_failing": 0,
+    "per_variant": {
+      "0": [
+        0,
+        2
+      ],
+      "1": [
+        1,
+        2
+      ],
+      "2": [
+        0,
+        2
+      ],
+      "3": [
+        0,
+        2
+      ]
+    }
+  },
+  "forget:file_expense_report": {
+    "k_fail": 8,
+    "n": 8,
+    "n_variants": 4,
+    "variants_failing": 4,
+    "per_variant": {
+      "0": [
+        2,
+        2
+      ],
+      "1": [
+        2,
+        2
+      ],
+      "2": [
+        2,
+        2
+      ],
+      "3": [
+        2,
+        2
+      ]
+    }
   },
   "healthy": {
     "k_fail": 0,
     "n": 8,
-    "n_variants": 4
+    "n_variants": 4,
+    "variants_failing": 0,
+    "per_variant": {
+      "0": [
+        0,
+        2
+      ],
+      "1": [
+        0,
+        2
+      ],
+      "2": [
+        0,
+        2
+      ],
+      "3": [
+        0,
+        2
+      ]
+    }
   },
   "sham": {
     "k_fail": 0,
     "n": 8,
-    "n_variants": 4
+    "n_variants": 4,
+    "variants_failing": 0,
+    "per_variant": {
+      "0": [
+        0,
+        2
+      ],
+      "1": [
+        0,
+        2
+      ],
+      "2": [
+        0,
+        2
+      ],
+      "3": [
+        0,
+        2
+      ]
+    }
   },
   "staleness": {
-    "k_fail": 4,
+    "k_fail": 8,
     "n": 8,
-    "n_variants": 4
+    "n_variants": 4,
+    "variants_failing": 4,
+    "per_variant": {
+      "0": [
+        2,
+        2
+      ],
+      "1": [
+        2,
+        2
+      ],
+      "2": [
+        2,
+        2
+      ],
+      "3": [
+        2,
+        2
+      ]
+    }
   }
 }
