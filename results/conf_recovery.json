@@ -1,14 +1,21 @@
 {
   "no_repair": {
     "k_ok": 1,
-    "n": 8
+    "n": 8,
+    "variants_recovered": 0,
+    "n_variants": 4
   },
   "blind_repair": {
     "k_ok": 0,
-    "n": 8
+    "n": 8,
+    "variants_recovered": 0,
+    "n_variants": 4
   },
   "targeted_repair": {
     "k_ok": 8,
-    "n": 8
-  }
+    "n": 8,
+    "variants_recovered": 4,
+    "n_variants": 4
+  },
+  "_clustered_fisher_targeted_vs_blind": 0.028571428571428567
 }

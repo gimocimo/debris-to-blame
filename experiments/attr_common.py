@@ -17,7 +17,10 @@ from d2b import FaultRecord, FaultSite, FaultType  # noqa: E402
 # constraint_drop we derive them from the dropped rule text instead (see grade_attribution).
 _ATTR_KEYS = {
     "staleness": ["stale", "cached", "surged", "outdated", "superseded"],
-    "contradiction": ["budget", "raised", "inflated", "contradict", "conflicting", "note"],
+    # deliberately NOT "budget"/"note" (too generic — they match any over-budget failure narrative,
+    # which would credit the contradiction fault for a plain budget miss). Must name the fabricated
+    # note that RAISED/INFLATED the cap.
+    "contradiction": ["raised", "inflated", "contradict", "conflicting", "fabricated", "hiked"],
 }
 
 

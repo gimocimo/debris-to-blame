@@ -256,16 +256,18 @@ cross-provider grader remains future work.
 
 ### 4. Recovery — localization enables recovery (`experiments/conf_recover_score.py`)
 
-On the binding `cdrop:refundable` fault, sincere agents, three repairs:
+On the binding `cdrop:refundable` fault, sincere agents, three repairs — reported both pooled and at
+the variant level (variants = the independent unit, matching §1):
 
-| repair | P[recovered] (95% Wilson) | what it is |
-|---|---|---|
-| no_repair | 1/8 = 0.12 [0.02, 0.47] | leave the rule dropped |
-| blind_repair | 0/8 = 0.00 [0.00, 0.32] | add a *wrong* rule ("prefer free breakfast") |
-| targeted_repair | 8/8 = 1.00 [0.68, 1.00] | restore the actual dropped rule |
+| repair | pooled P[recovered] | variants recovered | what it is |
+|---|---|---|---|
+| no_repair | 1/8 = 0.12 | 0/4 | leave the rule dropped |
+| blind_repair | 0/8 = 0.00 | 0/4 | add a *wrong* rule ("prefer free breakfast") |
+| targeted_repair | 8/8 = 1.00 | 4/4 | restore the actual dropped rule |
 
-**Localization lift = +1.00.** A misdiagnosed repair recovers nothing; restoring the correctly
-localized rule recovers every task. Recovery is gated on correct attribution.
+**Localization lift = +1.00**; variant-clustered **targeted 4/4 vs blind 0/4, Fisher p = 0.029**. A
+misdiagnosed repair recovers nothing; restoring the correctly localized rule recovers every task, in
+every variant. Recovery is gated on correct attribution.
 
 ### 5. External validity — an honest null (`experiments/decisions/organic_*`)
 

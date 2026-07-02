@@ -47,8 +47,8 @@ On the multi-step **CONFERENCE_TRIP** task (a 10+ step book-then-file-then-send 
 > policy makes them attributable **depends on the fault type** — a deletion gap closes, a deception gap
 > does not. Dumb baselines (grep/recency) floor at ~0 recall / 100% false-positive, so the LLM
 > auditor's oracle result is real work, not token-matching. Recovery follows attribution: restoring
-> the correctly localized rule recovers **8/8** vs **0/8** for a misdiagnosed repair (localization lift
-> **+1.00**). ([full results, arms, and caveats](docs/results.md))
+> the correctly localized rule recovers the task in **4/4** variants vs **0/4** for a misdiagnosed
+> repair (localization lift **+1.00**, clustered Fisher p = 0.029). ([full results + caveats](docs/results.md))
 
 <details><summary>Method note — why "sincere agents" and "oracle upper bound" matter</summary>
 
@@ -81,7 +81,7 @@ python3 scripts/make_figure.py     # regenerate the figure above from results/
 ### Status
 🚧 Active. **M0/M1 done; the full degrade → attribute → recover loop is demonstrated on ONE multi-step
 task family** (CONFERENCE_TRIP + 4 variants), with a de-contaminated blame-gap map, dumb-baseline
-floor, cross-tier robustness check, and honest variant-level statistics (124 tests). **M2 is not yet
+floor, cross-tier robustness check, and honest variant-level statistics (125 unit tests green). **M2 is not yet
 met**: its bar is a measurable attribution gap in **≥3 domains**, and only CONFERENCE_TRIP is wired
 into the interactive loop — the other domains are still single-step static fixtures. Next: port a
 second domain to the interactive loop; a true cross-provider grader; larger n. See

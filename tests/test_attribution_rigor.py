@@ -58,6 +58,18 @@ def test_grade_attribution_tool_forgetting():
     assert not bad["attributed"]
 
 
+def test_contradiction_keys_do_not_credit_a_generic_budget_miss():
+    rec = record_for("contradiction", TASK)
+    # a plain over-budget narrative must NOT be attributed to the injected contradiction note
+    for culprit in ("agent booked an over budget hotel", "the total exceeded the budget",
+                    "a note in the context"):
+        assert not grade_attribution({"problem": True, "culprit": culprit}, rec)["attributed"]
+    # naming the fabricated cap-raising note DOES count
+    assert grade_attribution(
+        {"problem": True, "culprit": "acted on a note that raised the budget cap"}, rec
+    )["attributed"]
+
+
 def test_sham_record_correct_when_not_flagged():
     rec = record_for("sham", TASK)
     assert grade_attribution({"problem": False, "culprit": "none"}, rec)["correct"]
