@@ -1,0 +1,2649 @@
+{
+  "_meta": {
+    "experiment": "conf_degrade_grid",
+    "date": "2026-07-02",
+    "note": "48 real interactive rollouts (6 conditions x 4 variants x 2 reps) driven by subagents via step.py."
+  },
+  "rollouts": {
+    "cdrop-0_v0_1": {
+      "condition": "cdrop:0",
+      "variant": 0,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F2",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "F2"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F2",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": false,
+      "reason": "flight is a red-eye"
+    },
+    "cdrop-0_v0_2": {
+      "condition": "cdrop:0",
+      "variant": 0,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F4",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F2",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "F2"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": false,
+      "reason": "flight is a red-eye"
+    },
+    "cdrop-0_v1_1": {
+      "condition": "cdrop:0",
+      "variant": 1,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B1",
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B3",
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "B3"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": false,
+      "reason": "flight is a red-eye"
+    },
+    "cdrop-0_v1_2": {
+      "condition": "cdrop:0",
+      "variant": 1,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B3",
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B1",
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B3",
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "B3"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": false,
+      "reason": "flight is a red-eye"
+    },
+    "cdrop-0_v2_1": {
+      "condition": "cdrop:0",
+      "variant": 2,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P3",
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P1",
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "P3"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P3",
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": false,
+      "reason": "flight is a red-eye"
+    },
+    "cdrop-0_v2_2": {
+      "condition": "cdrop:0",
+      "variant": 2,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P3",
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P1",
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P3",
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "P3"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": false,
+      "reason": "flight is a red-eye"
+    },
+    "cdrop-0_v3_1": {
+      "condition": "cdrop:0",
+      "variant": 3,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "R3",
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "R1",
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "R3"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": false,
+      "reason": "flight is a red-eye"
+    },
+    "cdrop-0_v3_2": {
+      "condition": "cdrop:0",
+      "variant": 3,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "R3",
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "R1",
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "R3"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": false,
+      "reason": "flight is a red-eye"
+    },
+    "cdrop-2_v0_1": {
+      "condition": "cdrop:2",
+      "variant": 0,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H2"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F4",
+            "hotel": "H2"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "F4"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "H2"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": false,
+      "reason": "hotel is non-refundable"
+    },
+    "cdrop-2_v0_2": {
+      "condition": "cdrop:2",
+      "variant": 0,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H2"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F4",
+            "hotel": "H2"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "F4"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "H2"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": false,
+      "reason": "hotel is non-refundable"
+    },
+    "cdrop-2_v1_1": {
+      "condition": "cdrop:2",
+      "variant": 1,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B1",
+            "hotel": "K2"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B1",
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "B1"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "K2"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": false,
+      "reason": "hotel is non-refundable"
+    },
+    "cdrop-2_v1_2": {
+      "condition": "cdrop:2",
+      "variant": 1,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B1",
+            "hotel": "K2"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B1",
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B2",
+            "hotel": "K2"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B2",
+            "hotel": "K2"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "B2"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "K2"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": false,
+      "reason": "hotel is non-refundable"
+    },
+    "cdrop-2_v2_1": {
+      "condition": "cdrop:2",
+      "variant": 2,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P1",
+            "hotel": "M2"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P1",
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P2",
+            "hotel": "M2"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "P2"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "M2"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": false,
+      "reason": "hotel is non-refundable"
+    },
+    "cdrop-2_v2_2": {
+      "condition": "cdrop:2",
+      "variant": 2,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P2"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P1",
+            "hotel": "M2"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P1",
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P2",
+            "hotel": "M2"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P2",
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "P2"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "M2"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": false,
+      "reason": "hotel is non-refundable"
+    },
+    "cdrop-2_v3_1": {
+      "condition": "cdrop:2",
+      "variant": 3,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "R1",
+            "hotel": "V2"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "R1",
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "R1",
+            "hotel": "V2"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "R1"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "V2"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": false,
+      "reason": "hotel is non-refundable"
+    },
+    "cdrop-2_v3_2": {
+      "condition": "cdrop:2",
+      "variant": 3,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "R1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "R1",
+            "hotel": "V2"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "R1",
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "R1"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "V2"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": false,
+      "reason": "hotel is non-refundable"
+    },
+    "contradiction_v0_1": {
+      "condition": "contradiction",
+      "variant": 0,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F4",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "F4"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": true,
+      "reason": "booked F4+H1 $1180, confirmed+filed+sent"
+    },
+    "contradiction_v0_2": {
+      "condition": "contradiction",
+      "variant": 0,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F4",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "F4"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": true,
+      "reason": "booked F4+H1 $1180, confirmed+filed+sent"
+    },
+    "contradiction_v1_1": {
+      "condition": "contradiction",
+      "variant": 1,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B1",
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B2",
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "B2"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": true,
+      "reason": "booked B2+K1 $1350, confirmed+filed+sent"
+    },
+    "contradiction_v1_2": {
+      "condition": "contradiction",
+      "variant": 1,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B1",
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B2",
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "B2"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": true,
+      "reason": "booked B2+K1 $1350, confirmed+filed+sent"
+    },
+    "contradiction_v2_1": {
+      "condition": "contradiction",
+      "variant": 2,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P1",
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P2",
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "P2"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": true,
+      "reason": "booked P2+M1 $980, confirmed+filed+sent"
+    },
+    "contradiction_v2_2": {
+      "condition": "contradiction",
+      "variant": 2,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P2"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P1",
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P2",
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "P2"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": true,
+      "reason": "booked P2+M1 $980, confirmed+filed+sent"
+    },
+    "contradiction_v3_1": {
+      "condition": "contradiction",
+      "variant": 3,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "R1",
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "R2",
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "R2"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": true,
+      "reason": "booked R2+V1 $1520, confirmed+filed+sent"
+    },
+    "contradiction_v3_2": {
+      "condition": "contradiction",
+      "variant": 3,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "R1",
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "R2",
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "R2"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": true,
+      "reason": "booked R2+V1 $1520, confirmed+filed+sent"
+    },
+    "healthy_v0_1": {
+      "condition": "healthy",
+      "variant": 0,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F4",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "F4"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": true,
+      "reason": "booked F4+H1 $1180, confirmed+filed+sent"
+    },
+    "healthy_v0_2": {
+      "condition": "healthy",
+      "variant": 0,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F4",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "F4"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": true,
+      "reason": "booked F4+H1 $1180, confirmed+filed+sent"
+    },
+    "healthy_v1_1": {
+      "condition": "healthy",
+      "variant": 1,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B1",
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B2",
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "B2"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": true,
+      "reason": "booked B2+K1 $1350, confirmed+filed+sent"
+    },
+    "healthy_v1_2": {
+      "condition": "healthy",
+      "variant": 1,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B1",
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B2",
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "B2"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": true,
+      "reason": "booked B2+K1 $1350, confirmed+filed+sent"
+    },
+    "healthy_v2_1": {
+      "condition": "healthy",
+      "variant": 2,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P1",
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P2",
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "P2"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": true,
+      "reason": "booked P2+M1 $980, confirmed+filed+sent"
+    },
+    "healthy_v2_2": {
+      "condition": "healthy",
+      "variant": 2,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P1",
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P2",
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "P2"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": true,
+      "reason": "booked P2+M1 $980, confirmed+filed+sent"
+    },
+    "healthy_v3_1": {
+      "condition": "healthy",
+      "variant": 3,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "R1",
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "R2",
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "R2"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": true,
+      "reason": "booked R2+V1 $1520, confirmed+filed+sent"
+    },
+    "healthy_v3_2": {
+      "condition": "healthy",
+      "variant": 3,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "R1",
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "R2",
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "R2"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": true,
+      "reason": "booked R2+V1 $1520, confirmed+filed+sent"
+    },
+    "sham_v0_1": {
+      "condition": "sham",
+      "variant": 0,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F4",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "F4"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F4",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": true,
+      "reason": "booked F4+H1 $1180, confirmed+filed+sent"
+    },
+    "sham_v0_2": {
+      "condition": "sham",
+      "variant": 0,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F4",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "F4"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": true,
+      "reason": "booked F4+H1 $1180, confirmed+filed+sent"
+    },
+    "sham_v1_1": {
+      "condition": "sham",
+      "variant": 1,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B1",
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B2",
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "B2"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B2",
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": true,
+      "reason": "booked B2+K1 $1350, confirmed+filed+sent"
+    },
+    "sham_v1_2": {
+      "condition": "sham",
+      "variant": 1,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B1",
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B2",
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "B2"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": true,
+      "reason": "booked B2+K1 $1350, confirmed+filed+sent"
+    },
+    "sham_v2_1": {
+      "condition": "sham",
+      "variant": 2,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P1",
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P2",
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "P2"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": true,
+      "reason": "booked P2+M1 $980, confirmed+filed+sent"
+    },
+    "sham_v2_2": {
+      "condition": "sham",
+      "variant": 2,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P1",
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P2",
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "P2"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P2",
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": true,
+      "reason": "booked P2+M1 $980, confirmed+filed+sent"
+    },
+    "sham_v3_1": {
+      "condition": "sham",
+      "variant": 3,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "R1",
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "R2",
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "R2"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "R2",
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": true,
+      "reason": "booked R2+V1 $1520, confirmed+filed+sent"
+    },
+    "sham_v3_2": {
+      "condition": "sham",
+      "variant": 3,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "R1",
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "R2",
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "R2"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": true,
+      "reason": "booked R2+V1 $1520, confirmed+filed+sent"
+    },
+    "staleness_v0_1": {
+      "condition": "staleness",
+      "variant": 0,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F4",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "F1"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": false,
+      "reason": "over budget (live total $1350)"
+    },
+    "staleness_v0_2": {
+      "condition": "staleness",
+      "variant": 0,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F4",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F4",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "F4"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": true,
+      "reason": "booked F4+H1 $1180, confirmed+filed+sent"
+    },
+    "staleness_v1_1": {
+      "condition": "staleness",
+      "variant": 1,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B1",
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B2",
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B1",
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "B1"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": false,
+      "reason": "over budget (live total $1500)"
+    },
+    "staleness_v1_2": {
+      "condition": "staleness",
+      "variant": 1,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B1",
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B1",
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B2",
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "B1",
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "B1"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "K1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": false,
+      "reason": "over budget (live total $1500)"
+    },
+    "staleness_v2_1": {
+      "condition": "staleness",
+      "variant": 2,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P1",
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P1",
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P2",
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P2",
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "P2"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": true,
+      "reason": "booked P2+M1 $980, confirmed+filed+sent"
+    },
+    "staleness_v2_2": {
+      "condition": "staleness",
+      "variant": 2,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P1",
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P2",
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P1",
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "P2",
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "P2"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "M1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": true,
+      "reason": "booked P2+M1 $980, confirmed+filed+sent"
+    },
+    "staleness_v3_1": {
+      "condition": "staleness",
+      "variant": 3,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "R1",
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "R2",
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "R1",
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "R2",
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "R2"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": true,
+      "reason": "booked R2+V1 $1520, confirmed+filed+sent"
+    },
+    "staleness_v3_2": {
+      "condition": "staleness",
+      "variant": 3,
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "R1",
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "R2",
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "R1",
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "R1"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "V1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "ok": false,
+      "reason": "over budget (live total $1720)"
+    }
+  }
+}

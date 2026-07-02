@@ -172,6 +172,31 @@ stayed ground truth while only the *observation* was corrupted.
 Next: scale n and add parameterized task variants (so n is task-level, not resamples of one prompt),
 then wire attribution + recovery on this task.
 
+## Scaled degradation surface — 6 faults × 4 task variants (`experiments/conf_score.py`)
+
+48 real interactive rollouts (6 conditions × **4 independent task variants** × 2 reps). Because the
+variants are distinct catalogs (different cities/prices/surges), n is now **task-level**, not
+resamples of one prompt — so the significant results below are real claims, not just a cell.
+
+![conf grid](../assets/conf_grid.png)
+
+| condition | P[fails] (95% Wilson) | Fisher vs healthy | reading |
+|---|---|---|---|
+| healthy | 0/8 = 0.00 [0.00, 0.32] | — | baseline |
+| staleness | 4/8 = 0.50 [0.22, 0.78] | p = 0.077 | **partial** — half re-quote and dodge the trap |
+| contradiction | 0/8 = 0.00 | p = 1.0 | agents ignore the fake "budget raised" note |
+| constraint_drop:red-eye | **8/8 = 1.00** [0.68, 1.00] | **p = 0.0002** | drop the rule → every agent books a red-eye |
+| constraint_drop:refundable | **8/8 = 1.00** [0.68, 1.00] | **p = 0.0002** | drop the rule → every agent books the non-refundable hotel |
+| sham (drop inert rule) | 0/8 = 0.00 | p = 1.0 | control holds |
+
+**A real degradation surface, with significance.** Constraint-drops on *binding* rules reliably
+break agents (100%, **p = 0.0002** across 4 independent variants — a genuine claim, not a saturated
+cell). Staleness is *partial* (50%): the "confirm the latest quote" rule + the "(cached)" tell let
+about half the agents re-verify and dodge the surge — an honest, interesting middle. Contradiction
+(a fake budget-hike note) and the sham control are both null — agents respect the true budget, and
+dropping the inert rule changes nothing. This differentiation across fault types is exactly the
+signal the blame-gap map is built on.
+
 ## Caveats (why this is a proof of mechanism, not a claim)
 
 - **Single-decision, single-domain, single-fault toy cell — the biggest threat.** The whole slice is

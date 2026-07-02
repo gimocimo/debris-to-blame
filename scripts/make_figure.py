@@ -83,6 +83,42 @@ def main() -> None:
     if conf_path.exists():
         _conf_figure(json.loads(conf_path.read_text()))
 
+    gpath = R / "conf_degrade_grid.json"
+    if gpath.exists():
+        _degrade_grid_figure(json.loads(gpath.read_text()))
+
+
+def _degrade_grid_figure(m: dict) -> None:
+    order = ["healthy", "staleness", "contradiction", "cdrop:0", "cdrop:2", "sham"]
+    nice = {"cdrop:0": "cdrop\nred-eye", "cdrop:2": "cdrop\nrefundable"}
+    order = [c for c in order if c in m]
+    vals = [m[c]["k_fail"] / m[c]["n"] for c in order]
+    colors = [
+        "#c9a227" if c in ("healthy", "sham") else BAD if v >= 0.75 else "#e08a3c"
+        for c, v in zip(order, vals, strict=True)
+    ]
+    colors[order.index("healthy")] = GOOD
+    fig, ax = plt.subplots(figsize=(9, 4.4))
+    ax.bar([nice.get(c, c) for c in order], vals, color=colors, width=0.62)
+    ax.set_ylim(0, 1.12)
+    ax.set_ylabel("P[task fails]")
+    n = m[order[0]]["n"]
+    ax.set_title(f"CONFERENCE_TRIP degradation by fault (n={n}/cond across 4 task variants)")
+    ax.spines[["top", "right"]].set_visible(False)
+    for p in ax.patches:
+        ax.text(
+            p.get_x() + p.get_width() / 2,
+            p.get_height() + 0.02,
+            f"{p.get_height():.2f}",
+            ha="center",
+            fontsize=10,
+            fontweight="bold",
+        )
+    fig.tight_layout()
+    out = ROOT / "assets" / "conf_grid.png"
+    fig.savefig(out, dpi=140, bbox_inches="tight")
+    print(f"wrote {out.relative_to(ROOT)}")
+
 
 def _conf_figure(matrix: dict) -> None:
     labels = {"healthy": "healthy", "staleness": "staleness", "cdrop_2": "cdrop\n(refundable)"}
