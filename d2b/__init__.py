@@ -5,6 +5,7 @@ See PROJECT_PLAN.md for scope.
 """
 
 from .agent import decision_to_messages, parse_decision, render_prefix
+from .conference import CONFERENCE_TRIP
 from .domains import (
     ALL_DOMAINS,
     CALENDAR,
@@ -71,6 +72,7 @@ __all__ = [
     "ECOMMERCE",
     "SPREADSHEET",
     "TRAVEL_TEMPTING",
+    "CONFERENCE_TRIP",
     # legacy stateless demo tools (M1)
     "MockTool",
     "ToolRegistry",

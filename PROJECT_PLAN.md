@@ -41,7 +41,7 @@ stop and re-align.
   (trace-only attribution 0/5, with-policy 5/5) → exp04 **recovery**: targeted-repair 1.00 vs
   blind/no-repair 0.00 (**localization lift +1.00**). "Silently breaks → invisible in trace →
   recoverable only once localized." Thesis demonstrated end-to-end on one cell.
-- **Latest handoff:** `handoffs/0013-breadth-sham-tiers.md` (sham control + env date fix + 3-tier breadth grid)
+- **Latest handoff:** `handoffs/0014-conference-multistep-task.md` (multi-step CONFERENCE_TRIP built; next = run the loop on it)
 
 ---
 
