@@ -55,6 +55,10 @@ def prompts() -> dict:
 
 def p_fail(prefix, decisions: list[dict]) -> tuple[int, int]:
     def ok(d):
+        # A parse failure (or a decision with no tool) is an OUTCOME, not a silent drop — count it
+        # as a task failure rather than crashing decision_to_messages (Codex issue 6).
+        if d.get("status") == "parse_fail" or "tool" not in d:
+            return False
         return resume(TASK, prefix, CUT, scripted_policy(decision_to_messages(d))).ok
 
     return sum(not ok(d) for d in decisions), len(decisions)

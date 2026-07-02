@@ -505,4 +505,8 @@ TRAVEL_TEMPTING = TaskSpec(
 )
 
 
-ALL_DOMAINS = [TRAVEL, REPO_TRIAGE, CALENDAR, ECOMMERCE, SPREADSHEET]
+from .conference import CONFERENCE_TRIP  # noqa: E402  (placed last to avoid an import cycle)
+
+# All runnable tasks. CONFERENCE_TRIP is multi-step (use interactive_rollout for its faults) but is
+# included here so runners that iterate the task list can see it (Codex review issue 8).
+ALL_DOMAINS = [TRAVEL, REPO_TRIAGE, CALENDAR, ECOMMERCE, SPREADSHEET, CONFERENCE_TRIP]

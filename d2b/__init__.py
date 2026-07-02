@@ -5,7 +5,12 @@ See PROJECT_PLAN.md for scope.
 """
 
 from .agent import decision_to_messages, parse_decision, render_prefix
-from .conference import CONFERENCE_TRIP
+from .conference import (
+    CONFERENCE_TRIP,
+    contradiction_injector,
+    sham_note_injector,
+    staleness_injector,
+)
 from .domains import (
     ALL_DOMAINS,
     CALENDAR,
@@ -28,6 +33,7 @@ from .faults import (
 )
 from .fixtures import successful_flight_trajectory
 from .replay import Policy, evaluate, replay, replay_tail_policy, resume, scripted_policy
+from .rollout import Injector, Rollout, interactive_rollout, scripted_policy_fn
 from .tools import MockTool, ToolRegistry, demo_registry
 from .trajectory import Message, ToolCall, Trajectory
 from .validate import TaskSpec, ValidationResult
@@ -73,6 +79,14 @@ __all__ = [
     "SPREADSHEET",
     "TRAVEL_TEMPTING",
     "CONFERENCE_TRIP",
+    # interactive rollout (multi-step, reacts to corrupted observations)
+    "interactive_rollout",
+    "Injector",
+    "Rollout",
+    "scripted_policy_fn",
+    "staleness_injector",
+    "contradiction_injector",
+    "sham_note_injector",
     # legacy stateless demo tools (M1)
     "MockTool",
     "ToolRegistry",

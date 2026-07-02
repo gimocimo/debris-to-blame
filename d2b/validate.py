@@ -28,3 +28,6 @@ class TaskSpec:
     make_trajectory: Callable[[], Trajectory]
     validate: Callable[[World], ValidationResult]
     critical_step: int  # message index of the tool call the task hinges on
+    # Optional domain-aware sham plan, e.g. {"constraint_drop_index": 7} = the inert (non-binding)
+    # rule to drop for a constraint_drop sham. The trajectory also stamps its meta.
+    sham_plan: dict | None = None

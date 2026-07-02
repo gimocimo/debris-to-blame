@@ -208,7 +208,19 @@ def _inject_constraint_drop(t: Trajectory, spec: FaultSpec) -> tuple[FaultSite, 
     for _ in range(max(1, int(spec.volume))):
         if spec.position < len(t.constraints):
             dropped.append(t.constraints.pop(spec.position))
+    _scrub_from_messages(t, dropped)  # so a policy-bearing tool output can't re-leak the rule
     return FaultSite("constraint", str(spec.position)), {"dropped_constraint": dropped}
+
+
+def _scrub_from_messages(t: Trajectory, rules: list[str]) -> None:
+    """Remove dropped-rule text lingering in message contents (e.g. a get_policy tool output)."""
+    for m in t.messages:
+        if not m.content:
+            continue
+        for rule in rules:
+            if rule in m.content:
+                m.content = m.content.replace(rule, "").replace(" |  | ", " | ").strip(" |")
+                m.injected = m.injected or "constraint_drop"
 
 
 def _inject_tool_forgetting(t: Trajectory, spec: FaultSpec) -> tuple[FaultSite, dict]:
@@ -267,11 +279,13 @@ def _sham_wrong_tool(t: Trajectory, spec: FaultSpec) -> tuple[FaultSite, dict]:
 
 
 def _sham_constraint_drop(t: Trajectory, spec: FaultSpec) -> tuple[FaultSite, dict]:
-    # Drop a DIFFERENT (non-target) constraint — isolates "the binding rule mattered" from
-    # "dropping any rule". Default: drop the last constraint (heuristically the non-binding one).
+    # Drop a genuinely NON-binding rule — isolates "the binding rule mattered" from "dropping any
+    # rule". Prefer the domain's inert rule (meta["sham_constraint_index"]); else a heuristic.
     if len(t.constraints) < 2:
         raise ValueError("constraint_drop sham needs >=2 constraints (a non-target one to drop)")
-    idx = len(t.constraints) - 1 if spec.position == 0 else 0
+    idx = t.meta.get("sham_constraint_index")
+    if not (isinstance(idx, int) and 0 <= idx < len(t.constraints)):
+        idx = len(t.constraints) - 1 if spec.position == 0 else 0
     dropped = t.constraints.pop(idx)
     return FaultSite("constraint", str(idx)), {"dropped_constraint": [dropped]}
 

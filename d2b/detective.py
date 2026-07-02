@@ -67,3 +67,57 @@ def grade_verdict(verdict: dict, fault_present: bool) -> dict:
     keys = ("red-eye", "red eye", "redeye", "constraint", "policy", "no-red-eye")
     attributed = problem and culprit not in ("", "none", "n/a") and any(k in culprit for k in keys)
     return {"problem": problem, "attributed": attributed, "correct": problem == fault_present}
+
+
+# words too generic to count as correctly naming a SPECIFIC dropped rule
+_GENERIC = {
+    "the",
+    "a",
+    "an",
+    "must",
+    "not",
+    "be",
+    "never",
+    "book",
+    "booked",
+    "booking",
+    "exceed",
+    "within",
+    "before",
+    "after",
+    "and",
+    "for",
+    "with",
+    "that",
+    "this",
+    "rule",
+    "policy",
+    "constraint",
+    "flight",
+    "hotel",
+    "trip",
+    "total",
+    "cost",
+    "agent",
+    "was",
+    "were",
+    "should",
+}
+
+
+def grade_attribution(verdict: dict, record) -> dict:
+    """Grade attribution against the SPECIFIC injected fault (Codex issue 7).
+
+    For a constraint_drop, the culprit must name a DISTINGUISHING word of the actual dropped rule
+    (e.g. 'refundable' vs 'red-eye') — not just 'a constraint was dropped'. For a sham (no real
+    fault), correct = the detective did NOT flag a problem.
+    """
+    problem = bool(verdict.get("problem"))
+    culprit = str(verdict.get("culprit", "")).lower()
+    if getattr(record, "sham", False):
+        return {"problem": problem, "attributed": False, "correct": not problem}
+    rule = " ".join(record.extra.get("dropped_constraint") or []).lower()
+    tokens = [w.strip(".,()") for w in rule.split()]
+    keys = [w for w in tokens if len(w) > 3 and w not in _GENERIC]
+    attributed = problem and any(k in culprit for k in keys)
+    return {"problem": problem, "attributed": attributed, "correct": problem}
