@@ -1,0 +1,14 @@
+{
+  "healthy": {
+    "k_fail": 0,
+    "n": 3
+  },
+  "staleness": {
+    "k_fail": 3,
+    "n": 3
+  },
+  "cdrop_2": {
+    "k_fail": 3,
+    "n": 3
+  }
+}

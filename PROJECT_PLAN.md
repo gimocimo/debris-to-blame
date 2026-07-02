@@ -41,7 +41,9 @@ stop and re-align.
   (trace-only attribution 0/5, with-policy 5/5) → exp04 **recovery**: targeted-repair 1.00 vs
   blind/no-repair 0.00 (**localization lift +1.00**). "Silently breaks → invisible in trace →
   recoverable only once localized." Thesis demonstrated end-to-end on one cell.
-- **Latest handoff:** `handoffs/0015-review3-closed-interactive.md` (round-3 review closed + adversarially verified; interactive rollout + staleness bites)
+- **First multi-step interactive result:** CONFERENCE_TRIP degradation (real agents driving full
+  ReAct rollouts, n=3) — healthy 0/3, staleness 3/3, constraint_drop:refundable 3/3 (Fisher p=0.10).
+- **Latest handoff:** `handoffs/0016-interactive-experiment.md` (step.py CLI driver + first interactive degradation batch)
 
 ---
 

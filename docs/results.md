@@ -146,6 +146,32 @@ p=0.43). It is a **proof of mechanism**, not a claim: the loop must still be run
 variants) on this task. `grade_attribution` is implemented + unit-tested but not yet wired into an
 experiment — that is the next step.
 
+## Interactive degradation on the multi-step task (`experiments/step.py`)
+
+The loop is now run on CONFERENCE_TRIP with **real agents driving full interactive rollouts** — each
+agent takes one action at a time through a tool CLI, reacting to each (possibly corrupted)
+observation, and is never told its condition. n=3 per condition.
+
+![conf](../assets/conf_degrade.png)
+
+| condition | P[task fails] (95% Wilson) | what happened |
+|---|---|---|
+| healthy | **0/3 = 0.00** [0.00, 0.56] | all booked F4+H1 ($1180) — correctly avoided the surged F1 |
+| staleness | **3/3 = 1.00** [0.44, 1.00] | all lured into F1 by the cached $1050 quote → true $1350, over budget |
+| constraint_drop (refundable) | **3/3 = 1.00** [0.44, 1.00] | with the rule gone, all took the cheaper **non-refundable** H2 |
+
+Fisher exact healthy-vs-fault = **p = 0.10** (the floor at n=3; direction clear, n small).
+
+**This is the payoff of the round-3 fixes.** In the *full interactive* rollout, staleness degrades
+3/3 (vs. 2/4 in the earlier single-decision smoke) — real agents commit to F1 mid-flow based on the
+cached quote. And `constraint_drop` on the *refundable* rule produces its own distinct failure (the
+cheaper non-refundable hotel), not the red-eye failure — showing the multi-step task exposes
+per-rule degradation a single-decision task cannot. Each agent drove its own ReAct loop; the world
+stayed ground truth while only the *observation* was corrupted.
+
+Next: scale n and add parameterized task variants (so n is task-level, not resamples of one prompt),
+then wire attribution + recovery on this task.
+
 ## Caveats (why this is a proof of mechanism, not a claim)
 
 - **Single-decision, single-domain, single-fault toy cell — the biggest threat.** The whole slice is

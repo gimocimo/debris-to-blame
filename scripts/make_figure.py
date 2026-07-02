@@ -79,6 +79,29 @@ def main() -> None:
     if grid_path.exists():
         _grid_figure(json.loads(grid_path.read_text()))
 
+    conf_path = R / "conf_interactive_degrade.json"
+    if conf_path.exists():
+        _conf_figure(json.loads(conf_path.read_text()))
+
+
+def _conf_figure(matrix: dict) -> None:
+    labels = {"healthy": "healthy", "staleness": "staleness", "cdrop_2": "cdrop\n(refundable)"}
+    order = ["healthy", "staleness", "cdrop_2"]
+    vals = [matrix[k]["k_fail"] / matrix[k]["n"] for k in order]
+    fig, ax = plt.subplots(figsize=(7, 4.4))
+    ax.bar([labels[k] for k in order], vals, color=[GOOD, BAD, BAD], width=0.6)
+    ax.set_ylim(0, 1.12)
+    ax.set_ylabel("P[task fails]")
+    ax.set_title("CONFERENCE_TRIP — interactive rollout degradation (n=3, real agents)")
+    ax.spines[["top", "right"]].set_visible(False)
+    for p in ax.patches:
+        ax.text(p.get_x() + p.get_width() / 2, p.get_height() + 0.02, f"{p.get_height():.2f}",
+                ha="center", fontsize=10, fontweight="bold")
+    fig.tight_layout()
+    out = ROOT / "assets" / "conf_degrade.png"
+    fig.savefig(out, dpi=140, bbox_inches="tight")
+    print(f"wrote {out.relative_to(ROOT)}")
+
 
 def _grid_figure(matrix: dict) -> None:
     tiers = list(matrix)

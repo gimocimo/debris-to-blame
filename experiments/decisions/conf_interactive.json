@@ -1,0 +1,514 @@
+{
+  "_meta": {
+    "experiment": "conference_interactive_degrade",
+    "date": "2026-07-02",
+    "note": "Real subagents drove full interactive CONFERENCE_TRIP rollouts via step.py (each never told its condition). n=3/condition.",
+    "model": "subscription subagents (general-purpose)"
+  },
+  "rollouts": {
+    "healthy_1": {
+      "condition": "healthy",
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F4",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "F4"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "result": "RESULT: PASS \u2014 booked F4+H1 $1180, confirmed+filed+sent",
+      "ok": true
+    },
+    "healthy_2": {
+      "condition": "healthy",
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F4",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "F4"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "result": "RESULT: PASS \u2014 booked F4+H1 $1180, confirmed+filed+sent",
+      "ok": true
+    },
+    "healthy_3": {
+      "condition": "healthy",
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F4",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "F4"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "result": "RESULT: PASS \u2014 booked F4+H1 $1180, confirmed+filed+sent",
+      "ok": true
+    },
+    "staleness_1": {
+      "condition": "staleness",
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "F1"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "result": "RESULT: FAIL \u2014 over budget (live total $1350)",
+      "ok": false
+    },
+    "staleness_2": {
+      "condition": "staleness",
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "F1"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "result": "RESULT: FAIL \u2014 over budget (live total $1350)",
+      "ok": false
+    },
+    "staleness_3": {
+      "condition": "staleness",
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "F1"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "result": "RESULT: FAIL \u2014 over budget (live total $1350)",
+      "ok": false
+    },
+    "cdrop_2_1": {
+      "condition": "cdrop:2",
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H2"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F4",
+            "hotel": "H2"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F4",
+            "hotel": "H2"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "F4"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "H2"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "result": "RESULT: FAIL \u2014 hotel is non-refundable",
+      "ok": false
+    },
+    "cdrop_2_2": {
+      "condition": "cdrop:2",
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H2"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F4",
+            "hotel": "H2"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "F4"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "H2"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F4",
+            "hotel": "H2"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "result": "RESULT: FAIL \u2014 hotel is non-refundable",
+      "ok": false
+    },
+    "cdrop_2_3": {
+      "condition": "cdrop:2",
+      "decisions": [
+        {
+          "tool": "search_flights",
+          "args": {}
+        },
+        {
+          "tool": "search_hotels",
+          "args": {}
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H2"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F1",
+            "hotel": "H1"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F4",
+            "hotel": "H2"
+          }
+        },
+        {
+          "tool": "latest_quote",
+          "args": {
+            "flight": "F4",
+            "hotel": "H2"
+          }
+        },
+        {
+          "tool": "book_flight",
+          "args": {
+            "flight": "F4"
+          }
+        },
+        {
+          "tool": "book_hotel",
+          "args": {
+            "hotel": "H2"
+          }
+        },
+        {
+          "tool": "file_expense_report",
+          "args": {}
+        },
+        {
+          "tool": "send_itinerary",
+          "args": {}
+        }
+      ],
+      "result": "RESULT: FAIL \u2014 hotel is non-refundable",
+      "ok": false
+    }
+  },
+  "matrix": {
+    "healthy": {
+      "k_fail": 0,
+      "n": 3
+    },
+    "staleness": {
+      "k_fail": 3,
+      "n": 3
+    },
+    "cdrop_2": {
+      "k_fail": 3,
+      "n": 3
+    }
+  }
+}
