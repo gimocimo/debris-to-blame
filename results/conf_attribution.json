@@ -1,0 +1,12 @@
+{
+  "blind": {
+    "detect": 0,
+    "attr": 0,
+    "n": 8
+  },
+  "policy": {
+    "detect": 7,
+    "attr": 7,
+    "n": 8
+  }
+}

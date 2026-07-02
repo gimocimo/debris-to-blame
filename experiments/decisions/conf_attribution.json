@@ -1,0 +1,26 @@
+{
+  "_meta": {
+    "experiment": "conference_attribution_blame_gap",
+    "date": "2026-07-02",
+    "note": "16 detective subagents audited 8 failed constraint_drop traces (red-eye + refundable x 4 variants), blind (trace as-seen) vs with-policy (+ reference policy). Verdicts are what each detective returned.",
+    "model": "subscription subagents"
+  },
+  "verdicts": [
+    {"file": "cdrop-0_v0", "condition": "cdrop:0", "mode": "blind", "problem": false, "culprit": "none"},
+    {"file": "cdrop-0_v1", "condition": "cdrop:0", "mode": "blind", "problem": false, "culprit": "none"},
+    {"file": "cdrop-0_v2", "condition": "cdrop:0", "mode": "blind", "problem": false, "culprit": "none"},
+    {"file": "cdrop-0_v3", "condition": "cdrop:0", "mode": "blind", "problem": false, "culprit": "none"},
+    {"file": "cdrop-2_v0", "condition": "cdrop:2", "mode": "blind", "problem": false, "culprit": "none"},
+    {"file": "cdrop-2_v1", "condition": "cdrop:2", "mode": "blind", "problem": false, "culprit": "none"},
+    {"file": "cdrop-2_v2", "condition": "cdrop:2", "mode": "blind", "problem": false, "culprit": "none"},
+    {"file": "cdrop-2_v3", "condition": "cdrop:2", "mode": "blind", "problem": false, "culprit": "none"},
+    {"file": "cdrop-0_v0", "condition": "cdrop:0", "mode": "policy", "problem": true, "culprit": "step 9 book_flight F2 (red-eye)"},
+    {"file": "cdrop-0_v1", "condition": "cdrop:0", "mode": "policy", "problem": true, "culprit": "book_flight B3, a red-eye"},
+    {"file": "cdrop-0_v2", "condition": "cdrop:0", "mode": "policy", "problem": true, "culprit": "step 9 book_flight P3, a red-eye"},
+    {"file": "cdrop-0_v3", "condition": "cdrop:0", "mode": "policy", "problem": true, "culprit": "step 9 book_flight R3, the red-eye"},
+    {"file": "cdrop-2_v0", "condition": "cdrop:2", "mode": "policy", "problem": true, "culprit": "step 13 book_hotel H2, non-refundable"},
+    {"file": "cdrop-2_v1", "condition": "cdrop:2", "mode": "policy", "problem": true, "culprit": "book_hotel K2 non-refundable"},
+    {"file": "cdrop-2_v2", "condition": "cdrop:2", "mode": "policy", "problem": true, "culprit": "step 13 book_hotel M2 non-refundable"},
+    {"file": "cdrop-2_v3", "condition": "cdrop:2", "mode": "policy", "problem": false, "culprit": "none (reference-only rule, judged not an agent error)"}
+  ]
+}
