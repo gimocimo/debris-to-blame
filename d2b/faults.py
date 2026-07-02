@@ -285,7 +285,7 @@ def _sham_constraint_drop(t: Trajectory, spec: FaultSpec) -> tuple[FaultSite, di
         raise ValueError("constraint_drop sham needs >=2 constraints (a non-target one to drop)")
     idx = t.meta.get("sham_constraint_index")
     if not (isinstance(idx, int) and 0 <= idx < len(t.constraints)):
-        idx = len(t.constraints) - 1 if spec.position == 0 else 0
+        idx = len(t.constraints) - 1  # safe default: the last rule (never position-dependent)
     dropped = t.constraints.pop(idx)
     return FaultSite("constraint", str(idx)), {"dropped_constraint": [dropped]}
 

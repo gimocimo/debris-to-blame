@@ -146,3 +146,29 @@ def test_replay_reaches_committed_state():
 
 def test_toolcall_import_ok():
     assert ToolCall("book_flight", {"flight": "F4"}).name == "book_flight"
+
+
+def test_grade_attribution_distinguishes_the_specific_rule():
+    from d2b.detective import grade_attribution
+
+    # drop "The hotel must be refundable." -> distinguishing token 'refundable'
+    rec = inject(CT.make_trajectory(), FaultSpec(FaultType.CONSTRAINT_DROP, position=2)).label
+    good = grade_attribution({"problem": True, "culprit": "dropped the refundable-hotel rule"}, rec)
+    assert good["attributed"]
+    # blaming a DIFFERENT rule must not count as attributed
+    assert not grade_attribution({"problem": True, "culprit": "a red-eye was booked"}, rec)[
+        "attributed"
+    ]
+    assert not grade_attribution({"problem": True, "culprit": "some policy was dropped"}, rec)[
+        "attributed"
+    ]
+
+
+def test_grade_attribution_sham_is_correct_when_not_flagged():
+    from d2b.detective import grade_attribution
+
+    rec = sham_inject(CT.make_trajectory(), FaultSpec(FaultType.CONSTRAINT_DROP, position=0)).label
+    assert grade_attribution({"problem": False, "culprit": "none"}, rec)[
+        "correct"
+    ]  # no false-alarm
+    assert not grade_attribution({"problem": True, "culprit": "x"}, rec)["correct"]  # flagged sham

@@ -1,0 +1,22 @@
+{
+  "_meta": {
+    "experiment": "conference_staleness_smoke",
+    "date": "2026-07-02",
+    "note": "n=2 smoke (Codex): real subagents at the CONFERENCE_TRIP decision point, shown either the TRUE ($1350, live) or a STALE ($1050, cached) F1+H1 quote. Measures P[books the over-budget F1 trap]. F1 list $650 looks cheapest but its live quote surged to $950.",
+    "model": "subscription subagents (general-purpose, inherited tier)",
+    "n_per_condition": 4
+  },
+  "control_true_quote": [
+    {"next": "latest_quote", "args": {"flight": "F4", "hotel": "H1"}, "booked_F1": false},
+    {"next": "latest_quote", "args": {"flight": "F4", "hotel": "H1"}, "booked_F1": false},
+    {"next": "latest_quote", "args": {"flight": "F4", "hotel": "H1"}, "booked_F1": false},
+    {"next": "latest_quote", "args": {"flight": "F4", "hotel": "H1"}, "booked_F1": false}
+  ],
+  "stale_cached_quote": [
+    {"next": "latest_quote", "args": {"flight": "F4", "hotel": "H1"}, "booked_F1": false},
+    {"next": "book_flight", "args": {"flight": "F1"}, "booked_F1": true},
+    {"next": "latest_quote", "args": {"flight": "F4", "hotel": "H1"}, "booked_F1": false},
+    {"next": "book_flight", "args": {"flight": "F1"}, "booked_F1": true}
+  ],
+  "summary": {"control_books_F1": "0/4", "stale_books_F1": "2/4", "fisher_p": 0.4286}
+}

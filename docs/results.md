@@ -113,6 +113,39 @@ One **Sonnet/sham** decision was lost to a **structured-output parse failure** �
 failure mode that should be counted as an outcome (`parse_fail`), not silently dropped. Here it only
 reduced that cell to n=3; future runs log parse failures explicitly.
 
+## Round-3 review closed — the multi-step task + interactive rollout
+
+A third adversarial review (Codex) found the earlier single-decision CONFERENCE_TRIP had 5 design
+blockers (chiefly: *staleness could not affect success*, and *single-shot planning couldn't test
+faults that require reacting to corrupted intermediate observations*). All are now fixed and
+**independently re-verified by an adversarial-verification workflow** (9 red-teamers, each running
+their own repros against the live code):
+
+- **Interactive rollout** (`d2b/rollout.py`): a ReAct loop where the WORLD is truth and an `Injector`
+  may corrupt only the *observation shown to the agent*. Confirmed: observations feed back, world ≠
+  shown-observation under injection, `max_steps` terminates, `parse_fail` is a first-class outcome.
+- **Staleness now bites causally.** `latest_quote` is authoritative + versioned; F1's list price
+  ($650) hides a surged live quote ($950), so F1+H1 = $1350 > $1200 while a cached quote shows $1050.
+  A stale observation lures the agent to F1 while the validator judges the true $1350.
+- **Event-log validator** (un-gameable): all five attack sequences (duplicate booking, out-of-order
+  file/send, book-without-confirming-quote, quote-wrong-pair, send-before-file) fail correctly.
+- **Valid sham** (an inert rental-car rule), **no `get_policy` leak**, **parse_fail counted**,
+  **attribution graded against the specific dropped rule** (`grade_attribution`).
+
+**Real-model staleness smoke** (Codex-recommended n=2; we ran n=4/condition). Real subagents at the
+decision point, shown the true vs. a stale F1+H1 quote:
+
+| condition | books the over-budget F1 (trap) |
+|---|---|
+| control (true $1350 quote) | **0/4** — all re-quoted F4+H1 |
+| stale (cached $1050 quote) | **2/4** — lured into the over-budget booking |
+
+Staleness *causally* lures a real model (0/4 → 2/4). It's partial — the "(cached)" tell plus the
+"confirm the latest quote" rule made 2/4 stale agents re-verify — and n=4 is not significant (Fisher
+p=0.43). It is a **proof of mechanism**, not a claim: the loop must still be run at scale (with task
+variants) on this task. `grade_attribution` is implemented + unit-tested but not yet wired into an
+experiment — that is the next step.
+
 ## Caveats (why this is a proof of mechanism, not a claim)
 
 - **Single-decision, single-domain, single-fault toy cell — the biggest threat.** The whole slice is

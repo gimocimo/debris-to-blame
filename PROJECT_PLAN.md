@@ -41,7 +41,7 @@ stop and re-align.
   (trace-only attribution 0/5, with-policy 5/5) → exp04 **recovery**: targeted-repair 1.00 vs
   blind/no-repair 0.00 (**localization lift +1.00**). "Silently breaks → invisible in trace →
   recoverable only once localized." Thesis demonstrated end-to-end on one cell.
-- **Latest handoff:** `handoffs/0014-conference-multistep-task.md` (multi-step CONFERENCE_TRIP built; next = run the loop on it)
+- **Latest handoff:** `handoffs/0015-review3-closed-interactive.md` (round-3 review closed + adversarially verified; interactive rollout + staleness bites)
 
 ---
 
@@ -304,6 +304,19 @@ a detect→rollback loop recovers — the C4/v0.1 headline metric), **irreversib
   to measure `constraint_drop` (and other decision faults) must make violating the rule TEMPTING
   (cheaper/only-viable shortcut). (b) `render_prefix` must include **tool arg schemas** (agents
   guessed `{"flight":...}` vs the expected `{"id":...}`). Both are prerequisites before scaling exp01.
+- **D-016 (2026-07-02, Codex round-3 review CLOSED + adversarially verified):** The multi-step
+  CONFERENCE_TRIP was redesigned to fix 5 blockers + 3 issues, then **re-verified by an
+  adversarial-verification workflow (9 red-teamers, own repros)** — all CLOSED. (1) **Interactive
+  rollout** (`d2b/rollout.py`) — ReAct loop; world=truth, injector corrupts only the shown
+  observation; parse_fail is an outcome. (2) **Staleness bites** — `latest_quote` authoritative +
+  versioned (surge model); a real-model smoke shows 0/4 (control) → 2/4 (stale) book the over-budget
+  trap. (3) **Event-log validator** un-gameable (5 attacks fail). (4) **No get_policy leak**;
+  constraint_drop also scrubs message contents. (5) **Valid sham** (inert rental-car rule via
+  `TaskSpec.sham_plan`). (6) parse_fail counted (grid). (7) `grade_attribution` grades the specific
+  rule (+unit tests). (8) CONFERENCE_TRIP in ALL_DOMAINS. Residuals hardened: sham fallback drops the
+  last (not a position-dependent, possibly-binding) rule; rollout guards non-dict decisions. 91 tests
+  green. **Still open (next step, not a blocker): wire an experiment that runs degrade/attribute/
+  recover on CONFERENCE_TRIP via interactive_rollout + task variants.**
 - **D-015 (2026-07-02, Codex rigor review adopted):** A 2nd Codex review (mostly correct) drove
   honesty fixes: (a) replaced "CI non-overlap ⇒ effect is real" with a proper **Fisher exact** test
   (`d2b/stats.py:fisher_p`); within-cell effects p=0.008 (significant *for the cell*), but samples

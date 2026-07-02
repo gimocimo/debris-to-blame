@@ -64,7 +64,7 @@ def interactive_rollout(
 
     for _ in range(max_steps):
         decision = policy(transcript, setup.constraints, setup.tools)
-        if decision is None:
+        if not isinstance(decision, dict):  # None or a malformed (non-dict) decision
             status = "parse_fail"
             break
         if decision.get("finish"):
