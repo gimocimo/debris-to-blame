@@ -38,7 +38,9 @@ INSTR = (
 
 
 def reconstruct(state: dict):
-    setup, _, task = step.setup_and_injectors(state["condition"], state.get("variant", 0))
+    setup, _, task = step.setup_and_injectors(
+        state["condition"], state.get("variant", 0), state.get("domain", "conference")
+    )
     r = step.replay(state)
     traj = redact_for_attribution(
         Trajectory(

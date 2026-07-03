@@ -6,13 +6,13 @@ stays ground truth. State is just the decision list (+ condition), so parallel r
 files with no races; each `act` replays the decisions so far to produce the next observation.
 
 Usage:
-  python experiments/step.py <state.json> init <condition> [variant]  # -> prints the initial prompt
+  python experiments/step.py <state.json> init <condition> [domain] [variant]  # initial prompt
   python experiments/step.py <state.json> act <tool> [k=v ...]        # -> OBSERVATION + STATUS
   python experiments/step.py <state.json> act finish                  # -> STATUS: done + RESULT
   python experiments/step.py <state.json> result                     # -> authoritative PASS/FAIL
 
-conditions: healthy | staleness | contradiction | cdrop:<rule_index> | sham
-variant: index into d2b.CONFERENCE_VARIANTS (default 0)
+conditions: healthy | staleness | contradiction | cdrop:<rule_index> | sham | forget:<tool>
+domain: a key in d2b.DOMAINS (default "conference"; also "scheduling"); variant: index (default 0)
 """
 
 from __future__ import annotations
@@ -25,24 +25,24 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import d2b  # noqa: E402
 
-VARIANTS = d2b.CONFERENCE_VARIANTS
 FaultSpec, FaultType = d2b.FaultSpec, d2b.FaultType
 inject, sham_inject, redact = d2b.inject, d2b.sham_inject, d2b.redact_for_attribution
 interactive_rollout, scripted_policy_fn = d2b.interactive_rollout, d2b.scripted_policy_fn
-staleness_injector, contradiction_injector = d2b.staleness_injector, d2b.contradiction_injector
 
 MAX_STEPS = 14
+TERMINAL_TOOLS = ("finish", "send_itinerary", "post_agenda")
 
 
-def setup_and_injectors(condition: str, variant: int = 0):
-    """Return (setup_trajectory, injectors, task) for the given condition + variant."""
-    task = VARIANTS[variant]
+def setup_and_injectors(condition: str, variant: int = 0, domain: str = "conference"):
+    """Return (setup_trajectory, injectors, task) for the given condition + variant + domain."""
+    dom = d2b.DOMAINS[domain]
+    task = dom["variants"][variant]
     if condition == "healthy":
         return redact(task.make_trajectory()), (), task
     if condition == "staleness":
-        return redact(task.make_trajectory()), (staleness_injector(task),), task
+        return redact(task.make_trajectory()), (dom["staleness"](task),), task
     if condition == "contradiction":
-        return redact(task.make_trajectory()), (contradiction_injector(task),), task
+        return redact(task.make_trajectory()), (dom["contradiction"](task),), task
     if condition.startswith("cdrop:"):
         spec = FaultSpec(FaultType.CONSTRAINT_DROP, position=int(condition.split(":", 1)[1]))
         return inject(task.make_trajectory(), spec).public, (), task
@@ -74,15 +74,14 @@ MISDIAGNOSIS = {
 }
 
 
-def render_initial(setup) -> str:
+def render_initial(setup, arg_hints: str = "") -> str:
     user = next((m.content for m in setup.messages if m.role == "user"), setup.task)
     lines = [f"TASK: {setup.task}", "", "STANDING RULES:"]
     lines += [f"  - {c}" for c in setup.constraints]
     lines += [
         "",
         f"AVAILABLE TOOLS: {', '.join(setup.tools)}",
-        "ARG HINTS: latest_quote & book_flight take flight=<id>; book_hotel takes hotel=<id>; "
-        "search_flights/search_hotels/file_expense_report/send_itinerary take no args.",
+        f"ARG HINTS: {arg_hints}" if arg_hints else "ARG HINTS: pass ids as key=value.",
         "",
         "CONVERSATION SO FAR:",
         f"  user: {user}",
@@ -91,7 +90,9 @@ def render_initial(setup) -> str:
 
 
 def replay(state: dict):
-    setup, inj, task = setup_and_injectors(state["condition"], state.get("variant", 0))
+    setup, inj, task = setup_and_injectors(
+        state["condition"], state.get("variant", 0), state.get("domain", "conference")
+    )
     decs = [dict(d) for d in state["decisions"]]
     n = max(1, len(decs))
     return interactive_rollout(task, scripted_policy_fn(decs), setup, injectors=inj, max_steps=n)
@@ -103,17 +104,20 @@ def main() -> None:
 
     if cmd == "init":
         condition = sys.argv[3]
-        variant = int(sys.argv[4]) if len(sys.argv) > 4 else 0
-        setup, _, _ = setup_and_injectors(condition, variant)
-        path.write_text(json.dumps({"condition": condition, "variant": variant, "decisions": []}))
-        print(render_initial(setup))
+        domain = sys.argv[4] if len(sys.argv) > 4 else "conference"
+        variant = int(sys.argv[5]) if len(sys.argv) > 5 else 0
+        setup, _, _ = setup_and_injectors(condition, variant, domain)
+        state = {"condition": condition, "domain": domain, "variant": variant, "decisions": []}
+        path.write_text(json.dumps(state))
+        print(render_initial(setup, d2b.DOMAINS[domain].get("arg_hints", "")))
         return
 
     state = json.loads(path.read_text())
+    domain = state.get("domain", "conference")
 
     if cmd == "start":  # print the initial prompt WITHOUT revealing the condition (no leak)
-        setup, _, _ = setup_and_injectors(state["condition"], state.get("variant", 0))
-        print(render_initial(setup))
+        setup, _, _ = setup_and_injectors(state["condition"], state.get("variant", 0), domain)
+        print(render_initial(setup, d2b.DOMAINS[domain].get("arg_hints", "")))
         return
 
     if cmd == "result":
@@ -140,7 +144,7 @@ def main() -> None:
         r = replay(state)
         obs = next((m for m in reversed(r.transcript) if m.role == "tool"), None)
         print("OBSERVATION:", obs.content if obs else "(no tool observation yet)")
-        done = tool in ("finish", "send_itinerary") or len(state["decisions"]) >= MAX_STEPS
+        done = tool in TERMINAL_TOOLS or len(state["decisions"]) >= MAX_STEPS
         if done:
             print("STATUS: done")
             print(f"RESULT: {'PASS' if r.result.ok else 'FAIL'} — {r.result.reason}")
