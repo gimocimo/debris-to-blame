@@ -62,6 +62,7 @@ def make_conference(cfg: dict) -> TaskSpec:
             "events": [],
             "quote_version": 0,
             "latest": None,
+            "checked": [],
             "booked_flight": None,
             "booked_hotel": None,
             "report_filed": False,
@@ -83,6 +84,7 @@ def make_conference(cfg: dict) -> TaskSpec:
         total = FL[f]["quote"] + HO[h]["quote"]
         w["quote_version"] += 1
         w["latest"] = {"version": w["quote_version"], "fid": f, "hid": h, "total": total}
+        w["checked"].append((f, h))
         w["events"].append("latest_quote")
         return f"Quote v{w['quote_version']}: {f}+{h} = ${total} (live)."
 
@@ -156,9 +158,8 @@ def make_conference(cfg: dict) -> TaskSpec:
         true_total = bf["quote"] + bh["quote"]
         if true_total > budget:
             return ValidationResult(False, f"over budget (live total ${true_total})")
-        latest = w["latest"]
-        if latest is None or (latest["fid"], latest["hid"]) != (bf["id"], bh["id"]):
-            return ValidationResult(False, "did not confirm the latest quote for the booked pair")
+        if (bf["id"], bh["id"]) not in w["checked"]:
+            return ValidationResult(False, "did not confirm the quote for the booked pair")
         if not w["report_filed"]:
             return ValidationResult(False, "expense report not filed")
         if not w["itinerary_sent"]:

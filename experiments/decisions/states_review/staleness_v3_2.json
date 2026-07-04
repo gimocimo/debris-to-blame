@@ -1,0 +1,1 @@
+{"condition": "staleness", "domain": "review", "variant": 3, "decisions": [{"tool": "list_prs", "args": {}}, {"tool": "check_ci", "args": {"pr": "M1"}}, {"tool": "check_ci", "args": {"pr": "M2"}}, {"tool": "check_ci", "args": {"pr": "M1"}}, {"finish": true}]}

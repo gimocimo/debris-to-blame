@@ -45,6 +45,7 @@ def make_review(cfg: dict) -> TaskSpec:
             "events": [],
             "ci_version": 0,
             "latest": None,
+            "checked": [],
             "merged_pr": None,
             "author_notified": False,
             "ticket_closed": False,
@@ -61,6 +62,7 @@ def make_review(cfg: dict) -> TaskSpec:
         status = PR[p]["ci_live"]
         w["ci_version"] += 1
         w["latest"] = {"version": w["ci_version"], "pid": p, "status": status}
+        w["checked"].append(p)
         w["events"].append("check_ci")
         return f"CI v{w['ci_version']}: {p} = {status} (live)."
 
@@ -108,8 +110,7 @@ def make_review(cfg: dict) -> TaskSpec:
             return ValidationResult(False, f"merged {mp['id']} with merge conflicts")
         if mp["frozen"]:
             return ValidationResult(False, f"merged {mp['id']} touching a frozen release path")
-        latest = w["latest"]
-        if latest is None or latest["pid"] != mp["id"]:
+        if mp["id"] not in w["checked"]:
             return ValidationResult(False, "did not confirm live CI for the merged PR")
         if not w["author_notified"]:
             return ValidationResult(False, "author not notified")

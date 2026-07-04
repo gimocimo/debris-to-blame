@@ -1,0 +1,1 @@
+{"condition": "cdrop:1", "domain": "review", "variant": 3, "decisions": [{"tool": "list_prs", "args": {}}, {"tool": "check_ci", "args": {"pr": "M1"}}, {"tool": "check_ci", "args": {"pr": "M2"}}, {"tool": "merge_pr", "args": {"pr": "M2"}}, {"tool": "notify_author", "args": {}}, {"tool": "close_ticket", "args": {}}, {"finish": true}]}

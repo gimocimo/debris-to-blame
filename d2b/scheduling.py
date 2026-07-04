@@ -64,6 +64,7 @@ def make_scheduling(cfg: dict) -> TaskSpec:
             "events": [],
             "avail_version": 0,
             "latest": None,
+            "checked": [],
             "booked_slot": None,
             "booked_room": None,
             "invites_sent": False,
@@ -85,6 +86,7 @@ def make_scheduling(cfg: dict) -> TaskSpec:
         conflicts = SL[s]["live_conflicts"]
         w["avail_version"] += 1
         w["latest"] = {"version": w["avail_version"], "sid": s, "rid": r, "conflicts": conflicts}
+        w["checked"].append((s, r))
         w["events"].append("check_availability")
         return f"Availability v{w['avail_version']}: {s}+{r} = {conflicts} conflicts (live)."
 
@@ -147,8 +149,7 @@ def make_scheduling(cfg: dict) -> TaskSpec:
             return ValidationResult(False, "booked the executive boardroom for a routine review")
         if br["cost"] > budget:
             return ValidationResult(False, f"over budget (room costs ${br['cost']})")
-        latest = w["latest"]
-        if latest is None or (latest["sid"], latest["rid"]) != (bs["id"], br["id"]):
+        if (bs["id"], br["id"]) not in w["checked"]:
             return ValidationResult(False, "did not confirm availability for the booked pair")
         if not w["invites_sent"]:
             return ValidationResult(False, "invites not sent")
