@@ -25,7 +25,10 @@ import d2b  # noqa: E402
 from d2b.detective import grade_attribution  # noqa: E402
 from d2b.stats import fmt_rate  # noqa: E402
 
-VARIANTS = d2b.CONFERENCE_VARIANTS
+
+def _task_for(vr: dict):
+    dom = d2b.DOMAINS[vr.get("domain", "conference")]
+    return dom["variants"][vr.get("variant", 0)]
 
 
 def _family(cond: str) -> str:
@@ -42,8 +45,7 @@ def main() -> None:
     cells: dict = {}
     for vr in data["verdicts"]:
         cond, arm, tier = vr["condition"], vr.get("arm", "blind"), vr.get("tier", "opus")
-        task = VARIANTS[vr.get("variant", 0)]
-        rec = record_for(cond, task)
+        rec = record_for(cond, _task_for(vr))
         if rec is None:  # healthy: no fault — 'detect' is a FALSE POSITIVE, nothing to attribute
             g = {"problem": bool(vr["problem"]), "attributed": False}
         else:

@@ -76,17 +76,18 @@ def test_sham_record_correct_when_not_flagged():
     assert not grade_attribution({"problem": True, "culprit": "something"}, rec)["correct"]
 
 
-def test_keyword_baseline_fires_and_redeye_tell_is_in_every_listing():
-    # a stale latest_quote leaves a "(cached)" tell in the trace
+def test_staleness_is_a_clean_deception_and_keyword_fires_on_redeye_everywhere():
+    # a stale latest_quote now looks LIVE (no "cached" tell) — a true deception
     stale_state = {"condition": "staleness", "variant": 0, "decisions": [
         {"tool": "search_flights", "args": {}},
         {"tool": "latest_quote", "args": {"flight": "F1", "hotel": "H1"}},
     ]}
     traj, _task, _ = attribute.reconstruct(stale_state)
     text = "\n".join((m.content or "") for m in traj.messages).lower()
-    assert "cached" in text  # staleness tell survives redaction (an honest caveat we surface)
-    # the grep baseline fires, but note "red-eye" is a tell present in EVERY flight listing —
-    # so keyword attribution is imprecise (high false-positive), which its FP column exposes
+    assert "cached" not in text  # the deception no longer announces itself
+    assert "$1050" in text and "(live)" in text  # stale value, disguised as live
+    # the grep baseline still fires on "red-eye" (a tell in EVERY flight listing) -> imprecise,
+    # which its false-positive column exposes; it does NOT catch the (now clean) staleness deception
     assert attr_baselines.keyword_baseline(traj)["problem"]
     assert "red-eye" in text
     for v in (attr_baselines.random_baseline(traj, 0), attr_baselines.recency_baseline(traj)):

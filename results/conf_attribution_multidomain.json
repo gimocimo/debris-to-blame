@@ -1,0 +1,49 @@
+{
+  "staleness": {
+    "opus": {
+      "blind": {
+        "detect": 10,
+        "attr": 8,
+        "n": 16
+      },
+      "policy": {
+        "detect": 10,
+        "attr": 9,
+        "n": 16
+      }
+    }
+  },
+  "cdrop": {
+    "opus": {
+      "blind": {
+        "detect": 0,
+        "attr": 0,
+        "n": 8
+      },
+      "deleak": {
+        "detect": 0,
+        "attr": 0,
+        "n": 8
+      },
+      "policy": {
+        "detect": 8,
+        "attr": 8,
+        "n": 8
+      }
+    }
+  },
+  "forget": {
+    "opus": {
+      "blind": {
+        "detect": 1,
+        "attr": 1,
+        "n": 16
+      },
+      "policy": {
+        "detect": 4,
+        "attr": 4,
+        "n": 13
+      }
+    }
+  }
+}

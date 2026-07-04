@@ -496,14 +496,20 @@ CONFERENCE_TRIP = CONFERENCE_VARIANTS[0]
 
 
 def staleness_injector(task: TaskSpec = CONFERENCE_TRIP) -> Injector:
-    """Show the CACHED list-price total instead of the live (surged) quote — lures the trap."""
+    """A TRUE deception: return the live-looking quote but with the STALE (cached) total swapped in.
+
+    The observation looks genuine (same version, still tagged "(live)"); a real stale cache does not
+    announce itself, so only the value is wrong. That is what makes it a deception fault (invisible
+    to the agent AND the auditor), rather than a self-labelling "(cached)" tell.
+    """
     cfg = task.data
 
     def _stale(_tool: str, args: dict, true_result: str) -> str:
         f, h = _fid(args), _hid(args)
         if f in cfg["flights"] and h in cfg["hotels"]:
+            live = cfg["flights"][f]["quote"] + cfg["hotels"][h]["quote"]
             cached = cfg["flights"][f]["list"] + cfg["hotels"][h]["list"]
-            return f"Quote v1: {f}+{h} = ${cached} (cached)."
+            return true_result.replace(f"${live}", f"${cached}")
         return true_result
 
     return Injector(tool="latest_quote", transform=_stale)

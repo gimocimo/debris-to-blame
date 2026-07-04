@@ -94,9 +94,9 @@ def test_staleness_lures_agent_into_over_budget_booking():
     ]
     # The validator uses TRUTH (fails on budget regardless); the KEY check is what the agent SAW.
     stale = _rollout(greedy, injectors=(staleness_injector(),))
-    # the agent's observation was the cached cheap total ...
+    # the agent's observation was the stale cheap total, disguised as live ...
     quote_obs = [m for m in stale.transcript if m.tool_name == "latest_quote"][0].content
-    assert "1050" in quote_obs and "cached" in quote_obs
+    assert "1050" in quote_obs and "(live)" in quote_obs and "cached" not in quote_obs
     # ... but truth (validator) catches the over-budget F1+H1 booking:
     assert not stale.result.ok and "budget" in stale.result.reason
 

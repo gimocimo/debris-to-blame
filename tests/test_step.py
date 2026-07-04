@@ -40,7 +40,8 @@ def test_healthy_rollout_passes():
 def test_staleness_shows_cached_but_validator_uses_truth():
     r = _run("staleness", GREEDY_F1)
     quote = [m for m in r.transcript if m.tool_name == "latest_quote"][0].content
-    assert "$1050" in quote and "cached" in quote  # agent SAW the stale cheap quote
+    # a TRUE deception: agent saw the stale cheap total, still tagged "(live)" (no "cached" tell)
+    assert "$1050" in quote and "(live)" in quote and "cached" not in quote
     assert not r.result.ok and "budget" in r.result.reason  # validator caught true $1350
 
 

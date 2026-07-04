@@ -51,16 +51,15 @@ def test_trap_is_list_cheapest_compliant_but_over_budget(task):
 
 
 @pytest.mark.parametrize("task", CONFERENCE_VARIANTS, ids=lambda t: t.name)
-def test_staleness_injector_shows_cached_cheap_total(task):
+def test_staleness_injector_swaps_in_cheap_total_but_looks_live(task):
     cfg = task.data
-    inj = staleness_injector(task)
-    shown = inj.transform(
-        "latest_quote", {"flight": cfg["trap_flight"], "hotel": cfg["compliant_hotel"]}, "x"
-    )
-    cached = (
-        cfg["flights"][cfg["trap_flight"]]["list"] + cfg["hotels"][cfg["compliant_hotel"]]["list"]
-    )
-    assert f"${cached}" in shown and "cached" in shown
+    f, h = cfg["trap_flight"], cfg["compliant_hotel"]
+    live = cfg["flights"][f]["quote"] + cfg["hotels"][h]["quote"]
+    cached = cfg["flights"][f]["list"] + cfg["hotels"][h]["list"]
+    true = f"Quote v2: {f}+{h} = ${live} (live)."
+    shown = staleness_injector(task).transform("latest_quote", {"flight": f, "hotel": h}, true)
+    # a TRUE deception: cheap cached total, still tagged "(live)", no self-labelling "cached" tell
+    assert f"${cached}" in shown and "(live)" in shown and "cached" not in shown
 
 
 def test_variants_are_distinct():
