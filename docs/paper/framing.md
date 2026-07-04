@@ -28,6 +28,17 @@ The deception gap is the sharp, novel claim: **more observability of the rules d
 observability of the world.** It has a direct safety/oversight implication — logging traces and specs
 is insufficient for a whole class of failures; you must retain re-verifiable ground truth.
 
+**Cross-domain status (2026-07-04).** Two regimes are ROBUST across domains: the **deception gap**
+replicates **3/3** (staleness: blind 0, oracle 0 on stale-price / availability / CI) and the
+**deletion gap** replicates **2/2** (cdrop: blind 0, de-leak 0, oracle 1.0). The **"visible" category
+is NOT clean**: forget is caught blind only when the missing step is *salient* (conference's
+expense-report, 8/8) and is missed on minor steps (scheduling/review, ~0) even with the policy. So the
+honest framing is **two distinct blame-gap regimes** (deletion vs deception, separated by what
+information closes them), plus a softer, salience-dependent "omission" case — not a clean three-way
+taxonomy. (Methodological note: the staleness injector was corrected mid-phase to a *true* deception —
+no self-labelling "(cached)" tell — after the first audit showed the tell made it partly attributable;
+the labelled-vs-unlabelled contrast is itself reportable.)
+
 ## Positioning (defensible after Phase-0 verification)
 - **Injection→attribution-labels** (AEGIS 2509.14295, AgenTracer 2509.03312): they inject faults to
   **scale training data / train a tracer**. We inject as a **controlled instrument to characterize
@@ -56,8 +67,8 @@ is insufficient for a whole class of failures; you must retain re-verifiable gro
 ## Load-bearing experiments (each MUST succeed or the claim narrows)
 | # | Experiment | Why it's load-bearing | Status |
 |---|---|---|---|
-| E1 | The ladder holds on **≥3 task domains**, not one | generality — without it, "one toy" | CONFERENCE_TRIP done; **2 domains to port (Phase 1)** |
-| E2 | The **deception gap** replicates for staleness across domains + ≥1 other deception fault | the sharp claim can't be a single dot | 1 fault/1 domain done |
+| E1 | The ladder holds on **≥3 task domains**, not one | generality — without it, "one toy" | **DONE** — 3 domains wired + collected (conference, scheduling, review) |
+| E2 | The **deception gap** replicates for staleness across domains | the sharp claim can't be a single dot | **DONE** — replicates **3/3** (blind 0, oracle 0 on stale-price / availability / CI) |
 | E3 | **External validity:** injected-fault failures resemble organic ones (or a measured characterization of the gap) | the premise the whole method rests on | open (Phase 2) — organic failures not yet elicited |
 | E4 | **Method comparison** (baselines vs LLM auditor vs oracle) with clean labels, per fault type | C3; the reviewer's money table | baselines + oracle done on 1 domain (Phase 3) |
 | E5 | **Cross-provider grader** — the ladder isn't a same-family artifact | kills R6 | within-Claude done; cross-provider open (Phase 4, needs paid budget) |
