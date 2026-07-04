@@ -30,7 +30,7 @@ inject, sham_inject, redact = d2b.inject, d2b.sham_inject, d2b.redact_for_attrib
 interactive_rollout, scripted_policy_fn = d2b.interactive_rollout, d2b.scripted_policy_fn
 
 MAX_STEPS = 14
-TERMINAL_TOOLS = ("finish", "send_itinerary", "post_agenda")
+TERMINAL_TOOLS = ("finish", "send_itinerary", "post_agenda", "close_ticket")
 
 
 def setup_and_injectors(condition: str, variant: int = 0, domain: str = "conference"):

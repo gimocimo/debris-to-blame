@@ -7,6 +7,7 @@ See PROJECT_PLAN.md for scope.
 # Registry of interactive multi-step domains: name -> {variants, per-domain observation injectors}.
 # step.py drives any registered domain; new domains only need to register here.
 from . import conference as _conference  # noqa: E402
+from . import review as _review  # noqa: E402
 from . import scheduling as _scheduling  # noqa: E402
 from .agent import decision_to_messages, parse_decision, render_prefix
 from .conference import (
@@ -39,6 +40,7 @@ from .faults import (
 )
 from .fixtures import successful_flight_trajectory
 from .replay import Policy, evaluate, replay, replay_tail_policy, resume, scripted_policy
+from .review import REVIEW_TASK, REVIEW_VARIANTS, make_review
 from .rollout import Injector, Rollout, interactive_rollout, scripted_policy_fn
 from .scheduling import SCHEDULING_TASK, SCHEDULING_VARIANTS, make_scheduling
 from .tools import MockTool, ToolRegistry, demo_registry
@@ -64,6 +66,16 @@ DOMAINS = {
         "arg_hints": (
             "check_availability takes slot=<id> room=<id>; book_slot takes slot=<id>; "
             "book_room takes room=<id>; list_slots/list_rooms/send_invites/post_agenda: no args."
+        ),
+    },
+    "review": {
+        "variants": REVIEW_VARIANTS,
+        "staleness": _review.staleness_injector,
+        "contradiction": _review.contradiction_injector,
+        "sham": _review.sham_note_injector,
+        "arg_hints": (
+            "check_ci & merge_pr take pr=<id>; "
+            "list_prs/notify_author/close_ticket take no args."
         ),
     },
 }
@@ -114,6 +126,9 @@ __all__ = [
     "SCHEDULING_TASK",
     "SCHEDULING_VARIANTS",
     "make_scheduling",
+    "REVIEW_TASK",
+    "REVIEW_VARIANTS",
+    "make_review",
     "DOMAINS",
     # interactive rollout (multi-step, reacts to corrupted observations)
     "interactive_rollout",
