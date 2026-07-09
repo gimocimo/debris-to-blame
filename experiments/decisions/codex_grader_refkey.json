@@ -1,0 +1,4250 @@
+{
+ "conference:opus:blind:cdrop:2:v0:0": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "blind",
+  "variant": 0
+ },
+ "conference:opus:deleak:cdrop:2:v0:1": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "deleak",
+  "variant": 0
+ },
+ "conference:opus:policy:cdrop:2:v0:2": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "policy",
+  "variant": 0
+ },
+ "conference:opus:blind:cdrop:2:v1:3": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "blind",
+  "variant": 1
+ },
+ "conference:opus:deleak:cdrop:2:v1:4": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "deleak",
+  "variant": 1
+ },
+ "conference:opus:policy:cdrop:2:v1:5": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "policy",
+  "variant": 1
+ },
+ "conference:opus:blind:cdrop:2:v1:6": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "blind",
+  "variant": 1
+ },
+ "conference:opus:deleak:cdrop:2:v1:7": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "deleak",
+  "variant": 1
+ },
+ "conference:opus:policy:cdrop:2:v1:8": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "policy",
+  "variant": 1
+ },
+ "conference:opus:blind:cdrop:2:v2:9": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "blind",
+  "variant": 2
+ },
+ "conference:opus:deleak:cdrop:2:v2:10": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "deleak",
+  "variant": 2
+ },
+ "conference:opus:policy:cdrop:2:v2:11": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "policy",
+  "variant": 2
+ },
+ "conference:opus:blind:cdrop:2:v2:12": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "blind",
+  "variant": 2
+ },
+ "conference:opus:deleak:cdrop:2:v2:13": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "deleak",
+  "variant": 2
+ },
+ "conference:opus:policy:cdrop:2:v2:14": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "policy",
+  "variant": 2
+ },
+ "conference:opus:blind:cdrop:2:v3:15": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "blind",
+  "variant": 3
+ },
+ "conference:opus:deleak:cdrop:2:v3:16": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "deleak",
+  "variant": 3
+ },
+ "conference:opus:policy:cdrop:2:v3:17": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "policy",
+  "variant": 3
+ },
+ "conference:opus:blind:cdrop:2:v3:18": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "blind",
+  "variant": 3
+ },
+ "conference:opus:deleak:cdrop:2:v3:19": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "deleak",
+  "variant": 3
+ },
+ "conference:opus:policy:cdrop:2:v3:20": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "policy",
+  "variant": 3
+ },
+ "conference:opus:blind:forget:file_expense_report:v0:21": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "blind",
+  "variant": 0
+ },
+ "conference:opus:policy:forget:file_expense_report:v0:22": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "policy",
+  "variant": 0
+ },
+ "conference:opus:blind:forget:file_expense_report:v0:23": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "blind",
+  "variant": 0
+ },
+ "conference:opus:policy:forget:file_expense_report:v0:24": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "policy",
+  "variant": 0
+ },
+ "conference:opus:blind:forget:file_expense_report:v1:25": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "blind",
+  "variant": 1
+ },
+ "conference:opus:policy:forget:file_expense_report:v1:26": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "policy",
+  "variant": 1
+ },
+ "conference:opus:blind:forget:file_expense_report:v1:27": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "blind",
+  "variant": 1
+ },
+ "conference:opus:policy:forget:file_expense_report:v1:28": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "policy",
+  "variant": 1
+ },
+ "conference:opus:blind:forget:file_expense_report:v2:29": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "blind",
+  "variant": 2
+ },
+ "conference:opus:policy:forget:file_expense_report:v2:30": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "policy",
+  "variant": 2
+ },
+ "conference:opus:blind:forget:file_expense_report:v2:31": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "blind",
+  "variant": 2
+ },
+ "conference:opus:policy:forget:file_expense_report:v2:32": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "policy",
+  "variant": 2
+ },
+ "conference:opus:blind:forget:file_expense_report:v3:33": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "blind",
+  "variant": 3
+ },
+ "conference:opus:policy:forget:file_expense_report:v3:34": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "policy",
+  "variant": 3
+ },
+ "conference:opus:blind:forget:file_expense_report:v3:35": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "blind",
+  "variant": 3
+ },
+ "conference:opus:policy:forget:file_expense_report:v3:36": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "policy",
+  "variant": 3
+ },
+ "conference:opus:blind:healthy:v0:37": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "healthy",
+  "arm": "blind",
+  "variant": 0
+ },
+ "conference:opus:policy:healthy:v0:38": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "healthy",
+  "arm": "policy",
+  "variant": 0
+ },
+ "conference:opus:blind:healthy:v0:39": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "healthy",
+  "arm": "blind",
+  "variant": 0
+ },
+ "conference:opus:policy:healthy:v0:40": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "healthy",
+  "arm": "policy",
+  "variant": 0
+ },
+ "conference:opus:blind:healthy:v1:41": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "healthy",
+  "arm": "blind",
+  "variant": 1
+ },
+ "conference:opus:policy:healthy:v1:42": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "healthy",
+  "arm": "policy",
+  "variant": 1
+ },
+ "conference:opus:blind:healthy:v1:43": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "healthy",
+  "arm": "blind",
+  "variant": 1
+ },
+ "conference:opus:policy:healthy:v1:44": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "healthy",
+  "arm": "policy",
+  "variant": 1
+ },
+ "conference:opus:blind:healthy:v2:45": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "healthy",
+  "arm": "blind",
+  "variant": 2
+ },
+ "conference:opus:policy:healthy:v2:46": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "healthy",
+  "arm": "policy",
+  "variant": 2
+ },
+ "conference:opus:blind:healthy:v2:47": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "healthy",
+  "arm": "blind",
+  "variant": 2
+ },
+ "conference:opus:policy:healthy:v2:48": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "healthy",
+  "arm": "policy",
+  "variant": 2
+ },
+ "conference:opus:blind:healthy:v3:49": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "healthy",
+  "arm": "blind",
+  "variant": 3
+ },
+ "conference:opus:policy:healthy:v3:50": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "healthy",
+  "arm": "policy",
+  "variant": 3
+ },
+ "conference:opus:blind:healthy:v3:51": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "healthy",
+  "arm": "blind",
+  "variant": 3
+ },
+ "conference:opus:policy:healthy:v3:52": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "healthy",
+  "arm": "policy",
+  "variant": 3
+ },
+ "conference:opus:blind:sham:v0:53": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "sham",
+  "arm": "blind",
+  "variant": 0
+ },
+ "conference:opus:policy:sham:v0:54": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "sham",
+  "arm": "policy",
+  "variant": 0
+ },
+ "conference:opus:blind:sham:v0:55": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "sham",
+  "arm": "blind",
+  "variant": 0
+ },
+ "conference:opus:policy:sham:v0:56": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "sham",
+  "arm": "policy",
+  "variant": 0
+ },
+ "conference:opus:blind:sham:v1:57": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "sham",
+  "arm": "blind",
+  "variant": 1
+ },
+ "conference:opus:policy:sham:v1:58": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "sham",
+  "arm": "policy",
+  "variant": 1
+ },
+ "conference:opus:blind:sham:v1:59": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "sham",
+  "arm": "blind",
+  "variant": 1
+ },
+ "conference:opus:blind:sham:v2:60": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "sham",
+  "arm": "blind",
+  "variant": 2
+ },
+ "conference:opus:blind:sham:v3:61": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "sham",
+  "arm": "blind",
+  "variant": 3
+ },
+ "conference:opus:policy:sham:v3:62": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "sham",
+  "arm": "policy",
+  "variant": 3
+ },
+ "conference:haiku:blind:cdrop:2:v0:63": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "blind",
+  "variant": 0
+ },
+ "conference:sonnet:blind:cdrop:2:v0:64": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "blind",
+  "variant": 0
+ },
+ "conference:haiku:policy:cdrop:2:v0:65": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "policy",
+  "variant": 0
+ },
+ "conference:sonnet:policy:cdrop:2:v0:66": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "policy",
+  "variant": 0
+ },
+ "conference:haiku:blind:cdrop:2:v1:67": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "blind",
+  "variant": 1
+ },
+ "conference:sonnet:blind:cdrop:2:v1:68": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "blind",
+  "variant": 1
+ },
+ "conference:haiku:policy:cdrop:2:v1:69": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "policy",
+  "variant": 1
+ },
+ "conference:sonnet:policy:cdrop:2:v1:70": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "policy",
+  "variant": 1
+ },
+ "conference:haiku:blind:cdrop:2:v1:71": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "blind",
+  "variant": 1
+ },
+ "conference:sonnet:blind:cdrop:2:v1:72": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "blind",
+  "variant": 1
+ },
+ "conference:haiku:policy:cdrop:2:v1:73": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "policy",
+  "variant": 1
+ },
+ "conference:sonnet:policy:cdrop:2:v1:74": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "policy",
+  "variant": 1
+ },
+ "conference:haiku:blind:cdrop:2:v2:75": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "blind",
+  "variant": 2
+ },
+ "conference:sonnet:blind:cdrop:2:v2:76": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "blind",
+  "variant": 2
+ },
+ "conference:haiku:policy:cdrop:2:v2:77": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "policy",
+  "variant": 2
+ },
+ "conference:sonnet:policy:cdrop:2:v2:78": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "policy",
+  "variant": 2
+ },
+ "conference:haiku:blind:cdrop:2:v2:79": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "blind",
+  "variant": 2
+ },
+ "conference:sonnet:blind:cdrop:2:v2:80": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "blind",
+  "variant": 2
+ },
+ "conference:haiku:policy:cdrop:2:v2:81": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "policy",
+  "variant": 2
+ },
+ "conference:sonnet:policy:cdrop:2:v2:82": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "policy",
+  "variant": 2
+ },
+ "conference:haiku:blind:cdrop:2:v3:83": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "blind",
+  "variant": 3
+ },
+ "conference:sonnet:blind:cdrop:2:v3:84": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "blind",
+  "variant": 3
+ },
+ "conference:haiku:policy:cdrop:2:v3:85": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "policy",
+  "variant": 3
+ },
+ "conference:sonnet:policy:cdrop:2:v3:86": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "policy",
+  "variant": 3
+ },
+ "conference:haiku:blind:cdrop:2:v3:87": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "blind",
+  "variant": 3
+ },
+ "conference:sonnet:blind:cdrop:2:v3:88": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "blind",
+  "variant": 3
+ },
+ "conference:haiku:policy:cdrop:2:v3:89": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "policy",
+  "variant": 3
+ },
+ "conference:sonnet:policy:cdrop:2:v3:90": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "arm": "policy",
+  "variant": 3
+ },
+ "scheduling:opus:blind:cdrop:3:v0:91": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "arm": "blind",
+  "variant": 0
+ },
+ "scheduling:opus:deleak:cdrop:3:v0:92": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "arm": "deleak",
+  "variant": 0
+ },
+ "scheduling:opus:policy:cdrop:3:v0:93": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "arm": "policy",
+  "variant": 0
+ },
+ "scheduling:opus:blind:cdrop:3:v0:94": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "arm": "blind",
+  "variant": 0
+ },
+ "scheduling:opus:deleak:cdrop:3:v0:95": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "arm": "deleak",
+  "variant": 0
+ },
+ "scheduling:opus:policy:cdrop:3:v0:96": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "arm": "policy",
+  "variant": 0
+ },
+ "scheduling:opus:blind:cdrop:3:v1:97": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "arm": "blind",
+  "variant": 1
+ },
+ "scheduling:opus:deleak:cdrop:3:v1:98": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "arm": "deleak",
+  "variant": 1
+ },
+ "scheduling:opus:policy:cdrop:3:v1:99": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "arm": "policy",
+  "variant": 1
+ },
+ "scheduling:opus:blind:cdrop:3:v1:100": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "arm": "blind",
+  "variant": 1
+ },
+ "scheduling:opus:deleak:cdrop:3:v1:101": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "arm": "deleak",
+  "variant": 1
+ },
+ "scheduling:opus:policy:cdrop:3:v1:102": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "arm": "policy",
+  "variant": 1
+ },
+ "scheduling:opus:blind:cdrop:3:v2:103": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "arm": "blind",
+  "variant": 2
+ },
+ "scheduling:opus:deleak:cdrop:3:v2:104": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "arm": "deleak",
+  "variant": 2
+ },
+ "scheduling:opus:policy:cdrop:3:v2:105": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "arm": "policy",
+  "variant": 2
+ },
+ "scheduling:opus:blind:cdrop:3:v2:106": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "arm": "blind",
+  "variant": 2
+ },
+ "scheduling:opus:deleak:cdrop:3:v2:107": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "arm": "deleak",
+  "variant": 2
+ },
+ "scheduling:opus:policy:cdrop:3:v2:108": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "arm": "policy",
+  "variant": 2
+ },
+ "scheduling:opus:blind:cdrop:3:v3:109": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "arm": "blind",
+  "variant": 3
+ },
+ "scheduling:opus:deleak:cdrop:3:v3:110": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "arm": "deleak",
+  "variant": 3
+ },
+ "scheduling:opus:policy:cdrop:3:v3:111": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "arm": "policy",
+  "variant": 3
+ },
+ "scheduling:opus:blind:cdrop:3:v3:112": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "arm": "blind",
+  "variant": 3
+ },
+ "scheduling:opus:deleak:cdrop:3:v3:113": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "arm": "deleak",
+  "variant": 3
+ },
+ "scheduling:opus:policy:cdrop:3:v3:114": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "arm": "policy",
+  "variant": 3
+ },
+ "scheduling:opus:blind:forget:post_agenda:v0:115": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "blind",
+  "variant": 0
+ },
+ "scheduling:opus:policy:forget:post_agenda:v0:116": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "policy",
+  "variant": 0
+ },
+ "scheduling:opus:blind:forget:post_agenda:v0:117": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "blind",
+  "variant": 0
+ },
+ "scheduling:opus:policy:forget:post_agenda:v0:118": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "policy",
+  "variant": 0
+ },
+ "scheduling:opus:blind:forget:post_agenda:v1:119": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "blind",
+  "variant": 1
+ },
+ "scheduling:opus:policy:forget:post_agenda:v1:120": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "policy",
+  "variant": 1
+ },
+ "scheduling:opus:blind:forget:post_agenda:v1:121": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "blind",
+  "variant": 1
+ },
+ "scheduling:opus:policy:forget:post_agenda:v1:122": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "policy",
+  "variant": 1
+ },
+ "scheduling:opus:blind:forget:post_agenda:v2:123": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "blind",
+  "variant": 2
+ },
+ "scheduling:opus:policy:forget:post_agenda:v2:124": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "policy",
+  "variant": 2
+ },
+ "scheduling:opus:blind:forget:post_agenda:v2:125": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "blind",
+  "variant": 2
+ },
+ "scheduling:opus:policy:forget:post_agenda:v2:126": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "policy",
+  "variant": 2
+ },
+ "scheduling:opus:blind:forget:post_agenda:v3:127": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "blind",
+  "variant": 3
+ },
+ "scheduling:opus:policy:forget:post_agenda:v3:128": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "policy",
+  "variant": 3
+ },
+ "scheduling:opus:blind:forget:post_agenda:v3:129": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "blind",
+  "variant": 3
+ },
+ "scheduling:opus:policy:forget:post_agenda:v3:130": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "policy",
+  "variant": 3
+ },
+ "review:opus:blind:forget:close_ticket:v0:131": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "blind",
+  "variant": 0
+ },
+ "review:opus:policy:forget:close_ticket:v0:132": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "policy",
+  "variant": 0
+ },
+ "review:opus:blind:forget:close_ticket:v0:133": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "blind",
+  "variant": 0
+ },
+ "review:opus:policy:forget:close_ticket:v0:134": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "policy",
+  "variant": 0
+ },
+ "review:opus:blind:forget:close_ticket:v1:135": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "blind",
+  "variant": 1
+ },
+ "review:opus:policy:forget:close_ticket:v1:136": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "policy",
+  "variant": 1
+ },
+ "review:opus:blind:forget:close_ticket:v1:137": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "blind",
+  "variant": 1
+ },
+ "review:opus:policy:forget:close_ticket:v1:138": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "policy",
+  "variant": 1
+ },
+ "review:opus:blind:forget:close_ticket:v2:139": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "blind",
+  "variant": 2
+ },
+ "review:opus:blind:forget:close_ticket:v2:140": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "blind",
+  "variant": 2
+ },
+ "review:opus:blind:forget:close_ticket:v3:141": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "blind",
+  "variant": 3
+ },
+ "review:opus:blind:forget:close_ticket:v3:142": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "blind",
+  "variant": 3
+ },
+ "review:opus:policy:forget:close_ticket:v3:143": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "policy",
+  "variant": 3
+ },
+ "conference:opus:blind:staleness:v0:144": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 0
+ },
+ "conference:opus:policy:staleness:v0:145": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 0
+ },
+ "conference:opus:blind:staleness:v0:146": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 0
+ },
+ "conference:opus:policy:staleness:v0:147": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 0
+ },
+ "conference:opus:blind:staleness:v1:148": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 1
+ },
+ "conference:opus:policy:staleness:v1:149": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 1
+ },
+ "conference:opus:blind:staleness:v1:150": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 1
+ },
+ "conference:opus:policy:staleness:v1:151": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 1
+ },
+ "conference:opus:blind:staleness:v2:152": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 2
+ },
+ "conference:opus:policy:staleness:v2:153": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 2
+ },
+ "conference:opus:blind:staleness:v2:154": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 2
+ },
+ "conference:opus:policy:staleness:v2:155": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 2
+ },
+ "conference:opus:blind:staleness:v3:156": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 3
+ },
+ "conference:opus:policy:staleness:v3:157": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 3
+ },
+ "conference:opus:blind:staleness:v3:158": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 3
+ },
+ "conference:opus:policy:staleness:v3:159": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 3
+ },
+ "scheduling:opus:blind:staleness:v0:160": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 0
+ },
+ "scheduling:opus:policy:staleness:v0:161": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 0
+ },
+ "scheduling:opus:blind:staleness:v0:162": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 0
+ },
+ "scheduling:opus:policy:staleness:v0:163": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 0
+ },
+ "scheduling:opus:blind:staleness:v1:164": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 1
+ },
+ "scheduling:opus:policy:staleness:v1:165": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 1
+ },
+ "scheduling:opus:blind:staleness:v1:166": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 1
+ },
+ "scheduling:opus:policy:staleness:v1:167": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 1
+ },
+ "scheduling:opus:blind:staleness:v2:168": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 2
+ },
+ "scheduling:opus:policy:staleness:v2:169": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 2
+ },
+ "scheduling:opus:blind:staleness:v2:170": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 2
+ },
+ "scheduling:opus:policy:staleness:v2:171": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 2
+ },
+ "scheduling:opus:blind:staleness:v3:172": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 3
+ },
+ "scheduling:opus:policy:staleness:v3:173": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 3
+ },
+ "scheduling:opus:blind:staleness:v3:174": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 3
+ },
+ "scheduling:opus:policy:staleness:v3:175": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 3
+ },
+ "review:opus:blind:staleness:v0:176": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 0
+ },
+ "review:opus:policy:staleness:v0:177": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 0
+ },
+ "review:opus:blind:staleness:v0:178": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 0
+ },
+ "review:opus:policy:staleness:v0:179": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 0
+ },
+ "review:opus:blind:staleness:v1:180": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 1
+ },
+ "review:opus:policy:staleness:v1:181": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 1
+ },
+ "review:opus:blind:staleness:v1:182": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 1
+ },
+ "review:opus:policy:staleness:v1:183": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 1
+ },
+ "review:opus:blind:staleness:v2:184": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 2
+ },
+ "review:opus:policy:staleness:v2:185": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 2
+ },
+ "review:opus:blind:staleness:v2:186": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 2
+ },
+ "review:opus:policy:staleness:v2:187": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 2
+ },
+ "review:opus:blind:staleness:v3:188": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 3
+ },
+ "review:opus:policy:staleness:v3:189": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 3
+ },
+ "review:opus:blind:staleness:v3:190": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 3
+ },
+ "review:opus:policy:staleness:v3:191": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 3
+ },
+ "conference:opus:blind:misexec:v0:192": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 0
+ },
+ "conference:opus:policy:misexec:v0:193": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 0
+ },
+ "conference:opus:rootcause:misexec:v0:194": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 0
+ },
+ "conference:opus:rootcause_policy:misexec:v0:195": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "rootcause_policy",
+  "variant": 0
+ },
+ "conference:opus:blind:misexec:v0:196": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 0
+ },
+ "conference:opus:policy:misexec:v0:197": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 0
+ },
+ "conference:opus:rootcause:misexec:v0:198": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 0
+ },
+ "conference:opus:rootcause_policy:misexec:v0:199": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "rootcause_policy",
+  "variant": 0
+ },
+ "conference:opus:blind:misexec:v1:200": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 1
+ },
+ "conference:opus:policy:misexec:v1:201": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 1
+ },
+ "conference:opus:rootcause:misexec:v1:202": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 1
+ },
+ "conference:opus:rootcause_policy:misexec:v1:203": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "rootcause_policy",
+  "variant": 1
+ },
+ "conference:opus:blind:misexec:v1:204": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 1
+ },
+ "conference:opus:policy:misexec:v1:205": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 1
+ },
+ "conference:opus:rootcause:misexec:v1:206": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 1
+ },
+ "conference:opus:rootcause_policy:misexec:v1:207": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "rootcause_policy",
+  "variant": 1
+ },
+ "conference:opus:blind:misexec:v2:208": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 2
+ },
+ "conference:opus:policy:misexec:v2:209": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 2
+ },
+ "conference:opus:rootcause:misexec:v2:210": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 2
+ },
+ "conference:opus:rootcause_policy:misexec:v2:211": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "rootcause_policy",
+  "variant": 2
+ },
+ "conference:opus:blind:misexec:v2:212": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 2
+ },
+ "conference:opus:policy:misexec:v2:213": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 2
+ },
+ "conference:opus:rootcause:misexec:v2:214": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 2
+ },
+ "conference:opus:rootcause_policy:misexec:v2:215": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "rootcause_policy",
+  "variant": 2
+ },
+ "conference:opus:blind:misexec:v3:216": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 3
+ },
+ "conference:opus:policy:misexec:v3:217": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 3
+ },
+ "conference:opus:rootcause:misexec:v3:218": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 3
+ },
+ "conference:opus:rootcause_policy:misexec:v3:219": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "rootcause_policy",
+  "variant": 3
+ },
+ "conference:opus:blind:misexec:v3:220": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 3
+ },
+ "conference:opus:policy:misexec:v3:221": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 3
+ },
+ "conference:opus:rootcause:misexec:v3:222": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 3
+ },
+ "conference:opus:rootcause_policy:misexec:v3:223": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "misexec",
+  "arm": "rootcause_policy",
+  "variant": 3
+ },
+ "scheduling:opus:blind:misexec:v0:224": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 0
+ },
+ "scheduling:opus:policy:misexec:v0:225": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 0
+ },
+ "scheduling:opus:rootcause:misexec:v0:226": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 0
+ },
+ "scheduling:opus:rootcause_policy:misexec:v0:227": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "rootcause_policy",
+  "variant": 0
+ },
+ "scheduling:opus:blind:misexec:v0:228": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 0
+ },
+ "scheduling:opus:policy:misexec:v0:229": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 0
+ },
+ "scheduling:opus:rootcause:misexec:v0:230": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 0
+ },
+ "scheduling:opus:rootcause_policy:misexec:v0:231": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "rootcause_policy",
+  "variant": 0
+ },
+ "scheduling:opus:blind:misexec:v1:232": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 1
+ },
+ "scheduling:opus:policy:misexec:v1:233": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 1
+ },
+ "scheduling:opus:rootcause:misexec:v1:234": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 1
+ },
+ "scheduling:opus:rootcause_policy:misexec:v1:235": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "rootcause_policy",
+  "variant": 1
+ },
+ "scheduling:opus:blind:misexec:v1:236": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 1
+ },
+ "scheduling:opus:policy:misexec:v1:237": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 1
+ },
+ "scheduling:opus:rootcause:misexec:v1:238": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 1
+ },
+ "scheduling:opus:rootcause_policy:misexec:v1:239": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "rootcause_policy",
+  "variant": 1
+ },
+ "scheduling:opus:blind:misexec:v2:240": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 2
+ },
+ "scheduling:opus:policy:misexec:v2:241": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 2
+ },
+ "scheduling:opus:rootcause:misexec:v2:242": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 2
+ },
+ "scheduling:opus:rootcause_policy:misexec:v2:243": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "rootcause_policy",
+  "variant": 2
+ },
+ "scheduling:opus:blind:misexec:v2:244": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 2
+ },
+ "scheduling:opus:policy:misexec:v2:245": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 2
+ },
+ "scheduling:opus:rootcause:misexec:v2:246": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 2
+ },
+ "scheduling:opus:rootcause_policy:misexec:v2:247": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "rootcause_policy",
+  "variant": 2
+ },
+ "scheduling:opus:blind:misexec:v3:248": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 3
+ },
+ "scheduling:opus:policy:misexec:v3:249": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 3
+ },
+ "scheduling:opus:rootcause:misexec:v3:250": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 3
+ },
+ "scheduling:opus:rootcause_policy:misexec:v3:251": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "rootcause_policy",
+  "variant": 3
+ },
+ "scheduling:opus:blind:misexec:v3:252": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 3
+ },
+ "scheduling:opus:policy:misexec:v3:253": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 3
+ },
+ "scheduling:opus:rootcause:misexec:v3:254": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 3
+ },
+ "scheduling:opus:rootcause_policy:misexec:v3:255": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "misexec",
+  "arm": "rootcause_policy",
+  "variant": 3
+ },
+ "review:opus:blind:misexec:v0:256": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 0
+ },
+ "review:opus:policy:misexec:v0:257": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 0
+ },
+ "review:opus:rootcause:misexec:v0:258": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 0
+ },
+ "review:opus:rootcause_policy:misexec:v0:259": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "rootcause_policy",
+  "variant": 0
+ },
+ "review:opus:blind:misexec:v0:260": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 0
+ },
+ "review:opus:policy:misexec:v0:261": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 0
+ },
+ "review:opus:rootcause:misexec:v0:262": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 0
+ },
+ "review:opus:rootcause_policy:misexec:v0:263": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "rootcause_policy",
+  "variant": 0
+ },
+ "review:opus:blind:misexec:v1:264": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 1
+ },
+ "review:opus:policy:misexec:v1:265": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 1
+ },
+ "review:opus:rootcause:misexec:v1:266": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 1
+ },
+ "review:opus:rootcause_policy:misexec:v1:267": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "rootcause_policy",
+  "variant": 1
+ },
+ "review:opus:blind:misexec:v1:268": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 1
+ },
+ "review:opus:policy:misexec:v1:269": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 1
+ },
+ "review:opus:rootcause:misexec:v1:270": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 1
+ },
+ "review:opus:rootcause_policy:misexec:v1:271": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "rootcause_policy",
+  "variant": 1
+ },
+ "review:opus:blind:misexec:v2:272": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 2
+ },
+ "review:opus:policy:misexec:v2:273": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 2
+ },
+ "review:opus:rootcause:misexec:v2:274": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 2
+ },
+ "review:opus:rootcause_policy:misexec:v2:275": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "rootcause_policy",
+  "variant": 2
+ },
+ "review:opus:blind:misexec:v2:276": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 2
+ },
+ "review:opus:policy:misexec:v2:277": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 2
+ },
+ "review:opus:rootcause:misexec:v2:278": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 2
+ },
+ "review:opus:rootcause_policy:misexec:v2:279": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "rootcause_policy",
+  "variant": 2
+ },
+ "review:opus:blind:misexec:v3:280": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 3
+ },
+ "review:opus:policy:misexec:v3:281": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 3
+ },
+ "review:opus:rootcause:misexec:v3:282": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 3
+ },
+ "review:opus:rootcause_policy:misexec:v3:283": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "rootcause_policy",
+  "variant": 3
+ },
+ "review:opus:blind:misexec:v3:284": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 3
+ },
+ "review:opus:policy:misexec:v3:285": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 3
+ },
+ "review:opus:rootcause:misexec:v3:286": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 3
+ },
+ "review:opus:rootcause_policy:misexec:v3:287": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "misexec",
+  "arm": "rootcause_policy",
+  "variant": 3
+ },
+ "conference:opus:rootcause:forget:file_expense_report:v0:288": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "rootcause",
+  "variant": 0
+ },
+ "conference:opus:rootcause_policy:forget:file_expense_report:v0:289": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "rootcause_policy",
+  "variant": 0
+ },
+ "conference:opus:rootcause:forget:file_expense_report:v0:290": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "rootcause",
+  "variant": 0
+ },
+ "conference:opus:rootcause_policy:forget:file_expense_report:v0:291": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "rootcause_policy",
+  "variant": 0
+ },
+ "conference:opus:rootcause:forget:file_expense_report:v1:292": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "rootcause",
+  "variant": 1
+ },
+ "conference:opus:rootcause_policy:forget:file_expense_report:v1:293": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "rootcause_policy",
+  "variant": 1
+ },
+ "conference:opus:rootcause:forget:file_expense_report:v1:294": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "rootcause",
+  "variant": 1
+ },
+ "conference:opus:rootcause_policy:forget:file_expense_report:v1:295": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "rootcause_policy",
+  "variant": 1
+ },
+ "conference:opus:rootcause:forget:file_expense_report:v2:296": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "rootcause",
+  "variant": 2
+ },
+ "conference:opus:rootcause_policy:forget:file_expense_report:v2:297": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "rootcause_policy",
+  "variant": 2
+ },
+ "conference:opus:rootcause:forget:file_expense_report:v2:298": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "rootcause",
+  "variant": 2
+ },
+ "conference:opus:rootcause_policy:forget:file_expense_report:v2:299": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "rootcause_policy",
+  "variant": 2
+ },
+ "conference:opus:rootcause:forget:file_expense_report:v3:300": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "rootcause",
+  "variant": 3
+ },
+ "conference:opus:rootcause_policy:forget:file_expense_report:v3:301": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "rootcause_policy",
+  "variant": 3
+ },
+ "conference:opus:rootcause:forget:file_expense_report:v3:302": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "rootcause",
+  "variant": 3
+ },
+ "conference:opus:rootcause_policy:forget:file_expense_report:v3:303": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "forget:file_expense_report",
+  "arm": "rootcause_policy",
+  "variant": 3
+ },
+ "conference:opus:rootcause:staleness:v0:304": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 0
+ },
+ "conference:opus:rootcause:staleness:v0:305": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 0
+ },
+ "conference:opus:rootcause:staleness:v1:306": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 1
+ },
+ "conference:opus:rootcause:staleness:v1:307": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 1
+ },
+ "conference:opus:rootcause:staleness:v2:308": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 2
+ },
+ "conference:opus:rootcause:staleness:v2:309": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 2
+ },
+ "conference:opus:rootcause:staleness:v3:310": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 3
+ },
+ "conference:opus:rootcause:staleness:v3:311": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "conference",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 3
+ },
+ "scheduling:opus:rootcause:forget:post_agenda:v0:312": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "rootcause",
+  "variant": 0
+ },
+ "scheduling:opus:rootcause_policy:forget:post_agenda:v0:313": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "rootcause_policy",
+  "variant": 0
+ },
+ "scheduling:opus:rootcause:forget:post_agenda:v0:314": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "rootcause",
+  "variant": 0
+ },
+ "scheduling:opus:rootcause_policy:forget:post_agenda:v0:315": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "rootcause_policy",
+  "variant": 0
+ },
+ "scheduling:opus:rootcause:forget:post_agenda:v1:316": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "rootcause",
+  "variant": 1
+ },
+ "scheduling:opus:rootcause_policy:forget:post_agenda:v1:317": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "rootcause_policy",
+  "variant": 1
+ },
+ "scheduling:opus:rootcause:forget:post_agenda:v1:318": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "rootcause",
+  "variant": 1
+ },
+ "scheduling:opus:rootcause_policy:forget:post_agenda:v1:319": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "rootcause_policy",
+  "variant": 1
+ },
+ "scheduling:opus:rootcause:forget:post_agenda:v2:320": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "rootcause",
+  "variant": 2
+ },
+ "scheduling:opus:rootcause_policy:forget:post_agenda:v2:321": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "rootcause_policy",
+  "variant": 2
+ },
+ "scheduling:opus:rootcause:forget:post_agenda:v2:322": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "rootcause",
+  "variant": 2
+ },
+ "scheduling:opus:rootcause_policy:forget:post_agenda:v2:323": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "rootcause_policy",
+  "variant": 2
+ },
+ "scheduling:opus:rootcause:forget:post_agenda:v3:324": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "rootcause",
+  "variant": 3
+ },
+ "scheduling:opus:rootcause_policy:forget:post_agenda:v3:325": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "rootcause_policy",
+  "variant": 3
+ },
+ "scheduling:opus:rootcause:forget:post_agenda:v3:326": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "rootcause",
+  "variant": 3
+ },
+ "scheduling:opus:rootcause_policy:forget:post_agenda:v3:327": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "forget:post_agenda",
+  "arm": "rootcause_policy",
+  "variant": 3
+ },
+ "scheduling:opus:rootcause:staleness:v0:328": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 0
+ },
+ "scheduling:opus:rootcause:staleness:v0:329": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 0
+ },
+ "scheduling:opus:rootcause:staleness:v1:330": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 1
+ },
+ "scheduling:opus:rootcause:staleness:v1:331": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 1
+ },
+ "scheduling:opus:rootcause:staleness:v2:332": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 2
+ },
+ "scheduling:opus:rootcause:staleness:v2:333": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 2
+ },
+ "scheduling:opus:rootcause:staleness:v3:334": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 3
+ },
+ "scheduling:opus:rootcause:staleness:v3:335": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "scheduling",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 3
+ },
+ "review:opus:rootcause:forget:close_ticket:v0:336": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "rootcause",
+  "variant": 0
+ },
+ "review:opus:rootcause_policy:forget:close_ticket:v0:337": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "rootcause_policy",
+  "variant": 0
+ },
+ "review:opus:rootcause:forget:close_ticket:v0:338": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "rootcause",
+  "variant": 0
+ },
+ "review:opus:rootcause_policy:forget:close_ticket:v0:339": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "rootcause_policy",
+  "variant": 0
+ },
+ "review:opus:rootcause:forget:close_ticket:v1:340": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "rootcause",
+  "variant": 1
+ },
+ "review:opus:rootcause_policy:forget:close_ticket:v1:341": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "rootcause_policy",
+  "variant": 1
+ },
+ "review:opus:rootcause:forget:close_ticket:v1:342": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "rootcause",
+  "variant": 1
+ },
+ "review:opus:rootcause_policy:forget:close_ticket:v1:343": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "rootcause_policy",
+  "variant": 1
+ },
+ "review:opus:rootcause:forget:close_ticket:v2:344": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "rootcause",
+  "variant": 2
+ },
+ "review:opus:rootcause_policy:forget:close_ticket:v2:345": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "rootcause_policy",
+  "variant": 2
+ },
+ "review:opus:rootcause:forget:close_ticket:v2:346": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "rootcause",
+  "variant": 2
+ },
+ "review:opus:rootcause_policy:forget:close_ticket:v2:347": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "rootcause_policy",
+  "variant": 2
+ },
+ "review:opus:rootcause:forget:close_ticket:v3:348": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "rootcause",
+  "variant": 3
+ },
+ "review:opus:rootcause_policy:forget:close_ticket:v3:349": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "rootcause_policy",
+  "variant": 3
+ },
+ "review:opus:rootcause:forget:close_ticket:v3:350": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "rootcause",
+  "variant": 3
+ },
+ "review:opus:rootcause_policy:forget:close_ticket:v3:351": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "rootcause_policy",
+  "variant": 3
+ },
+ "review:opus:rootcause:staleness:v0:352": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 0
+ },
+ "review:opus:rootcause:staleness:v0:353": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 0
+ },
+ "review:opus:rootcause:staleness:v1:354": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 1
+ },
+ "review:opus:rootcause:staleness:v1:355": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 1
+ },
+ "review:opus:rootcause:staleness:v2:356": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 2
+ },
+ "review:opus:rootcause:staleness:v2:357": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 2
+ },
+ "review:opus:rootcause:staleness:v3:358": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 3
+ },
+ "review:opus:rootcause:staleness:v3:359": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 3
+ },
+ "review:opus:policy:forget:close_ticket:v2:360": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "policy",
+  "variant": 2
+ },
+ "review:opus:policy:forget:close_ticket:v2:361": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "policy",
+  "variant": 2
+ },
+ "review:opus:policy:forget:close_ticket:v3:362": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "review",
+  "condition": "forget:close_ticket",
+  "arm": "policy",
+  "variant": 3
+ },
+ "incident:opus:blind:staleness:v0:363": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 0
+ },
+ "incident:opus:policy:staleness:v0:364": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 0
+ },
+ "incident:opus:rootcause:staleness:v0:365": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 0
+ },
+ "incident:opus:blind:staleness:v0:366": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 0
+ },
+ "incident:opus:policy:staleness:v0:367": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 0
+ },
+ "incident:opus:rootcause:staleness:v0:368": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 0
+ },
+ "incident:opus:blind:staleness:v1:369": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 1
+ },
+ "incident:opus:policy:staleness:v1:370": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 1
+ },
+ "incident:opus:rootcause:staleness:v1:371": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 1
+ },
+ "incident:opus:blind:staleness:v1:372": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 1
+ },
+ "incident:opus:policy:staleness:v1:373": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "incident",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 1
+ },
+ "incident:opus:rootcause:staleness:v1:374": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 1
+ },
+ "incident:opus:blind:staleness:v2:375": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 2
+ },
+ "incident:opus:policy:staleness:v2:376": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "incident",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 2
+ },
+ "incident:opus:rootcause:staleness:v2:377": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 2
+ },
+ "incident:opus:blind:staleness:v2:378": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 2
+ },
+ "incident:opus:policy:staleness:v2:379": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 2
+ },
+ "incident:opus:rootcause:staleness:v2:380": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 2
+ },
+ "incident:opus:blind:staleness:v3:381": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 3
+ },
+ "incident:opus:policy:staleness:v3:382": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 3
+ },
+ "incident:opus:rootcause:staleness:v3:383": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 3
+ },
+ "incident:opus:blind:staleness:v3:384": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 3
+ },
+ "incident:opus:policy:staleness:v3:385": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 3
+ },
+ "incident:opus:rootcause:staleness:v3:386": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 3
+ },
+ "incident:opus:blind:misexec:v0:387": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 0
+ },
+ "incident:opus:policy:misexec:v0:388": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "incident",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 0
+ },
+ "incident:opus:rootcause:misexec:v0:389": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 0
+ },
+ "incident:opus:blind:misexec:v0:390": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "incident",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 0
+ },
+ "incident:opus:policy:misexec:v0:391": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "incident",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 0
+ },
+ "incident:opus:rootcause:misexec:v0:392": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 0
+ },
+ "incident:opus:blind:misexec:v1:393": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 1
+ },
+ "incident:opus:policy:misexec:v1:394": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 1
+ },
+ "incident:opus:rootcause:misexec:v1:395": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 1
+ },
+ "incident:opus:blind:misexec:v1:396": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 1
+ },
+ "incident:opus:policy:misexec:v1:397": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "incident",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 1
+ },
+ "incident:opus:rootcause:misexec:v1:398": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 1
+ },
+ "incident:opus:blind:misexec:v2:399": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "incident",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 2
+ },
+ "incident:opus:policy:misexec:v2:400": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "incident",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 2
+ },
+ "incident:opus:rootcause:misexec:v2:401": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 2
+ },
+ "incident:opus:blind:misexec:v2:402": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "incident",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 2
+ },
+ "incident:opus:policy:misexec:v2:403": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "incident",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 2
+ },
+ "incident:opus:rootcause:misexec:v2:404": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 2
+ },
+ "incident:opus:blind:misexec:v3:405": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 3
+ },
+ "incident:opus:policy:misexec:v3:406": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 3
+ },
+ "incident:opus:rootcause:misexec:v3:407": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 3
+ },
+ "incident:opus:blind:misexec:v3:408": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "incident",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 3
+ },
+ "incident:opus:policy:misexec:v3:409": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "incident",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 3
+ },
+ "incident:opus:rootcause:misexec:v3:410": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 3
+ },
+ "incident:opus:blind:forget:close_incident:v0:411": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "forget:close_incident",
+  "arm": "blind",
+  "variant": 0
+ },
+ "incident:opus:policy:forget:close_incident:v0:412": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "forget:close_incident",
+  "arm": "policy",
+  "variant": 0
+ },
+ "incident:opus:rootcause:forget:close_incident:v0:413": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "forget:close_incident",
+  "arm": "rootcause",
+  "variant": 0
+ },
+ "incident:opus:blind:forget:close_incident:v0:414": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "forget:close_incident",
+  "arm": "blind",
+  "variant": 0
+ },
+ "incident:opus:policy:forget:close_incident:v0:415": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "forget:close_incident",
+  "arm": "policy",
+  "variant": 0
+ },
+ "incident:opus:rootcause:forget:close_incident:v0:416": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "forget:close_incident",
+  "arm": "rootcause",
+  "variant": 0
+ },
+ "incident:opus:blind:forget:close_incident:v1:417": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "forget:close_incident",
+  "arm": "blind",
+  "variant": 1
+ },
+ "incident:opus:policy:forget:close_incident:v1:418": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "forget:close_incident",
+  "arm": "policy",
+  "variant": 1
+ },
+ "incident:opus:rootcause:forget:close_incident:v1:419": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "forget:close_incident",
+  "arm": "rootcause",
+  "variant": 1
+ },
+ "incident:opus:blind:forget:close_incident:v1:420": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "forget:close_incident",
+  "arm": "blind",
+  "variant": 1
+ },
+ "incident:opus:policy:forget:close_incident:v1:421": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "forget:close_incident",
+  "arm": "policy",
+  "variant": 1
+ },
+ "incident:opus:rootcause:forget:close_incident:v1:422": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "forget:close_incident",
+  "arm": "rootcause",
+  "variant": 1
+ },
+ "incident:opus:blind:forget:close_incident:v2:423": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "forget:close_incident",
+  "arm": "blind",
+  "variant": 2
+ },
+ "incident:opus:policy:forget:close_incident:v2:424": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "forget:close_incident",
+  "arm": "policy",
+  "variant": 2
+ },
+ "incident:opus:rootcause:forget:close_incident:v2:425": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "forget:close_incident",
+  "arm": "rootcause",
+  "variant": 2
+ },
+ "incident:opus:blind:forget:close_incident:v2:426": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "forget:close_incident",
+  "arm": "blind",
+  "variant": 2
+ },
+ "incident:opus:policy:forget:close_incident:v2:427": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "forget:close_incident",
+  "arm": "policy",
+  "variant": 2
+ },
+ "incident:opus:rootcause:forget:close_incident:v2:428": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "forget:close_incident",
+  "arm": "rootcause",
+  "variant": 2
+ },
+ "incident:opus:blind:forget:close_incident:v3:429": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "forget:close_incident",
+  "arm": "blind",
+  "variant": 3
+ },
+ "incident:opus:policy:forget:close_incident:v3:430": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "forget:close_incident",
+  "arm": "policy",
+  "variant": 3
+ },
+ "incident:opus:rootcause:forget:close_incident:v3:431": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "forget:close_incident",
+  "arm": "rootcause",
+  "variant": 3
+ },
+ "incident:opus:blind:forget:close_incident:v3:432": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "forget:close_incident",
+  "arm": "blind",
+  "variant": 3
+ },
+ "incident:opus:policy:forget:close_incident:v3:433": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "incident",
+  "condition": "forget:close_incident",
+  "arm": "policy",
+  "variant": 3
+ },
+ "incident:opus:rootcause:forget:close_incident:v3:434": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "incident",
+  "condition": "forget:close_incident",
+  "arm": "rootcause",
+  "variant": 3
+ },
+ "reconcile:opus:blind:cdrop:1:v0:435": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "arm": "blind",
+  "variant": 0
+ },
+ "reconcile:opus:deleak:cdrop:1:v0:436": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "arm": "deleak",
+  "variant": 0
+ },
+ "reconcile:opus:policy:cdrop:1:v0:437": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "arm": "policy",
+  "variant": 0
+ },
+ "reconcile:opus:blind:cdrop:1:v0:438": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "arm": "blind",
+  "variant": 0
+ },
+ "reconcile:opus:deleak:cdrop:1:v0:439": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "arm": "deleak",
+  "variant": 0
+ },
+ "reconcile:opus:policy:cdrop:1:v0:440": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "arm": "policy",
+  "variant": 0
+ },
+ "reconcile:opus:blind:cdrop:1:v1:441": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "arm": "blind",
+  "variant": 1
+ },
+ "reconcile:opus:deleak:cdrop:1:v1:442": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "arm": "deleak",
+  "variant": 1
+ },
+ "reconcile:opus:policy:cdrop:1:v1:443": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "arm": "policy",
+  "variant": 1
+ },
+ "reconcile:opus:blind:cdrop:1:v1:444": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "arm": "blind",
+  "variant": 1
+ },
+ "reconcile:opus:deleak:cdrop:1:v1:445": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "arm": "deleak",
+  "variant": 1
+ },
+ "reconcile:opus:policy:cdrop:1:v1:446": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "arm": "policy",
+  "variant": 1
+ },
+ "reconcile:opus:blind:cdrop:1:v2:447": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "arm": "blind",
+  "variant": 2
+ },
+ "reconcile:opus:deleak:cdrop:1:v2:448": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "arm": "deleak",
+  "variant": 2
+ },
+ "reconcile:opus:policy:cdrop:1:v2:449": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "arm": "policy",
+  "variant": 2
+ },
+ "reconcile:opus:blind:cdrop:1:v2:450": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "arm": "blind",
+  "variant": 2
+ },
+ "reconcile:opus:deleak:cdrop:1:v2:451": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "arm": "deleak",
+  "variant": 2
+ },
+ "reconcile:opus:policy:cdrop:1:v2:452": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "arm": "policy",
+  "variant": 2
+ },
+ "reconcile:opus:blind:cdrop:1:v3:453": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "arm": "blind",
+  "variant": 3
+ },
+ "reconcile:opus:deleak:cdrop:1:v3:454": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "arm": "deleak",
+  "variant": 3
+ },
+ "reconcile:opus:policy:cdrop:1:v3:455": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "arm": "policy",
+  "variant": 3
+ },
+ "reconcile:opus:blind:cdrop:1:v3:456": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "arm": "blind",
+  "variant": 3
+ },
+ "reconcile:opus:deleak:cdrop:1:v3:457": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "arm": "deleak",
+  "variant": 3
+ },
+ "reconcile:opus:policy:cdrop:1:v3:458": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "arm": "policy",
+  "variant": 3
+ },
+ "reconcile:opus:blind:staleness:v0:459": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 0
+ },
+ "reconcile:opus:policy:staleness:v0:460": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 0
+ },
+ "reconcile:opus:rootcause:staleness:v0:461": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 0
+ },
+ "reconcile:opus:blind:staleness:v0:462": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 0
+ },
+ "reconcile:opus:policy:staleness:v0:463": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 0
+ },
+ "reconcile:opus:rootcause:staleness:v0:464": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 0
+ },
+ "reconcile:opus:blind:staleness:v1:465": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 1
+ },
+ "reconcile:opus:policy:staleness:v1:466": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 1
+ },
+ "reconcile:opus:rootcause:staleness:v1:467": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 1
+ },
+ "reconcile:opus:blind:staleness:v1:468": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 1
+ },
+ "reconcile:opus:policy:staleness:v1:469": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 1
+ },
+ "reconcile:opus:rootcause:staleness:v1:470": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 1
+ },
+ "reconcile:opus:blind:staleness:v2:471": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 2
+ },
+ "reconcile:opus:policy:staleness:v2:472": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 2
+ },
+ "reconcile:opus:rootcause:staleness:v2:473": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 2
+ },
+ "reconcile:opus:blind:staleness:v2:474": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 2
+ },
+ "reconcile:opus:policy:staleness:v2:475": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 2
+ },
+ "reconcile:opus:rootcause:staleness:v2:476": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 2
+ },
+ "reconcile:opus:blind:staleness:v3:477": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 3
+ },
+ "reconcile:opus:policy:staleness:v3:478": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 3
+ },
+ "reconcile:opus:rootcause:staleness:v3:479": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 3
+ },
+ "reconcile:opus:blind:staleness:v3:480": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "staleness",
+  "arm": "blind",
+  "variant": 3
+ },
+ "reconcile:opus:policy:staleness:v3:481": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "staleness",
+  "arm": "policy",
+  "variant": 3
+ },
+ "reconcile:opus:rootcause:staleness:v3:482": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "staleness",
+  "arm": "rootcause",
+  "variant": 3
+ },
+ "reconcile:opus:blind:misexec:v0:483": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 0
+ },
+ "reconcile:opus:policy:misexec:v0:484": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 0
+ },
+ "reconcile:opus:rootcause:misexec:v0:485": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 0
+ },
+ "reconcile:opus:blind:misexec:v0:486": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 0
+ },
+ "reconcile:opus:policy:misexec:v0:487": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 0
+ },
+ "reconcile:opus:rootcause:misexec:v0:488": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 0
+ },
+ "reconcile:opus:blind:misexec:v1:489": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 1
+ },
+ "reconcile:opus:policy:misexec:v1:490": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 1
+ },
+ "reconcile:opus:rootcause:misexec:v1:491": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 1
+ },
+ "reconcile:opus:blind:misexec:v1:492": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 1
+ },
+ "reconcile:opus:policy:misexec:v1:493": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 1
+ },
+ "reconcile:opus:rootcause:misexec:v1:494": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 1
+ },
+ "reconcile:opus:blind:misexec:v2:495": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 2
+ },
+ "reconcile:opus:policy:misexec:v2:496": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 2
+ },
+ "reconcile:opus:rootcause:misexec:v2:497": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 2
+ },
+ "reconcile:opus:blind:misexec:v2:498": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 2
+ },
+ "reconcile:opus:policy:misexec:v2:499": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 2
+ },
+ "reconcile:opus:rootcause:misexec:v2:500": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 2
+ },
+ "reconcile:opus:blind:misexec:v3:501": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 3
+ },
+ "reconcile:opus:policy:misexec:v3:502": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 3
+ },
+ "reconcile:opus:rootcause:misexec:v3:503": {
+  "det_attributed": false,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 3
+ },
+ "reconcile:opus:blind:misexec:v3:504": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "misexec",
+  "arm": "blind",
+  "variant": 3
+ },
+ "reconcile:opus:policy:misexec:v3:505": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "misexec",
+  "arm": "policy",
+  "variant": 3
+ },
+ "reconcile:opus:rootcause:misexec:v3:506": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "misexec",
+  "arm": "rootcause",
+  "variant": 3
+ },
+ "reconcile:opus:blind:forget:submit_batch:v0:507": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "forget:submit_batch",
+  "arm": "blind",
+  "variant": 0
+ },
+ "reconcile:opus:policy:forget:submit_batch:v0:508": {
+  "det_attributed": false,
+  "det_problem": false,
+  "domain": "reconcile",
+  "condition": "forget:submit_batch",
+  "arm": "policy",
+  "variant": 0
+ },
+ "reconcile:opus:rootcause:forget:submit_batch:v0:509": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "forget:submit_batch",
+  "arm": "rootcause",
+  "variant": 0
+ },
+ "reconcile:opus:blind:forget:submit_batch:v0:510": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "forget:submit_batch",
+  "arm": "blind",
+  "variant": 0
+ },
+ "reconcile:opus:policy:forget:submit_batch:v0:511": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "forget:submit_batch",
+  "arm": "policy",
+  "variant": 0
+ },
+ "reconcile:opus:rootcause:forget:submit_batch:v0:512": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "forget:submit_batch",
+  "arm": "rootcause",
+  "variant": 0
+ },
+ "reconcile:opus:blind:forget:submit_batch:v1:513": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "forget:submit_batch",
+  "arm": "blind",
+  "variant": 1
+ },
+ "reconcile:opus:policy:forget:submit_batch:v1:514": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "forget:submit_batch",
+  "arm": "policy",
+  "variant": 1
+ },
+ "reconcile:opus:rootcause:forget:submit_batch:v1:515": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "forget:submit_batch",
+  "arm": "rootcause",
+  "variant": 1
+ },
+ "reconcile:opus:blind:forget:submit_batch:v1:516": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "forget:submit_batch",
+  "arm": "blind",
+  "variant": 1
+ },
+ "reconcile:opus:policy:forget:submit_batch:v1:517": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "forget:submit_batch",
+  "arm": "policy",
+  "variant": 1
+ },
+ "reconcile:opus:rootcause:forget:submit_batch:v1:518": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "forget:submit_batch",
+  "arm": "rootcause",
+  "variant": 1
+ },
+ "reconcile:opus:blind:forget:submit_batch:v2:519": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "forget:submit_batch",
+  "arm": "blind",
+  "variant": 2
+ },
+ "reconcile:opus:policy:forget:submit_batch:v2:520": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "forget:submit_batch",
+  "arm": "policy",
+  "variant": 2
+ },
+ "reconcile:opus:rootcause:forget:submit_batch:v2:521": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "forget:submit_batch",
+  "arm": "rootcause",
+  "variant": 2
+ },
+ "reconcile:opus:blind:forget:submit_batch:v2:522": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "forget:submit_batch",
+  "arm": "blind",
+  "variant": 2
+ },
+ "reconcile:opus:policy:forget:submit_batch:v2:523": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "forget:submit_batch",
+  "arm": "policy",
+  "variant": 2
+ },
+ "reconcile:opus:rootcause:forget:submit_batch:v2:524": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "forget:submit_batch",
+  "arm": "rootcause",
+  "variant": 2
+ },
+ "reconcile:opus:blind:forget:submit_batch:v3:525": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "forget:submit_batch",
+  "arm": "blind",
+  "variant": 3
+ },
+ "reconcile:opus:policy:forget:submit_batch:v3:526": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "forget:submit_batch",
+  "arm": "policy",
+  "variant": 3
+ },
+ "reconcile:opus:rootcause:forget:submit_batch:v3:527": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "forget:submit_batch",
+  "arm": "rootcause",
+  "variant": 3
+ },
+ "reconcile:opus:blind:forget:submit_batch:v3:528": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "forget:submit_batch",
+  "arm": "blind",
+  "variant": 3
+ },
+ "reconcile:opus:policy:forget:submit_batch:v3:529": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "forget:submit_batch",
+  "arm": "policy",
+  "variant": 3
+ },
+ "reconcile:opus:rootcause:forget:submit_batch:v3:530": {
+  "det_attributed": true,
+  "det_problem": true,
+  "domain": "reconcile",
+  "condition": "forget:submit_batch",
+  "arm": "rootcause",
+  "variant": 3
+ }
+}

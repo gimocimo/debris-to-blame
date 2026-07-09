@@ -42,15 +42,15 @@ property of the **fault type**, and it replicates across all five:
 | regime | blind | + full policy (oracle) | closes only with | replicates |
 |---|---|---|---|---|
 | **deception gap** (staleness: stale price / availability / CI / service-health / receipt) | **0.00** | **0.00** | **ground-truth world state** | **5/5 domains** |
-| **deletion gap** (constraint_drop; de-leak control ≈0) | **≈0.00** | **0.88–1.00** | the exact deleted rule | 3/3 domains where it bites |
-| omission (tool_forgetting) | salience-dependent (0.00 → 1.00) | can *drop* (oracle exonerates) | the **causation question** (root-cause 5/5) | 5/5 damaging, unevenly visible |
+| **deletion gap** (constraint_drop; de-leak control 0.00) | **0.00** | **0.88–1.00** | the exact deleted rule | 3/3 domains where it bites |
+| omission (tool_forgetting) | salience-dependent (0.00 → 1.00) | uneven (0.38–0.88) | the **causation question** (root-cause 5/5, 40/40) | 5/5 damaging, unevenly visible |
 
 > The sharp claim is the **deception gap**: for a whole class of faults, *more rule/spec observability
 > does not help* — the corrupted observation fools the auditor exactly as it fooled the agent, so
 > post-hoc attribution needs re-verifiable **world state**, not better logs. The two new shapes add a
 > limit: outcome-informed **root-cause** reasoning recovers deceptions on pick-then-finalize tasks but
-> **fails on a diagnostic chain and an accumulation loop** (staleness 3/8 and 0/8), where an honest
-> alternative explanation is equally available. Dumb baselines (grep/recency) always cry wolf (100%
+> **fails on both a diagnostic chain and an accumulation loop** (staleness 0/8 on each), where an
+> honest alternative explanation is equally available. Dumb baselines (grep/recency) always cry wolf (100%
 > false-positive) and get ~0–0.19 recall; the LLM auditor has 0 false-positives. Recovery follows
 > attribution: restoring the correctly localized rule recovers **4/4** variants vs **0/4** for a
 > misdiagnosed repair (lift **+1.00**, p = 0.029, two domains).

@@ -18,3 +18,4 @@ results/raw/
 # secrets
 .env
 *.key
+scratchpad/

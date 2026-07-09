@@ -300,18 +300,18 @@
     "staleness": {
       "opus": {
         "blind": {
-          "detect": 7,
+          "detect": 8,
           "attr": 0,
           "n": 8
         },
         "policy": {
-          "detect": 7,
+          "detect": 6,
           "attr": 0,
           "n": 8
         },
         "rootcause": {
           "detect": 8,
-          "attr": 3,
+          "attr": 0,
           "n": 8
         }
       }
@@ -319,8 +319,8 @@
     "misexec": {
       "opus": {
         "blind": {
-          "detect": 6,
-          "attr": 1,
+          "detect": 4,
+          "attr": 0,
           "n": 8
         },
         "policy": {
@@ -338,13 +338,13 @@
     "forget": {
       "opus": {
         "blind": {
-          "detect": 7,
-          "attr": 7,
+          "detect": 8,
+          "attr": 8,
           "n": 8
         },
         "policy": {
-          "detect": 1,
-          "attr": 1,
+          "detect": 7,
+          "attr": 7,
           "n": 8
         },
         "rootcause": {
@@ -356,10 +356,29 @@
     }
   },
   "reconcile": {
-    "staleness": {
+    "cdrop": {
       "opus": {
         "blind": {
           "detect": 0,
+          "attr": 0,
+          "n": 8
+        },
+        "deleak": {
+          "detect": 0,
+          "attr": 0,
+          "n": 8
+        },
+        "policy": {
+          "detect": 7,
+          "attr": 7,
+          "n": 8
+        }
+      }
+    },
+    "staleness": {
+      "opus": {
+        "blind": {
+          "detect": 4,
           "attr": 0,
           "n": 8
         },
@@ -378,7 +397,7 @@
     "misexec": {
       "opus": {
         "blind": {
-          "detect": 1,
+          "detect": 0,
           "attr": 0,
           "n": 8
         },
@@ -388,7 +407,7 @@
           "n": 8
         },
         "rootcause": {
-          "detect": 8,
+          "detect": 7,
           "attr": 0,
           "n": 8
         }
@@ -397,37 +416,18 @@
     "forget": {
       "opus": {
         "blind": {
-          "detect": 7,
-          "attr": 7,
+          "detect": 8,
+          "attr": 8,
           "n": 8
         },
         "policy": {
-          "detect": 4,
-          "attr": 4,
+          "detect": 7,
+          "attr": 7,
           "n": 8
         },
         "rootcause": {
           "detect": 8,
           "attr": 8,
-          "n": 8
-        }
-      }
-    },
-    "cdrop": {
-      "opus": {
-        "blind": {
-          "detect": 1,
-          "attr": 1,
-          "n": 8
-        },
-        "deleak": {
-          "detect": 1,
-          "attr": 1,
-          "n": 8
-        },
-        "policy": {
-          "detect": 7,
-          "attr": 7,
           "n": 8
         }
       }

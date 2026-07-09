@@ -317,8 +317,11 @@ and an **accumulation loop** that validates ~14 items in sequence:
 | conference | 0/8 / **0/8** / 8/8 | 0/7 / 0/7 / **7/7** | 8/8 / 7/8 / 8/8 |
 | scheduling | 0/8 / **0/8** / 7/8 | 0/8 / 0/8 / **8/8** | 1/8 / 3/8 / 8/8 |
 | review | 0/8 / **0/8** / 3/8 | — (fault null) | 0/8 / 3/8 / 8/8 |
-| **incident** | 0/8 / **0/8** / 3/8 | *n/a* | 7/8 / **1/8** / 8/8 |
-| **reconcile** | 0/8 / **0/8** / **0/8** | 1/8 / 1/8 / **7/8** | 7/8 / 4/8 / 8/8 |
+| **incident** | 0/8 / **0/8** / **0/8** | *n/a* | 8/8 / 7/8 / 8/8 |
+| **reconcile** | 0/8 / **0/8** / **0/8** | 0/8 / 0/8 / **7/8** | 8/8 / 7/8 / 8/8 |
+
+(All five domains' incident/reconcile cells are re-audited from **committed states** via
+`attribute.py`, so every rate above replays from committed data — see the reproducibility note below.)
 
 Four findings:
 
@@ -330,10 +333,11 @@ Four findings:
   paper's central claim, now a five-domain regularity.
 - **Root-cause recovery of deceptions is *task-shape-dependent* — a new limit exposed by the two new
   shapes.** The outcome-informed root-cause auditor recovers staleness on the pick-then-finalize
-  shapes (conference 8/8, scheduling 7/8) but *fails* on the diagnostic chain (incident 3/8) and the
-  accumulation loop (**reconcile 0/8**). The reason is that both new shapes admit an equally-plausible
-  *honest* alternative for the same symptom: on the chain, "the fix silently didn't take" competes
-  with "the health reading was stale"; on the loop, an over-approved batch reads as ordinary
+  shapes (conference 8/8, scheduling 7/8) but *fails on both new shapes*: the diagnostic chain
+  (**incident 0/8**) and the accumulation loop (**reconcile 0/8**). The reason is that both admit an
+  equally-plausible *honest* alternative for the same symptom: on the chain, "the fix silently didn't
+  take" competes with "the health reading was stale" (auditors overwhelmingly pick the former — the
+  service visibly stays degraded after the fix); on the loop, an over-approved batch reads as ordinary
   over-eagerness. Outcome-informed root-cause reasoning is **not** a universal fix for deceptions —
   it degrades to the most *available* failure story, and diffuse-symptom shapes offer competitors.
 - **The deletion gap replicates 3/3** (where the fault manifests). Blind and de-leak (full rulebook
@@ -341,23 +345,33 @@ Four findings:
   7/7, scheduling 8/8, reconcile 7/8). On review, dropping the approval rule causes **no failures at
   all** — agents don't merge unreviewed code even unprompted — reconfirming that a dropped rule only
   bites when it is *binding and non-redundant* (D-014).
-- **"Omission" splits by whether it forces a downstream violation — a culpability-vs-causation
-  effect, not visibility — and the oracle can actively *hurt*.** A verified mechanism check (agents
-  *attempted* the missing tool in **8/8 traces on all five domains**, so the failed call is in every
-  trace) shows the auditors **see** the omission everywhere; what differs is the *blame judgment*.
-  Where the missing tool is **mid-sequence** (conference), the agent's *own next action* violates a
-  standing rule → auditors blame the agent (8/8 blind). Where it is the **terminal step**
-  (scheduling/review/incident/reconcile), the agent attempts it, errors, and ends — a perfectly-behaved
-  agent whose environment failed — so auditors *correctly* answer "the agent made no mistake". The
-  new **incident** domain sharpens this into its cleanest form: blind attribution is **7/8** (the
-  auditor reports the visible `close_incident` tool error), but adding the full policy *drops it to
-  **1/8*** — with the rulebook in hand and a culpability framing, the auditor reasons "the agent tried
-  and the tool failed, so it isn't at fault" and returns *none*. **More reference information made
-  attribution worse.** This exposes an instrument insight that applies to attribution benchmarks
-  generally (incl. Who&When's "which agent caused the failure"): asking "**did the agent err?**"
-  conflates *culpability* with *causation*. Reframed as "**why did this run fail?**", the root-cause
-  arm restores forget to **8/8 on all five domains** — the only arm that localizes omissions
-  robustly.
+- **"Omission" is visible-but-mis-blamed under the culpability question; only the causation question
+  localizes it robustly.** Auditors *see* the omission (agents attempt the missing tool, so a failed
+  call or a stalled terminal step is in the trace), but blind attribution swings on **salience**:
+  where the missing tool leaves a loud error or a downstream rule-violation it is blamed (conference
+  8/8, incident 8/8, reconcile 8/8), but where the agent simply attempts a terminal step and stops
+  cleanly it is not (scheduling 1/8, review 0/8). The full policy (oracle) does **not** reliably fix
+  this — it helps unevenly (forget oracle 27/40 aggregate: 7/8, 3/8, 3/8, 7/8, 7/8) because a
+  *culpability* framing ("did the agent err?") exonerates an agent whose tool was removed. Reframed as
+  "**why did this run fail?**", the root-cause arm restores forget to **8/8 on all five domains
+  (40/40)** — the *only* arm that localizes omissions robustly. This exposes an instrument insight
+  that applies to attribution benchmarks generally (incl. Who&When's "which agent caused the
+  failure"): asking "did the agent err?" conflates *culpability* with *causation*; for fault
+  localization the question must be causal.
+  <br>*(Reproducibility note: an earlier non-committed audit render put incident forget oracle at
+  1/8 — a dramatic "the oracle exonerates" instance that did **not** replay from committed states,
+  where it is 7/8. The committed-state numbers above are canonical; the effect survives only as the
+  blind→root-cause jump on the clean-terminal domains, review 0/8→8/8 and scheduling 1/8→8/8, not as
+  an oracle that actively harms.)*
+
+**Reproducibility note (incident + reconcile).** The two new domains' attribution cells were
+re-audited from the **committed state files** via `experiments/attribute.py` (the same canonical trace
+set the cross-family Codex probe consumes), so every rate replays from committed data. This caught a
+real correction: a first, non-committed audit render had put incident-forget-oracle at **1/8** (a
+striking "the oracle exonerates the agent" instance) and incident-staleness-root-cause at 3/8; neither
+replayed from committed states (7/8 and 0/8 respectively). The committed-state numbers are canonical;
+the culpability-vs-causation effect survives as the blind→root-cause jump on clean-terminal domains
+(review 0→8/8, scheduling 1→8/8), not as an oracle that actively harms.
 
 **Methodological note (reported for transparency).** The first cross-domain audit used staleness
 injectors that emitted a self-labelling "(cached)" tag; on domains whose rules say "confirm *live*",
@@ -400,10 +414,10 @@ inc / rec):
 
 | fault | blind | oracle (+policy) | root-cause (+outcome) | what closes the gap |
 |---|---|---|---|---|
-| staleness | 0/40 | 0/40 | **21/40** (8, 7, 3, 3, 0 /8) | outcome, partially — **task-shape-dependent**, 0 on the loop |
-| misexecution | 1/40 | 0/40 | **15/40** (7, 6, 2, 0, 0 /8) | outcome — but only when the symptom implicates the *action* |
-| constraint_drop | 1/23 | 1/23 (de-leak) | 22/23 (oracle) | the exact deleted rule (conf/sched/rec; rev+inc n/a) |
-| forget | 23/40 | 18/40 | **40/40** | the causation question — the *only* arm robust across shapes |
+| staleness | 0/40 | 0/40 | **18/40** (8, 7, 3, 0, 0 /8) | outcome, partially — **task-shape-dependent**, 0 on chain + loop |
+| misexecution | 0/40 | 0/40 | **15/40** (7, 6, 2, 0, 0 /8) | outcome — but only when the symptom implicates the *action* |
+| constraint_drop | 0/23 | 0/23 (de-leak) | 22/23 (oracle) | the exact deleted rule (conf/sched/rec; rev+inc n/a) |
+| forget | 25/40 | 27/40 | **40/40** | the causation question — the *only* arm robust across shapes |
 
 > Grading note (Codex audit, finding 1): misexecution is graded **strictly** — the culprit must name
 > the misexecuted *action* (`book_flight`/`book_room`/`merge_pr`) **and** a substitution concept,
@@ -424,12 +438,14 @@ Two findings:
   over-eagerness. Even outcome-informed attribution degrades to the most *available* fault story,
   which competing deceptions and diffuse symptoms hijack. (The *specific* substituted item is
   unknowable without ground-truth state; auditors' guesses at it were usually wrong.)
-- **The omission gap was a question-framing artifact — robust across all five shapes.** Root-cause
-  framing takes forget from 23/40 blind to **40/40** — auditors always *saw* the failed tool call;
-  asked the causation question, they name it every time, on all five domains. Staleness recovers only
-  partially and *unevenly by task shape* (conference 8/8, scheduling 7/8, review 3/8, incident 3/8,
-  reconcile **0/8**) — with no trace inconsistency to reason from, the auditor must *conjecture* that
-  the data was wrong, which fails when an honest alternative explanation is equally available.
+- **The omission gap is a question-framing effect — root-cause framing is robust across all five
+  shapes.** Root-cause framing takes forget from 25/40 blind (and 27/40 even with the full policy) to
+  **40/40** — auditors always *saw* the failed tool call; asked the causation question, they name it
+  every time, on all five domains, where the culpability question exonerates. Staleness recovers only
+  partially and *unevenly by task shape* (conference 8/8, scheduling 7/8, review 3/8, incident
+  **0/8**, reconcile **0/8**) — with no trace inconsistency to reason from, the auditor must
+  *conjecture* that the data was wrong, which fails on both new shapes where an honest alternative
+  explanation (a fix that silently didn't take; ordinary over-approval) is equally available.
 
 **The information ladder, final form.** What an auditor needs is fault-type-structured:
 *trace only* (agent-caused errors, forced-violation omissions) → *+ outcome* (misexecution, via
@@ -502,7 +518,7 @@ broad-coverage benchmark.
   ≥3-domain bar is exceeded (sham-controlled degradation + a measured attribution gap on conference,
   scheduling, review, incident, reconcile). The last two deliberately break the shared shape — a
   diagnostic chain (fault surfaces downstream of its cause) and a ~14-step accumulation loop — and it
-  was on exactly these shapes that root-cause recovery of deceptions *failed* (staleness 3/8 and 0/8),
+  was on exactly these shapes that root-cause recovery of deceptions *failed* (staleness 0/8 on both),
   which is the point of adding them. Still true: all five are synthetic office-workflow tasks under
   ~30 steps; the cross-*tier* panel exists only for conference cdrop; recovery is measured on two
   domains; debris/contradiction were exercised only on the first three. Longer-horizon (tens–hundreds

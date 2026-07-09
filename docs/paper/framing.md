@@ -30,14 +30,19 @@ is insufficient for a whole class of failures; you must retain re-verifiable gro
 
 **Phase-3 refinement (2026-07-04): the ladder gained an OUTCOME rung and a second deception type.**
 Misexecution (deceptive confirmation) is blind-0 AND oracle-0; an outcome-informed *root-cause*
-auditor recovers it **15/24** by inference ("visible decisions compliant + run failed ⇒ a tool
-lied") — **but only when the failure symptom implicates the action tool** (conference 7/8, scheduling
-6/8, review just 2/8, where auditors instead blame the CI check). The same framing closes the omission
-gap entirely (24/24 — it was a culpability-question artifact) and recovers staleness partially (18/24,
-domain-dependent). Final ladder: trace → +outcome → +policy → +state, with fault types on different
-rungs. Caveats: the root-cause arm bundles outcome-knowledge with the causation question (dissection =
-future work); cdrop×root-cause is an unrun cell; misexec is graded strictly (action-locus + substitution)
-after a Codex audit caught a lenient grader inflating it to 23/24.
+auditor recovers it **15/40** (across 5 domains) by inference ("visible decisions compliant + run
+failed ⇒ a tool lied") — **but only when the failure symptom implicates the action tool** (conference
+7/8, scheduling 6/8, review 2/8, and **0/8 on the incident chain and reconcile loop**). The same
+framing closes the omission gap (**forget 40/40** — a culpability-question artifact) and recovers
+staleness partially (**18/40**: conference 8/8, scheduling 7/8, review 3/8, but **0/8 on both new
+shapes** — root-cause recovery of deceptions is task-shape-dependent, failing where an honest
+alternative explanation for the same symptom is equally available). Final ladder: trace → +outcome →
++policy → +state, with fault types on different rungs. Caveats: the root-cause arm bundles
+outcome-knowledge with the causation question (dissection = future work); cdrop×root-cause is an unrun
+cell; misexec is graded strictly (action-locus + substitution) after a Codex audit caught a lenient
+grader inflating it to 23/24. All incident/reconcile cells re-audited from committed states (an
+earlier non-committed render put incident-forget-oracle at a dramatic 1/8; it is 7/8 on committed
+data — the "oracle exonerates" instance did not replay, so it is not claimed).
 
 **Cross-domain status (2026-07-04).** Two regimes are ROBUST across domains: the **deception gap**
 replicates **3/3** (staleness: blind 0, oracle 0 on stale-price / availability / CI) and the
@@ -79,7 +84,7 @@ the labelled-vs-unlabelled contrast is itself reportable.)
 | # | Experiment | Why it's load-bearing | Status |
 |---|---|---|---|
 | E1 | The ladder holds on **≥3 task domains**, not one | generality — without it, "one toy" | **DONE (exceeded)** — **5** domains wired + collected (conference, scheduling, review, incident, reconcile); last two break the shared pick-then-finalize shape (diagnostic chain + accumulation loop) |
-| E2 | The **deception gap** replicates for staleness across domains | the sharp claim can't be a single dot | **DONE** — replicates **5/5** (blind 0, oracle 0 on stale price / availability / CI / service-health / receipt). New limit surfaced: outcome-informed root-cause recovery is *task-shape-dependent* (staleness recovered 8/8 on pick tasks, 0/8 on the accumulation loop) |
+| E2 | The **deception gap** replicates for staleness across domains | the sharp claim can't be a single dot | **DONE** — replicates **5/5** (blind 0, oracle 0 on stale price / availability / CI / service-health / receipt). New limit surfaced: outcome-informed root-cause recovery is *task-shape-dependent* (staleness recovered 8/8 conf, 7/8 sched, but **0/8 on both** the diagnostic chain and the accumulation loop) |
 | E3 | **External validity:** injected-fault failures resemble organic ones (or a measured characterization of the gap) | the premise the whole method rests on | **ADDRESSED (characterized)** — 2/28 organic failures elicited (xhard); 6/6 blind-attributable → agent-caused failures are trace-visible; environment faults are the blame-gap regime and are un-elicitable by definition (their realism is an infrastructure fact) |
 | E4 | **Method comparison** (baselines vs LLM auditor vs oracle) with clean labels, per fault type | C3; the reviewer's money table | **DONE** — random/recency/keyword + stepwise (Who&When-style) + all-at-once blind + oracle + root-cause, per fault family; ranking is fault-type-dependent; step-walking cannot fix deception blindness |
 | E5 | **Cross-provider grader** — the ladder isn't a same-family artifact | kills R6 | within-Claude done; cross-provider open (Phase 4, needs paid budget) |

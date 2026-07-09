@@ -1,0 +1,534 @@
+[
+ {
+  "file": "experiments/decisions/states/staleness_v0_1.json",
+  "arm": "blind",
+  "domain": "conference",
+  "condition": "staleness",
+  "variant": 0
+ },
+ {
+  "file": "experiments/decisions/states/staleness_v0_1.json",
+  "arm": "policy",
+  "domain": "conference",
+  "condition": "staleness",
+  "variant": 0
+ },
+ {
+  "file": "experiments/decisions/states/staleness_v1_1.json",
+  "arm": "blind",
+  "domain": "conference",
+  "condition": "staleness",
+  "variant": 1
+ },
+ {
+  "file": "experiments/decisions/states/staleness_v1_1.json",
+  "arm": "policy",
+  "domain": "conference",
+  "condition": "staleness",
+  "variant": 1
+ },
+ {
+  "file": "experiments/decisions/states/staleness_v2_1.json",
+  "arm": "blind",
+  "domain": "conference",
+  "condition": "staleness",
+  "variant": 2
+ },
+ {
+  "file": "experiments/decisions/states/staleness_v2_1.json",
+  "arm": "policy",
+  "domain": "conference",
+  "condition": "staleness",
+  "variant": 2
+ },
+ {
+  "file": "experiments/decisions/states/staleness_v3_1.json",
+  "arm": "blind",
+  "domain": "conference",
+  "condition": "staleness",
+  "variant": 3
+ },
+ {
+  "file": "experiments/decisions/states/staleness_v3_1.json",
+  "arm": "policy",
+  "domain": "conference",
+  "condition": "staleness",
+  "variant": 3
+ },
+ {
+  "file": "experiments/decisions/states_scheduling/staleness_v0_1.json",
+  "arm": "blind",
+  "domain": "scheduling",
+  "condition": "staleness",
+  "variant": 0
+ },
+ {
+  "file": "experiments/decisions/states_scheduling/staleness_v0_1.json",
+  "arm": "policy",
+  "domain": "scheduling",
+  "condition": "staleness",
+  "variant": 0
+ },
+ {
+  "file": "experiments/decisions/states_scheduling/staleness_v1_1.json",
+  "arm": "blind",
+  "domain": "scheduling",
+  "condition": "staleness",
+  "variant": 1
+ },
+ {
+  "file": "experiments/decisions/states_scheduling/staleness_v1_1.json",
+  "arm": "policy",
+  "domain": "scheduling",
+  "condition": "staleness",
+  "variant": 1
+ },
+ {
+  "file": "experiments/decisions/states_scheduling/staleness_v2_1.json",
+  "arm": "blind",
+  "domain": "scheduling",
+  "condition": "staleness",
+  "variant": 2
+ },
+ {
+  "file": "experiments/decisions/states_scheduling/staleness_v2_1.json",
+  "arm": "policy",
+  "domain": "scheduling",
+  "condition": "staleness",
+  "variant": 2
+ },
+ {
+  "file": "experiments/decisions/states_scheduling/staleness_v3_1.json",
+  "arm": "blind",
+  "domain": "scheduling",
+  "condition": "staleness",
+  "variant": 3
+ },
+ {
+  "file": "experiments/decisions/states_scheduling/staleness_v3_1.json",
+  "arm": "policy",
+  "domain": "scheduling",
+  "condition": "staleness",
+  "variant": 3
+ },
+ {
+  "file": "experiments/decisions/states_review/staleness_v0_1.json",
+  "arm": "blind",
+  "domain": "review",
+  "condition": "staleness",
+  "variant": 0
+ },
+ {
+  "file": "experiments/decisions/states_review/staleness_v0_1.json",
+  "arm": "policy",
+  "domain": "review",
+  "condition": "staleness",
+  "variant": 0
+ },
+ {
+  "file": "experiments/decisions/states_review/staleness_v1_1.json",
+  "arm": "blind",
+  "domain": "review",
+  "condition": "staleness",
+  "variant": 1
+ },
+ {
+  "file": "experiments/decisions/states_review/staleness_v1_1.json",
+  "arm": "policy",
+  "domain": "review",
+  "condition": "staleness",
+  "variant": 1
+ },
+ {
+  "file": "experiments/decisions/states_review/staleness_v2_1.json",
+  "arm": "blind",
+  "domain": "review",
+  "condition": "staleness",
+  "variant": 2
+ },
+ {
+  "file": "experiments/decisions/states_review/staleness_v2_1.json",
+  "arm": "policy",
+  "domain": "review",
+  "condition": "staleness",
+  "variant": 2
+ },
+ {
+  "file": "experiments/decisions/states_review/staleness_v3_1.json",
+  "arm": "blind",
+  "domain": "review",
+  "condition": "staleness",
+  "variant": 3
+ },
+ {
+  "file": "experiments/decisions/states_review/staleness_v3_1.json",
+  "arm": "policy",
+  "domain": "review",
+  "condition": "staleness",
+  "variant": 3
+ },
+ {
+  "file": "experiments/decisions/states_incident/staleness_v0_1.json",
+  "arm": "blind",
+  "domain": "incident",
+  "condition": "staleness",
+  "variant": 0
+ },
+ {
+  "file": "experiments/decisions/states_incident/staleness_v0_1.json",
+  "arm": "policy",
+  "domain": "incident",
+  "condition": "staleness",
+  "variant": 0
+ },
+ {
+  "file": "experiments/decisions/states_incident/staleness_v1_1.json",
+  "arm": "blind",
+  "domain": "incident",
+  "condition": "staleness",
+  "variant": 1
+ },
+ {
+  "file": "experiments/decisions/states_incident/staleness_v1_1.json",
+  "arm": "policy",
+  "domain": "incident",
+  "condition": "staleness",
+  "variant": 1
+ },
+ {
+  "file": "experiments/decisions/states_incident/staleness_v2_1.json",
+  "arm": "blind",
+  "domain": "incident",
+  "condition": "staleness",
+  "variant": 2
+ },
+ {
+  "file": "experiments/decisions/states_incident/staleness_v2_1.json",
+  "arm": "policy",
+  "domain": "incident",
+  "condition": "staleness",
+  "variant": 2
+ },
+ {
+  "file": "experiments/decisions/states_incident/staleness_v3_1.json",
+  "arm": "blind",
+  "domain": "incident",
+  "condition": "staleness",
+  "variant": 3
+ },
+ {
+  "file": "experiments/decisions/states_incident/staleness_v3_1.json",
+  "arm": "policy",
+  "domain": "incident",
+  "condition": "staleness",
+  "variant": 3
+ },
+ {
+  "file": "experiments/decisions/states_reconcile/staleness_v0_1.json",
+  "arm": "blind",
+  "domain": "reconcile",
+  "condition": "staleness",
+  "variant": 0
+ },
+ {
+  "file": "experiments/decisions/states_reconcile/staleness_v0_1.json",
+  "arm": "policy",
+  "domain": "reconcile",
+  "condition": "staleness",
+  "variant": 0
+ },
+ {
+  "file": "experiments/decisions/states_reconcile/staleness_v1_1.json",
+  "arm": "blind",
+  "domain": "reconcile",
+  "condition": "staleness",
+  "variant": 1
+ },
+ {
+  "file": "experiments/decisions/states_reconcile/staleness_v1_1.json",
+  "arm": "policy",
+  "domain": "reconcile",
+  "condition": "staleness",
+  "variant": 1
+ },
+ {
+  "file": "experiments/decisions/states_reconcile/staleness_v2_1.json",
+  "arm": "blind",
+  "domain": "reconcile",
+  "condition": "staleness",
+  "variant": 2
+ },
+ {
+  "file": "experiments/decisions/states_reconcile/staleness_v2_1.json",
+  "arm": "policy",
+  "domain": "reconcile",
+  "condition": "staleness",
+  "variant": 2
+ },
+ {
+  "file": "experiments/decisions/states_reconcile/staleness_v3_1.json",
+  "arm": "blind",
+  "domain": "reconcile",
+  "condition": "staleness",
+  "variant": 3
+ },
+ {
+  "file": "experiments/decisions/states_reconcile/staleness_v3_1.json",
+  "arm": "policy",
+  "domain": "reconcile",
+  "condition": "staleness",
+  "variant": 3
+ },
+ {
+  "file": "experiments/decisions/states/cdrop-2_v0_1.json",
+  "arm": "blind",
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "variant": 0
+ },
+ {
+  "file": "experiments/decisions/states/cdrop-2_v0_1.json",
+  "arm": "deleak",
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "variant": 0
+ },
+ {
+  "file": "experiments/decisions/states/cdrop-2_v0_1.json",
+  "arm": "policy",
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "variant": 0
+ },
+ {
+  "file": "experiments/decisions/states/cdrop-2_v1_1.json",
+  "arm": "blind",
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "variant": 1
+ },
+ {
+  "file": "experiments/decisions/states/cdrop-2_v1_1.json",
+  "arm": "deleak",
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "variant": 1
+ },
+ {
+  "file": "experiments/decisions/states/cdrop-2_v1_1.json",
+  "arm": "policy",
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "variant": 1
+ },
+ {
+  "file": "experiments/decisions/states/cdrop-2_v2_1.json",
+  "arm": "blind",
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "variant": 2
+ },
+ {
+  "file": "experiments/decisions/states/cdrop-2_v2_1.json",
+  "arm": "deleak",
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "variant": 2
+ },
+ {
+  "file": "experiments/decisions/states/cdrop-2_v2_1.json",
+  "arm": "policy",
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "variant": 2
+ },
+ {
+  "file": "experiments/decisions/states/cdrop-2_v3_1.json",
+  "arm": "blind",
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "variant": 3
+ },
+ {
+  "file": "experiments/decisions/states/cdrop-2_v3_1.json",
+  "arm": "deleak",
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "variant": 3
+ },
+ {
+  "file": "experiments/decisions/states/cdrop-2_v3_1.json",
+  "arm": "policy",
+  "domain": "conference",
+  "condition": "cdrop:2",
+  "variant": 3
+ },
+ {
+  "file": "experiments/decisions/states_scheduling/cdrop-3_v0_1.json",
+  "arm": "blind",
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "variant": 0
+ },
+ {
+  "file": "experiments/decisions/states_scheduling/cdrop-3_v0_1.json",
+  "arm": "deleak",
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "variant": 0
+ },
+ {
+  "file": "experiments/decisions/states_scheduling/cdrop-3_v0_1.json",
+  "arm": "policy",
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "variant": 0
+ },
+ {
+  "file": "experiments/decisions/states_scheduling/cdrop-3_v1_1.json",
+  "arm": "blind",
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "variant": 1
+ },
+ {
+  "file": "experiments/decisions/states_scheduling/cdrop-3_v1_1.json",
+  "arm": "deleak",
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "variant": 1
+ },
+ {
+  "file": "experiments/decisions/states_scheduling/cdrop-3_v1_1.json",
+  "arm": "policy",
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "variant": 1
+ },
+ {
+  "file": "experiments/decisions/states_scheduling/cdrop-3_v2_1.json",
+  "arm": "blind",
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "variant": 2
+ },
+ {
+  "file": "experiments/decisions/states_scheduling/cdrop-3_v2_1.json",
+  "arm": "deleak",
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "variant": 2
+ },
+ {
+  "file": "experiments/decisions/states_scheduling/cdrop-3_v2_1.json",
+  "arm": "policy",
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "variant": 2
+ },
+ {
+  "file": "experiments/decisions/states_scheduling/cdrop-3_v3_1.json",
+  "arm": "blind",
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "variant": 3
+ },
+ {
+  "file": "experiments/decisions/states_scheduling/cdrop-3_v3_1.json",
+  "arm": "deleak",
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "variant": 3
+ },
+ {
+  "file": "experiments/decisions/states_scheduling/cdrop-3_v3_1.json",
+  "arm": "policy",
+  "domain": "scheduling",
+  "condition": "cdrop:3",
+  "variant": 3
+ },
+ {
+  "file": "experiments/decisions/states_reconcile/cdrop-1_v0_1.json",
+  "arm": "blind",
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "variant": 0
+ },
+ {
+  "file": "experiments/decisions/states_reconcile/cdrop-1_v0_1.json",
+  "arm": "deleak",
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "variant": 0
+ },
+ {
+  "file": "experiments/decisions/states_reconcile/cdrop-1_v0_1.json",
+  "arm": "policy",
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "variant": 0
+ },
+ {
+  "file": "experiments/decisions/states_reconcile/cdrop-1_v1_1.json",
+  "arm": "blind",
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "variant": 1
+ },
+ {
+  "file": "experiments/decisions/states_reconcile/cdrop-1_v1_1.json",
+  "arm": "deleak",
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "variant": 1
+ },
+ {
+  "file": "experiments/decisions/states_reconcile/cdrop-1_v1_1.json",
+  "arm": "policy",
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "variant": 1
+ },
+ {
+  "file": "experiments/decisions/states_reconcile/cdrop-1_v2_1.json",
+  "arm": "blind",
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "variant": 2
+ },
+ {
+  "file": "experiments/decisions/states_reconcile/cdrop-1_v2_1.json",
+  "arm": "deleak",
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "variant": 2
+ },
+ {
+  "file": "experiments/decisions/states_reconcile/cdrop-1_v2_1.json",
+  "arm": "policy",
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "variant": 2
+ },
+ {
+  "file": "experiments/decisions/states_reconcile/cdrop-1_v3_1.json",
+  "arm": "blind",
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "variant": 3
+ },
+ {
+  "file": "experiments/decisions/states_reconcile/cdrop-1_v3_1.json",
+  "arm": "deleak",
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "variant": 3
+ },
+ {
+  "file": "experiments/decisions/states_reconcile/cdrop-1_v3_1.json",
+  "arm": "policy",
+  "domain": "reconcile",
+  "condition": "cdrop:1",
+  "variant": 3
+ }
+]
