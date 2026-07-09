@@ -1,1 +1,1 @@
-{"condition": "misexec", "domain": "scheduling", "variant": 0, "decisions": []}
+{"condition": "misexec", "domain": "scheduling", "variant": 0, "decisions": [{"tool": "list_slots", "args": {}}, {"tool": "list_rooms", "args": {}}]}

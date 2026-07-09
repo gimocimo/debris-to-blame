@@ -1,1 +1,1 @@
-{"condition": "healthy", "domain": "review", "variant": 1, "decisions": []}
+{"condition": "healthy", "domain": "review", "variant": 1, "decisions": [{"tool": "list_prs", "args": {}}, {"tool": "check_ci", "args": {"pr": "W1"}}, {"tool": "check_ci", "args": {"pr": "W2"}}, {"tool": "merge_pr", "args": {"pr": "W2"}}, {"tool": "notify_author", "args": {}}, {"tool": "close_ticket", "args": {}}]}

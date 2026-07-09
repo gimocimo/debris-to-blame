@@ -1,1 +1,1 @@
-{"condition": "healthy", "domain": "scheduling", "variant": 2, "decisions": []}
+{"condition": "healthy", "domain": "scheduling", "variant": 2, "decisions": [{"tool": "list_slots", "args": {}}, {"tool": "list_rooms", "args": {}}, {"tool": "check_availability", "args": {"slot": "V1", "room": "PB"}}, {"tool": "check_availability", "args": {"slot": "V2", "room": "PB"}}, {"tool": "book_slot", "args": {"slot": "V2"}}, {"tool": "book_room", "args": {"room": "PB"}}, {"tool": "send_invites", "args": {}}, {"tool": "post_agenda", "args": {}}, {"finish": true}]}
