@@ -112,7 +112,7 @@ def _blamegap_map_figure(deg: dict, att: dict) -> None:
     Shows the two regimes: the deletion gap (closed only by the exact rule) and the deception gap
     (NOT closed by the policy), replicated across domains; forget is salience-dependent.
     """
-    domains = ["conference", "scheduling", "review"]
+    domains = ["conference", "scheduling", "review", "incident", "reconcile"]
     fams = [("staleness", "staleness\n(deceptive data)"),
             ("misexec", "misexecution\n(deceptive confirmation)"),
             ("cdrop", "constraint_drop\n(deletion)"), ("forget", "tool_forgetting\n(omission)")]
@@ -124,9 +124,9 @@ def _blamegap_map_figure(deg: dict, att: dict) -> None:
         c = att.get(dom, {}).get(fam, {}).get("opus", {}).get(arm)
         return (c["attr"] / c["n"]) if c else None
 
-    fig, axes = plt.subplots(1, 4, figsize=(16.5, 4.2), sharey=True)
+    fig, axes = plt.subplots(1, 4, figsize=(20.5, 4.4), sharey=True)
     fig.suptitle("Cross-domain blame-gap map — attributed rate by auditor information "
-                 "(3 domains, sincere agents)", fontsize=11, y=1.04)
+                 "(5 domains, sincere agents)", fontsize=11, y=1.04)
     w = 0.2
     for ax, (fam, title) in zip(axes, fams, strict=True):
         xs = list(range(len(domains)))
@@ -145,7 +145,7 @@ def _blamegap_map_figure(deg: dict, att: dict) -> None:
                 ax.text(x, 0.06, "fault null\n(no failures)", ha="center", fontsize=8,
                         color="#6b7280")
         ax.set_xticks(xs)
-        ax.set_xticklabels(domains)
+        ax.set_xticklabels(domains, rotation=20, ha="right", fontsize=8.5)
         ax.set_ylim(0, 1.18)
         ax.set_yticks([0, 0.5, 1.0])
         ax.set_title(title, fontsize=10)

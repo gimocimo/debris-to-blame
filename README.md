@@ -28,27 +28,32 @@ constraint pinning, memory/context-editing) on a cost–quality–detectability 
 `debris` · `staleness` · `contradiction` · `wrong_tool` · `constraint_drop` · `tool_forgetting`
 — each with a real `volume` severity knob.
 
-### Headline — two blame-gap regimes, replicated across three domains
+### Headline — two blame-gap regimes, replicated across five domains
 
 ![cross-domain blame-gap map](assets/blamegap_map.png)
 
-Multi-step tasks (booking a trip / scheduling a meeting / merging a PR), driven by **sincere agents**
-in **real interactive (ReAct) rollouts**, 4 independent variants per domain, all at **$0** through
-subscription subagents. The faults below each break the task ~always — but *what an auditor needs in
-order to blame them correctly* is a property of the **fault type**, and it replicates across domains:
+Multi-step tasks (booking a trip / scheduling a meeting / merging a PR / triaging an incident down a
+dependency chain / reconciling a ~14-txn batch), driven by **sincere agents** in **real interactive
+(ReAct) rollouts**, 4 independent variants per domain, all at **$0** through subscription subagents.
+The last two domains deliberately break the shared pick-then-finalize *task shape*. The faults below
+each break the task ~always — but *what an auditor needs in order to blame them correctly* is a
+property of the **fault type**, and it replicates across all five:
 
 | regime | blind | + full policy (oracle) | closes only with | replicates |
 |---|---|---|---|---|
-| **deception gap** (staleness: stale price / availability / CI) | **0.00** | **0.00** | **ground-truth world state** | **3/3 domains** |
-| **deletion gap** (constraint_drop; de-leak control 0.00) | **0.00** | **1.00** | the exact deleted rule | 2/2 domains where it bites |
-| omission (tool_forgetting) | salience-dependent (1.00 → 0.00) | 0.38–0.88 | seeing the agent's *failed attempt* | 3/3 damaging, unevenly visible |
+| **deception gap** (staleness: stale price / availability / CI / service-health / receipt) | **0.00** | **0.00** | **ground-truth world state** | **5/5 domains** |
+| **deletion gap** (constraint_drop; de-leak control ≈0) | **≈0.00** | **0.88–1.00** | the exact deleted rule | 3/3 domains where it bites |
+| omission (tool_forgetting) | salience-dependent (0.00 → 1.00) | can *drop* (oracle exonerates) | the **causation question** (root-cause 5/5) | 5/5 damaging, unevenly visible |
 
 > The sharp claim is the **deception gap**: for a whole class of faults, *more rule/spec observability
 > does not help* — the corrupted observation fools the auditor exactly as it fooled the agent, so
-> post-hoc attribution needs re-verifiable **world state**, not better logs. Dumb baselines
-> (grep/recency) always cry wolf (100% false-positive) and get ~0–0.19 recall; the LLM auditor has 0
-> false-positives. Recovery follows attribution: restoring the correctly localized rule recovers
-> **4/4** variants vs **0/4** for a misdiagnosed repair (lift **+1.00**, p = 0.029, two domains).
+> post-hoc attribution needs re-verifiable **world state**, not better logs. The two new shapes add a
+> limit: outcome-informed **root-cause** reasoning recovers deceptions on pick-then-finalize tasks but
+> **fails on a diagnostic chain and an accumulation loop** (staleness 3/8 and 0/8), where an honest
+> alternative explanation is equally available. Dumb baselines (grep/recency) always cry wolf (100%
+> false-positive) and get ~0–0.19 recall; the LLM auditor has 0 false-positives. Recovery follows
+> attribution: restoring the correctly localized rule recovers **4/4** variants vs **0/4** for a
+> misdiagnosed repair (lift **+1.00**, p = 0.029, two domains).
 > ([full results + caveats](docs/results.md))
 
 <details><summary>Method note — why "sincere agents" and "oracle upper bound" matter</summary>
@@ -81,11 +86,12 @@ python3 scripts/make_figure.py     # regenerate the figure above from results/
 
 ### Status
 🚧 Active — now a paper program (see [`docs/paper/framing.md`](docs/paper/framing.md)). **M0/M1 done.
-M2's exit bar (sham-controlled degradation + a measured attribution gap in ≥3 domains) is met on the
-domains axis**: three multi-step domains (conference, scheduling, review) are wired into the
-interactive loop, with the deception gap replicating 3/3 and the deletion gap 2/2 (182 unit tests
-green; every number replays from committed data; audited by an external Codex review, findings fixed). Honest partials: the cross-*tier* panel exists only
-for conference cdrop; recovery is one domain; external validity (organic-vs-injected) remains open.
+M2's exit bar (sham-controlled degradation + a measured attribution gap in ≥3 domains) is exceeded**:
+**five** multi-step domains (conference, scheduling, review, incident, reconcile) are wired into the
+interactive loop, with the deception gap replicating **5/5** and the deletion gap **3/3** where it
+bites (220 unit tests green; every number replays from committed data; audited by an external Codex
+review, findings fixed). Honest partials: the cross-*tier* panel exists only for conference cdrop;
+recovery is one domain; long-horizon (tens–hundreds of steps) and external validity remain open.
 Next: full 6-fault map + attribution-method re-ranking (Phase 3), external validity (Phase 2),
 cross-provider grader (Phase 4). See [`PROJECT_PLAN.md`](PROJECT_PLAN.md) (decision log),
 [`ROADMAP.md`](ROADMAP.md) (milestones), [`docs/results.md`](docs/results.md) (results + caveats).

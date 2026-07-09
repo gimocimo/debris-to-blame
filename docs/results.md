@@ -283,60 +283,81 @@ tool) — so the induced failures are the task's **natural** failure modes (over
 missing step), each mapping to a real agent-failure category. Face validity by construction; a measured
 organic comparison is future work.
 
-## Cross-domain replication — two blame-gap regimes (3 domains)
+## Cross-domain replication — two blame-gap regimes (5 domains)
 
 Everything above was one task family. To test generality (paper E1/E2), the interactive loop was
-extended to **three genuinely different domains**, each with 4 independent variants and its own
-staleness deception:
+extended to **five genuinely different domains**, each with 4 independent variants and its own
+staleness deception. The last two deliberately break the shared *task shape* of the first three
+(pick-then-finalize): a **diagnostic chain** where the fault surfaces far downstream of its cause,
+and an **accumulation loop** that validates ~14 items in sequence:
 
 | domain | task shape | its staleness deception |
 |---|---|---|
 | **conference** | book flight + hotel (two-pick) | cached cheap **price** hides a live surge |
 | **scheduling** | book slot + room (two-pick) | cached "**0 conflicts**" hides a live double-booking |
 | **review** | merge one PR (single-pick) | cached "**CI green**" hides a live red pipeline |
+| **incident** | fix root cause up a dependency **chain** | cached "**healthy**" hides the down root service |
+| **reconcile** | approve/flag a **batch** of ~14 txns | cached matching **receipt** hides a live mismatch |
 
 **Degradation** (sincere agents, variant-clustered; healthy and sham are 0/8 everywhere):
 
-| fault | conference | scheduling | review |
-|---|---|---|---|
-| staleness | 8/8, p=.029 | 8/8, p=.029 | 8/8, p=.029 |
-| forget (required tool missing) | 8/8, p=.029 | 8/8, p=.029 | 8/8, p=.029 |
-| constraint_drop | 7/8 (refundable, p=.14) | 8/8 (boardroom, p=.029) | 0/8 **null** (approval redundant) |
+| fault | conference | scheduling | review | incident | reconcile |
+|---|---|---|---|---|---|
+| staleness | 8/8, p=.029 | 8/8, p=.029 | 8/8, p=.029 | 8/8, p=.029 | 8/8, p=.029 |
+| misexecution | 8/8, p=.029 | 8/8, p=.029 | 8/8, p=.029 | 8/8, p=.029 | 8/8, p=.029 |
+| forget (required tool missing) | 8/8, p=.029 | 8/8, p=.029 | 8/8, p=.029 | 8/8, p=.029 | 8/8, p=.029 |
+| constraint_drop | 7/8 (refundable) | 8/8 (boardroom) | 0/8 **null** | *n/a* | 8/8 (blocked-category) |
 
 **Attribution — the cross-domain blame-gap map** (auditor arms; graded vs the specific fault):
 
 ![cross-domain blame-gap map](../assets/blamegap_map.png)
 
-| domain | staleness blind → oracle | cdrop blind / de-leak / oracle | forget blind → oracle |
+| domain | staleness blind / oracle / root-cause | cdrop blind / de-leak / oracle | forget blind / oracle / root-cause |
 |---|---|---|---|
-| conference | 0/8 → **0/8** | 0/7 / 0/7 / **7/7** | 8/8 → 7/8 |
-| scheduling | 0/8 → **0/8** | 0/8 / 0/8 / **8/8** | 1/8 → 3/8 |
-| review | 0/8 → **0/8** | — (fault null) | 0/8 → 4/8 |
+| conference | 0/8 / **0/8** / 8/8 | 0/7 / 0/7 / **7/7** | 8/8 / 7/8 / 8/8 |
+| scheduling | 0/8 / **0/8** / 7/8 | 0/8 / 0/8 / **8/8** | 1/8 / 3/8 / 8/8 |
+| review | 0/8 / **0/8** / 3/8 | — (fault null) | 0/8 / 3/8 / 8/8 |
+| **incident** | 0/8 / **0/8** / 3/8 | *n/a* | 7/8 / **1/8** / 8/8 |
+| **reconcile** | 0/8 / **0/8** / **0/8** | 1/8 / 1/8 / **7/8** | 7/8 / 4/8 / 8/8 |
 
-Three findings:
+Four findings:
 
-- **The deception gap replicates 3/3.** Staleness breaks the task everywhere, yet is unattributable
-  **even with the full reference policy** — on a stale price, a stale availability count, and a stale
-  CI status. The corrupted observation deceives the auditor exactly as it deceived the agent; both
-  read the trace as compliant. Closing this gap requires **ground-truth world state**, not more
-  spec/rule observability. This is the paper's central claim, now a cross-domain regularity.
-- **The deletion gap replicates 2/2** (where the fault manifests). Blind and de-leak (full rulebook
-  *minus* the dropped line) are 0.00; only restoring the exact deleted rule attributes it (oracle
-  1.0). On review, dropping the approval rule causes **no failures at all** — agents don't merge
-  unreviewed code even unprompted — reconfirming that a dropped rule only bites when it is *binding
-  and non-redundant* (D-014).
+- **The deception gap replicates 5/5.** Staleness breaks the task on every shape, yet its blind AND
+  oracle attribution are **0/8 in all five domains** — a stale price, a stale availability count, a
+  stale CI status, a stale service-health reading, and a stale receipt. The corrupted observation
+  deceives the auditor exactly as it deceived the agent; both read the trace as compliant. Closing
+  this gap requires **ground-truth world state**, not more spec/rule observability. This is the
+  paper's central claim, now a five-domain regularity.
+- **Root-cause recovery of deceptions is *task-shape-dependent* — a new limit exposed by the two new
+  shapes.** The outcome-informed root-cause auditor recovers staleness on the pick-then-finalize
+  shapes (conference 8/8, scheduling 7/8) but *fails* on the diagnostic chain (incident 3/8) and the
+  accumulation loop (**reconcile 0/8**). The reason is that both new shapes admit an equally-plausible
+  *honest* alternative for the same symptom: on the chain, "the fix silently didn't take" competes
+  with "the health reading was stale"; on the loop, an over-approved batch reads as ordinary
+  over-eagerness. Outcome-informed root-cause reasoning is **not** a universal fix for deceptions —
+  it degrades to the most *available* failure story, and diffuse-symptom shapes offer competitors.
+- **The deletion gap replicates 3/3** (where the fault manifests). Blind and de-leak (full rulebook
+  *minus* the dropped line) are ≈0; only restoring the exact deleted rule attributes it (conference
+  7/7, scheduling 8/8, reconcile 7/8). On review, dropping the approval rule causes **no failures at
+  all** — agents don't merge unreviewed code even unprompted — reconfirming that a dropped rule only
+  bites when it is *binding and non-redundant* (D-014).
 - **"Omission" splits by whether it forces a downstream violation — a culpability-vs-causation
-  effect, not visibility.** A verified mechanism check (agents *attempted* the missing tool in
-  **8/8 traces on all three domains**, so the failed call is in every trace) shows the auditors
-  **see** the omission everywhere; what differs is the *blame judgment*. On conference the missing
-  tool is **mid-sequence**: the agent then sends the itinerary anyway, so its *own next action*
-  violates the "file, then send" rule → auditors blame the agent (8/8 blind). On scheduling/review
-  the missing tool is the **terminal step**: the agent attempts it, errors, and ends — a
-  perfectly-behaved agent whose environment failed — so auditors *correctly* answer "the agent made
-  no mistake" (0–1/8), even with the policy (0.38–0.50). This exposes an instrument insight that
-  applies to attribution benchmarks generally (incl. Who&When's "which agent caused the failure"):
-  asking "**did the agent err?**" conflates *culpability* with *causation*. For fault localization
-  the right question is "**why did this run fail?**" — a root-cause arm added in Phase 3.
+  effect, not visibility — and the oracle can actively *hurt*.** A verified mechanism check (agents
+  *attempted* the missing tool in **8/8 traces on all five domains**, so the failed call is in every
+  trace) shows the auditors **see** the omission everywhere; what differs is the *blame judgment*.
+  Where the missing tool is **mid-sequence** (conference), the agent's *own next action* violates a
+  standing rule → auditors blame the agent (8/8 blind). Where it is the **terminal step**
+  (scheduling/review/incident/reconcile), the agent attempts it, errors, and ends — a perfectly-behaved
+  agent whose environment failed — so auditors *correctly* answer "the agent made no mistake". The
+  new **incident** domain sharpens this into its cleanest form: blind attribution is **7/8** (the
+  auditor reports the visible `close_incident` tool error), but adding the full policy *drops it to
+  **1/8*** — with the rulebook in hand and a culpability framing, the auditor reasons "the agent tried
+  and the tool failed, so it isn't at fault" and returns *none*. **More reference information made
+  attribution worse.** This exposes an instrument insight that applies to attribution benchmarks
+  generally (incl. Who&When's "which agent caused the failure"): asking "**did the agent err?**"
+  conflates *culpability* with *causation*. Reframed as "**why did this run fail?**", the root-cause
+  arm restores forget to **8/8 on all five domains** — the only arm that localizes omissions
+  robustly.
 
 **Methodological note (reported for transparency).** The first cross-domain audit used staleness
 injectors that emitted a self-labelling "(cached)" tag; on domains whose rules say "confirm *live*",
@@ -350,8 +371,9 @@ the corruption leaves no lexical tell**.
 
 With misexecution (a second deception TYPE: the world executes something *different* from what the
 agent requested, while the observation claims success) and debris added, **all six fault types of the
-taxonomy are exercised interactively across the three domains**. Degradation (variant-clustered;
-healthy/sham 0/8 everywhere):
+taxonomy are exercised interactively across the first three domains** (staleness/misexec/forget/cdrop
+also run on incident + reconcile; debris/contradiction only on these three). Degradation
+(variant-clustered; healthy/sham 0/8 everywhere):
 
 | fault | conference | scheduling | review | reading |
 |---|---|---|---|---|
@@ -373,12 +395,15 @@ reflecting realistic post-mortem conditions (dissecting the two is future work).
 
 ![cross-domain blame-gap map](../assets/blamegap_map.png)
 
+Aggregated across all **five** domains (per-domain cells in the table above; conf / sched / rev /
+inc / rec):
+
 | fault | blind | oracle (+policy) | root-cause (+outcome) | what closes the gap |
 |---|---|---|---|---|
-| staleness | 0/24 | 0/24 | **18/24** (8/8, 7/8, 3/8) | outcome, partially — domain-dependent |
-| misexecution | 0/24 | 0/24 | **15/24** (7/8, 6/8, 2/8) | outcome — but only when the symptom implicates the *action* |
-| constraint_drop | 0/15 | 15/15 | *(not yet run)* | the exact deleted rule |
-| forget | 9/24 | 13/24 | **24/24** | the causation question |
+| staleness | 0/40 | 0/40 | **21/40** (8, 7, 3, 3, 0 /8) | outcome, partially — **task-shape-dependent**, 0 on the loop |
+| misexecution | 1/40 | 0/40 | **15/40** (7, 6, 2, 0, 0 /8) | outcome — but only when the symptom implicates the *action* |
+| constraint_drop | 1/23 | 1/23 (de-leak) | 22/23 (oracle) | the exact deleted rule (conf/sched/rec; rev+inc n/a) |
+| forget | 23/40 | 18/40 | **40/40** | the causation question — the *only* arm robust across shapes |
 
 > Grading note (Codex audit, finding 1): misexecution is graded **strictly** — the culprit must name
 > the misexecuted *action* (`book_flight`/`book_room`/`merge_pr`) **and** a substitution concept,
@@ -386,22 +411,25 @@ reflecting realistic post-mortem conditions (dissecting the two is future work).
 > tool (e.g. `check_ci`) and reported 23/24; the honest number is **15/24**.
 
 Two findings:
-- **Root-cause reasoning localizes misexecution only when the symptom implicates the action.** Under
-  the culpability question, misexecution is a perfect deception (blind 0 *and* oracle 0 — the trace
-  shows a compliant agent and a success message; nothing names the substitution). An outcome-informed
-  root-cause auditor recovers it by *inference* ("every visible decision is compliant, yet the run
-  failed ⇒ a tool executed something other than it reported") — **but only where the failure symptom
-  points at the action tool**: conference (over-budget ⇒ the *booking* went wrong) **7/8**, scheduling
-  (boardroom booked ⇒ *booking*) **6/8**, but review (a red-CI PR merged) only **2/8**, because
-  "the CI check was stale/wrong" is an equally available — and, here, wrong — hypothesis, so auditors
-  blame `check_ci` instead of `merge_pr`. So even outcome-informed attribution degrades to the most
-  *available* fault story, which competing deceptions can hijack. (The *specific* substituted item is
+- **Root-cause reasoning localizes deceptions only when the symptom implicates the action, and
+  fails on diffuse-symptom task shapes.** Under the culpability question, misexecution is a perfect
+  deception (blind 0 *and* oracle 0 — the trace shows a compliant agent and a success message;
+  nothing names the substitution). An outcome-informed root-cause auditor recovers it by *inference*
+  ("every visible decision is compliant, yet the run failed ⇒ a tool executed something other than it
+  reported") — **but only where the failure symptom points at the action tool**: conference
+  (over-budget ⇒ the *booking* went wrong) **7/8**, scheduling (boardroom booked ⇒ *booking*) **6/8**,
+  review (a red-CI PR merged) **2/8**, and on the two new shapes — incident and reconcile — **0/8**.
+  On review the competitor is "the CI check was stale/wrong" (blame `check_ci`); on the incident chain
+  it is "the fix silently didn't take"; on the reconcile loop the over-approval reads as ordinary
+  over-eagerness. Even outcome-informed attribution degrades to the most *available* fault story,
+  which competing deceptions and diffuse symptoms hijack. (The *specific* substituted item is
   unknowable without ground-truth state; auditors' guesses at it were usually wrong.)
-- **The omission gap was a question-framing artifact.** Root-cause framing takes forget from
-  9/24 blind to **24/24** — auditors always *saw* the failed tool call; asked the causation question,
-  they name it every time. Staleness recovers only partially (and unevenly: price 8/8, availability
-  7/8, CI 3/8) — with no trace inconsistency to reason from, the auditor must *conjecture* that the
-  data was wrong, which works less well the more binary the corrupted value.
+- **The omission gap was a question-framing artifact — robust across all five shapes.** Root-cause
+  framing takes forget from 23/40 blind to **40/40** — auditors always *saw* the failed tool call;
+  asked the causation question, they name it every time, on all five domains. Staleness recovers only
+  partially and *unevenly by task shape* (conference 8/8, scheduling 7/8, review 3/8, incident 3/8,
+  reconcile **0/8**) — with no trace inconsistency to reason from, the auditor must *conjecture* that
+  the data was wrong, which fails when an honest alternative explanation is equally available.
 
 **The information ladder, final form.** What an auditor needs is fault-type-structured:
 *trace only* (agent-caused errors, forced-violation omissions) → *+ outcome* (misexecution, via
@@ -467,14 +495,18 @@ targeted 4/4 vs blind 0/4, Fisher **p = .029**. C4 holds on a second domain.
 
 ## Caveats (what this is and is not)
 
-These results are an honest measurement across **three synthetic task families**, not yet a
+These results are an honest measurement across **five synthetic task families**, not yet a
 broad-coverage benchmark.
 
-- **Domain generality: 3 task families.** M2's ≥3-domain bar is met on the *domains* axis
-  (sham-controlled degradation + a measured attribution gap on conference, scheduling, review). Still
-  true: all three are short synthetic office-workflow tasks of similar length/structure; the
-  cross-*tier* panel exists only for conference cdrop; recovery is measured on two domains. Broader
-  ecological diversity remains future work.
+- **Domain generality: 5 task families, 2 distinct task shapes beyond pick-then-finalize.** M2's
+  ≥3-domain bar is exceeded (sham-controlled degradation + a measured attribution gap on conference,
+  scheduling, review, incident, reconcile). The last two deliberately break the shared shape — a
+  diagnostic chain (fault surfaces downstream of its cause) and a ~14-step accumulation loop — and it
+  was on exactly these shapes that root-cause recovery of deceptions *failed* (staleness 3/8 and 0/8),
+  which is the point of adding them. Still true: all five are synthetic office-workflow tasks under
+  ~30 steps; the cross-*tier* panel exists only for conference cdrop; recovery is measured on two
+  domains; debris/contradiction were exercised only on the first three. Longer-horizon (tens–hundreds
+  of steps) and broader ecological diversity remain future work.
 - **Small n and multiplicity (Codex audit, finding 7).** 4 task variants per domain, reported at the
   variant level (reps of one variant are correlated). At n=4, `4/4 vs 0/4` gives the *minimum possible*
   two-sided Fisher p = **0.0286** — and one flipped variant makes it 0.143. Many fault×domain cells
@@ -520,7 +552,7 @@ scoring below replays **deterministically and free** — no model calls:
 python experiments/conf_score.py         "experiments/decisions/states/*.json"             # conference
 python experiments/conf_score.py         "experiments/decisions/states_scheduling/*.json"  # scheduling
 python experiments/conf_score.py         "experiments/decisions/states_review/*.json"      # review
-# the CROSS-DOMAIN blame-gap map, 4 arms x 6 faults (363 committed verdicts; tier-grouped)
+# the CROSS-DOMAIN blame-gap map, 4 arms x 6 faults, 5 domains (531 committed verdicts; tier-grouped)
 python experiments/conf_attr_score.py    experiments/decisions/conf_attribution_alldomains.json
 # the dumb-baseline floor — pass ALL domain globs (recall + domain-dependent false-positive)
 python experiments/attr_baselines.py     "experiments/decisions/states/*.json" \

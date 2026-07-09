@@ -78,8 +78,8 @@ the labelled-vs-unlabelled contrast is itself reportable.)
 ## Load-bearing experiments (each MUST succeed or the claim narrows)
 | # | Experiment | Why it's load-bearing | Status |
 |---|---|---|---|
-| E1 | The ladder holds on **≥3 task domains**, not one | generality — without it, "one toy" | **DONE** — 3 domains wired + collected (conference, scheduling, review) |
-| E2 | The **deception gap** replicates for staleness across domains | the sharp claim can't be a single dot | **DONE** — replicates **3/3** (blind 0, oracle 0 on stale-price / availability / CI) |
+| E1 | The ladder holds on **≥3 task domains**, not one | generality — without it, "one toy" | **DONE (exceeded)** — **5** domains wired + collected (conference, scheduling, review, incident, reconcile); last two break the shared pick-then-finalize shape (diagnostic chain + accumulation loop) |
+| E2 | The **deception gap** replicates for staleness across domains | the sharp claim can't be a single dot | **DONE** — replicates **5/5** (blind 0, oracle 0 on stale price / availability / CI / service-health / receipt). New limit surfaced: outcome-informed root-cause recovery is *task-shape-dependent* (staleness recovered 8/8 on pick tasks, 0/8 on the accumulation loop) |
 | E3 | **External validity:** injected-fault failures resemble organic ones (or a measured characterization of the gap) | the premise the whole method rests on | **ADDRESSED (characterized)** — 2/28 organic failures elicited (xhard); 6/6 blind-attributable → agent-caused failures are trace-visible; environment faults are the blame-gap regime and are un-elicitable by definition (their realism is an infrastructure fact) |
 | E4 | **Method comparison** (baselines vs LLM auditor vs oracle) with clean labels, per fault type | C3; the reviewer's money table | **DONE** — random/recency/keyword + stepwise (Who&When-style) + all-at-once blind + oracle + root-cause, per fault family; ranking is fault-type-dependent; step-walking cannot fix deception blindness |
 | E5 | **Cross-provider grader** — the ladder isn't a same-family artifact | kills R6 | within-Claude done; cross-provider open (Phase 4, needs paid budget) |
