@@ -378,10 +378,13 @@ a detect→rollback loop recovers — the C4/v0.1 headline metric), **irreversib
   audit showed the "(cached)" tell made staleness ~0.5 blind-attributable. (d) **E1/E2 DONE — the
   cross-domain result:** deception gap replicates **3/3** (staleness blind 0, oracle 0 everywhere);
   deletion gap **2/2** (blind 0, de-leak 0, oracle 1.0; review cdrop null = D-014 redundancy);
-  omission (forget) is SALIENCE-DEPENDENT (blind 1.0 on the prominent conference step; ~0 on minor
-  steps; oracle only 0.38–0.88 — hypothesis: visible mainly when the trace contains the agent's
-  failed attempt; Phase-3 validity check). Honest framing = TWO robust regimes + a softer omission
-  case. 195 committed verdicts; `assets/blamegap_map.png`; M2 ≥3-domain bar met on the domains axis
+  omission (forget) is a CULPABILITY-vs-CAUSATION effect (mechanism verified, salience hypothesis
+  refuted: agents attempted the missing tool 8/8 on all domains — auditors SEE the failure; they
+  blame the agent only where the omission is mid-sequence and forces the agent's own next action to
+  violate a rule (conference 8/8); on terminal omissions they correctly answer "no agent mistake"
+  (~0) — so the "did the agent err?" question under-counts environment faults; Phase 3 adds a
+  root-cause arm "why did this run fail?"). Honest framing = TWO robust regimes + the
+  culpability-split omission case. 195 committed verdicts; `assets/blamegap_map.png`; M2 ≥3-domain bar met on the domains axis
   (ROADMAP updated; v0.1 still un-tagged: tier panel conference-only, recovery one domain).
   (e) **Phase-4 plan updated:** cross-provider grading via the owner's Codex subscription (OpenAI
   models with repo access run `attribute.py` themselves) → Phase 4 becomes $0.

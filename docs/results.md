@@ -323,12 +323,18 @@ Three findings:
   1.0). On review, dropping the approval rule causes **no failures at all** — agents don't merge
   unreviewed code even unprompted — reconfirming that a dropped rule only bites when it is *binding
   and non-redundant* (D-014).
-- **"Omission" is salience-dependent, not cleanly visible.** Forget is caught blind when the missing
-  step is prominent (conference's expense report, 8/8) but largely missed on minor steps
-  (scheduling 1/8, review 0/8) — *even the oracle arm only reaches 0.38–0.50*. Inspection of the
-  verdicts suggests a mechanism: the omission is visible mainly when the trace contains the agent's
-  **failed attempt** at the missing tool; when the agent silently skips it, auditors read the
-  truncated trajectory as complete. (To be verified systematically in Phase 3.)
+- **"Omission" splits by whether it forces a downstream violation — a culpability-vs-causation
+  effect, not visibility.** A verified mechanism check (agents *attempted* the missing tool in
+  **8/8 traces on all three domains**, so the failed call is in every trace) shows the auditors
+  **see** the omission everywhere; what differs is the *blame judgment*. On conference the missing
+  tool is **mid-sequence**: the agent then sends the itinerary anyway, so its *own next action*
+  violates the "file, then send" rule → auditors blame the agent (8/8 blind). On scheduling/review
+  the missing tool is the **terminal step**: the agent attempts it, errors, and ends — a
+  perfectly-behaved agent whose environment failed — so auditors *correctly* answer "the agent made
+  no mistake" (0–1/8), even with the policy (0.38–0.50). This exposes an instrument insight that
+  applies to attribution benchmarks generally (incl. Who&When's "which agent caused the failure"):
+  asking "**did the agent err?**" conflates *culpability* with *causation*. For fault localization
+  the right question is "**why did this run fail?**" — a root-cause arm added in Phase 3.
 
 **Methodological note (reported for transparency).** The first cross-domain audit used staleness
 injectors that emitted a self-labelling "(cached)" tag; on domains whose rules say "confirm *live*",

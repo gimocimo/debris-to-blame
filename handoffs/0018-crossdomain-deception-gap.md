@@ -36,9 +36,14 @@ write-up. Two integrity bugs found by the experiments themselves were fixed and 
   - **Deception gap replicates 3/3:** staleness blind 0/8 AND oracle 0/8 on stale-price,
     stale-availability, stale-CI. The policy does not close it; needs ground-truth state.
   - **Deletion gap replicates 2/2:** cdrop blind 0, de-leak 0, oracle 1.0 (7/7, 8/8).
-  - **Omission is salience-dependent:** forget blind 8/8 (conference, prominent step) vs 1/8 / 0/8
-    (scheduling/review); oracle only 0.38–0.88. Verdict inspection suggests it is visible mainly when
-    the trace contains the agent's *failed attempt* at the missing tool — Phase-3 validity check.
+  - **Omission = a culpability-vs-causation effect (mechanism VERIFIED, initial salience hypothesis
+    refuted):** agents attempted the missing tool in **8/8 traces on all 3 domains**, so the failed
+    call is visible everywhere. Blind attribution differs because of the *blame judgment*: on
+    conference the omission is mid-sequence and the agent's own next action violates the ordering
+    rule → agent blamed (8/8); on scheduling/review it is the terminal step → the trace shows a
+    compliant agent with a broken environment → auditors correctly answer "no agent mistake" (0–1/8).
+    Instrument fix for Phase 3: add a root-cause arm ("why did this run fail?") alongside the
+    agent-blame question.
 - 3 rate-limited review-forget oracle audits backfilled → clean n=8 (4/8).
 - 167 tests green; ruff clean; pushed.
 
@@ -46,7 +51,8 @@ write-up. Two integrity bugs found by the experiments themselves were fixed and 
 - **R2 external validity** still open: 0/22 organic failures elicitable so far (Phase 2). Fallback
   framing exists (labelled-vs-unlabelled staleness contrast = detectability result).
 - **Fault map incomplete:** contradiction (2 domains), debris, wrong_tool not yet interactive.
-- **Forget-grader validity check** required before the salience claim enters the paper.
+- **Forget framing:** the agent-blame question under-counts environment faults (see above) — the
+  root-cause arm must be run before the omission row enters the paper.
 - Review domain has no binding cdrop rule (deletion point is 2/2, not 3/3) — acceptable, or design
   a binding drop for review later.
 - Cross-tier panel is conference-cdrop only.
