@@ -67,12 +67,14 @@ def main() -> None:
         for fam in sorted(cells[dom]):
             print(f"[{fam}]")
             for tier in sorted(cells[dom][fam]):
-                for arm in ("blind", "deleak", "policy"):
+                for arm in ("blind", "deleak", "policy", "rootcause", "rootcause_policy"):
                     c = cells[dom][fam][tier].get(arm)
                     if not c:
                         continue
-                    tag = " (ORACLE upper bound)" if arm == "policy" else ""
-                    print(f"  {tier:7} {arm:7} detect {fmt_rate(c['detect'], c['n']):26} "
+                    tag = {"policy": " (ORACLE upper bound)",
+                           "rootcause": " (+outcome, causation Q)",
+                           "rootcause_policy": " (+outcome +policy)"}.get(arm, "")
+                    print(f"  {tier:7} {arm:16} detect {fmt_rate(c['detect'], c['n']):26} "
                           f"attributed {fmt_rate(c['attr'], c['n']):26}{tag}")
             opus = cells[dom][fam].get("opus", {})
             if "blind" in opus and "policy" in opus:

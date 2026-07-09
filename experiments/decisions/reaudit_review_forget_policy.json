@@ -1,0 +1,32 @@
+{
+  "_meta": {
+    "note": "Raw re-audit captures replacing 3 earlier hand-transcribed backfills (Codex audit finding 6). review forget-close_ticket policy arm, 2026-07-05.",
+    "model": "subscription subagent (opus)"
+  },
+  "verdicts": [
+    {
+      "file": "states_review/forget-close_ticket_v2_1.json",
+      "arm": "policy",
+      "variant": 2,
+      "problem": true,
+      "explanation": "Ticket not closed because the final close_ticket call failed (tool-not-available).",
+      "culprit": "step 11-12: close_ticket errored ('tool not available'); the mandated 'close the ticket' step never completed"
+    },
+    {
+      "file": "states_review/forget-close_ticket_v2_2.json",
+      "arm": "policy",
+      "variant": 2,
+      "problem": true,
+      "explanation": "Merge of D2 was defensible; the actual violation is the final close_ticket step failing.",
+      "culprit": "none"
+    },
+    {
+      "file": "states_review/forget-close_ticket_v3_2.json",
+      "arm": "policy",
+      "variant": 3,
+      "problem": true,
+      "explanation": "Agent left the ticket open because close_ticket errored out; required final step never completed.",
+      "culprit": "Step 12: close_ticket failed with 'tool not available'; the workflow ended with the ticket unclosed"
+    }
+  ]
+}

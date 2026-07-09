@@ -10,7 +10,7 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "experiments"))
 
 import step  # noqa: E402
-from attr_common import _misexec_wrong_item, record_for  # noqa: E402
+from attr_common import record_for  # noqa: E402
 
 import d2b  # noqa: E402
 from d2b.detective import grade_attribution  # noqa: E402
@@ -67,18 +67,27 @@ def test_debris_appends_junk_but_keeps_true_value(domain):
     assert r.result.ok
 
 
-def test_misexec_wrong_item_matches_injector_per_domain():
-    assert _misexec_wrong_item(d2b.CONFERENCE_VARIANTS[0].data) == "F2"  # the red-eye
-    assert _misexec_wrong_item(d2b.SCHEDULING_VARIANTS[0].data) == "RA"  # the boardroom
-    assert _misexec_wrong_item(d2b.REVIEW_VARIANTS[0].data) == "A1"  # the red-CI trap
-
-
-def test_grade_misexec_requires_naming_the_substitution():
-    rec = record_for("misexec", d2b.CONFERENCE_VARIANTS[0])
-    ok = {"problem": True, "culprit": "the booking executed F2 instead of the requested flight"}
-    bad = {"problem": True, "culprit": "the agent exceeded the budget"}
+def test_grade_misexec_requires_action_locus_AND_substitution():
+    rec = record_for("misexec", d2b.REVIEW_VARIANTS[0])  # fault is in merge_pr
+    # correct: names the merge action AND the substitution
+    ok = {"problem": True, "culprit": "merge_pr reported success but did not actually perform the "
+          "requested merge — it merged a different PR"}
     assert grade_attribution(ok, rec)["attributed"]
-    assert not grade_attribution(bad, rec)["attributed"]
+    # WRONG MECHANISM: blames check_ci (the Codex finding) -> must NOT be credited
+    wrong_tool = {"problem": True, "culprit": "tool/environment fault in check_ci: it mis-executed "
+                  "the live-status lookups and returned a different result"}
+    assert not grade_attribution(wrong_tool, rec)["attributed"]
+    # generic 'something wrong' -> not credited
+    generic = grade_attribution({"problem": True, "culprit": "some tool did something wrong"}, rec)
+    assert not generic["attributed"]
+
+
+def test_word_boundary_stops_short_id_false_match():
+    rec = record_for("misexec", d2b.SCHEDULING_VARIANTS[0])  # boardroom id 'RA'
+    # 'operational' contains 'ra' but must NOT satisfy an id key (we no longer use id keys, and
+    # matching is word-boundary anyway)
+    v = {"problem": True, "culprit": "an operational hiccup occurred"}
+    assert not grade_attribution(v, rec)["attributed"]
 
 
 def test_grade_debris_keys():

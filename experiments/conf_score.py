@@ -26,11 +26,17 @@ NICE = {"cdrop:0": "cdrop:red-eye", "cdrop:2": "cdrop:refundable",
         "forget:file_expense_report": "forget:expense"}
 
 
+# recovery/repair conditions are NOT degradation conditions — never count them (Codex finding 3)
+_SKIP = ("blindrepair", "targeted", "no_repair")
+
+
 def score(files: list[str]) -> dict:
     by: dict[str, dict] = {}
     for f in files:
         st = json.loads(Path(f).read_text())
         cond = st["condition"]
+        if any(cond.startswith(s) for s in _SKIP):
+            continue
         r = step.replay(st) if st["decisions"] else None
         ok = bool(r and r.result.ok)
         d = by.setdefault(cond, {"k_fail": 0, "n": 0, "pv": {}})

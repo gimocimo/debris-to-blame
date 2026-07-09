@@ -46,9 +46,9 @@ order to blame them correctly* is a property of the **fault type**, and it repli
 > The sharp claim is the **deception gap**: for a whole class of faults, *more rule/spec observability
 > does not help* — the corrupted observation fools the auditor exactly as it fooled the agent, so
 > post-hoc attribution needs re-verifiable **world state**, not better logs. Dumb baselines
-> (grep/recency) floor at ~0 recall / 100% false-positive; healthy/sham false-positives are 0.
-> Recovery follows attribution: restoring the correctly localized rule recovers **4/4** variants vs
-> **0/4** for a misdiagnosed repair (lift **+1.00**, p = 0.029).
+> (grep/recency) always cry wolf (100% false-positive) and get ~0–0.19 recall; the LLM auditor has 0
+> false-positives. Recovery follows attribution: restoring the correctly localized rule recovers
+> **4/4** variants vs **0/4** for a misdiagnosed repair (lift **+1.00**, p = 0.029, two domains).
 > ([full results + caveats](docs/results.md))
 
 <details><summary>Method note — why "sincere agents" and "oracle upper bound" matter</summary>
@@ -83,8 +83,8 @@ python3 scripts/make_figure.py     # regenerate the figure above from results/
 🚧 Active — now a paper program (see [`docs/paper/framing.md`](docs/paper/framing.md)). **M0/M1 done.
 M2's exit bar (sham-controlled degradation + a measured attribution gap in ≥3 domains) is met on the
 domains axis**: three multi-step domains (conference, scheduling, review) are wired into the
-interactive loop, with the deception gap replicating 3/3 and the deletion gap 2/2 (167 unit tests
-green; every number replays from committed data). Honest partials: the cross-*tier* panel exists only
+interactive loop, with the deception gap replicating 3/3 and the deletion gap 2/2 (182 unit tests
+green; every number replays from committed data; audited by an external Codex review, findings fixed). Honest partials: the cross-*tier* panel exists only
 for conference cdrop; recovery is one domain; external validity (organic-vs-injected) remains open.
 Next: full 6-fault map + attribution-method re-ranking (Phase 3), external validity (Phase 2),
 cross-provider grader (Phase 4). See [`PROJECT_PLAN.md`](PROJECT_PLAN.md) (decision log),

@@ -8,7 +8,11 @@ Repairs a constraint_drop failure three ways and reports P[task recovered]:
 Reported BOTH pooled and variant-clustered (variants = the independent unit, matching conf_score.py
 §1 — pooling reps overstates precision), with a variant-clustered Fisher for targeted vs blind.
 
-  python experiments/conf_recover_score.py "<br glob>"
+  python experiments/conf_recover_score.py "<br glob>" [grid.json] [cdrop_condition]
+
+The grid path and the binding-cdrop condition are explicit (Codex audit finding 2): the earlier
+default read the MUTABLE results/conf_degrade_grid.json, which the docs' multi-domain reproduce
+order overwrites — silently yielding a bogus n=0 table. This scorer now fails loudly on n=0.
 """
 
 from __future__ import annotations
@@ -24,8 +28,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import step  # noqa: E402
 
 from d2b.stats import cluster_by_variant, fisher_p, fmt_rate  # noqa: E402
-
-GRID = Path("results/conf_degrade_grid.json")
 
 
 def blind_recovered_by_variant(files: list[str]) -> dict[int, tuple[int, int]]:
@@ -53,15 +55,23 @@ def _pooled(pv: dict[int, tuple[int, int]]) -> tuple[int, int]:
 
 def main() -> None:
     br = sorted(glob(sys.argv[1]))
-    grid = json.loads(GRID.read_text())
-    # targeted = restore the rule = healthy; no_repair = the BINDING cdrop cell (cdrop:2).
-    # cdrop:0 (red-eye) is excluded: with sincere agents it is redundant with agent preference, so
-    # it does not degrade (0/8) and there is nothing to recover.
+    grid_path = Path(sys.argv[2]) if len(sys.argv) > 2 else Path("results/conf_degrade_grid.json")
+    cdrop_cond = sys.argv[3] if len(sys.argv) > 3 else "cdrop:2"
+    grid = json.loads(grid_path.read_text())
+    # targeted = restore the rule = healthy; no_repair = the BINDING cdrop cell (cdrop:2 conference,
+    # cdrop:3 scheduling). Grid path + cdrop condition are explicit so a clobbered/wrong-domain grid
+    # cannot silently produce n=0 (Codex audit finding 2).
     cells = {
-        "no_repair": _grid_recovered(grid, "cdrop:2"),
+        "no_repair": _grid_recovered(grid, cdrop_cond),
         "blind_repair": blind_recovered_by_variant(br),
         "targeted_repair": _grid_recovered(grid, "healthy"),
     }
+    for name, pv in cells.items():
+        if _pooled(pv)[1] == 0:
+            raise SystemExit(
+                f"ERROR: {name} has n=0 (grid={grid_path}, cdrop={cdrop_cond}). "
+                "Pass the correct domain grid + cdrop condition."
+            )
 
     print("CONFERENCE_TRIP recovery — localization enables recovery\n")
     print(f"{'repair policy':16} {'pooled P[recovered] (Wilson)':32} {'variants rec.':>14}")

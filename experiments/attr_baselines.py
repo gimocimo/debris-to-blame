@@ -80,17 +80,19 @@ def _verdict(name: str, traj, idx: int) -> dict:
 
 
 def main() -> None:
-    files = sorted(glob(sys.argv[1]))
+    files = sorted(f for pat in sys.argv[1:] for f in glob(pat))
     # tallies[name] = {"faulty":[att,n], "clean":[fp,n]}
     tallies = {b: {"faulty": [0, 0], "clean": [0, 0]} for b in BASELINES}
     for idx, f in enumerate(files):
         st = json.loads(Path(f).read_text())
         cond = st["condition"]
+        if any(cond.startswith(s) for s in ("blindrepair", "targeted", "no_repair")):
+            continue  # recovery states are not attribution traces (Codex finding 3)
         r = step.replay(st) if st["decisions"] else None
         failed = bool(r and not r.result.ok)
         traj, task, _ = attribute.reconstruct(st)
-        rec = record_for(cond, task)
         clean = cond in ("healthy", "sham")
+        rec = None if clean else record_for(cond, task)
         for b in BASELINES:
             v = _verdict(b, traj, idx)
             if clean:

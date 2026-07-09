@@ -29,13 +29,15 @@ observability of the world.** It has a direct safety/oversight implication — l
 is insufficient for a whole class of failures; you must retain re-verifiable ground truth.
 
 **Phase-3 refinement (2026-07-04): the ladder gained an OUTCOME rung and a second deception type.**
-Misexecution (deceptive confirmation) is blind-0 AND oracle-0, but an outcome-informed *root-cause*
-auditor recovers it 23/24 by **deduction by elimination** ("all visible decisions compliant + run
-failed ⇒ a tool lied"); the same framing closes the omission gap entirely (24/24 — it was a
-culpability-question artifact) and recovers staleness only partially (18/24, domain-dependent). Final
-ladder: trace → +outcome → +policy → +state, with fault types occupying different rungs. Caveat to
-carry: the root-cause arm bundles outcome-knowledge with the causation question (dissection = future
-work); cdrop under root-cause is an unrun cell.
+Misexecution (deceptive confirmation) is blind-0 AND oracle-0; an outcome-informed *root-cause*
+auditor recovers it **15/24** by inference ("visible decisions compliant + run failed ⇒ a tool
+lied") — **but only when the failure symptom implicates the action tool** (conference 7/8, scheduling
+6/8, review just 2/8, where auditors instead blame the CI check). The same framing closes the omission
+gap entirely (24/24 — it was a culpability-question artifact) and recovers staleness partially (18/24,
+domain-dependent). Final ladder: trace → +outcome → +policy → +state, with fault types on different
+rungs. Caveats: the root-cause arm bundles outcome-knowledge with the causation question (dissection =
+future work); cdrop×root-cause is an unrun cell; misexec is graded strictly (action-locus + substitution)
+after a Codex audit caught a lenient grader inflating it to 23/24.
 
 **Cross-domain status (2026-07-04).** Two regimes are ROBUST across domains: the **deception gap**
 replicates **3/3** (staleness: blind 0, oracle 0 on stale-price / availability / CI) and the

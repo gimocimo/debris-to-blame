@@ -25,15 +25,6 @@ _ATTR_KEYS = {
 }
 
 
-def _misexec_wrong_item(cfg: dict) -> str:
-    """The item the world ACTUALLY acted on under misexec (mirrors the domain misexec_injector)."""
-    if "flights" in cfg:
-        return next(f for f, d in cfg["flights"].items() if d["red_eye"])
-    if "rooms" in cfg:
-        return next(r for r, d in cfg["rooms"].items() if d["boardroom"])
-    return cfg["trap_pr"]
-
-
 def record_for(condition: str, task) -> FaultRecord | None:
     """The private ground-truth label for a rollout condition (None = no fault: healthy)."""
     if condition == "healthy":
@@ -71,11 +62,30 @@ def record_for(condition: str, task) -> FaultRecord | None:
             {"attr_keys": _ATTR_KEYS["debris"]},
         )
     if condition == "misexec":
-        wrong = _misexec_wrong_item(task.data)
-        # the culprit must name the SUBSTITUTION: the wrongly-executed item or the mismatch itself
-        keys = [wrong.lower(), "wrong", "instead", "mismatch", "misexecut", "substitut",
-                "different", "not the requested"]
+        cfg = task.data
+        # STRICT (Codex audit finding 1): the culprit must (A) name the misexecuted ACTION locus —
+        # the booking/merge step, NOT the check/quote tool — AND (B) a substitution concept. This
+        # rejects wrong-mechanism verdicts that blame check_ci/latest_quote for a book/merge fault.
+        if "flights" in cfg:
+            action = ["book_flight", "book_hotel", "booked flight", "booked hotel", "booking step",
+                      "booking-side", "booking-path", "booking path", "booking-step"]
+        elif "rooms" in cfg:
+            action = ["book_room", "book_slot", "booked room", "booked slot", "booking step",
+                      "booking-step"]
+        else:
+            action = ["merge_pr", "the requested merge", "merge step", "merge tool", "merge action",
+                      "merging step", "merge-step"]
+        # full inflected forms (word-boundary matching requires whole words, not truncated stems)
+        substitution = [
+            "instead", "different", "other than", "not the requested", "did not actually perform",
+            "did not perform the requested", "substituted", "substitution", "mismatch",
+            "discrepancy", "diverged", "divergence", "divergent", "silently executed",
+            "silent misexecution", "misexecution", "misexecuted", "mis-execution", "mis-executed",
+            "did not reflect", "actually executed", "actually merged", "actually booked",
+            "non-compliant", "something other", "something else", "did not match",
+        ]
         return FaultRecord(
-            FaultType.WRONG_TOOL, FaultSite("tool", "book/merge"), 1.0, {"attr_keys": keys},
+            FaultType.WRONG_TOOL, FaultSite("tool", "book/merge"), 1.0,
+            {"match_groups": [action, substitution]},
         )
     raise SystemExit(f"no record mapping for condition: {condition}")

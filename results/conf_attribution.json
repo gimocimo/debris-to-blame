@@ -118,7 +118,7 @@
       "opus": {
         "blind": {
           "detect": 2,
-          "attr": 1,
+          "attr": 0,
           "n": 8
         },
         "policy": {
@@ -128,12 +128,12 @@
         },
         "rootcause": {
           "detect": 8,
-          "attr": 8,
+          "attr": 7,
           "n": 8
         },
         "rootcause_policy": {
           "detect": 8,
-          "attr": 7,
+          "attr": 6,
           "n": 8
         }
       }
@@ -216,7 +216,7 @@
         },
         "rootcause": {
           "detect": 8,
-          "attr": 7,
+          "attr": 6,
           "n": 8
         },
         "rootcause_policy": {
@@ -237,7 +237,7 @@
         },
         "policy": {
           "detect": 4,
-          "attr": 4,
+          "attr": 3,
           "n": 8
         },
         "rootcause": {
@@ -285,12 +285,12 @@
         },
         "rootcause": {
           "detect": 8,
-          "attr": 8,
+          "attr": 2,
           "n": 8
         },
         "rootcause_policy": {
           "detect": 8,
-          "attr": 8,
+          "attr": 1,
           "n": 8
         }
       }

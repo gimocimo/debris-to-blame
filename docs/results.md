@@ -242,10 +242,12 @@ Three findings the old saturated "+0.88" hid:
   what makes the blame gap a *fault-type property*, not a universal law.
 
 **Why this is not "copying a printed word".** The dumb-baseline floor (`experiments/attr_baselines.py`
-— random / recency / a grep-for-suspicious-tokens auditor) scores **~0 recall and 100% false-positive**
-(the token "red-eye" is in *every* flight listing, so a grep auditor fires on healthy traces too). The
-LLM oracle's 1.0 recall with **0** false-positives on cdrop is therefore real cross-referencing work,
-and the de-leak control shows it depends on the specific rule being present, not on any token echoed.
+— random / recency / a grep-for-suspicious-tokens auditor) gets **0 recall on cdrop and cries wolf on
+clean traces** (on conference the token "red-eye" is in *every* flight listing, so the grep auditor
+fires on healthy traces too — 100% false-positive here; see the all-domain baseline table below for
+the fuller, structured picture). The LLM oracle's 1.0 recall with **0** false-positives on cdrop is
+therefore real cross-referencing work, and the de-leak control shows it depends on the specific rule
+being present, not on any token echoed.
 
 ### 3. Cross-tier robustness — the gap is not a grader artifact (`experiments/conf_attr_score.py`)
 
@@ -374,19 +376,27 @@ reflecting realistic post-mortem conditions (dissecting the two is future work).
 | fault | blind | oracle (+policy) | root-cause (+outcome) | what closes the gap |
 |---|---|---|---|---|
 | staleness | 0/24 | 0/24 | **18/24** (8/8, 7/8, 3/8) | outcome, partially — domain-dependent |
-| misexecution | 1/24 | 0/24 | **23/24** | **outcome — by *elimination*** |
+| misexecution | 0/24 | 0/24 | **15/24** (7/8, 6/8, 2/8) | outcome — but only when the symptom implicates the *action* |
 | constraint_drop | 0/15 | 15/15 | *(not yet run)* | the exact deleted rule |
-| forget | 9/24 | 14/24 | **24/24** | the causation question |
+| forget | 9/24 | 13/24 | **24/24** | the causation question |
+
+> Grading note (Codex audit, finding 1): misexecution is graded **strictly** — the culprit must name
+> the misexecuted *action* (`book_flight`/`book_room`/`merge_pr`) **and** a substitution concept,
+> word-boundary matched. An earlier lenient substring grader credited verdicts that blamed the *wrong*
+> tool (e.g. `check_ci`) and reported 23/24; the honest number is **15/24**.
 
 Two findings:
-- **Deduction by elimination.** Under the culpability question, misexecution is a perfect deception
-  (blind ≈ 0 *and* oracle 0 — the trace shows a compliant agent and a success message; nothing names
-  the substitution). But an outcome-informed root-cause auditor recovers it almost perfectly
-  (23/24) by *reasoning*: "every visible decision is compliant, yet the run failed ⇒ a tool must have
-  executed something other than what it reported." Attribution here is an **inference**, not an
-  observation — and it requires knowing the run failed. (Graded on naming the mechanism + step; the
-  *specific* substituted item is unknowable without ground-truth state, and auditors' guesses at it
-  were often wrong.)
+- **Root-cause reasoning localizes misexecution only when the symptom implicates the action.** Under
+  the culpability question, misexecution is a perfect deception (blind 0 *and* oracle 0 — the trace
+  shows a compliant agent and a success message; nothing names the substitution). An outcome-informed
+  root-cause auditor recovers it by *inference* ("every visible decision is compliant, yet the run
+  failed ⇒ a tool executed something other than it reported") — **but only where the failure symptom
+  points at the action tool**: conference (over-budget ⇒ the *booking* went wrong) **7/8**, scheduling
+  (boardroom booked ⇒ *booking*) **6/8**, but review (a red-CI PR merged) only **2/8**, because
+  "the CI check was stale/wrong" is an equally available — and, here, wrong — hypothesis, so auditors
+  blame `check_ci` instead of `merge_pr`. So even outcome-informed attribution degrades to the most
+  *available* fault story, which competing deceptions can hijack. (The *specific* substituted item is
+  unknowable without ground-truth state; auditors' guesses at it were usually wrong.)
 - **The omission gap was a question-framing artifact.** Root-cause framing takes forget from
   9/24 blind to **24/24** — auditors always *saw* the failed tool call; asked the causation question,
   they name it every time. Staleness recovers only partially (and unevenly: price 8/8, availability
@@ -404,18 +414,28 @@ elimination; omissions, via the causation question; staleness partially) → *+ 
 Same graded standard, per fault family (deterministic baselines over all traces; LLM methods:
 stepwise on 44 sampled failed traces, others on all):
 
-| method | staleness | misexec | cdrop | forget | healthy/sham FP |
+| method | staleness | misexec | cdrop | forget | false-positive (healthy/sham) |
 |---|---|---|---|---|---|
-| random / recency / keyword | ~0 | ~0 | ~0 | ~0 | **100%** |
-| LLM all-at-once, blind | 0.00 | 0.04 | 0.00 | 0.38 | 0.00 |
+| random (deterministic) | 0.03 recall | — | — | — | **1.00** (always flags) |
+| recency (deterministic) | — | — | — | catches forget | 0.19 recall overall / **1.00** FP |
+| keyword-grep (deterministic) | 0.00 | 0.00 | 0.00 | 0.00 | conference **1.00**, scheduling/review **0.00** |
+| LLM all-at-once, blind | 0.00 | 0.00 | 0.00 | 0.38 | 0.00 |
 | LLM step-by-step (Who&When-style), blind | 0/12 | 2/12 | 0/8 | **12/12** | — |
-| LLM + full policy (oracle) | 0.00 | 0.00 | **1.00** | 0.58 | 0.00 |
-| LLM root-cause (+outcome) | **0.75** | **0.96** | — | **1.00** | — |
+| LLM + full policy (oracle) | 0.00 | 0.00 | **1.00** | 0.54 | 0.00 |
+| LLM root-cause (+outcome) | **0.75** | **0.62** | — | **1.00** | — |
 
-Step-by-step trace-walking (the field's standard recipe) fixes *omissions* but is as blind to
-deceptions and deletions as the all-at-once auditor: **walking the trace more carefully cannot help
-when the trace itself is the lie.** The ranking of methods is fault-type-dependent — a single
-"attribution accuracy" number hides exactly the structure that matters.
+Baseline nuance (Codex audit, finding 4): the dumb baselines are not a uniform "~0 recall / 100% FP"
+floor. random/recency **always** flag a problem, so their false-positive rate is 100% everywhere;
+recency reaches **0.19** recall over all faults because naming the last tool step accidentally catches
+`forget` (whose missing-tool name is the last action). keyword-grep's false-positive rate is
+**domain-dependent** — 100% on conference (the `red-eye` tell is in every flight listing) but 0% on
+scheduling/review. The LLM auditor still dominates (0 false-positives, real recall), but the floor is
+structured, not flat.
+
+Step-by-step trace-walking (the field's standard recipe) fixes *omissions* (12/12) but is as blind to
+deceptions and deletions as the all-at-once auditor (0/12, 2/12, 0/8): **walking the trace more
+carefully cannot help when the trace itself is the lie.** The ranking of methods is
+fault-type-dependent — a single "attribution accuracy" number hides exactly the structure that matters.
 
 ## External validity — organic failures obtained (Phase 2)
 
@@ -447,21 +467,29 @@ targeted 4/4 vs blind 0/4, Fisher **p = .029**. C4 holds on a second domain.
 
 ## Caveats (what this is and is not)
 
-The canonical multi-step results (the section above) are an honest measurement on **one task family**.
-They are not yet a cross-domain benchmark.
+These results are an honest measurement across **three synthetic task families**, not yet a
+broad-coverage benchmark.
 
-- **Domain generality: now 3 task families** (see the cross-domain section above) — M2's ≥3-domain
-  bar is met on the *domains* axis (sham-controlled degradation + a measured attribution gap on
-  conference, scheduling, review). Still true: all three are short synthetic office-workflow tasks of
-  similar length/structure; the cross-*tier* panel exists only for conference cdrop; and recovery is
-  measured on one domain. Broader ecological diversity remains future work.
-- **Small n (4 task variants).** Reported at the variant level (reps of one variant are correlated, so
-  they are not pooled as independent). Staleness and forget reach clustered p = 0.029; `cdrop:
-  refundable` is only p = 0.14 — honestly underpowered, not a saturated cell.
+- **Domain generality: 3 task families.** M2's ≥3-domain bar is met on the *domains* axis
+  (sham-controlled degradation + a measured attribution gap on conference, scheduling, review). Still
+  true: all three are short synthetic office-workflow tasks of similar length/structure; the
+  cross-*tier* panel exists only for conference cdrop; recovery is measured on two domains. Broader
+  ecological diversity remains future work.
+- **Small n and multiplicity (Codex audit, finding 7).** 4 task variants per domain, reported at the
+  variant level (reps of one variant are correlated). At n=4, `4/4 vs 0/4` gives the *minimum possible*
+  two-sided Fisher p = **0.0286** — and one flipped variant makes it 0.143. Many fault×domain cells
+  are tested with **no multiple-comparisons correction**. Treat the p-values as **descriptive** at this
+  scale (they say "the effect is large and consistent across variants", not "robustly significant per
+  cell"); `cdrop:refundable` is p = 0.14 — honestly underpowered.
 - **The oracle attribution arm is an UPPER BOUND, not a detector.** The `with-policy`/oracle number is
   the auditor handed the complete pre-deletion spec; for a deletion fault the blind→oracle gap is
   near-tautological by design. The `de-leak` control (rulebook minus the deleted line ⇒ 0.00) and the
-  dumb-baseline floor (~0 recall / 100% FP) bound the realistic number from below.
+  (structured, not flat) dumb-baseline floor bound the realistic number from below.
+- **Attribution grading is keyword-based (Codex audit, finding 1).** Verdicts are graded by
+  word-boundary keyword/keygroup matching against the specific injected fault, not human adjudication.
+  This is why misexecution uses a strict two-group rule (name the action locus AND a substitution); a
+  looser earlier grader over-credited it (23/24 → 15/24). A human-adjudicated re-grade of a verdict
+  sample, and ideally a cross-provider grader, are the next hardening steps.
 - **Same-family generate + grade (R6).** Generator and detective are both Claude. Bounded across the
   Claude family (Haiku/Sonnet/Opus give the same profile, §3) but a true **cross-provider** grader is
   future work. Truth comes from *injection*, not a model, and the detective sees only the redacted trace.
@@ -488,16 +516,20 @@ driven via `experiments/step.py`; every rollout `state` and detective `verdict` 
 scoring below replays **deterministically and free** — no model calls:
 
 ```
-# degradation surfaces, per domain (variant-clustered Fisher; 136 committed rollout states)
+# degradation surfaces, per domain (variant-clustered Fisher; 200 committed rollout states)
 python experiments/conf_score.py         "experiments/decisions/states/*.json"             # conference
 python experiments/conf_score.py         "experiments/decisions/states_scheduling/*.json"  # scheduling
 python experiments/conf_score.py         "experiments/decisions/states_review/*.json"      # review
-# the CROSS-DOMAIN blame-gap map (blind / de-leak / oracle arms; 195 committed verdicts)
+# the CROSS-DOMAIN blame-gap map, 4 arms x 6 faults (363 committed verdicts; tier-grouped)
 python experiments/conf_attr_score.py    experiments/decisions/conf_attribution_alldomains.json
-# the dumb-baseline floor (random / recency / keyword; recall + false-positive)
-python experiments/attr_baselines.py     "experiments/decisions/states/*.json"
-# recovery on the binding fault (localization lift +1.00)
-python experiments/conf_recover_score.py "experiments/decisions/recovery2/br2_*.json"
+# the dumb-baseline floor — pass ALL domain globs (recall + domain-dependent false-positive)
+python experiments/attr_baselines.py     "experiments/decisions/states/*.json" \
+                                         "experiments/decisions/states_scheduling/*.json" \
+                                         "experiments/decisions/states_review/*.json"
+# recovery: pass the CORRECT domain grid + cdrop condition explicitly (fails loudly on n=0)
+python experiments/conf_score.py "experiments/decisions/states/*.json"            # writes conf grid
+python experiments/conf_recover_score.py "experiments/decisions/recovery2/br2_*.json" \
+                                         results/conf_degrade_grid.json cdrop:2    # conference
 python scripts/make_figure.py            # blamegap_map.png (cross-domain) + conf_grid.png + ...
 ```
 

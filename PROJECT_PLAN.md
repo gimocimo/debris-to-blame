@@ -28,10 +28,11 @@ stop and re-align.
   M4 recovery on one domain (lift +1.00, clustered p=.029).
 - **Headline result:** **the deception gap replicates 3/3 domains** (staleness: damaging 8/8
   everywhere, attributed 0 blind AND 0 with-policy on stale-price/availability/CI); deletion gap 2/2
-  (blind 0, de-leak 0, oracle 1.0); omission salience-dependent. 195 committed verdicts; every number
+  (blind 0, de-leak 0, oracle 1.0); omission salience-dependent. 363 committed verdicts; every number
   replays from committed data at $0.
 - **Repo health:** public at `github.com/gimocimo/debris-to-blame`, pushed through the cross-domain
-  result; 167 tests green; ruff clean; ~380 subagents of subscription-native inference, $0 total.
+  result; 182 tests green; ruff clean; $0. **Externally audited** (Codex, 2026-07-05): 9 findings,
+  all fixed — most importantly a lenient misexec grader (23/24 → honest 15/24). See D-020.
 - **Biggest open risks:** **R2 external validity** (organic failures not yet elicitable — Phase 2) and
   fault-map completeness (contradiction/debris/wrong_tool not yet interactive — Phase 3). R6 grader
   circularity to be closed via Codex-as-cross-provider-grader (Phase 4, $0 via owner's subscription).
@@ -388,3 +389,24 @@ a detect→rollback loop recovers — the C4/v0.1 headline metric), **irreversib
   (ROADMAP updated; v0.1 still un-tagged: tier panel conference-only, recovery one domain).
   (e) **Phase-4 plan updated:** cross-provider grading via the owner's Codex subscription (OpenAI
   models with repo access run `attribute.py` themselves) → Phase 4 becomes $0.
+- **D-020 (2026-07-05, external Codex audit adopted — honest regime hardening):** A full adversarial
+  Codex review (prompted via `docs/paper/codex_audit_prompt.md`) surfaced 9 findings; all fixed.
+  **Blocker (grader):** the misexecution root-cause claim (23/24) was inflated by a lenient
+  substring grader that credited wrong-mechanism verdicts (blaming `check_ci` for a `merge_pr`
+  fault) and short IDs matching inside words. Fixed: word-boundary matching for ALL keys +
+  `match_groups` AND-of-ORs (misexec must name the action locus `book_flight`/`book_room`/`merge_pr`
+  AND a substitution concept). **Honest re-grade: misexec root-cause 15/24** (conference 7/8,
+  scheduling 6/8, review 2/8) — and the finding IMPROVED: root-cause inference localizes
+  misexecution only when the failure symptom implicates the action tool; on review it is hijacked by
+  the equally-available "stale CI" hypothesis. Only misexec moved; staleness/forget/cdrop identical
+  under the stricter grader. **Other fixes:** (2) `conf_recover_score` now takes an explicit
+  grid+condition and fails on n=0 (the docs' multi-domain order had clobbered the mutable grid);
+  (3) moved scheduling recovery states out of the degradation corpus + added condition guards to the
+  scorers; (4) all-domain baseline scorer — honest floor is STRUCTURED not flat (recency recall 0.19
+  via catching forget's missing-tool name; keyword FP domain-dependent: 100% conference / 0%
+  scheduling+review); (5) `conf_attr_score` now prints the root-cause arms; (6) replaced 3
+  hand-transcribed backfill verdicts with raw re-audit captures (review forget oracle 4/8 → honest
+  3/8; raw outputs committed); (7) added a multiplicity/fragility caveat (p descriptive at n=4, no
+  correction); (8) refreshed stale counts (200 states / 363 verdicts / 182 tests); (9)
+  `grade_attribution` `correct` now == `attributed` for faulty records. No residual leakage found
+  (Codex confirmed redaction + de-leak clean; misexec world model coherent; organic data checks out).

@@ -8,6 +8,8 @@ measure how much observability restores detectability.
 
 from __future__ import annotations
 
+import re
+
 from .agent import decision_to_messages
 from .trajectory import Message, Trajectory
 from .validate import TaskSpec
@@ -105,24 +107,38 @@ _GENERIC = {
 }
 
 
-def grade_attribution(verdict: dict, record) -> dict:
-    """Grade attribution against the SPECIFIC injected fault (Codex issue 7).
+def _kw(key: str, text: str) -> bool:
+    """Whole-word / whole-phrase match (word boundaries) — avoids short IDs like 'RA' matching
+    inside ordinary words (Codex audit finding 1), and stops generic substrings over-crediting."""
+    return re.search(rf"(?<![a-z0-9]){re.escape(key.lower())}(?![a-z0-9])", text) is not None
 
-    For a constraint_drop, the culprit must name a DISTINGUISHING word of the actual dropped rule
-    (e.g. 'refundable' vs 'red-eye') — not just 'a constraint was dropped'. For other faults, the
-    caller supplies the distinguishing tokens via record.extra['attr_keys'] (e.g. staleness ->
-    'stale'/'cached', tool_forgetting -> 'expense'/'report'). For a sham (no real fault), correct =
-    the detective did NOT flag a problem.
+
+def grade_attribution(verdict: dict, record) -> dict:
+    """Grade attribution against the SPECIFIC injected fault, with WORD-BOUNDARY matching.
+
+    Three grading modes (record.extra):
+    - `match_groups`: a list of token-groups; the culprit must match >=1 token from EVERY group
+      (AND-of-ORs). Used for misexecution, which requires naming BOTH the misexecuted action locus
+      (book_flight / book_room / merge_pr) AND a substitution concept — so a verdict that blames the
+      wrong tool (e.g. check_ci) is NOT credited (Codex audit finding 1).
+    - `attr_keys`: the culprit must name >=1 distinguishing token (staleness, forget, ...).
+    - else (constraint_drop): distinguishing words of the actual dropped rule.
+    For a sham (no real fault), correct = the detective did NOT flag a problem. For a real fault,
+    `correct` == `attributed` (flagging *a* problem without naming the fault is not correct).
     """
     problem = bool(verdict.get("problem"))
     culprit = str(verdict.get("culprit", "")).lower()
     if getattr(record, "sham", False):
         return {"problem": problem, "attributed": False, "correct": not problem}
+    groups = record.extra.get("match_groups")
+    if groups:
+        attributed = problem and all(any(_kw(k, culprit) for k in g) for g in groups)
+        return {"problem": problem, "attributed": attributed, "correct": attributed}
     keys = record.extra.get("attr_keys")
     if not keys:
         rule = " ".join(record.extra.get("dropped_constraint") or []).lower()
         tokens = [w.strip(".,()") for w in rule.split()]
         keys = [w for w in tokens if len(w) > 3 and w not in _GENERIC]
     keys = [str(k).lower() for k in keys]
-    attributed = problem and any(k in culprit for k in keys)
-    return {"problem": problem, "attributed": attributed, "correct": problem}
+    attributed = problem and any(_kw(k, culprit) for k in keys)
+    return {"problem": problem, "attributed": attributed, "correct": attributed}
