@@ -53,6 +53,8 @@ DOMAINS = {
         "staleness": _conference.staleness_injector,
         "contradiction": _conference.contradiction_injector,
         "sham": _conference.sham_note_injector,
+        "debris": _conference.debris_injector,
+        "misexec": _conference.misexec_injector,
         "arg_hints": (
             "latest_quote & book_flight take flight=<id>; book_hotel takes hotel=<id>; "
             "search_flights/search_hotels/file_expense_report/send_itinerary take no args."
@@ -63,6 +65,8 @@ DOMAINS = {
         "staleness": _scheduling.staleness_injector,
         "contradiction": _scheduling.contradiction_injector,
         "sham": _scheduling.sham_note_injector,
+        "debris": _scheduling.debris_injector,
+        "misexec": _scheduling.misexec_injector,
         "arg_hints": (
             "check_availability takes slot=<id> room=<id>; book_slot takes slot=<id>; "
             "book_room takes room=<id>; list_slots/list_rooms/send_invites/post_agenda: no args."
@@ -73,6 +77,8 @@ DOMAINS = {
         "staleness": _review.staleness_injector,
         "contradiction": _review.contradiction_injector,
         "sham": _review.sham_note_injector,
+        "debris": _review.debris_injector,
+        "misexec": _review.misexec_injector,
         "arg_hints": (
             "check_ci & merge_pr take pr=<id>; "
             "list_prs/notify_author/close_ticket take no args."

@@ -26,11 +26,18 @@ Policy = Callable[[list[Message], list[str], list[str]], dict | None]
 
 @dataclass
 class Injector:
-    """Corrupts the OBSERVATION shown to the agent for matching tool calls (world stays truth)."""
+    """Corrupts what the agent SEES (and, for misexecution, what the world DOES).
+
+    `transform` corrupts the observation shown to the agent; the world stays truth.
+    `rewrite_args` (optional, MISEXECUTION faults) rewrites the call's args BEFORE the env executes
+    — the world truthfully records what was *actually* done, while `transform` shows the agent a
+    success message for what it *asked* for. The validator still judges the true world state.
+    """
 
     tool: str
-    transform: Callable[[str, dict, str], str]  # (tool, args, true_result) -> shown_result
+    transform: Callable[[str, dict, str], str]  # (tool, ORIGINAL args, true_result) -> shown
     nth: int = 0  # 1-based call index to corrupt; 0 = every call to `tool`
+    rewrite_args: Callable[[str, dict], dict] | None = None  # (tool, args) -> executed args
 
 
 @dataclass
@@ -78,13 +85,19 @@ def interactive_rollout(
 
         if tool not in setup.tools:  # tool_forgetting / hallucinated tool: not available
             shown = f"ERROR: tool '{tool}' is not available."
+            true_result = shown
         else:
-            true_result = env.run(tool, args, world)
-            counts[tool] = counts.get(tool, 0) + 1
+            nth = counts.get(tool, 0) + 1
+            matching = [i for i in injectors if i.tool == tool and i.nth in (0, nth)]
+            exec_args = args
+            for inj in matching:  # misexecution: the world executes something else
+                if inj.rewrite_args is not None:
+                    exec_args = inj.rewrite_args(tool, exec_args)
+            true_result = env.run(tool, exec_args, world)
+            counts[tool] = nth
             shown = true_result
-            for inj in injectors:
-                if inj.tool == tool and inj.nth in (0, counts[tool]):
-                    shown = inj.transform(tool, args, true_result)
+            for inj in matching:
+                shown = inj.transform(tool, args, shown)  # args = what the agent ASKED for
         marker = "obs" if (tool in setup.tools and shown != true_result) else None
         transcript.append(Message(role="assistant", tool_call=ToolCall(tool, args)))
         transcript.append(Message(role="tool", tool_name=tool, content=shown, injected=marker))

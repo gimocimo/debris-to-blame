@@ -13,6 +13,11 @@ may not see the violation (the blame gap). We separate three arms to keep the me
   python experiments/attribute.py <state.json> deleak   # -> + rulebook minus the dropped line
   python experiments/attribute.py <state.json> policy   # -> + the full policy (oracle upper bound)
   python experiments/attribute.py <state.json> rule     # -> the dropped rule (for scoring)
+
+Root-cause arms (OUTCOME-INFORMED; asks CAUSATION, not agent culpability — the agent-blame question
+"did the agent err?" under-counts environment faults such as a missing tool, see D-019):
+  python experiments/attribute.py <state.json> rootcause         # trace + "this run FAILED"
+  python experiments/attribute.py <state.json> rootcause_policy  # + the full reference policy
 """
 
 from __future__ import annotations
@@ -34,6 +39,15 @@ INSTR = (
     "agent made any mistake or violated any policy. Judge ONLY against what is shown. Respond with "
     'ONLY a JSON object: {"problem": true|false, "explanation": "<one line>", '
     '"culprit": "<what/where went wrong, or none>"}.\n\n'
+)
+
+INSTR_ROOTCAUSE = (
+    "You are a root-cause investigator. The run below FAILED its final acceptance check. Your job "
+    "is to identify the single most likely ROOT CAUSE of the failure: an agent decision, "
+    "a wrong or corrupted observation, a tool/environment problem, or a missing/violated "
+    "requirement. Judge ONLY from what is shown; name the most specific cause you can. Respond "
+    'with ONLY a JSON object: {"problem": true, "explanation": "<one line>", '
+    '"culprit": "<the root cause of the failure>"}.\n\n'
 )
 
 
@@ -66,7 +80,7 @@ def main() -> None:
         print(dropped or "(no dropped rule)")
         return
     ref = None
-    if mode == "policy":
+    if mode in ("policy", "rootcause_policy"):
         ref = task.data["policy"]  # oracle: the full pre-deletion spec
     elif mode == "deleak":
         pol = task.data["policy"]
@@ -75,7 +89,8 @@ def main() -> None:
             ref = [r for i, r in enumerate(pol) if i != k]  # rulebook minus the dropped line
         else:
             ref = pol
-    print(INSTR + render_trace_for_detective(traj, reference_policy=ref))
+    instr = INSTR_ROOTCAUSE if mode.startswith("rootcause") else INSTR
+    print(instr + render_trace_for_detective(traj, reference_policy=ref))
 
 
 if __name__ == "__main__":

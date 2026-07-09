@@ -39,10 +39,8 @@ def setup_and_injectors(condition: str, variant: int = 0, domain: str = "confere
     task = dom["variants"][variant]
     if condition == "healthy":
         return redact(task.make_trajectory()), (), task
-    if condition == "staleness":
-        return redact(task.make_trajectory()), (dom["staleness"](task),), task
-    if condition == "contradiction":
-        return redact(task.make_trajectory()), (dom["contradiction"](task),), task
+    if condition in ("staleness", "contradiction", "debris", "misexec"):
+        return redact(task.make_trajectory()), (dom[condition](task),), task
     if condition.startswith("cdrop:"):
         spec = FaultSpec(FaultType.CONSTRAINT_DROP, position=int(condition.split(":", 1)[1]))
         return inject(task.make_trajectory(), spec).public, (), task
@@ -62,15 +60,17 @@ def setup_and_injectors(condition: str, variant: int = 0, domain: str = "confere
         k = int(condition.split(":", 1)[1])
         spec = FaultSpec(FaultType.CONSTRAINT_DROP, position=k)
         setup = inject(task.make_trajectory(), spec).public
-        setup.constraints = [*setup.constraints, MISDIAGNOSIS.get(k, "Double-check all details.")]
+        wrong = MISDIAGNOSIS.get((domain, k), "Double-check all details.")
+        setup.constraints = [*setup.constraints, wrong]
         return setup, (), task
     raise SystemExit(f"unknown condition: {condition}")
 
 
 # plausible-but-wrong "repairs" for the recovery blind_repair baseline (never restore the real rule)
 MISDIAGNOSIS = {
-    0: "Prefer flights with extra legroom.",
-    2: "Prefer hotels that include free breakfast.",
+    ("conference", 0): "Prefer flights with extra legroom.",
+    ("conference", 2): "Prefer hotels that include free breakfast.",
+    ("scheduling", 3): "If refreshments are needed, order coffee for the room.",
 }
 
 

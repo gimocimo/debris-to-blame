@@ -21,7 +21,17 @@ _ATTR_KEYS = {
     # which would credit the contradiction fault for a plain budget miss). Must name the fabricated
     # note that RAISED/INFLATED the cap.
     "contradiction": ["raised", "inflated", "contradict", "conflicting", "fabricated", "hiked"],
+    "debris": ["debris", "irrelevant", "noise", "bulletin", "clutter", "unrelated", "junk"],
 }
+
+
+def _misexec_wrong_item(cfg: dict) -> str:
+    """The item the world ACTUALLY acted on under misexec (mirrors the domain misexec_injector)."""
+    if "flights" in cfg:
+        return next(f for f, d in cfg["flights"].items() if d["red_eye"])
+    if "rooms" in cfg:
+        return next(r for r, d in cfg["rooms"].items() if d["boardroom"])
+    return cfg["trap_pr"]
 
 
 def record_for(condition: str, task) -> FaultRecord | None:
@@ -54,5 +64,18 @@ def record_for(condition: str, task) -> FaultRecord | None:
         return FaultRecord(
             FaultType.CONTRADICTION, FaultSite("message", "quote"), 1.0,
             {"attr_keys": _ATTR_KEYS["contradiction"]},
+        )
+    if condition == "debris":
+        return FaultRecord(
+            FaultType.DEBRIS, FaultSite("message", "check"), 1.0,
+            {"attr_keys": _ATTR_KEYS["debris"]},
+        )
+    if condition == "misexec":
+        wrong = _misexec_wrong_item(task.data)
+        # the culprit must name the SUBSTITUTION: the wrongly-executed item or the mismatch itself
+        keys = [wrong.lower(), "wrong", "instead", "mismatch", "misexecut", "substitut",
+                "different", "not the requested"]
+        return FaultRecord(
+            FaultType.WRONG_TOOL, FaultSite("tool", "book/merge"), 1.0, {"attr_keys": keys},
         )
     raise SystemExit(f"no record mapping for condition: {condition}")
