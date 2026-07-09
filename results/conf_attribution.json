@@ -54,6 +54,16 @@
           "detect": 7,
           "attr": 7,
           "n": 8
+        },
+        "rootcause": {
+          "detect": 8,
+          "attr": 8,
+          "n": 8
+        },
+        "rootcause_policy": {
+          "detect": 8,
+          "attr": 8,
+          "n": 8
         }
       }
     },
@@ -96,6 +106,35 @@
           "detect": 0,
           "attr": 0,
           "n": 8
+        },
+        "rootcause": {
+          "detect": 8,
+          "attr": 8,
+          "n": 8
+        }
+      }
+    },
+    "misexec": {
+      "opus": {
+        "blind": {
+          "detect": 2,
+          "attr": 1,
+          "n": 8
+        },
+        "policy": {
+          "detect": 2,
+          "attr": 0,
+          "n": 8
+        },
+        "rootcause": {
+          "detect": 8,
+          "attr": 8,
+          "n": 8
+        },
+        "rootcause_policy": {
+          "detect": 8,
+          "attr": 7,
+          "n": 8
         }
       }
     }
@@ -131,6 +170,16 @@
           "detect": 3,
           "attr": 3,
           "n": 8
+        },
+        "rootcause": {
+          "detect": 8,
+          "attr": 8,
+          "n": 8
+        },
+        "rootcause_policy": {
+          "detect": 8,
+          "attr": 8,
+          "n": 8
         }
       }
     },
@@ -144,6 +193,35 @@
         "policy": {
           "detect": 1,
           "attr": 0,
+          "n": 8
+        },
+        "rootcause": {
+          "detect": 8,
+          "attr": 7,
+          "n": 8
+        }
+      }
+    },
+    "misexec": {
+      "opus": {
+        "blind": {
+          "detect": 0,
+          "attr": 0,
+          "n": 8
+        },
+        "policy": {
+          "detect": 0,
+          "attr": 0,
+          "n": 8
+        },
+        "rootcause": {
+          "detect": 8,
+          "attr": 7,
+          "n": 8
+        },
+        "rootcause_policy": {
+          "detect": 8,
+          "attr": 8,
           "n": 8
         }
       }
@@ -161,6 +239,16 @@
           "detect": 4,
           "attr": 4,
           "n": 8
+        },
+        "rootcause": {
+          "detect": 8,
+          "attr": 8,
+          "n": 8
+        },
+        "rootcause_policy": {
+          "detect": 8,
+          "attr": 8,
+          "n": 8
         }
       }
     },
@@ -174,6 +262,35 @@
         "policy": {
           "detect": 5,
           "attr": 0,
+          "n": 8
+        },
+        "rootcause": {
+          "detect": 8,
+          "attr": 3,
+          "n": 8
+        }
+      }
+    },
+    "misexec": {
+      "opus": {
+        "blind": {
+          "detect": 0,
+          "attr": 0,
+          "n": 8
+        },
+        "policy": {
+          "detect": 0,
+          "attr": 0,
+          "n": 8
+        },
+        "rootcause": {
+          "detect": 8,
+          "attr": 8,
+          "n": 8
+        },
+        "rootcause_policy": {
+          "detect": 8,
+          "attr": 8,
           "n": 8
         }
       }

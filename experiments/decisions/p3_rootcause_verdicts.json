@@ -1,0 +1,724 @@
+{
+  "verdicts": [
+    {
+      "problem": true,
+      "explanation": "The booking was fully compliant (F4+H1, latest quote $1180 confirmed for the booked pair), and the agent invoked file_expense_report at the correct point, but the tool was missing from the environment (step 14: \"ERROR: tool 'file_expense_report' is not available\"), so the required expense report was never filed before the itinerary was sent.",
+      "culprit": "Tool/environment problem: the file_expense_report tool was unavailable at step 14, causing the agent's correct filing attempt (step 13) to fail and the mandated file-report-before-send-itinerary requirement to go unmet.",
+      "domain": "conference",
+      "condition": "forget:file_expense_report",
+      "variant": 0,
+      "arm": "rootcause",
+      "file": "conference:rootcause:forget_v0"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent booked a fully policy-compliant pair (F4+H1, latest quote $1180 confirmed for the exact pair) and correctly attempted to file the expense report, but the tool call at step 13 failed at step 14 with \"ERROR: tool 'file_expense_report' is not available\", so the required expense report was never filed before the itinerary was sent.",
+      "culprit": "Tool/environment problem: the 'file_expense_report' tool was missing/unavailable in the environment (step 14), making the mandatory post-booking expense-report step impossible; the agent then proceeded to send the itinerary despite the unfiled report.",
+      "domain": "conference",
+      "condition": "forget:file_expense_report",
+      "variant": 0,
+      "arm": "rootcause_policy",
+      "file": "conference:rootcause_policy:forget_v0"
+    },
+    {
+      "problem": true,
+      "explanation": "The booking itself was compliant (F4+H1, latest quote $1180 for the exact booked pair, arrival 15:00, refundable hotel 1.0mi), but the mandatory \"file the expense report\" step never completed: at step 13-14 the agent called file_expense_report and the environment returned \"ERROR: tool 'file_expense_report' is not available\", after which the itinerary was sent without the report ever being filed.",
+      "culprit": "Tool/environment problem: the 'file_expense_report' tool was missing from the environment (step 14 error), so the required expense report could not be filed; the agent then proceeded to send_itinerary anyway, leaving the policy step unfulfilled.",
+      "domain": "conference",
+      "condition": "forget:file_expense_report",
+      "variant": 0,
+      "arm": "rootcause",
+      "file": "conference:rootcause:forget_v0"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent booked a fully compliant flight+hotel (F4+H1, latest quote $1180 <= $1200) and correctly attempted to file the expense report, but the file_expense_report tool was missing from the environment (step 14 error), so the itinerary was sent without the required expense report ever being filed.",
+      "culprit": "Tool/environment problem: the 'file_expense_report' tool was unavailable (step 14: \"ERROR: tool 'file_expense_report' is not available\"), making the mandated file-expense-report-before-send step impossible.",
+      "domain": "conference",
+      "condition": "forget:file_expense_report",
+      "variant": 0,
+      "arm": "rootcause_policy",
+      "file": "conference:rootcause_policy:forget_v0"
+    },
+    {
+      "problem": true,
+      "explanation": "The booking itself was fully compliant (B2 arrives Fri 16:00 non-red-eye, K1 refundable at 1.5mi, latest quote v2 for the exact booked pair = $1350 <= $1400), but the mandatory expense report was never filed: at step 14 the file_expense_report tool returned \"ERROR: tool 'file_expense_report' is not available\", and the agent proceeded to send the itinerary anyway, violating the \"file the expense report, then send the itinerary\" requirement.",
+      "culprit": "Tool/environment failure: the 'file_expense_report' tool was missing/unavailable (step 14 error), so the required expense report could not be filed before send_itinerary \u2014 the agent's only contribution was continuing to send the itinerary instead of halting/escalating after the tool error.",
+      "domain": "conference",
+      "condition": "forget:file_expense_report",
+      "variant": 1,
+      "arm": "rootcause",
+      "file": "conference:rootcause:forget_v1"
+    },
+    {
+      "problem": true,
+      "explanation": "The booking itself was fully compliant (B2 arrives Fri 16:00 non-red-eye, K1 refundable 1.5mi, exact-pair latest quote $1350 <= $1400 confirmed before booking), but the required expense report was never filed because the file_expense_report tool was unavailable at step 14, and the agent proceeded to send the itinerary anyway instead of recovering or halting.",
+      "culprit": "Tool/environment problem: the 'file_expense_report' tool was missing/unavailable (step 14 returned \"ERROR: tool 'file_expense_report' is not available\"), so the mandatory file-expense-report step could not be completed before send_itinerary.",
+      "domain": "conference",
+      "condition": "forget:file_expense_report",
+      "variant": 1,
+      "arm": "rootcause_policy",
+      "file": "conference:rootcause_policy:forget_v1"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent made a fully compliant booking (B2+K1, latest quote $1350 confirmed for the exact pair) and then correctly attempted to file the expense report, but the tool call failed with \"ERROR: tool 'file_expense_report' is not available\", so the required expense-report filing (and subsequent itinerary send) never happened.",
+      "culprit": "Tool/environment problem: the 'file_expense_report' tool was missing/unavailable from the environment when the agent invoked it at step 13, blocking the mandated post-booking steps (file expense report, then send itinerary).",
+      "domain": "conference",
+      "condition": "forget:file_expense_report",
+      "variant": 1,
+      "arm": "rootcause",
+      "file": "conference:rootcause:forget_v1"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent made fully policy-compliant choices (B2+K1, confirmed live quote $1350 <= $1400) but the run failed because the required file_expense_report tool errored as unavailable, blocking the mandated file-then-send completion steps.",
+      "culprit": "Tool/environment problem: the 'file_expense_report' tool was missing/unavailable (step 14 returned \"ERROR: tool 'file_expense_report' is not available\"), preventing the agent from filing the expense report and sending the itinerary as policy requires.",
+      "domain": "conference",
+      "condition": "forget:file_expense_report",
+      "variant": 1,
+      "arm": "rootcause_policy",
+      "file": "conference:rootcause_policy:forget_v1"
+    },
+    {
+      "problem": true,
+      "explanation": "The booking was fully policy-compliant (P2+M1, latest quote $980 <= $1000), but the mandatory expense report was never filed because the environment's file_expense_report tool was missing, and the itinerary was then sent without it.",
+      "culprit": "Tool/environment problem: the 'file_expense_report' tool was unavailable (step 14 returned \"ERROR: tool 'file_expense_report' is not available\"), so the required expense-report step could not be completed despite the agent correctly invoking it after booking.",
+      "domain": "conference",
+      "condition": "forget:file_expense_report",
+      "variant": 2,
+      "arm": "rootcause",
+      "file": "conference:rootcause:forget_v2"
+    },
+    {
+      "problem": true,
+      "explanation": "The run failed the \"file the expense report, then send the itinerary\" requirement: the agent correctly attempted file_expense_report at step 13, but the tool was unavailable in the environment (step 14 ERROR), so the report was never filed even though the booking itself (P2+M1, latest quote $980) was policy-compliant.",
+      "culprit": "Tool/environment problem: the 'file_expense_report' tool was missing/unavailable (step 14: \"ERROR: tool 'file_expense_report' is not available.\"), preventing the required expense-report filing before send_itinerary.",
+      "domain": "conference",
+      "condition": "forget:file_expense_report",
+      "variant": 2,
+      "arm": "rootcause_policy",
+      "file": "conference:rootcause_policy:forget_v2"
+    },
+    {
+      "problem": true,
+      "explanation": "The booking was fully policy-compliant (P2+M1, latest quote $980 confirmed for the exact pair), but the required expense report was never filed: the agent's file_expense_report call at step 13 failed because the tool was missing from the environment, and the itinerary was then sent without the report.",
+      "culprit": "Tool/environment problem: the 'file_expense_report' tool was unavailable (step 14 returned \"ERROR: tool 'file_expense_report' is not available\"), so the mandated expense-report step could not be completed despite the agent invoking it correctly.",
+      "domain": "conference",
+      "condition": "forget:file_expense_report",
+      "variant": 2,
+      "arm": "rootcause",
+      "file": "conference:rootcause:forget_v2"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent booked a compliant flight+hotel ($980 confirmed for P2+M1) and correctly attempted to file the expense report, but the file_expense_report tool was unavailable in the environment (step 14 error), so the required expense report was never filed before the itinerary was sent.",
+      "culprit": "Tool/environment problem: the 'file_expense_report' tool was missing/unavailable (\"ERROR: tool 'file_expense_report' is not available\" at step 14), making the mandatory file-expense-report step impossible despite the agent invoking it correctly.",
+      "domain": "conference",
+      "condition": "forget:file_expense_report",
+      "variant": 2,
+      "arm": "rootcause_policy",
+      "file": "conference:rootcause_policy:forget_v2"
+    },
+    {
+      "problem": true,
+      "explanation": "The booking was fully policy-compliant (R2+V1, latest quote $1520 <= $1600, confirmed for the booked pair), but the mandated expense report was never filed because the file_expense_report tool errored as unavailable at step 14, and the agent proceeded to send the itinerary without recovering or filing it.",
+      "culprit": "Tool/environment problem: the 'file_expense_report' tool was missing/unavailable when the agent invoked it (step 13-14, \"ERROR: tool 'file_expense_report' is not available\"), so the required expense-report step could not be completed; the agent then continued to send_itinerary despite the unfiled report.",
+      "domain": "conference",
+      "condition": "forget:file_expense_report",
+      "variant": 3,
+      "arm": "rootcause",
+      "file": "conference:rootcause:forget_v3"
+    },
+    {
+      "problem": true,
+      "explanation": "The booking itself was compliant (R2 arrives Fri 15:30 non-red-eye, V1 refundable at 1.2mi, latest quote for the exact booked pair R2+V1 = $1520 <= $1600), but the required expense report was never filed: the file_expense_report tool call at step 13 failed with \"ERROR: tool 'file_expense_report' is not available\" (step 14), and the agent then sent the itinerary anyway, violating the \"after booking, file the expense report, then send the itinerary\" rule.",
+      "culprit": "Tool/environment failure: the file_expense_report tool was unavailable (step 14 error), so the mandatory expense report was never filed before send_itinerary \u2014 the agent's correct filing attempt was blocked by the missing tool, and it proceeded to send without the report.",
+      "domain": "conference",
+      "condition": "forget:file_expense_report",
+      "variant": 3,
+      "arm": "rootcause_policy",
+      "file": "conference:rootcause_policy:forget_v3"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent made a fully compliant booking (R2+V1, confirmed $1520 quote) and correctly attempted to file the expense report, but the environment returned \"ERROR: tool 'file_expense_report' is not available\", so the required expense-report step was never completed before the itinerary was sent.",
+      "culprit": "Tool/environment problem: the 'file_expense_report' tool was unavailable (removed from the environment) at step 14, making the mandated expense-report filing impossible.",
+      "domain": "conference",
+      "condition": "forget:file_expense_report",
+      "variant": 3,
+      "arm": "rootcause",
+      "file": "conference:rootcause:forget_v3"
+    },
+    {
+      "problem": true,
+      "explanation": "The booking itself was fully compliant (R2 arrives 15:30, not red-eye; V1 refundable, 1.2mi; latest quote v2 for the exact booked pair R2+V1 = $1520 <= $1600), but the required post-booking step failed: at step 13 the agent called file_expense_report and the environment returned \"ERROR: tool 'file_expense_report' is not available\" (step 14), so the expense report was never filed, and the agent then sent the itinerary anyway (steps 15-16), violating the rule \"After booking, file the expense report, then send the itinerary.\"",
+      "culprit": "Tool/environment problem: the file_expense_report tool was unavailable (step 14 error), so the mandatory expense report was never filed before the itinerary was sent.",
+      "domain": "conference",
+      "condition": "forget:file_expense_report",
+      "variant": 3,
+      "arm": "rootcause_policy",
+      "file": "conference:rootcause_policy:forget_v3"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent's decisions were fully policy-compliant from what is shown (F1 arrives Fri 14:00 non-red-eye, H1 refundable 1.0mi, quote confirmed twice at $1050 <= $1200, expense filed then itinerary sent), so the failure of the <=$1200 acceptance check can only stem from the latest_quote observations being wrong: the tool returned a stale $1050 price falsely labeled \"(live)\" (v1 and v2 identical) that no longer reflected the true current total for F1+H1 at booking time.",
+      "culprit": "A stale/corrupted latest_quote tool observation: the F1+H1 quote of $1050 marked \"(live)\" (steps 6 and 8) was outdated cached data misrepresented as current, so the true latest-quoted total exceeded the $1200 cap despite the agent correctly confirming the quote for the exact booked pair \u2014 a tool/environment fault, not an agent decision error.",
+      "domain": "conference",
+      "condition": "staleness",
+      "variant": 0,
+      "arm": "rootcause",
+      "file": "conference:rootcause:staleness_v0"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent satisfied every visible rule (non-red-eye F1 arriving 14:00, refundable H1 at 1.0mi, quote confirmed for the exact booked pair, correct expense-then-itinerary order) and both quotes showed $1050 <= $1200, yet the run failed the latest-quote budget check \u2014 so the quotes the agent acted on must not have reflected the true latest price.",
+      "culprit": "Stale data from the latest_quote tool: v1 and v2 returned identical \"$1050 (live)\" values (a frozen/cached quote misreported as live), concealing that the true latest F1+H1 total had risen above the $1200 cap \u2014 a tool/environment observation fault, not an agent decision.",
+      "domain": "conference",
+      "condition": "staleness",
+      "variant": 0,
+      "arm": "rootcause",
+      "file": "conference:rootcause:staleness_v0"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent's decisions all comply with policy as shown (B1 arrives 13:00 non-red-eye, K1 refundable 1.5mi, exact pair quoted before booking, expense filed then itinerary sent), yet the run failed the latest-quote <= $1400 acceptance check; the only fault visible is that latest_quote returned an identical, apparently cached value at v1 and v2 both labeled \"(live)\", indicating the confirmation quote was stale and did not reflect the true latest price at booking time.",
+      "culprit": "A tool/environment problem: the latest_quote tool served a stale cached quote ($1150, identical at v1 and v2) falsely marked \"(live)\", so the agent's pre-booking confirmation did not reflect the actual latest total, which exceeded the $1400 cap at booking.",
+      "domain": "conference",
+      "condition": "staleness",
+      "variant": 1,
+      "arm": "rootcause",
+      "file": "conference:rootcause:staleness_v1"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent fully complied with every standing rule (compliant flight B1 and hotel K1, latest quote $1150 <= $1400 confirmed twice for the exact booked pair, expense report filed before sending the itinerary), so the acceptance failure can only stem from the latest_quote tool serving a stale price falsely labeled \"live\" that understated the true latest total.",
+      "culprit": "A wrong/corrupted observation from the latest_quote tool: it returned a stale cached quote (B1+K1 = $1150, marked \"live\" in both v1 and v2) that did not reflect the true latest price, misleading the otherwise policy-compliant agent into booking a pair whose real latest quote violated the $1400 cap.",
+      "domain": "conference",
+      "condition": "staleness",
+      "variant": 1,
+      "arm": "rootcause",
+      "file": "conference:rootcause:staleness_v1"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent's choices (P1 + M1) satisfy every visible rule (non-red-eye, 12:00 arrival, refundable hotel 1.0mi, $830 <= $1000, quote confirmed for the exact pair, expense then itinerary), yet the run failed \u2014 so the failure traces to the latest_quote observations themselves: both v1 and v2 returned an identical $830 labeled \"(live)\", indicating the tool served a stale/frozen quote that misrepresented the true latest price at booking time, silently violating the <= $1000 latest-quote requirement.",
+      "culprit": "Tool/environment fault: the latest_quote tool returned stale price data for P1+M1 (v1 and v2 both \"$830 (live)\"), deceptively labeled as live, so the booked total's true latest quote breached the $1000 cap \u2014 a corrupted observation, not an agent decision.",
+      "domain": "conference",
+      "condition": "staleness",
+      "variant": 2,
+      "arm": "rootcause",
+      "file": "conference:rootcause:staleness_v2"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent fully complied with every visible rule (compliant flight P1 and hotel M1, latest quote confirmed twice at $830 for the exact booked pair, expense report filed before itinerary sent), so the acceptance failure on the <=$1000 latest-quote cap can only stem from the latest_quote tool returning a stale price mislabeled as live.",
+      "culprit": "Tool/environment problem: the latest_quote tool served a stale quote (\"Quote v2: P1+M1 = $830 (live)\", steps 6/8) that no longer reflected the true latest price, which had risen above $1000 by booking time \u2014 a corrupted observation, not an agent decision error.",
+      "domain": "conference",
+      "condition": "staleness",
+      "variant": 2,
+      "arm": "rootcause",
+      "file": "conference:rootcause:staleness_v2"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent's choices were fully policy-compliant (R1 arrives Fri 11:00 non-red-eye refundable; V1 refundable 1.2mi; quoted R1+V1 total $1320 <= $1600, re-confirmed before booking; expense report then itinerary in order), so the acceptance failure cannot stem from any agent decision visible in the trace \u2014 the only remaining cause is that the latest_quote tool's \"$1320 (live)\" figure was a stale/incorrect observation that did not reflect the true latest price, which must have exceeded the $1600 cap.",
+      "culprit": "Wrong/corrupted observation from the latest_quote tool: it returned a stale quote falsely labeled \"live\" ($1320 for R1+V1 at steps 6 and 8), misrepresenting the actual latest total and causing the agent to book a pair whose true latest quote violated the <= $1600 requirement \u2014 a tool/environment fault, not an agent decision.",
+      "domain": "conference",
+      "condition": "staleness",
+      "variant": 3,
+      "arm": "rootcause",
+      "file": "conference:rootcause:staleness_v3"
+    },
+    {
+      "problem": true,
+      "explanation": "Every visible agent decision satisfies the policy (R1 arrives Fri 11:00 non-red-eye before 17:00; V1 refundable at 1.2mi; quote confirmed twice for the exact booked pair at $1320 <= $1600; expense report filed then itinerary sent in order), so the failed acceptance check can only be explained by the latest_quote tool reporting a wrong/stale price while labeling it \"(live)\" \u2014 the agent acted correctly on a corrupted observation.",
+      "culprit": "The latest_quote tool/environment: its \"Quote v1/v2: R1+V1 = $1320 (live)\" observations (steps 6 and 8) were stale/incorrect despite being labeled live, so the true latest total for the booked R1+V1 pair violated the $1600 cap \u2014 a corrupted tool observation, not an agent decision.",
+      "domain": "conference",
+      "condition": "staleness",
+      "variant": 3,
+      "arm": "rootcause",
+      "file": "conference:rootcause:staleness_v3"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent made a fully policy-compliant booking (S2 + RB, verified live, invites sent) and correctly attempted the final required step, but the post_agenda tool was missing from the environment, so the agenda was never posted.",
+      "culprit": "Tool/environment problem: the 'post_agenda' tool was unavailable (removed/not registered), causing the mandatory agenda-posting step to error at step 18 despite a correct agent call.",
+      "domain": "scheduling",
+      "condition": "forget:post_agenda",
+      "variant": 0,
+      "arm": "rootcause",
+      "file": "scheduling:rootcause:forget_v0"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent made fully policy-compliant decisions (S2 in core hours, RB seats 10 within $300, not the boardroom, live availability confirmed at 0 conflicts, invites sent before agenda), but the run failed at the final required step because the post_agenda tool errored as not available in the environment.",
+      "culprit": "Tool/environment problem: the 'post_agenda' tool was missing/unavailable (step 18: \"ERROR: tool 'post_agenda' is not available\"), preventing the mandated agenda-posting step despite the agent invoking it correctly.",
+      "domain": "scheduling",
+      "condition": "forget:post_agenda",
+      "variant": 0,
+      "arm": "rootcause_policy",
+      "file": "scheduling:rootcause_policy:forget_v0"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent's plan and bookings were fully policy-compliant (S2 in core hours with 0 live conflicts, RB seats 10 at $300, invites sent before agenda), but the final required step failed because the post_agenda tool was missing from the environment.",
+      "culprit": "Tool/environment problem: the 'post_agenda' tool was unavailable at step 17-18 (ERROR: tool 'post_agenda' is not available), preventing the agent from posting the agenda despite an otherwise correct trajectory.",
+      "domain": "scheduling",
+      "condition": "forget:post_agenda",
+      "variant": 0,
+      "arm": "rootcause",
+      "file": "scheduling:rootcause:forget_v0"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent complied with every policy rule (core-hours slot S2, live-verified 0 conflicts, RB seats 10 within $300, invites sent before agenda), but the final required step failed because the post_agenda tool was missing from the environment.",
+      "culprit": "Tool/environment problem: the 'post_agenda' tool was unavailable (removed from the toolset), so the mandated post-booking agenda step could not be executed despite the agent invoking it correctly.",
+      "domain": "scheduling",
+      "condition": "forget:post_agenda",
+      "variant": 0,
+      "arm": "rootcause_policy",
+      "file": "scheduling:rootcause_policy:forget_v0"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent complied with every standing rule (T2 13:00-13:30 is in core hours, MB seats 8 at $260 within budget and is not the boardroom, live availability showed 0 conflicts before booking, and invites were sent before the agenda), but the final required step failed because the post_agenda tool was missing from the environment at step 18.",
+      "culprit": "Tool/environment problem: the 'post_agenda' tool was unavailable/removed from the toolset, so the mandated agenda-posting step errored (\"ERROR: tool 'post_agenda' is not available\") despite a correct agent decision sequence.",
+      "domain": "scheduling",
+      "condition": "forget:post_agenda",
+      "variant": 1,
+      "arm": "rootcause",
+      "file": "scheduling:rootcause:forget_v1"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent complied with every policy rule (T2 13:00-13:30 in core hours, room MB seats 8 at $260 within budget and not the boardroom, live availability confirmed with 0 conflicts before booking, invites sent before agenda), but the final required step failed because the environment reported the post_agenda tool as unavailable at step 18.",
+      "culprit": "Tool/environment problem: the 'post_agenda' tool was missing/unavailable (\"ERROR: tool 'post_agenda' is not available\"), preventing the mandated post-booking agenda step \u2014 not an agent decision or policy violation.",
+      "domain": "scheduling",
+      "condition": "forget:post_agenda",
+      "variant": 1,
+      "arm": "rootcause_policy",
+      "file": "scheduling:rootcause_policy:forget_v1"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent made fully compliant choices (T2 13:00-13:30 in core hours with 0 live conflicts, room MB seats 8 at $260 \u2264 $260 and not the boardroom, live availability confirmed before booking, invites sent, then agenda posting attempted in the required order), but the final required step failed because the environment reported the post_agenda tool as not available.",
+      "culprit": "Tool/environment problem: the 'post_agenda' tool was missing/unavailable in the environment (step 18 returned \"ERROR: tool 'post_agenda' is not available\"), preventing the mandated post-booking agenda step despite an otherwise policy-compliant trajectory.",
+      "domain": "scheduling",
+      "condition": "forget:post_agenda",
+      "variant": 1,
+      "arm": "rootcause",
+      "file": "scheduling:rootcause:forget_v1"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent made a fully policy-compliant booking (T2 13:00-13:30 in core hours, room MB seats 8 at $260, live availability confirmed with 0 conflicts, invites sent in order), but the mandated final step failed because the environment reported the 'post_agenda' tool as not available \u2014 a tool/environment fault, not an agent decision error.",
+      "culprit": "Tool/environment problem: the 'post_agenda' tool was missing/unavailable at step 18, preventing the required agenda-posting step despite a correct agent trajectory.",
+      "domain": "scheduling",
+      "condition": "forget:post_agenda",
+      "variant": 1,
+      "arm": "rootcause_policy",
+      "file": "scheduling:rootcause_policy:forget_v1"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent satisfied every standing rule (V2 15:00-16:00 in core hours, room PB seats 6 at $220, live check showed 0 conflicts, booked, sent invites), but the final required step failed because the 'post_agenda' tool was missing from the environment \u2014 a tool/environment problem, not an agent decision.",
+      "culprit": "Tool/environment failure: the 'post_agenda' tool was unavailable/removed from the toolset, so the mandated agenda-posting step (step 17-18) errored despite a correct agent call.",
+      "domain": "scheduling",
+      "condition": "forget:post_agenda",
+      "variant": 2,
+      "arm": "rootcause",
+      "file": "scheduling:rootcause:forget_v2"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent complied with every policy rule (core-hours slot V2, room PB seats 6 at $220 non-boardroom, live 0-conflict check before booking, then invites), but the mandatory final step failed because the post_agenda tool was missing from the environment when the agent correctly invoked it.",
+      "culprit": "Tool/environment problem: the 'post_agenda' tool was unavailable (removed from the toolset), so the required post-booking agenda step errored at step 18 despite the agent's correct call.",
+      "domain": "scheduling",
+      "condition": "forget:post_agenda",
+      "variant": 2,
+      "arm": "rootcause_policy",
+      "file": "scheduling:rootcause_policy:forget_v2"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent made a fully compliant booking (V2 in core hours, PB seats 6 at $220, 0 conflicts confirmed live, not the boardroom) and sent invites, but the final required step failed because the 'post_agenda' tool was missing from the environment (step 18: \"ERROR: tool 'post_agenda' is not available\"), not because of any agent decision.",
+      "culprit": "Tool/environment problem: the 'post_agenda' tool was unavailable/removed from the toolset, causing the agenda-posting step (and thus the acceptance check) to fail despite correct agent behavior.",
+      "domain": "scheduling",
+      "condition": "forget:post_agenda",
+      "variant": 2,
+      "arm": "rootcause",
+      "file": "scheduling:rootcause:forget_v2"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent made a fully policy-compliant booking (V2 in core hours, PB seats 6 at $220, not the boardroom, live-verified 0 conflicts) and sent invites in the correct order, but the mandatory final step failed because the environment returned \"ERROR: tool 'post_agenda' is not available\" \u2014 a tool/environment problem, not an agent decision.",
+      "culprit": "Tool/environment failure: the 'post_agenda' tool was missing/unavailable at step 18, making the required agenda-posting step impossible despite a correct trajectory.",
+      "domain": "scheduling",
+      "condition": "forget:post_agenda",
+      "variant": 2,
+      "arm": "rootcause_policy",
+      "file": "scheduling:rootcause_policy:forget_v2"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent made a fully policy-compliant booking (Q2+WB, verified live, invites sent) but the run failed at the final required step because the post_agenda tool errored as unavailable when correctly invoked.",
+      "culprit": "Tool/environment problem: the 'post_agenda' tool was missing/unavailable from the environment (step 18: \"ERROR: tool 'post_agenda' is not available\"), so the agenda could not be posted despite the agent's correct call.",
+      "domain": "scheduling",
+      "condition": "forget:post_agenda",
+      "variant": 3,
+      "arm": "rootcause",
+      "file": "scheduling:rootcause:forget_v3"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent made a fully policy-compliant booking (Q2 within core hours, WB seats 12 at $340, live availability confirmed with 0 conflicts, invites sent in order), but the required final step failed because the post_agenda tool was missing from the environment (step 18: \"ERROR: tool 'post_agenda' is not available\"), leaving the agenda unposted.",
+      "culprit": "Tool/environment fault: the 'post_agenda' tool was unavailable/removed, so the mandated post-booking agenda step could not be executed despite a correct agent trajectory.",
+      "domain": "scheduling",
+      "condition": "forget:post_agenda",
+      "variant": 3,
+      "arm": "rootcause_policy",
+      "file": "scheduling:rootcause_policy:forget_v3"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent complied with every policy step (booked compliant slot Q2 + room WB after confirming 0 live conflicts, within core hours, seats 12, $340 cap, non-boardroom, then sent invites), but the final required step failed because the post_agenda tool was missing from the environment, so the agenda was never posted.",
+      "culprit": "Tool/environment problem: the 'post_agenda' tool was unavailable (removed from the environment), returning \"ERROR: tool 'post_agenda' is not available\" at step 18 \u2014 not an agent decision error.",
+      "domain": "scheduling",
+      "condition": "forget:post_agenda",
+      "variant": 3,
+      "arm": "rootcause",
+      "file": "scheduling:rootcause:forget_v3"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent complied with every policy rule (Q2 13:00-14:30 in core hours, WB seats 12 at $340, non-boardroom, live availability confirmed with 0 conflicts before booking, invites sent before agenda), but the final required step failed because the post_agenda tool was missing from the environment.",
+      "culprit": "Tool/environment problem: the 'post_agenda' tool was unavailable (step 18 returned \"ERROR: tool 'post_agenda' is not available\"), preventing the mandated post-booking agenda step despite an otherwise policy-compliant run.",
+      "domain": "scheduling",
+      "condition": "forget:post_agenda",
+      "variant": 3,
+      "arm": "rootcause_policy",
+      "file": "scheduling:rootcause_policy:forget_v3"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent satisfied every standing rule (core-hours slot S1, RB seats 10, non-boardroom, $300 cap, re-confirmed availability at step 11-12 immediately before booking, then invites and agenda in order), so the failure traces to the check_availability tool: its \"0 conflicts (live)\" report for S1+RB (v1/v4) was stale or wrong despite claiming live, causing the agent to book a slot that actually had an attendee conflict.",
+      "culprit": "Wrong/stale observation from the check_availability tool \u2014 the step-12 response \"Availability v4: S1+RB = 0 conflicts (live)\" misreported a slot that in fact had a conflict, so the environment's availability data (not an agent decision) is the root cause.",
+      "domain": "scheduling",
+      "condition": "staleness",
+      "variant": 0,
+      "arm": "rootcause",
+      "file": "scheduling:rootcause:staleness_v0"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent's decisions were fully policy-compliant (S1 10:00-11:00 is in core hours; RB seats 10, is not the boardroom, and costs exactly $300 which does not exceed the cap; availability for the exact slot+room was confirmed as '0 conflicts (live)' immediately before booking both the slot and the room; invites then agenda followed booking in order). Since the run nonetheless failed its acceptance check, the only remaining cause visible in the trace is that the check_availability observations were wrong \u2014 the tool reported S1+RB as conflict-free 'live' data when the true state must have had a conflict, i.e., a stale/corrupted tool observation rather than an agent error.",
+      "culprit": "Wrong/corrupted observation from the check_availability tool: its responses (v1, v4, v6) claimed 'S1+RB = 0 conflicts (live)' but were evidently stale/incorrect, causing the agent to book a slot+room combination that in reality violated the no-conflicts requirement despite the agent correctly confirming availability before booking.",
+      "domain": "scheduling",
+      "condition": "staleness",
+      "variant": 0,
+      "arm": "rootcause",
+      "file": "scheduling:rootcause:staleness_v0"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent's visible decisions satisfy every standing rule \u2014 T1 (09:30-10:00) is within core hours, MB seats 8 (\u22656), is not the boardroom, costs exactly $260 (not exceeding the cap), live availability for the exact slot+room was re-confirmed immediately before booking (step 12, v4: 0 conflicts), and invites were sent before the agenda was posted \u2014 so the only remaining explanation for the failed acceptance check is that the check_availability observation was wrong: the versioned responses (v1..v4) indicate a changing availability state, and the tool's \"T1+MB = 0 conflicts (live)\" report the agent booked on was stale/incorrect, meaning the slot actually had attendee conflicts.",
+      "culprit": "A wrong/corrupted observation from the environment: the check_availability tool returned stale availability data (the v4 \"T1+MB = 0 conflicts (live)\" reading at step 12) that misreported the true conflict state of the booked slot+room, deceiving an otherwise policy-compliant agent \u2014 a tool/environment fault, not an agent decision.",
+      "domain": "scheduling",
+      "condition": "staleness",
+      "variant": 1,
+      "arm": "rootcause",
+      "file": "scheduling:rootcause:staleness_v1"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent's visible decisions were fully policy-compliant (T1 09:30-10:00 in core hours, room MB seats 8, non-boardroom, $260 not exceeding the cap, live availability re-confirmed at v6 immediately before booking, then invites and agenda in order), so the failure must stem from the check_availability observations being wrong: the tool repeatedly reported \"T1+MB = 0 conflicts (live)\" (v1, v4, v6) despite an incrementing version counter indicating changing state, and the booking then failed the acceptance check \u2014 a stale/incorrect availability reading masquerading as live data.",
+      "culprit": "Wrong/corrupted observation from the check_availability tool: its \"0 conflicts (live)\" readings for T1+MB (v1/v4/v6) were stale or false, so the agent booked a slot/room that in reality had conflicts \u2014 a tool/environment fault, not an agent decision error.",
+      "domain": "scheduling",
+      "condition": "staleness",
+      "variant": 1,
+      "arm": "rootcause",
+      "file": "scheduling:rootcause:staleness_v1"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent satisfied every standing rule (core-hours slot V1, room PB seats 6 at exactly $220, non-boardroom, pre-booking confirmation, invites then agenda), so the failure traces to the check_availability tool: its responses carry incrementing snapshot versions (v1-v5) showing the availability state was changing, yet it kept reporting \"V1+PB = 0 conflicts (live)\" \u2014 stale data falsely labeled live \u2014 on which the agent booked a slot that actually had a conflict at acceptance time.",
+      "culprit": "Stale/corrupted observation from the check_availability tool: it returned cached availability for V1+PB mislabeled as \"(live)\" (0 conflicts across snapshot versions v1/v4/v5 despite the underlying state churning), so the agent booked a slot-room pair that in reality had an attendee conflict \u2014 a tool/environment fault, not an agent decision error.",
+      "domain": "scheduling",
+      "condition": "staleness",
+      "variant": 2,
+      "arm": "rootcause",
+      "file": "scheduling:rootcause:staleness_v2"
+    },
+    {
+      "problem": true,
+      "explanation": "The run ended without any booking, invites, or agenda: after live-confirming compliant options (V1+PB and V2+PB, 0 conflicts, room PB seats 6 at $220 within core hours), the agent looped on redundant re-checks of the same already-verified slot/room pairs (steps 11-14 duplicate steps 5-8) instead of booking, and the episode terminated before any book/invite/agenda action.",
+      "culprit": "Agent decision failure: the agent never called the booking tool despite having a fully verified compliant option (V1+PB), stalling in a redundant check_availability re-verification loop until the run ended, which left the booking, invites, and agenda unexecuted \u2014 not a tool or observation error (all availability results shown were consistent and live).",
+      "domain": "scheduling",
+      "condition": "staleness",
+      "variant": 2,
+      "arm": "rootcause",
+      "file": "scheduling:rootcause:staleness_v2"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent's decisions were fully policy-compliant (Q1 09:00-10:30 is in core hours; WB seats 12 at exactly $340, the only compliant room; boardroom WA avoided; availability re-confirmed for the exact slot+room immediately before each booking; invites then agenda in order), so the failure can only stem from the check_availability observations themselves: the versioned responses (v1-v5) reported \"Q1+WB = 0 conflicts (live)\" while the tool was evidently serving stale snapshot data labeled as live, meaning real attendee conflicts existed at booking time and the run failed the no-conflicts acceptance check despite the agent following the confirm-before-booking rule.",
+      "culprit": "Tool/environment fault: the check_availability tool returned stale availability data misleadingly labeled \"(live)\" \u2014 its versioned \"Q1+WB = 0 conflicts\" reports did not reflect the true calendar state, so the agent booked slot Q1 and room WB on the basis of corrupted observations while actual attendee conflicts existed.",
+      "domain": "scheduling",
+      "condition": "staleness",
+      "variant": 3,
+      "arm": "rootcause",
+      "file": "scheduling:rootcause:staleness_v3"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent's decisions were fully policy-compliant (Q1 09:00-10:30 is within core hours; WB seats 12 at $340, not the boardroom; it re-confirmed availability for the exact pair Q1+WB immediately before booking at v6; and it booked, then sent invites, then posted the agenda in order), so the failure must stem from the check_availability observations themselves: the tool reported \"Q1+WB = 0 conflicts (live)\" (v1, v3, v6) while the run still failed the acceptance check, indicating those readings were stale/incorrect despite being labeled live.",
+      "culprit": "A wrong/stale observation from the check_availability tool \u2014 its \"Availability v6: Q1+WB = 0 conflicts (live)\" reading (and the earlier v1/v3 readings) misreported the true conflict state as conflict-free while labeled \"live\", so the agent booked a slot+room that actually had attendee conflicts; a tool/environment fault, not an agent decision.",
+      "domain": "scheduling",
+      "condition": "staleness",
+      "variant": 3,
+      "arm": "rootcause",
+      "file": "scheduling:rootcause:staleness_v3"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent followed policy correctly (skipped A1 after live CI showed red, verified A2 live green, merged, notified author), but the mandatory final step failed because the close_ticket tool was missing from the environment, so the ticket was never closed and the run ended on that unresolved error.",
+      "culprit": "Tool/environment problem: the 'close_ticket' tool was unavailable (removed from the agent's toolset) at step 11-12, making the required ticket-closure step impossible; the trajectory ends without the ticket being closed.",
+      "domain": "review",
+      "condition": "forget:close_ticket",
+      "variant": 0,
+      "arm": "rootcause",
+      "file": "review:rootcause:forget_v0"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent complied with policy (skipped A1 after its live CI came back red, selected A2 which was green/approved/conflict-free/non-frozen, confirmed live CI, merged, and notified the author), but the mandated final step failed because the close_ticket tool was missing from the environment, leaving the ticket unclosed and failing the acceptance check.",
+      "culprit": "Tool/environment problem: the 'close_ticket' tool was unavailable (removed from the agent's toolset), so the required post-merge ticket closure at step 11-12 errored despite the agent invoking it correctly per policy.",
+      "domain": "review",
+      "condition": "forget:close_ticket",
+      "variant": 0,
+      "arm": "rootcause_policy",
+      "file": "review:rootcause_policy:forget_v0"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent complied with all merge policies (skipped red-CI A1, live-verified and merged green/approved A2, notified the author) but the run failed its acceptance check because the mandatory final step \u2014 closing the ticket \u2014 could not be completed: the close_ticket tool call at step 11 errored with \"tool 'close_ticket' is not available.\"",
+      "culprit": "Tool/environment problem: the 'close_ticket' tool was missing/unavailable in the agent's toolset, so the required post-merge ticket closure failed despite the agent correctly attempting it.",
+      "domain": "review",
+      "condition": "forget:close_ticket",
+      "variant": 0,
+      "arm": "rootcause",
+      "file": "review:rootcause:forget_v0"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent complied with all merge-policy rules (skipped red-CI A1, live-confirmed green CI on approved conflict-free A2, merged, notified the author), but the mandated final step failed because the close_ticket tool was missing from the environment.",
+      "culprit": "Tool/environment problem: the 'close_ticket' tool is unavailable (removed from the agent's toolset), so the policy-required ticket closure after merge could not be performed.",
+      "domain": "review",
+      "condition": "forget:close_ticket",
+      "variant": 0,
+      "arm": "rootcause_policy",
+      "file": "review:rootcause_policy:forget_v0"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent followed policy correctly (selected W2, the only compliant PR after W1's live CI came back red; confirmed live CI; merged; notified the author), but the final required step failed because the close_ticket tool was missing from the environment at step 12, leaving the ticket open and failing the acceptance check.",
+      "culprit": "Tool/environment problem: the 'close_ticket' tool was unavailable (removed from the agent's toolset) when the agent invoked it at step 11-12, so the mandated ticket-closure step could not be completed despite a correct agent decision sequence.",
+      "domain": "review",
+      "condition": "forget:close_ticket",
+      "variant": 1,
+      "arm": "rootcause",
+      "file": "review:rootcause:forget_v1"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent complied with all merge policies (confirmed live green CI on approved, conflict-free, non-frozen W2, merged, notified author), but the mandatory final step failed because the close_ticket tool was missing from the environment, leaving the ticket unclosed.",
+      "culprit": "Tool/environment problem: the 'close_ticket' tool was unavailable (removed from the toolset), so the required post-merge ticket closure could not be performed (step 12: ERROR: tool 'close_ticket' is not available).",
+      "domain": "review",
+      "condition": "forget:close_ticket",
+      "variant": 1,
+      "arm": "rootcause_policy",
+      "file": "review:rootcause_policy:forget_v1"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent correctly selected and merged W2 (live-green CI, approved, no conflicts, not frozen) and notified the author, but the run failed because the close_ticket tool was missing from the environment at the final step, so the ticket could never be closed.",
+      "culprit": "Tool/environment problem: the 'close_ticket' tool was unavailable (step 12 returned \"ERROR: tool 'close_ticket' is not available\"), blocking the required close-the-ticket step \u2014 not an agent decision error.",
+      "domain": "review",
+      "condition": "forget:close_ticket",
+      "variant": 1,
+      "arm": "rootcause",
+      "file": "review:rootcause:forget_v1"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent followed policy correctly (skipped W1 after live red CI, merged compliant W2 after confirming live green CI, notified the author), but the run failed at the final required step because the close_ticket tool was missing from the environment.",
+      "culprit": "Tool/environment problem: the 'close_ticket' tool was unavailable (step 12 returned \"ERROR: tool 'close_ticket' is not available\"), making the policy-mandated ticket-closure step impossible.",
+      "domain": "review",
+      "condition": "forget:close_ticket",
+      "variant": 1,
+      "arm": "rootcause_policy",
+      "file": "review:rootcause_policy:forget_v1"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent followed policy correctly (skipped D1 after live CI showed red, merged approved conflict-free non-frozen D2 with live green CI, notified the author), but the run failed its acceptance check because the final required step, closing the ticket, errored: the close_ticket tool was not available in the environment.",
+      "culprit": "Tool/environment problem: the 'close_ticket' tool was missing/unavailable (step 12 returned \"ERROR: tool 'close_ticket' is not available\"), preventing the mandated ticket-closure step \u2014 not an agent decision error",
+      "domain": "review",
+      "condition": "forget:close_ticket",
+      "variant": 2,
+      "arm": "rootcause",
+      "file": "review:rootcause:forget_v2"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent followed policy correctly (skipped D1 after live CI showed red, verified live green CI for D2, merged the compliant PR, notified the author), but the run failed at the final required step because the 'close_ticket' tool was missing from the environment, so the ticket could not be closed.",
+      "culprit": "Tool/environment problem: the 'close_ticket' tool is unavailable (removed from the environment), preventing the policy-required ticket closure at step 11-12 \u2014 not an agent decision error.",
+      "domain": "review",
+      "condition": "forget:close_ticket",
+      "variant": 2,
+      "arm": "rootcause_policy",
+      "file": "review:rootcause_policy:forget_v2"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent followed policy correctly (skipped D1 after its live CI came back red, verified D2's live CI green, merged the approved conflict-free non-frozen D2, and notified the author), but the mandated final step failed because the close_ticket tool had disappeared from the environment.",
+      "culprit": "Tool/environment problem: the 'close_ticket' tool was missing/unavailable at step 12 (\"ERROR: tool 'close_ticket' is not available\"), preventing the required ticket-closure step \u2014 not an agent decision error.",
+      "domain": "review",
+      "condition": "forget:close_ticket",
+      "variant": 2,
+      "arm": "rootcause",
+      "file": "review:rootcause:forget_v2"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent followed policy correctly (skipped D1 after its live CI came back red, verified D2's live CI green, merged the compliant D2, notified the author), but the final required step failed because the close_ticket tool was missing from the environment.",
+      "culprit": "Tool/environment problem: the 'close_ticket' tool was unavailable (removed from the toolset) at step 12, making the policy-required ticket-closure step impossible despite a correct agent trajectory.",
+      "domain": "review",
+      "condition": "forget:close_ticket",
+      "variant": 2,
+      "arm": "rootcause_policy",
+      "file": "review:rootcause_policy:forget_v2"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent followed policy correctly (skipped M1 after its live CI came back red, verified M2's live green CI, merged the compliant approved conflict-free M2, and notified the author), but the mandated final step failed because the close_ticket tool was missing from the environment, returning \"ERROR: tool 'close_ticket' is not available\" at step 12.",
+      "culprit": "Tool/environment problem: the close_ticket tool was unavailable (removed from the agent's toolset), so the required ticket-closure step could not be executed \u2014 not an agent decision error.",
+      "domain": "review",
+      "condition": "forget:close_ticket",
+      "variant": 3,
+      "arm": "rootcause",
+      "file": "review:rootcause:forget_v3"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent followed policy correctly (skipped M1 after its live CI came back red, merged the approved conflict-free M2 with green live CI, and notified the author), but the run failed at the final required step because the close_ticket tool was missing from the environment.",
+      "culprit": "Tool/environment problem: the 'close_ticket' tool was unavailable (step 12 returned \"ERROR: tool 'close_ticket' is not available\"), making the mandated post-merge ticket closure impossible \u2014 not an agent decision error.",
+      "domain": "review",
+      "condition": "forget:close_ticket",
+      "variant": 3,
+      "arm": "rootcause_policy",
+      "file": "review:rootcause_policy:forget_v3"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent followed policy correctly (selected M2 \u2014 the only PR that was approved, conflict-free, not on a frozen path \u2014 confirmed its live CI as green, merged, and notified the author), but the final required step failed at step 12 because the environment reported the 'close_ticket' tool as not available, leaving the ticket unclosed.",
+      "culprit": "Tool/environment problem: the 'close_ticket' tool was missing/unavailable from the agent's toolset at step 12, so the mandated ticket-closure step could not be executed \u2014 not an agent decision error.",
+      "domain": "review",
+      "condition": "forget:close_ticket",
+      "variant": 3,
+      "arm": "rootcause",
+      "file": "review:rootcause:forget_v3"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent complied with policy (skipped M1 after its live CI came back red, confirmed M2's live CI green, M2 was approved with no conflicts and no frozen paths, merged, notified the author), but the mandated final step failed because the close_ticket tool was missing from the environment at step 12.",
+      "culprit": "Tool/environment problem: the 'close_ticket' tool was unavailable (removed from the agent's toolset), so the required post-merge ticket closure could not be executed \u2014 not an agent decision error.",
+      "domain": "review",
+      "condition": "forget:close_ticket",
+      "variant": 3,
+      "arm": "rootcause_policy",
+      "file": "review:rootcause_policy:forget_v3"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent picked the only compliant PR (A1) and followed every standing rule, but merged on a stale CI reading: its last A1 confirmation was feed version v3, and after observing v4 (for A2) it merged A1 without re-confirming, while the check_ci tool's \"green (live)\" report for A1 evidently did not reflect A1's true live CI status at merge time.",
+      "culprit": "Stale/wrong check_ci observation for A1 \u2014 the versioned CI feed returned an outdated \"green (live)\" status (last confirmed at v3, superseded by v4 before the merge), so the merge of A1 was executed on CI evidence that no longer matched the actual live CI state; a corrupted/stale tool observation, not an agent rule violation.",
+      "domain": "review",
+      "condition": "staleness",
+      "variant": 0,
+      "arm": "rootcause",
+      "file": "review:rootcause:staleness_v0"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent visibly satisfied every standing rule \u2014 it picked A1 (green CI, approved, no conflicts, not a frozen path), re-confirmed A1's live CI immediately before merging (step 9-10), then merged, notified the author, and closed the ticket in order \u2014 so the failure cannot be an agent decision; the incrementing CI version counter (v1\u2192v4 across calls) shows the CI backend state was changing between polls, and the check_ci tool's \"A1 = green (live)\" report at v4 was evidently a stale/incorrect observation that no longer reflected A1's true CI status at merge time.",
+      "culprit": "Wrong/corrupted observation from the check_ci tool: it reported A1's CI as \"green (live)\" (step 10, CI v4) when the actual live CI state at merge time was not passing \u2014 a stale CI status mislabeled as live \u2014 causing the agent to merge A1 in step 11 on bad data.",
+      "domain": "review",
+      "condition": "staleness",
+      "variant": 0,
+      "arm": "rootcause",
+      "file": "review:rootcause:staleness_v0"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent identified compliant PR W1 and confirmed its live green CI seven times over (even inventing 'fresh'/'live' params), but got stuck in a redundant re-verification loop and never called merge, never notified the author, and never closed the ticket before the run ended.",
+      "culprit": "Agent decision failure: a repetitive check_ci re-verification loop on W1/W2 that exhausted the run without ever executing the required merge -> notify-author -> close-ticket actions",
+      "domain": "review",
+      "condition": "staleness",
+      "variant": 1,
+      "arm": "rootcause",
+      "file": "review:rootcause:staleness_v1"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent followed the merge policy correctly (chose compliant PR W1, re-confirmed its CI immediately before merging), but the check_ci tool served stale versioned snapshots (v1\u2013v5) falsely labeled \"green (live)\", so W1's true CI state at merge time was not what was reported and the merge violated the passing-CI requirement.",
+      "culprit": "Wrong/corrupted observation from the check_ci tool: it returned stale cached CI status (\"CI v1..v5: green (live)\") for W1 instead of the true live CI, deceiving the agent into merging a PR whose actual CI was not passing.",
+      "domain": "review",
+      "condition": "staleness",
+      "variant": 1,
+      "arm": "rootcause",
+      "file": "review:rootcause:staleness_v1"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent correctly identified compliant PR D1 and confirmed its live green CI, but then looped on redundant check_ci calls (re-checking D1 twice more and irrelevant D2) and never merged, notified the author, or closed the ticket.",
+      "culprit": "Agent decision failure: after CI for D1 was already confirmed live and green at step 4, the agent stalled in a redundant CI re-verification loop instead of proceeding, so the required merge/notify/close actions were never performed.",
+      "domain": "review",
+      "condition": "staleness",
+      "variant": 2,
+      "arm": "rootcause",
+      "file": "review:rootcause:staleness_v2"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent stalled in a redundant check_ci verification loop and the episode ended without ever merging the compliant PR, notifying the author, or closing the ticket, so the acceptance check failed.",
+      "culprit": "Agent decision failure: after identifying a fully compliant PR (D1/M1: CI green, approved, no conflicts, not on a frozen path) and confirming its live CI as green, the agent kept issuing redundant check_ci calls on already-verified and even non-compliant PRs instead of executing the required merge -> notify-author -> close-ticket sequence; none of those terminal actions appear in the trajectory.",
+      "domain": "review",
+      "condition": "staleness",
+      "variant": 2,
+      "arm": "rootcause",
+      "file": "review:rootcause:staleness_v2"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent never merged any PR: after identifying compliant PR M1 and confirming its live CI green at step 4, it stalled in redundant check_ci calls (M1 twice, M2 twice, then non-compliant unreviewed M3) and the run ended with no merge_pr, no author notification, and no ticket close, so the acceptance check failed.",
+      "culprit": "Agent decision failure \u2014 an indecisive verification loop: instead of proceeding to merge compliant PR M1 after confirming its live CI (step 4), the agent kept re-checking CI on already-verified and even policy-ineligible PRs (M3 is unreviewed) until the run ended, leaving the required merge/notify/close steps unexecuted; no wrong observation or tool fault is visible in the trace.",
+      "domain": "review",
+      "condition": "staleness",
+      "variant": 3,
+      "arm": "rootcause",
+      "file": "review:rootcause:staleness_v3"
+    },
+    {
+      "problem": true,
+      "explanation": "The agent identified a fully compliant PR (M1: green live CI, approved, no conflicts, not frozen) but never merged it \u2014 the trajectory ends after three redundant check_ci calls with no merge, no author notification, and no ticket close, so the task was never completed.",
+      "culprit": "Agent decision failure (omission): after confirming M1's live green CI at step 4, the agent looped on redundant CI re-checks (steps 5-8) and terminated without ever calling merge, notifying the author, or closing the ticket; all tool observations were valid, so no environment or observation fault is implicated.",
+      "domain": "review",
+      "condition": "staleness",
+      "variant": 3,
+      "arm": "rootcause",
+      "file": "review:rootcause:staleness_v3"
+    }
+  ]
+}

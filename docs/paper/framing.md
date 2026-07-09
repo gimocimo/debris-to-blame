@@ -28,6 +28,15 @@ The deception gap is the sharp, novel claim: **more observability of the rules d
 observability of the world.** It has a direct safety/oversight implication — logging traces and specs
 is insufficient for a whole class of failures; you must retain re-verifiable ground truth.
 
+**Phase-3 refinement (2026-07-04): the ladder gained an OUTCOME rung and a second deception type.**
+Misexecution (deceptive confirmation) is blind-0 AND oracle-0, but an outcome-informed *root-cause*
+auditor recovers it 23/24 by **deduction by elimination** ("all visible decisions compliant + run
+failed ⇒ a tool lied"); the same framing closes the omission gap entirely (24/24 — it was a
+culpability-question artifact) and recovers staleness only partially (18/24, domain-dependent). Final
+ladder: trace → +outcome → +policy → +state, with fault types occupying different rungs. Caveat to
+carry: the root-cause arm bundles outcome-knowledge with the causation question (dissection = future
+work); cdrop under root-cause is an unrun cell.
+
 **Cross-domain status (2026-07-04).** Two regimes are ROBUST across domains: the **deception gap**
 replicates **3/3** (staleness: blind 0, oracle 0 on stale-price / availability / CI) and the
 **deletion gap** replicates **2/2** (cdrop: blind 0, de-leak 0, oracle 1.0). The **"visible" category
@@ -69,8 +78,8 @@ the labelled-vs-unlabelled contrast is itself reportable.)
 |---|---|---|---|
 | E1 | The ladder holds on **≥3 task domains**, not one | generality — without it, "one toy" | **DONE** — 3 domains wired + collected (conference, scheduling, review) |
 | E2 | The **deception gap** replicates for staleness across domains | the sharp claim can't be a single dot | **DONE** — replicates **3/3** (blind 0, oracle 0 on stale-price / availability / CI) |
-| E3 | **External validity:** injected-fault failures resemble organic ones (or a measured characterization of the gap) | the premise the whole method rests on | open (Phase 2) — organic failures not yet elicited |
-| E4 | **Method comparison** (baselines vs LLM auditor vs oracle) with clean labels, per fault type | C3; the reviewer's money table | baselines + oracle done on 1 domain (Phase 3) |
+| E3 | **External validity:** injected-fault failures resemble organic ones (or a measured characterization of the gap) | the premise the whole method rests on | **ADDRESSED (characterized)** — 2/28 organic failures elicited (xhard); 6/6 blind-attributable → agent-caused failures are trace-visible; environment faults are the blame-gap regime and are un-elicitable by definition (their realism is an infrastructure fact) |
+| E4 | **Method comparison** (baselines vs LLM auditor vs oracle) with clean labels, per fault type | C3; the reviewer's money table | **DONE** — random/recency/keyword + stepwise (Who&When-style) + all-at-once blind + oracle + root-cause, per fault family; ranking is fault-type-dependent; step-walking cannot fix deception blindness |
 | E5 | **Cross-provider grader** — the ladder isn't a same-family artifact | kills R6 | within-Claude done; cross-provider open (Phase 4, needs paid budget) |
 | E6 | **Power:** variant-clustered significance at n large enough that the map isn't noise | honest stats | staleness/forget p=0.029; cdrop p=0.14 (need more n) |
 

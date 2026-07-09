@@ -113,30 +113,32 @@ def _blamegap_map_figure(deg: dict, att: dict) -> None:
     (NOT closed by the policy), replicated across domains; forget is salience-dependent.
     """
     domains = ["conference", "scheduling", "review"]
-    fams = [("staleness", "staleness (deception)"), ("cdrop", "constraint_drop (deletion)"),
-            ("forget", "tool_forgetting (omission)")]
+    fams = [("staleness", "staleness\n(deceptive data)"),
+            ("misexec", "misexecution\n(deceptive confirmation)"),
+            ("cdrop", "constraint_drop\n(deletion)"), ("forget", "tool_forgetting\n(omission)")]
     arms = [("blind", BAD, "blind (trace only)"), ("deleak", "#e08a3c", "de-leak (policy − rule)"),
-            ("policy", GOOD, "oracle (+ full policy)")]
+            ("policy", GOOD, "oracle (+ full policy)"),
+            ("rootcause", "#7c3aed", "root-cause (+ outcome, causation question)")]
 
     def rate(dom: str, fam: str, arm: str) -> float | None:
         c = att.get(dom, {}).get(fam, {}).get("opus", {}).get(arm)
         return (c["attr"] / c["n"]) if c else None
 
-    fig, axes = plt.subplots(1, 3, figsize=(13.5, 4.2), sharey=True)
+    fig, axes = plt.subplots(1, 4, figsize=(16.5, 4.2), sharey=True)
     fig.suptitle("Cross-domain blame-gap map — attributed rate by auditor information "
                  "(3 domains, sincere agents)", fontsize=11, y=1.04)
-    w = 0.26
+    w = 0.2
     for ax, (fam, title) in zip(axes, fams, strict=True):
         xs = list(range(len(domains)))
         for i, (arm, color, label) in enumerate(arms):
             vals = [rate(d, fam, arm) for d in domains]
-            pos = [x + (i - 1) * w for x in xs]
+            pos = [x + (i - 1.5) * w for x in xs]
             bars = ax.bar([p for p, v in zip(pos, vals, strict=True) if v is not None],
                           [v for v in vals if v is not None], width=w, color=color,
-                          label=label if fam == "staleness" else None)
+                          label=label if fam.startswith("staleness") else None)
             for b in bars:
                 ax.text(b.get_x() + b.get_width() / 2, b.get_height() + 0.03,
-                        f"{b.get_height():.2f}", ha="center", fontsize=8, fontweight="bold")
+                        f"{b.get_height():.2f}", ha="center", fontsize=7.5, fontweight="bold")
         # mark cells with no data (fault null on that domain)
         for x in xs:
             if rate(domains[x], fam, "blind") is None and rate(domains[x], fam, "policy") is None:

@@ -344,6 +344,107 @@ and all staleness cells re-audited (the numbers above). Degradation was unaffect
 The labelled-vs-unlabelled contrast is itself informative: **the deception gap exists precisely when
 the corruption leaves no lexical tell**.
 
+## The complete fault map and the information ladder (Phase 3)
+
+With misexecution (a second deception TYPE: the world executes something *different* from what the
+agent requested, while the observation claims success) and debris added, **all six fault types of the
+taxonomy are exercised interactively across the three domains**. Degradation (variant-clustered;
+healthy/sham 0/8 everywhere):
+
+| fault | conference | scheduling | review | reading |
+|---|---|---|---|---|
+| staleness (deceptive data) | 8/8, p=.029 | 8/8, p=.029 | 8/8, p=.029 | max damage |
+| **misexecution** (deceptive confirmation) | 8/8, p=.029 | 8/8, p=.029 | 8/8, p=.029 | max damage |
+| forget (omission) | 8/8, p=.029 | 8/8, p=.029 | 8/8, p=.029 | max damage |
+| constraint_drop (deletion) | 7/8 | 8/8, p=.029 | 0/8 null | needs a binding lure |
+| debris (irrelevant junk) | 0/8 | 0/8 | 0/8 | **null** — agents robust |
+| contradiction (fake permission note) | 1/8 | 0/8 | 0/8 | **null** — agents ignore it |
+
+The two nulls matter: injection does not *trivially* break agents — damage is fault-specific.
+
+### Attribution: the four-arm map (blind / de-leak / oracle / root-cause)
+
+The **root-cause arm** is the fix for the culpability-vs-causation finding: the auditor is told the
+run FAILED its acceptance check and asked *"why did this run fail?"* (causation) instead of *"did the
+agent err?"* (culpability). It bundles two changes — outcome knowledge + the causation question —
+reflecting realistic post-mortem conditions (dissecting the two is future work).
+
+![cross-domain blame-gap map](../assets/blamegap_map.png)
+
+| fault | blind | oracle (+policy) | root-cause (+outcome) | what closes the gap |
+|---|---|---|---|---|
+| staleness | 0/24 | 0/24 | **18/24** (8/8, 7/8, 3/8) | outcome, partially — domain-dependent |
+| misexecution | 1/24 | 0/24 | **23/24** | **outcome — by *elimination*** |
+| constraint_drop | 0/15 | 15/15 | *(not yet run)* | the exact deleted rule |
+| forget | 9/24 | 14/24 | **24/24** | the causation question |
+
+Two findings:
+- **Deduction by elimination.** Under the culpability question, misexecution is a perfect deception
+  (blind ≈ 0 *and* oracle 0 — the trace shows a compliant agent and a success message; nothing names
+  the substitution). But an outcome-informed root-cause auditor recovers it almost perfectly
+  (23/24) by *reasoning*: "every visible decision is compliant, yet the run failed ⇒ a tool must have
+  executed something other than what it reported." Attribution here is an **inference**, not an
+  observation — and it requires knowing the run failed. (Graded on naming the mechanism + step; the
+  *specific* substituted item is unknowable without ground-truth state, and auditors' guesses at it
+  were often wrong.)
+- **The omission gap was a question-framing artifact.** Root-cause framing takes forget from
+  9/24 blind to **24/24** — auditors always *saw* the failed tool call; asked the causation question,
+  they name it every time. Staleness recovers only partially (and unevenly: price 8/8, availability
+  7/8, CI 3/8) — with no trace inconsistency to reason from, the auditor must *conjecture* that the
+  data was wrong, which works less well the more binary the corrupted value.
+
+**The information ladder, final form.** What an auditor needs is fault-type-structured:
+*trace only* (agent-caused errors, forced-violation omissions) → *+ outcome* (misexecution, via
+elimination; omissions, via the causation question; staleness partially) → *+ reference policy*
+(deletions — and only the exact deleted rule, per the de-leak control) → *+ ground-truth state*
+(the remainder of staleness; confirming *what* was actually executed).
+
+### Attribution methods compared (the ladder vs the map)
+
+Same graded standard, per fault family (deterministic baselines over all traces; LLM methods:
+stepwise on 44 sampled failed traces, others on all):
+
+| method | staleness | misexec | cdrop | forget | healthy/sham FP |
+|---|---|---|---|---|---|
+| random / recency / keyword | ~0 | ~0 | ~0 | ~0 | **100%** |
+| LLM all-at-once, blind | 0.00 | 0.04 | 0.00 | 0.38 | 0.00 |
+| LLM step-by-step (Who&When-style), blind | 0/12 | 2/12 | 0/8 | **12/12** | — |
+| LLM + full policy (oracle) | 0.00 | 0.00 | **1.00** | 0.58 | 0.00 |
+| LLM root-cause (+outcome) | **0.75** | **0.96** | — | **1.00** | — |
+
+Step-by-step trace-walking (the field's standard recipe) fixes *omissions* but is as blind to
+deceptions and deletions as the all-at-once auditor: **walking the trace more carefully cannot help
+when the trace itself is the lie.** The ranking of methods is fault-type-dependent — a single
+"attribution accuracy" number hides exactly the structure that matters.
+
+## External validity — organic failures obtained (Phase 2)
+
+The harder `conference_xhard` variant (8 flights × 6 hotels, a near-miss lure on every rule, the
+unique compliant pair exactly at budget) elicited **2/28 organic failures** from a weaker agent
+(Haiku) with **no injection**: both booked the lure pair over live budget. The committed traces show
+the mechanism — a malformed quote call whose ERROR the agent ignored, booking on cheap list prices
+without a valid pre-booking quote, then quoting *after* booking, **seeing "$1030 (live)" over the
+$1000 budget, and filing/sending anyway**.
+
+Audits of these organic failures: **6/6 auditor verdicts (blind, policy, root-cause) flag them and
+name the true cause.** This completes the organic-vs-injected contrast:
+
+- **Agent-caused (organic) failures are trace-visible** — the agent's own mistakes are in the record,
+  and even a blind auditor attributes them.
+- **Environment-caused (injected) faults are the blame-gap regime** — and an agent *cannot produce an
+  environment fault organically, by definition*. Stale caches, flaky CI, and silent misexecution are
+  real for infrastructure reasons (their prevalence is an engineering fact, not something rollouts
+  establish); injection is how that regime becomes measurable at all.
+
+So the honest scope of R2: organic elicitation validates the agent-error end of the map; the
+environment-fault end rests on face validity plus the ubiquity of such faults in real systems.
+
+### Recovery replication (scheduling)
+
+Same protocol as conference, on `cdrop:boardroom`: no-repair **0/8**, blind-repair (plausible-but-
+wrong rule) **0/8**, targeted repair **8/8** — localization lift **+1.00**, variant-clustered
+targeted 4/4 vs blind 0/4, Fisher **p = .029**. C4 holds on a second domain.
+
 ## Caveats (what this is and is not)
 
 The canonical multi-step results (the section above) are an honest measurement on **one task family**.
