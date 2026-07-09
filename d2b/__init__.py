@@ -7,6 +7,8 @@ See PROJECT_PLAN.md for scope.
 # Registry of interactive multi-step domains: name -> {variants, per-domain observation injectors}.
 # step.py drives any registered domain; new domains only need to register here.
 from . import conference as _conference  # noqa: E402
+from . import incident as _incident  # noqa: E402
+from . import reconcile as _reconcile  # noqa: E402
 from . import review as _review  # noqa: E402
 from . import scheduling as _scheduling  # noqa: E402
 from .agent import decision_to_messages, parse_decision, render_prefix
@@ -39,6 +41,8 @@ from .faults import (
     sham_inject,
 )
 from .fixtures import successful_flight_trajectory
+from .incident import INCIDENT_TASK, INCIDENT_VARIANTS, make_incident
+from .reconcile import RECONCILE_TASK, RECONCILE_VARIANTS, make_reconcile
 from .replay import Policy, evaluate, replay, replay_tail_policy, resume, scripted_policy
 from .review import REVIEW_TASK, REVIEW_VARIANTS, make_review
 from .rollout import Injector, Rollout, interactive_rollout, scripted_policy_fn
@@ -82,6 +86,30 @@ DOMAINS = {
         "arg_hints": (
             "check_ci & merge_pr take pr=<id>; "
             "list_prs/notify_author/close_ticket take no args."
+        ),
+    },
+    "incident": {
+        "variants": INCIDENT_VARIANTS,
+        "staleness": _incident.staleness_injector,
+        "contradiction": _incident.contradiction_injector,
+        "sham": _incident.sham_note_injector,
+        "debris": _incident.debris_injector,
+        "misexec": _incident.misexec_injector,
+        "arg_hints": (
+            "check & apply_fix take service=<id>; "
+            "read_alert/list_services/close_incident/escalate take no args."
+        ),
+    },
+    "reconcile": {
+        "variants": RECONCILE_VARIANTS,
+        "staleness": _reconcile.staleness_injector,
+        "contradiction": _reconcile.contradiction_injector,
+        "sham": _reconcile.sham_note_injector,
+        "debris": _reconcile.debris_injector,
+        "misexec": _reconcile.misexec_injector,
+        "arg_hints": (
+            "check_receipt & approve_txn & flag_txn take txn=<id>; "
+            "list_transactions/submit_batch take no args."
         ),
     },
 }
@@ -135,6 +163,12 @@ __all__ = [
     "REVIEW_TASK",
     "REVIEW_VARIANTS",
     "make_review",
+    "INCIDENT_TASK",
+    "INCIDENT_VARIANTS",
+    "make_incident",
+    "RECONCILE_TASK",
+    "RECONCILE_VARIANTS",
+    "make_reconcile",
     "DOMAINS",
     # interactive rollout (multi-step, reacts to corrupted observations)
     "interactive_rollout",

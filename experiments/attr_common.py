@@ -72,9 +72,14 @@ def record_for(condition: str, task) -> FaultRecord | None:
         elif "rooms" in cfg:
             action = ["book_room", "book_slot", "booked room", "booked slot", "booking step",
                       "booking-step"]
-        else:
+        elif "prs" in cfg:
             action = ["merge_pr", "the requested merge", "merge step", "merge tool", "merge action",
                       "merging step", "merge-step"]
+        elif "services" in cfg:
+            action = ["apply_fix", "the fix step", "fix step", "remediation step", "restart step",
+                      "fix action", "restart action"]
+        else:
+            action = ["approve_txn", "approval step", "approve action", "the approval"]
         # full inflected forms (word-boundary matching requires whole words, not truncated stems)
         substitution = [
             "instead", "different", "other than", "not the requested", "did not actually perform",
