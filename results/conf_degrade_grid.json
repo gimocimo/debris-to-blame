@@ -71,6 +71,30 @@
       ]
     }
   },
+  "debris": {
+    "k_fail": 0,
+    "n": 8,
+    "n_variants": 4,
+    "variants_failing": 0,
+    "per_variant": {
+      "0": [
+        0,
+        2
+      ],
+      "1": [
+        0,
+        2
+      ],
+      "2": [
+        0,
+        2
+      ],
+      "3": [
+        0,
+        2
+      ]
+    }
+  },
   "forget:file_expense_report": {
     "k_fail": 8,
     "n": 8,
@@ -115,6 +139,30 @@
       ],
       "3": [
         0,
+        2
+      ]
+    }
+  },
+  "misexec": {
+    "k_fail": 8,
+    "n": 8,
+    "n_variants": 4,
+    "variants_failing": 4,
+    "per_variant": {
+      "0": [
+        2,
+        2
+      ],
+      "1": [
+        2,
+        2
+      ],
+      "2": [
+        2,
+        2
+      ],
+      "3": [
+        2,
         2
       ]
     }
