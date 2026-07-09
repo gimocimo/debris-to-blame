@@ -106,45 +106,51 @@ def _bars(ax, labels, vals, colors, title):
 
 
 def _blamegap_map_figure(deg: dict, att: dict) -> None:
-    """The money figure: three high-damage faults, three DIFFERENT attribution profiles."""
-    faults = [
-        ("cdrop:2", "cdrop", "cdrop\nrefundable"),
-        ("staleness", "staleness", "staleness"),
-        ("forget:file_expense_report", "forget", "forget\nexpense-tool"),
-    ]
+    """The money figure: the CROSS-DOMAIN blame-gap map (att = domain-aware conf_attribution.json).
 
-    def arate(fam: str, arm: str) -> float:
-        c = att[fam]["opus"][arm]
-        return c["attr"] / c["n"]
+    One panel per fault family; x = domains; bars = blind / de-leak / oracle attributed-rate.
+    Shows the two regimes: the deletion gap (closed only by the exact rule) and the deception gap
+    (NOT closed by the policy), replicated across domains; forget is salience-dependent.
+    """
+    domains = ["conference", "scheduling", "review"]
+    fams = [("staleness", "staleness (deception)"), ("cdrop", "constraint_drop (deletion)"),
+            ("forget", "tool_forgetting (omission)")]
+    arms = [("blind", BAD, "blind (trace only)"), ("deleak", "#e08a3c", "de-leak (policy − rule)"),
+            ("policy", GOOD, "oracle (+ full policy)")]
 
-    dmg = [deg[fk]["k_fail"] / deg[fk]["n"] for fk, _, _ in faults]
-    blind = [arate(fam, "blind") for _, fam, _ in faults]
-    oracle = [arate(fam, "policy") for _, fam, _ in faults]
+    def rate(dom: str, fam: str, arm: str) -> float | None:
+        c = att.get(dom, {}).get(fam, {}).get("opus", {}).get(arm)
+        return (c["attr"] / c["n"]) if c else None
 
-    fig, ax = plt.subplots(figsize=(10, 4.8))
+    fig, axes = plt.subplots(1, 3, figsize=(13.5, 4.2), sharey=True)
+    fig.suptitle("Cross-domain blame-gap map — attributed rate by auditor information "
+                 "(3 domains, sincere agents)", fontsize=11, y=1.04)
     w = 0.26
-    xs = list(range(len(faults)))
-    groups = [
-        (dmg, "#6b7280", "damage  P[task fails]", -w),
-        (blind, BAD, "attributed — trace only (blind)", 0.0),
-        (oracle, GOOD, "attributed — + full policy (ORACLE upper bound)", w),
-    ]
-    for vals, color, label, off in groups:
-        bars = ax.bar([x + off for x in xs], vals, width=w, color=color, label=label)
-        for p in bars:
-            ax.text(p.get_x() + p.get_width() / 2, p.get_height() + 0.02,
-                    f"{p.get_height():.2f}", ha="center", fontsize=8.5, fontweight="bold")
-    ax.set_xticks(xs)
-    ax.set_xticklabels([lbl for _, _, lbl in faults])
-    ax.set_ylim(0, 1.2)
-    ax.set_yticks([0, 0.5, 1.0])
-    ax.set_title("CONFERENCE_TRIP blame-gap map — same damage, three attribution profiles\n"
-                 "policy closes the deletion gap (cdrop) but NOT the deception gap (staleness); "
-                 "forget is visible outright", fontsize=10)
-    ax.spines[["top", "right"]].set_visible(False)
-    ax.legend(frameon=False, ncol=3, loc="upper center", fontsize=8)
-    fig.tight_layout()
-    out = ROOT / "assets" / "conf_blamegap.png"
+    for ax, (fam, title) in zip(axes, fams, strict=True):
+        xs = list(range(len(domains)))
+        for i, (arm, color, label) in enumerate(arms):
+            vals = [rate(d, fam, arm) for d in domains]
+            pos = [x + (i - 1) * w for x in xs]
+            bars = ax.bar([p for p, v in zip(pos, vals, strict=True) if v is not None],
+                          [v for v in vals if v is not None], width=w, color=color,
+                          label=label if fam == "staleness" else None)
+            for b in bars:
+                ax.text(b.get_x() + b.get_width() / 2, b.get_height() + 0.03,
+                        f"{b.get_height():.2f}", ha="center", fontsize=8, fontweight="bold")
+        # mark cells with no data (fault null on that domain)
+        for x in xs:
+            if rate(domains[x], fam, "blind") is None and rate(domains[x], fam, "policy") is None:
+                ax.text(x, 0.06, "fault null\n(no failures)", ha="center", fontsize=8,
+                        color="#6b7280")
+        ax.set_xticks(xs)
+        ax.set_xticklabels(domains)
+        ax.set_ylim(0, 1.18)
+        ax.set_yticks([0, 0.5, 1.0])
+        ax.set_title(title, fontsize=10)
+        ax.spines[["top", "right"]].set_visible(False)
+    fig.legend(frameon=False, ncol=3, loc="upper center", bbox_to_anchor=(0.5, 0.97), fontsize=9)
+    fig.tight_layout(rect=(0, 0, 1, 0.9))
+    out = ROOT / "assets" / "blamegap_map.png"
     fig.savefig(out, dpi=140, bbox_inches="tight")
     print(f"wrote {out.relative_to(ROOT)}")
 

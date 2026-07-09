@@ -41,44 +41,50 @@ def _family(cond: str) -> str:
 
 def main() -> None:
     data = json.loads(Path(sys.argv[1]).read_text())
-    # cells[family][tier][arm] = {"detect":k, "attr":k, "n":k}
+    # cells[domain][family][tier][arm] = {"detect":k, "attr":k, "n":k}
     cells: dict = {}
     for vr in data["verdicts"]:
         cond, arm, tier = vr["condition"], vr.get("arm", "blind"), vr.get("tier", "opus")
+        dom = vr.get("domain", "conference")
         rec = record_for(cond, _task_for(vr))
         if rec is None:  # healthy: no fault — 'detect' is a FALSE POSITIVE, nothing to attribute
             g = {"problem": bool(vr["problem"]), "attributed": False}
         else:
             g = grade_attribution({"problem": vr["problem"], "culprit": vr["culprit"]}, rec)
-        cell = cells.setdefault(_family(cond), {}).setdefault(tier, {}).setdefault(
-            arm, {"detect": 0, "attr": 0, "n": 0}
+        cell = (
+            cells.setdefault(dom, {})
+            .setdefault(_family(cond), {})
+            .setdefault(tier, {})
+            .setdefault(arm, {"detect": 0, "attr": 0, "n": 0})
         )
         cell["n"] += 1
         cell["detect"] += int(g["problem"])
         cell["attr"] += int(g["attributed"])
 
-    print("CONFERENCE_TRIP attribution — de-contaminated blame-gap map\n")
-    for fam in sorted(cells):
-        print(f"[{fam}]")
-        for tier in sorted(cells[fam]):
-            for arm in ("blind", "deleak", "policy"):
-                c = cells[fam][tier].get(arm)
-                if not c:
-                    continue
-                tag = " (ORACLE upper bound)" if arm == "policy" else ""
-                print(f"  {tier:7} {arm:7} detect {fmt_rate(c['detect'], c['n']):26} "
-                      f"attributed {fmt_rate(c['attr'], c['n']):26}{tag}")
-        opus = cells[fam].get("opus", {})
-        if "blind" in opus and "policy" in opus:
-            b, p = opus["blind"], opus["policy"]
-            gap = p["attr"] / p["n"] - b["attr"] / b["n"]
-            print(f"  -> oracle-vs-blind attribution gap = {gap:+.2f} "
-                  f"(blind {b['attr'] / b['n']:.2f} -> oracle {p['attr'] / p['n']:.2f})")
-        print()
+    print("Cross-domain attribution — the blame-gap map (grades vs the SPECIFIC injected fault)\n")
+    for dom in sorted(cells):
+        print(f"=== {dom} ===")
+        for fam in sorted(cells[dom]):
+            print(f"[{fam}]")
+            for tier in sorted(cells[dom][fam]):
+                for arm in ("blind", "deleak", "policy"):
+                    c = cells[dom][fam][tier].get(arm)
+                    if not c:
+                        continue
+                    tag = " (ORACLE upper bound)" if arm == "policy" else ""
+                    print(f"  {tier:7} {arm:7} detect {fmt_rate(c['detect'], c['n']):26} "
+                          f"attributed {fmt_rate(c['attr'], c['n']):26}{tag}")
+            opus = cells[dom][fam].get("opus", {})
+            if "blind" in opus and "policy" in opus:
+                b, p = opus["blind"], opus["policy"]
+                gap = p["attr"] / p["n"] - b["attr"] / b["n"]
+                print(f"  -> oracle-vs-blind attribution gap = {gap:+.2f} "
+                      f"(blind {b['attr'] / b['n']:.2f} -> oracle {p['attr'] / p['n']:.2f})")
+            print()
 
     Path("results").mkdir(exist_ok=True)
     Path("results/conf_attribution.json").write_text(json.dumps(cells, indent=2))
-    print("wrote results/conf_attribution.json")
+    print("wrote results/conf_attribution.json (domain-aware)")
 
 
 if __name__ == "__main__":

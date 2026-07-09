@@ -1,0 +1,182 @@
+{
+  "conference": {
+    "cdrop": {
+      "opus": {
+        "blind": {
+          "detect": 0,
+          "attr": 0,
+          "n": 7
+        },
+        "deleak": {
+          "detect": 0,
+          "attr": 0,
+          "n": 7
+        },
+        "policy": {
+          "detect": 7,
+          "attr": 7,
+          "n": 7
+        }
+      },
+      "haiku": {
+        "blind": {
+          "detect": 1,
+          "attr": 0,
+          "n": 7
+        },
+        "policy": {
+          "detect": 7,
+          "attr": 7,
+          "n": 7
+        }
+      },
+      "sonnet": {
+        "blind": {
+          "detect": 0,
+          "attr": 0,
+          "n": 7
+        },
+        "policy": {
+          "detect": 7,
+          "attr": 7,
+          "n": 7
+        }
+      }
+    },
+    "forget": {
+      "opus": {
+        "blind": {
+          "detect": 8,
+          "attr": 8,
+          "n": 8
+        },
+        "policy": {
+          "detect": 7,
+          "attr": 7,
+          "n": 8
+        }
+      }
+    },
+    "healthy": {
+      "opus": {
+        "blind": {
+          "detect": 0,
+          "attr": 0,
+          "n": 8
+        },
+        "policy": {
+          "detect": 0,
+          "attr": 0,
+          "n": 8
+        }
+      }
+    },
+    "sham": {
+      "opus": {
+        "blind": {
+          "detect": 0,
+          "attr": 0,
+          "n": 6
+        },
+        "policy": {
+          "detect": 0,
+          "attr": 0,
+          "n": 4
+        }
+      }
+    },
+    "staleness": {
+      "opus": {
+        "blind": {
+          "detect": 0,
+          "attr": 0,
+          "n": 8
+        },
+        "policy": {
+          "detect": 0,
+          "attr": 0,
+          "n": 8
+        }
+      }
+    }
+  },
+  "scheduling": {
+    "cdrop": {
+      "opus": {
+        "blind": {
+          "detect": 0,
+          "attr": 0,
+          "n": 8
+        },
+        "deleak": {
+          "detect": 0,
+          "attr": 0,
+          "n": 8
+        },
+        "policy": {
+          "detect": 8,
+          "attr": 8,
+          "n": 8
+        }
+      }
+    },
+    "forget": {
+      "opus": {
+        "blind": {
+          "detect": 1,
+          "attr": 1,
+          "n": 8
+        },
+        "policy": {
+          "detect": 3,
+          "attr": 3,
+          "n": 8
+        }
+      }
+    },
+    "staleness": {
+      "opus": {
+        "blind": {
+          "detect": 1,
+          "attr": 0,
+          "n": 8
+        },
+        "policy": {
+          "detect": 1,
+          "attr": 0,
+          "n": 8
+        }
+      }
+    }
+  },
+  "review": {
+    "forget": {
+      "opus": {
+        "blind": {
+          "detect": 0,
+          "attr": 0,
+          "n": 8
+        },
+        "policy": {
+          "detect": 4,
+          "attr": 4,
+          "n": 8
+        }
+      }
+    },
+    "staleness": {
+      "opus": {
+        "blind": {
+          "detect": 5,
+          "attr": 0,
+          "n": 8
+        },
+        "policy": {
+          "detect": 5,
+          "attr": 0,
+          "n": 8
+        }
+      }
+    }
+  }
+}

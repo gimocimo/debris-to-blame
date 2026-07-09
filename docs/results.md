@@ -281,15 +281,73 @@ tool) — so the induced failures are the task's **natural** failure modes (over
 missing step), each mapping to a real agent-failure category. Face validity by construction; a measured
 organic comparison is future work.
 
+## Cross-domain replication — two blame-gap regimes (3 domains)
+
+Everything above was one task family. To test generality (paper E1/E2), the interactive loop was
+extended to **three genuinely different domains**, each with 4 independent variants and its own
+staleness deception:
+
+| domain | task shape | its staleness deception |
+|---|---|---|
+| **conference** | book flight + hotel (two-pick) | cached cheap **price** hides a live surge |
+| **scheduling** | book slot + room (two-pick) | cached "**0 conflicts**" hides a live double-booking |
+| **review** | merge one PR (single-pick) | cached "**CI green**" hides a live red pipeline |
+
+**Degradation** (sincere agents, variant-clustered; healthy and sham are 0/8 everywhere):
+
+| fault | conference | scheduling | review |
+|---|---|---|---|
+| staleness | 8/8, p=.029 | 8/8, p=.029 | 8/8, p=.029 |
+| forget (required tool missing) | 8/8, p=.029 | 8/8, p=.029 | 8/8, p=.029 |
+| constraint_drop | 7/8 (refundable, p=.14) | 8/8 (boardroom, p=.029) | 0/8 **null** (approval redundant) |
+
+**Attribution — the cross-domain blame-gap map** (auditor arms; graded vs the specific fault):
+
+![cross-domain blame-gap map](../assets/blamegap_map.png)
+
+| domain | staleness blind → oracle | cdrop blind / de-leak / oracle | forget blind → oracle |
+|---|---|---|---|
+| conference | 0/8 → **0/8** | 0/7 / 0/7 / **7/7** | 8/8 → 7/8 |
+| scheduling | 0/8 → **0/8** | 0/8 / 0/8 / **8/8** | 1/8 → 3/8 |
+| review | 0/8 → **0/8** | — (fault null) | 0/8 → 4/8 |
+
+Three findings:
+
+- **The deception gap replicates 3/3.** Staleness breaks the task everywhere, yet is unattributable
+  **even with the full reference policy** — on a stale price, a stale availability count, and a stale
+  CI status. The corrupted observation deceives the auditor exactly as it deceived the agent; both
+  read the trace as compliant. Closing this gap requires **ground-truth world state**, not more
+  spec/rule observability. This is the paper's central claim, now a cross-domain regularity.
+- **The deletion gap replicates 2/2** (where the fault manifests). Blind and de-leak (full rulebook
+  *minus* the dropped line) are 0.00; only restoring the exact deleted rule attributes it (oracle
+  1.0). On review, dropping the approval rule causes **no failures at all** — agents don't merge
+  unreviewed code even unprompted — reconfirming that a dropped rule only bites when it is *binding
+  and non-redundant* (D-014).
+- **"Omission" is salience-dependent, not cleanly visible.** Forget is caught blind when the missing
+  step is prominent (conference's expense report, 8/8) but largely missed on minor steps
+  (scheduling 1/8, review 0/8) — *even the oracle arm only reaches 0.38–0.50*. Inspection of the
+  verdicts suggests a mechanism: the omission is visible mainly when the trace contains the agent's
+  **failed attempt** at the missing tool; when the agent silently skips it, auditors read the
+  truncated trajectory as complete. (To be verified systematically in Phase 3.)
+
+**Methodological note (reported for transparency).** The first cross-domain audit used staleness
+injectors that emitted a self-labelling "(cached)" tag; on domains whose rules say "confirm *live*",
+auditors caught the tell (staleness ≈ 0.5 attributable blind). The injectors were corrected to *true*
+deceptions — only the value is swapped; the observation stays formatted as a genuine live result —
+and all staleness cells re-audited (the numbers above). Degradation was unaffected (8/8 either way).
+The labelled-vs-unlabelled contrast is itself informative: **the deception gap exists precisely when
+the corruption leaves no lexical tell**.
+
 ## Caveats (what this is and is not)
 
 The canonical multi-step results (the section above) are an honest measurement on **one task family**.
 They are not yet a cross-domain benchmark.
 
-- **Single task family — M2's ≥3-domain bar is NOT met.** The full loop is shown on CONFERENCE_TRIP
-  and its variants only. The other five domains exist as single-step *static fixtures*, not wired into
-  the interactive rollout — so do **not** read the loop as "closed across domains". Porting a second
-  domain to the interactive loop is the next real milestone (see ROADMAP).
+- **Domain generality: now 3 task families** (see the cross-domain section above) — M2's ≥3-domain
+  bar is met on the *domains* axis (sham-controlled degradation + a measured attribution gap on
+  conference, scheduling, review). Still true: all three are short synthetic office-workflow tasks of
+  similar length/structure; the cross-*tier* panel exists only for conference cdrop; and recovery is
+  measured on one domain. Broader ecological diversity remains future work.
 - **Small n (4 task variants).** Reported at the variant level (reps of one variant are correlated, so
   they are not pooled as independent). Staleness and forget reach clustered p = 0.029; `cdrop:
   refundable` is only p = 0.14 — honestly underpowered, not a saturated cell.
@@ -323,15 +381,17 @@ driven via `experiments/step.py`; every rollout `state` and detective `verdict` 
 scoring below replays **deterministically and free** — no model calls:
 
 ```
-# degradation surface (variant-clustered Fisher; 56 committed rollout states)
-python experiments/conf_score.py         "experiments/decisions/states/*.json"
-# the de-contaminated blame-gap map (blind / de-leak / oracle + Haiku/Sonnet cross-tier)
-python experiments/conf_attr_score.py    experiments/decisions/conf_attribution.json
+# degradation surfaces, per domain (variant-clustered Fisher; 136 committed rollout states)
+python experiments/conf_score.py         "experiments/decisions/states/*.json"             # conference
+python experiments/conf_score.py         "experiments/decisions/states_scheduling/*.json"  # scheduling
+python experiments/conf_score.py         "experiments/decisions/states_review/*.json"      # review
+# the CROSS-DOMAIN blame-gap map (blind / de-leak / oracle arms; 195 committed verdicts)
+python experiments/conf_attr_score.py    experiments/decisions/conf_attribution_alldomains.json
 # the dumb-baseline floor (random / recency / keyword; recall + false-positive)
 python experiments/attr_baselines.py     "experiments/decisions/states/*.json"
 # recovery on the binding fault (localization lift +1.00)
 python experiments/conf_recover_score.py "experiments/decisions/recovery2/br2_*.json"
-python scripts/make_figure.py            # conf_grid.png + conf_blamegap.png + conf_recovery.png
+python scripts/make_figure.py            # blamegap_map.png (cross-domain) + conf_grid.png + ...
 ```
 
 The `experiments/decisions/**` files are the cached rollout states + detective verdicts (the

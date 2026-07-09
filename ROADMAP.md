@@ -80,6 +80,15 @@ The **blame gap** is the region where `D` is high but `A` is low — faults that
   delivered here too). **What is NOT met: the ≥3-domain bar.** The other five domains remain single-step
   static fixtures, not wired into the interactive rollout. **M2 stays OPEN until a second (then third)
   domain is ported to `step.py`'s interactive loop.** Do not describe M2/v0.1 as closed.
+- **Status update (2026-07-04, D-019): the ≥3-domain exit bar is MET on the domains axis.** Three
+  interactive multi-step domains (conference, scheduling, review — `d2b.DOMAINS`), each with 4
+  independent variants, sham-controlled degradation, and a measured attribution gap: the **deception
+  gap replicates 3/3** (staleness blind 0, oracle 0) and the **deletion gap 2/2** (blind 0, de-leak 0,
+  oracle 1.0; null on review where the rule is redundant). M3's blame-gap map is delivered
+  cross-domain (`assets/blamegap_map.png`). **Honest partials that keep v0.1 un-tagged:** the
+  cross-TIER panel exists only for conference cdrop (M2's "3 Claude tiers" framing is not met across
+  domains/faults); recovery (M4) is measured on one domain; contradiction/debris/wrong_tool are not
+  yet exercised interactively (Phase 3); external validity (R2) remains open (Phase 2).
 
 ### M3 — The blame gap (v0.1)
 - exp03 (C3): blame-gap map `damage × (1 − detectability)` per fault × tier.

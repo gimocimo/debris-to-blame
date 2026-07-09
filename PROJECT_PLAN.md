@@ -16,34 +16,26 @@ stop and re-align.
 
 ## 1. Current status (pinned — update every session)
 
-- **Date of last update:** 2026-06-30 (Session 3 — Codex audit adopted + recovery-headline reframe)
-- **Lead framing:** **Claim C4 — localization enables recovery** ("agents recover X% more when
-  attribution works"), supported by C1 injection-grounded attribution. The measurement floor under
-  recoverable long-horizon agents (§2a).
-- **Milestones complete:** M0 ✅ · **M1** ✅ (leakage-safe injector, `FaultSite`, real `volume`) ·
-  **M1b** ✅ (5 stateful domains + validators + replay/resume harness; 47 tests green)
-- **Next milestone:** **M2 — degradation + attribution + recovery (v0.1)** across the 5-domain suite
-  on the 3-Claude-tier panel, subscription-native. Needs the model-backed resume `Policy`. Recovery
-  (C4) is the headline. First real claim.
-- **Scope bar (D-010/D-011):** raised — recovery-headline + 5 domains + validators + sham controls +
-  dumb baselines + bootstrap CIs. Cost held at $0 (D-012).
-- **Repo health:** scaffold committed + pushed; **public** at `github.com/gimocimo/debris-to-blame`
-  (D-008). Smoke tests pass.
-- **Headline result so far:** none. No claim is real until M2 lands on a real (Claude-tier) panel.
-- **Optimize for:** *impressive, interesting, well-executed* over *novel/niche* (D-006). Copying an
-  existing idea is fine; a clean headline figure + a working demo beats a defensible-but-dull gap.
-- **Biggest open risk:** now **execution + validity**, not novelty. Chief validity risk: the same
-  model family generates and grades (R6, documented limitation) — mitigated because ground truth
-  comes from *injection*, not a model, and attribution runs on the redacted `.public` trace in
-  fresh-context subagents. Scale (5 domains at $0) is the other risk — rate limits force batching.
-- **COMPLETE VERTICAL SLICE (real inference, $0):** exp01 **degradation Δ=+1.00** (constraint_drop:
-  dropped→5/5 red-eye vs healthy 0/5; baseline non-tempting Δ=0) → exp02 **blame gap +1.00**
-  (trace-only attribution 0/5, with-policy 5/5) → exp04 **recovery**: targeted-repair 1.00 vs
-  blind/no-repair 0.00 (**localization lift +1.00**). "Silently breaks → invisible in trace →
-  recoverable only once localized." Thesis demonstrated end-to-end on one cell.
-- **First multi-step interactive result:** CONFERENCE_TRIP degradation (real agents driving full
-  ReAct rollouts, n=3) — healthy 0/3, staleness 3/3, constraint_drop:refundable 3/3 (Fisher p=0.10).
-- **Latest handoff:** `handoffs/0016-interactive-experiment.md` (step.py CLI driver + first interactive degradation batch)
+- **Date of last update:** 2026-07-04 (Session 10 — cross-domain consolidation; paper program active)
+- **Lead framing (updated by D-019):** the paper is **finding-led**: *attribution difficulty is
+  fault-type-structured* — an information ladder (trace / +reference-policy / +ground-truth-state)
+  with **two robust blame-gap regimes**: a *deletion gap* the exact rule closes and a **deception gap
+  the policy does NOT close**. C4 (localization→recovery) is supporting evidence. See
+  `docs/paper/framing.md` (north star) + `docs/paper/related_work.md` (novelty diff, verified).
+- **Milestones complete:** M0 ✅ · M1 ✅ · M1b ✅ · **M2 exit bar met on the domains axis** (3
+  interactive domains, sham-controlled degradation + measured attribution gap; tier panel still
+  conference-only — v0.1 NOT tagged) · **M3 delivered cross-domain** (`assets/blamegap_map.png`) ·
+  M4 recovery on one domain (lift +1.00, clustered p=.029).
+- **Headline result:** **the deception gap replicates 3/3 domains** (staleness: damaging 8/8
+  everywhere, attributed 0 blind AND 0 with-policy on stale-price/availability/CI); deletion gap 2/2
+  (blind 0, de-leak 0, oracle 1.0); omission salience-dependent. 195 committed verdicts; every number
+  replays from committed data at $0.
+- **Repo health:** public at `github.com/gimocimo/debris-to-blame`, pushed through the cross-domain
+  result; 167 tests green; ruff clean; ~380 subagents of subscription-native inference, $0 total.
+- **Biggest open risks:** **R2 external validity** (organic failures not yet elicitable — Phase 2) and
+  fault-map completeness (contradiction/debris/wrong_tool not yet interactive — Phase 3). R6 grader
+  circularity to be closed via Codex-as-cross-provider-grader (Phase 4, $0 via owner's subscription).
+- **Latest handoff:** `handoffs/0018-crossdomain-deception-gap.md`
 
 ---
 
@@ -370,3 +362,26 @@ a detect→rollback loop recovers — the C4/v0.1 headline metric), **irreversib
   **M2's ≥3-domain bar explicitly NOT claimed met** — only CONFERENCE_TRIP is wired). 124 tests green,
   ruff clean. **The honest artifact is stronger than the contaminated one: a fault-type-resolved
   observability map, not a single saturated number.**
+- **D-019 (2026-07-03/04, owner committed to a FULL RESEARCH PAPER — Phase 0 GO + Phase 1 + E1/E2):**
+  (a) **Prior-art verification GO with narrowed novelty:** a verify-and-read pass (2 independent
+  readers/paper + raw-PDF adjudication; fetch-echo caught and discarded) confirmed AEGIS (2509.14295)
+  and AgenTracer (2509.03312) already do injection→attribution-labels, and ReliabilityBench
+  (2601.06112) already built the live-corruption + state-oracle instrument. **The surviving novelty is
+  the FINDING (claim 3): attribution difficulty is fault-type-structured** — none of them stratify by
+  fault type or auditor information. Paper reframed finding-led (`docs/paper/framing.md`,
+  `docs/paper/related_work.md`). (b) **Three interactive domains** (`d2b.DOMAINS`): conference +
+  scheduling (`d2b/scheduling.py`) + review (`d2b/review.py`), each a 4-variant factory with an
+  event-log world-state validator and a DIFFERENT staleness deception (price / availability / CI).
+  (c) **Two integrity fixes, both regression-free on conference:** validator relaxed to
+  "confirmed-at-least-once" (the "latest-check" rule failed sincere agents that explore); staleness
+  injectors corrected to TRUE deceptions (swap only the value, keep the "(live)" tag) after the first
+  audit showed the "(cached)" tell made staleness ~0.5 blind-attributable. (d) **E1/E2 DONE — the
+  cross-domain result:** deception gap replicates **3/3** (staleness blind 0, oracle 0 everywhere);
+  deletion gap **2/2** (blind 0, de-leak 0, oracle 1.0; review cdrop null = D-014 redundancy);
+  omission (forget) is SALIENCE-DEPENDENT (blind 1.0 on the prominent conference step; ~0 on minor
+  steps; oracle only 0.38–0.88 — hypothesis: visible mainly when the trace contains the agent's
+  failed attempt; Phase-3 validity check). Honest framing = TWO robust regimes + a softer omission
+  case. 195 committed verdicts; `assets/blamegap_map.png`; M2 ≥3-domain bar met on the domains axis
+  (ROADMAP updated; v0.1 still un-tagged: tier panel conference-only, recovery one domain).
+  (e) **Phase-4 plan updated:** cross-provider grading via the owner's Codex subscription (OpenAI
+  models with repo access run `attribute.py` themselves) → Phase 4 becomes $0.
