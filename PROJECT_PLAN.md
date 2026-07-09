@@ -36,7 +36,7 @@ stop and re-align.
 - **Biggest open risks:** **R2 external validity** (organic failures not yet elicitable — Phase 2) and
   fault-map completeness (contradiction/debris/wrong_tool not yet interactive — Phase 3). R6 grader
   circularity to be closed via Codex-as-cross-provider-grader (Phase 4, $0 via owner's subscription).
-- **Latest handoff:** `handoffs/0018-crossdomain-deception-gap.md`
+- **Latest handoff:** `handoffs/0019-codex-audit-fixes.md`
 
 ---
 
