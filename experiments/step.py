@@ -29,9 +29,15 @@ FaultSpec, FaultType = d2b.FaultSpec, d2b.FaultType
 inject, sham_inject, redact = d2b.inject, d2b.sham_inject, d2b.redact_for_attribution
 interactive_rollout, scripted_policy_fn = d2b.interactive_rollout, d2b.scripted_policy_fn
 
-MAX_STEPS = 14
+MAX_STEPS = 14  # default cap; long-horizon tasks override via task.data["max_steps"]
 TERMINAL_TOOLS = ("finish", "send_itinerary", "post_agenda", "close_ticket", "close_incident",
                   "submit_batch")
+
+
+def _max_steps(domain: str, variant: int) -> int:
+    """Per-task step cap: long-horizon domains (big batches) need ~2N steps, not 14."""
+    task = d2b.DOMAINS[domain]["variants"][variant]
+    return int(getattr(task, "data", {}).get("max_steps", MAX_STEPS))
 
 
 def setup_and_injectors(condition: str, variant: int = 0, domain: str = "conference"):
@@ -145,7 +151,8 @@ def main() -> None:
         r = replay(state)
         obs = next((m for m in reversed(r.transcript) if m.role == "tool"), None)
         print("OBSERVATION:", obs.content if obs else "(no tool observation yet)")
-        done = tool in TERMINAL_TOOLS or len(state["decisions"]) >= MAX_STEPS
+        cap = _max_steps(domain, state.get("variant", 0))
+        done = tool in TERMINAL_TOOLS or len(state["decisions"]) >= cap
         if done:
             print("STATUS: done")
             print(f"RESULT: {'PASS' if r.result.ok else 'FAIL'} — {r.result.reason}")

@@ -43,6 +43,7 @@ from .faults import (
 from .fixtures import successful_flight_trajectory
 from .incident import INCIDENT_TASK, INCIDENT_VARIANTS, make_incident
 from .reconcile import RECONCILE_TASK, RECONCILE_VARIANTS, make_reconcile
+from .reconcile_long import RECONCILE_LONG_VARIANTS
 from .replay import Policy, evaluate, replay, replay_tail_policy, resume, scripted_policy
 from .review import REVIEW_TASK, REVIEW_VARIANTS, make_review
 from .rollout import Injector, Rollout, interactive_rollout, scripted_policy_fn
@@ -112,6 +113,20 @@ DOMAINS = {
             "list_transactions/submit_batch take no args."
         ),
     },
+    # long-horizon accumulation (8/24/48-txn batches ≈ up to ~100 interactive steps); reuses the
+    # reconcile tools/validator/injectors — variants carry n_txns + trap_depth for horizon scoring.
+    "reconcile_long": {
+        "variants": RECONCILE_LONG_VARIANTS,
+        "staleness": _reconcile.staleness_injector,
+        "contradiction": _reconcile.contradiction_injector,
+        "sham": _reconcile.sham_note_injector,
+        "debris": _reconcile.debris_injector,
+        "misexec": _reconcile.misexec_injector,
+        "arg_hints": (
+            "check_receipt & approve_txn & flag_txn take txn=<id>; "
+            "list_transactions/submit_batch take no args."
+        ),
+    },
 }
 
 __version__ = "0.0.0"
@@ -168,6 +183,7 @@ __all__ = [
     "make_incident",
     "RECONCILE_TASK",
     "RECONCILE_VARIANTS",
+    "RECONCILE_LONG_VARIANTS",
     "make_reconcile",
     "DOMAINS",
     # interactive rollout (multi-step, reacts to corrupted observations)
