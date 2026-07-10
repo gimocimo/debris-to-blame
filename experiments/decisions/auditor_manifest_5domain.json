@@ -1,0 +1,3026 @@
+[
+{
+"file": "experiments/decisions/states/staleness_v0_1.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "staleness",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states/staleness_v0_1.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "staleness",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states/staleness_v0_1.json",
+"arm": "rootcause",
+"domain": "conference",
+"condition": "staleness",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states/staleness_v0_2.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "staleness",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states/staleness_v0_2.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "staleness",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states/staleness_v0_2.json",
+"arm": "rootcause",
+"domain": "conference",
+"condition": "staleness",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states/staleness_v1_1.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "staleness",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states/staleness_v1_1.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "staleness",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states/staleness_v1_1.json",
+"arm": "rootcause",
+"domain": "conference",
+"condition": "staleness",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states/staleness_v1_2.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "staleness",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states/staleness_v1_2.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "staleness",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states/staleness_v1_2.json",
+"arm": "rootcause",
+"domain": "conference",
+"condition": "staleness",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states/staleness_v2_1.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "staleness",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states/staleness_v2_1.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "staleness",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states/staleness_v2_1.json",
+"arm": "rootcause",
+"domain": "conference",
+"condition": "staleness",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states/staleness_v2_2.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "staleness",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states/staleness_v2_2.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "staleness",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states/staleness_v2_2.json",
+"arm": "rootcause",
+"domain": "conference",
+"condition": "staleness",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states/staleness_v3_1.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "staleness",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states/staleness_v3_1.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "staleness",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states/staleness_v3_1.json",
+"arm": "rootcause",
+"domain": "conference",
+"condition": "staleness",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states/staleness_v3_2.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "staleness",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states/staleness_v3_2.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "staleness",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states/staleness_v3_2.json",
+"arm": "rootcause",
+"domain": "conference",
+"condition": "staleness",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states/misexec_v0_1.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "misexec",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states/misexec_v0_1.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "misexec",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states/misexec_v0_1.json",
+"arm": "rootcause",
+"domain": "conference",
+"condition": "misexec",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states/misexec_v0_2.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "misexec",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states/misexec_v0_2.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "misexec",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states/misexec_v0_2.json",
+"arm": "rootcause",
+"domain": "conference",
+"condition": "misexec",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states/misexec_v1_1.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "misexec",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states/misexec_v1_1.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "misexec",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states/misexec_v1_1.json",
+"arm": "rootcause",
+"domain": "conference",
+"condition": "misexec",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states/misexec_v1_2.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "misexec",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states/misexec_v1_2.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "misexec",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states/misexec_v1_2.json",
+"arm": "rootcause",
+"domain": "conference",
+"condition": "misexec",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states/misexec_v2_1.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "misexec",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states/misexec_v2_1.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "misexec",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states/misexec_v2_1.json",
+"arm": "rootcause",
+"domain": "conference",
+"condition": "misexec",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states/misexec_v2_2.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "misexec",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states/misexec_v2_2.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "misexec",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states/misexec_v2_2.json",
+"arm": "rootcause",
+"domain": "conference",
+"condition": "misexec",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states/misexec_v3_1.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "misexec",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states/misexec_v3_1.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "misexec",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states/misexec_v3_1.json",
+"arm": "rootcause",
+"domain": "conference",
+"condition": "misexec",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states/misexec_v3_2.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "misexec",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states/misexec_v3_2.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "misexec",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states/misexec_v3_2.json",
+"arm": "rootcause",
+"domain": "conference",
+"condition": "misexec",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states/forget-file_expense_report_v0_1.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "forget:file_expense_report",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states/forget-file_expense_report_v0_1.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "forget:file_expense_report",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states/forget-file_expense_report_v0_1.json",
+"arm": "rootcause",
+"domain": "conference",
+"condition": "forget:file_expense_report",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states/forget-file_expense_report_v0_2.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "forget:file_expense_report",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states/forget-file_expense_report_v0_2.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "forget:file_expense_report",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states/forget-file_expense_report_v0_2.json",
+"arm": "rootcause",
+"domain": "conference",
+"condition": "forget:file_expense_report",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states/forget-file_expense_report_v1_1.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "forget:file_expense_report",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states/forget-file_expense_report_v1_1.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "forget:file_expense_report",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states/forget-file_expense_report_v1_1.json",
+"arm": "rootcause",
+"domain": "conference",
+"condition": "forget:file_expense_report",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states/forget-file_expense_report_v1_2.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "forget:file_expense_report",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states/forget-file_expense_report_v1_2.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "forget:file_expense_report",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states/forget-file_expense_report_v1_2.json",
+"arm": "rootcause",
+"domain": "conference",
+"condition": "forget:file_expense_report",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states/forget-file_expense_report_v2_1.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "forget:file_expense_report",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states/forget-file_expense_report_v2_1.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "forget:file_expense_report",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states/forget-file_expense_report_v2_1.json",
+"arm": "rootcause",
+"domain": "conference",
+"condition": "forget:file_expense_report",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states/forget-file_expense_report_v2_2.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "forget:file_expense_report",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states/forget-file_expense_report_v2_2.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "forget:file_expense_report",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states/forget-file_expense_report_v2_2.json",
+"arm": "rootcause",
+"domain": "conference",
+"condition": "forget:file_expense_report",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states/forget-file_expense_report_v3_1.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "forget:file_expense_report",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states/forget-file_expense_report_v3_1.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "forget:file_expense_report",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states/forget-file_expense_report_v3_1.json",
+"arm": "rootcause",
+"domain": "conference",
+"condition": "forget:file_expense_report",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states/forget-file_expense_report_v3_2.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "forget:file_expense_report",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states/forget-file_expense_report_v3_2.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "forget:file_expense_report",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states/forget-file_expense_report_v3_2.json",
+"arm": "rootcause",
+"domain": "conference",
+"condition": "forget:file_expense_report",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states/cdrop-2_v0_1.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "cdrop:2",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states/cdrop-2_v0_1.json",
+"arm": "deleak",
+"domain": "conference",
+"condition": "cdrop:2",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states/cdrop-2_v0_1.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "cdrop:2",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states/cdrop-2_v0_2.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "cdrop:2",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states/cdrop-2_v0_2.json",
+"arm": "deleak",
+"domain": "conference",
+"condition": "cdrop:2",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states/cdrop-2_v0_2.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "cdrop:2",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states/cdrop-2_v1_1.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "cdrop:2",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states/cdrop-2_v1_1.json",
+"arm": "deleak",
+"domain": "conference",
+"condition": "cdrop:2",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states/cdrop-2_v1_1.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "cdrop:2",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states/cdrop-2_v1_2.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "cdrop:2",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states/cdrop-2_v1_2.json",
+"arm": "deleak",
+"domain": "conference",
+"condition": "cdrop:2",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states/cdrop-2_v1_2.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "cdrop:2",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states/cdrop-2_v2_1.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "cdrop:2",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states/cdrop-2_v2_1.json",
+"arm": "deleak",
+"domain": "conference",
+"condition": "cdrop:2",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states/cdrop-2_v2_1.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "cdrop:2",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states/cdrop-2_v2_2.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "cdrop:2",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states/cdrop-2_v2_2.json",
+"arm": "deleak",
+"domain": "conference",
+"condition": "cdrop:2",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states/cdrop-2_v2_2.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "cdrop:2",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states/cdrop-2_v3_1.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "cdrop:2",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states/cdrop-2_v3_1.json",
+"arm": "deleak",
+"domain": "conference",
+"condition": "cdrop:2",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states/cdrop-2_v3_1.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "cdrop:2",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states/cdrop-2_v3_2.json",
+"arm": "blind",
+"domain": "conference",
+"condition": "cdrop:2",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states/cdrop-2_v3_2.json",
+"arm": "deleak",
+"domain": "conference",
+"condition": "cdrop:2",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states/cdrop-2_v3_2.json",
+"arm": "policy",
+"domain": "conference",
+"condition": "cdrop:2",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_scheduling/staleness_v0_1.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "staleness",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_scheduling/staleness_v0_1.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "staleness",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_scheduling/staleness_v0_1.json",
+"arm": "rootcause",
+"domain": "scheduling",
+"condition": "staleness",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_scheduling/staleness_v0_2.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "staleness",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_scheduling/staleness_v0_2.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "staleness",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_scheduling/staleness_v0_2.json",
+"arm": "rootcause",
+"domain": "scheduling",
+"condition": "staleness",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_scheduling/staleness_v1_1.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "staleness",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_scheduling/staleness_v1_1.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "staleness",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_scheduling/staleness_v1_1.json",
+"arm": "rootcause",
+"domain": "scheduling",
+"condition": "staleness",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_scheduling/staleness_v1_2.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "staleness",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_scheduling/staleness_v1_2.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "staleness",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_scheduling/staleness_v1_2.json",
+"arm": "rootcause",
+"domain": "scheduling",
+"condition": "staleness",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_scheduling/staleness_v2_1.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "staleness",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_scheduling/staleness_v2_1.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "staleness",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_scheduling/staleness_v2_1.json",
+"arm": "rootcause",
+"domain": "scheduling",
+"condition": "staleness",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_scheduling/staleness_v2_2.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "staleness",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_scheduling/staleness_v2_2.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "staleness",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_scheduling/staleness_v2_2.json",
+"arm": "rootcause",
+"domain": "scheduling",
+"condition": "staleness",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_scheduling/staleness_v3_1.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "staleness",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_scheduling/staleness_v3_1.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "staleness",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_scheduling/staleness_v3_1.json",
+"arm": "rootcause",
+"domain": "scheduling",
+"condition": "staleness",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_scheduling/staleness_v3_2.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "staleness",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_scheduling/staleness_v3_2.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "staleness",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_scheduling/staleness_v3_2.json",
+"arm": "rootcause",
+"domain": "scheduling",
+"condition": "staleness",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_scheduling/misexec_v0_1.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "misexec",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_scheduling/misexec_v0_1.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "misexec",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_scheduling/misexec_v0_1.json",
+"arm": "rootcause",
+"domain": "scheduling",
+"condition": "misexec",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_scheduling/misexec_v0_2.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "misexec",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_scheduling/misexec_v0_2.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "misexec",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_scheduling/misexec_v0_2.json",
+"arm": "rootcause",
+"domain": "scheduling",
+"condition": "misexec",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_scheduling/misexec_v1_1.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "misexec",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_scheduling/misexec_v1_1.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "misexec",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_scheduling/misexec_v1_1.json",
+"arm": "rootcause",
+"domain": "scheduling",
+"condition": "misexec",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_scheduling/misexec_v1_2.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "misexec",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_scheduling/misexec_v1_2.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "misexec",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_scheduling/misexec_v1_2.json",
+"arm": "rootcause",
+"domain": "scheduling",
+"condition": "misexec",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_scheduling/misexec_v2_1.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "misexec",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_scheduling/misexec_v2_1.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "misexec",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_scheduling/misexec_v2_1.json",
+"arm": "rootcause",
+"domain": "scheduling",
+"condition": "misexec",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_scheduling/misexec_v2_2.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "misexec",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_scheduling/misexec_v2_2.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "misexec",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_scheduling/misexec_v2_2.json",
+"arm": "rootcause",
+"domain": "scheduling",
+"condition": "misexec",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_scheduling/misexec_v3_1.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "misexec",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_scheduling/misexec_v3_1.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "misexec",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_scheduling/misexec_v3_1.json",
+"arm": "rootcause",
+"domain": "scheduling",
+"condition": "misexec",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_scheduling/misexec_v3_2.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "misexec",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_scheduling/misexec_v3_2.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "misexec",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_scheduling/misexec_v3_2.json",
+"arm": "rootcause",
+"domain": "scheduling",
+"condition": "misexec",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_scheduling/forget-post_agenda_v0_1.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "forget:post_agenda",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_scheduling/forget-post_agenda_v0_1.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "forget:post_agenda",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_scheduling/forget-post_agenda_v0_1.json",
+"arm": "rootcause",
+"domain": "scheduling",
+"condition": "forget:post_agenda",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_scheduling/forget-post_agenda_v0_2.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "forget:post_agenda",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_scheduling/forget-post_agenda_v0_2.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "forget:post_agenda",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_scheduling/forget-post_agenda_v0_2.json",
+"arm": "rootcause",
+"domain": "scheduling",
+"condition": "forget:post_agenda",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_scheduling/forget-post_agenda_v1_1.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "forget:post_agenda",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_scheduling/forget-post_agenda_v1_1.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "forget:post_agenda",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_scheduling/forget-post_agenda_v1_1.json",
+"arm": "rootcause",
+"domain": "scheduling",
+"condition": "forget:post_agenda",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_scheduling/forget-post_agenda_v1_2.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "forget:post_agenda",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_scheduling/forget-post_agenda_v1_2.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "forget:post_agenda",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_scheduling/forget-post_agenda_v1_2.json",
+"arm": "rootcause",
+"domain": "scheduling",
+"condition": "forget:post_agenda",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_scheduling/forget-post_agenda_v2_1.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "forget:post_agenda",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_scheduling/forget-post_agenda_v2_1.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "forget:post_agenda",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_scheduling/forget-post_agenda_v2_1.json",
+"arm": "rootcause",
+"domain": "scheduling",
+"condition": "forget:post_agenda",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_scheduling/forget-post_agenda_v2_2.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "forget:post_agenda",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_scheduling/forget-post_agenda_v2_2.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "forget:post_agenda",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_scheduling/forget-post_agenda_v2_2.json",
+"arm": "rootcause",
+"domain": "scheduling",
+"condition": "forget:post_agenda",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_scheduling/forget-post_agenda_v3_1.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "forget:post_agenda",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_scheduling/forget-post_agenda_v3_1.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "forget:post_agenda",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_scheduling/forget-post_agenda_v3_1.json",
+"arm": "rootcause",
+"domain": "scheduling",
+"condition": "forget:post_agenda",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_scheduling/forget-post_agenda_v3_2.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "forget:post_agenda",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_scheduling/forget-post_agenda_v3_2.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "forget:post_agenda",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_scheduling/forget-post_agenda_v3_2.json",
+"arm": "rootcause",
+"domain": "scheduling",
+"condition": "forget:post_agenda",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_scheduling/cdrop-3_v0_1.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "cdrop:3",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_scheduling/cdrop-3_v0_1.json",
+"arm": "deleak",
+"domain": "scheduling",
+"condition": "cdrop:3",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_scheduling/cdrop-3_v0_1.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "cdrop:3",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_scheduling/cdrop-3_v0_2.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "cdrop:3",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_scheduling/cdrop-3_v0_2.json",
+"arm": "deleak",
+"domain": "scheduling",
+"condition": "cdrop:3",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_scheduling/cdrop-3_v0_2.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "cdrop:3",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_scheduling/cdrop-3_v1_1.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "cdrop:3",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_scheduling/cdrop-3_v1_1.json",
+"arm": "deleak",
+"domain": "scheduling",
+"condition": "cdrop:3",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_scheduling/cdrop-3_v1_1.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "cdrop:3",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_scheduling/cdrop-3_v1_2.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "cdrop:3",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_scheduling/cdrop-3_v1_2.json",
+"arm": "deleak",
+"domain": "scheduling",
+"condition": "cdrop:3",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_scheduling/cdrop-3_v1_2.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "cdrop:3",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_scheduling/cdrop-3_v2_1.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "cdrop:3",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_scheduling/cdrop-3_v2_1.json",
+"arm": "deleak",
+"domain": "scheduling",
+"condition": "cdrop:3",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_scheduling/cdrop-3_v2_1.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "cdrop:3",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_scheduling/cdrop-3_v2_2.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "cdrop:3",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_scheduling/cdrop-3_v2_2.json",
+"arm": "deleak",
+"domain": "scheduling",
+"condition": "cdrop:3",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_scheduling/cdrop-3_v2_2.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "cdrop:3",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_scheduling/cdrop-3_v3_1.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "cdrop:3",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_scheduling/cdrop-3_v3_1.json",
+"arm": "deleak",
+"domain": "scheduling",
+"condition": "cdrop:3",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_scheduling/cdrop-3_v3_1.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "cdrop:3",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_scheduling/cdrop-3_v3_2.json",
+"arm": "blind",
+"domain": "scheduling",
+"condition": "cdrop:3",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_scheduling/cdrop-3_v3_2.json",
+"arm": "deleak",
+"domain": "scheduling",
+"condition": "cdrop:3",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_scheduling/cdrop-3_v3_2.json",
+"arm": "policy",
+"domain": "scheduling",
+"condition": "cdrop:3",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_review/staleness_v0_1.json",
+"arm": "blind",
+"domain": "review",
+"condition": "staleness",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_review/staleness_v0_1.json",
+"arm": "policy",
+"domain": "review",
+"condition": "staleness",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_review/staleness_v0_1.json",
+"arm": "rootcause",
+"domain": "review",
+"condition": "staleness",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_review/staleness_v0_2.json",
+"arm": "blind",
+"domain": "review",
+"condition": "staleness",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_review/staleness_v0_2.json",
+"arm": "policy",
+"domain": "review",
+"condition": "staleness",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_review/staleness_v0_2.json",
+"arm": "rootcause",
+"domain": "review",
+"condition": "staleness",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_review/staleness_v1_1.json",
+"arm": "blind",
+"domain": "review",
+"condition": "staleness",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_review/staleness_v1_1.json",
+"arm": "policy",
+"domain": "review",
+"condition": "staleness",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_review/staleness_v1_1.json",
+"arm": "rootcause",
+"domain": "review",
+"condition": "staleness",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_review/staleness_v1_2.json",
+"arm": "blind",
+"domain": "review",
+"condition": "staleness",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_review/staleness_v1_2.json",
+"arm": "policy",
+"domain": "review",
+"condition": "staleness",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_review/staleness_v1_2.json",
+"arm": "rootcause",
+"domain": "review",
+"condition": "staleness",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_review/staleness_v2_1.json",
+"arm": "blind",
+"domain": "review",
+"condition": "staleness",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_review/staleness_v2_1.json",
+"arm": "policy",
+"domain": "review",
+"condition": "staleness",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_review/staleness_v2_1.json",
+"arm": "rootcause",
+"domain": "review",
+"condition": "staleness",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_review/staleness_v2_2.json",
+"arm": "blind",
+"domain": "review",
+"condition": "staleness",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_review/staleness_v2_2.json",
+"arm": "policy",
+"domain": "review",
+"condition": "staleness",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_review/staleness_v2_2.json",
+"arm": "rootcause",
+"domain": "review",
+"condition": "staleness",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_review/staleness_v3_1.json",
+"arm": "blind",
+"domain": "review",
+"condition": "staleness",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_review/staleness_v3_1.json",
+"arm": "policy",
+"domain": "review",
+"condition": "staleness",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_review/staleness_v3_1.json",
+"arm": "rootcause",
+"domain": "review",
+"condition": "staleness",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_review/staleness_v3_2.json",
+"arm": "blind",
+"domain": "review",
+"condition": "staleness",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_review/staleness_v3_2.json",
+"arm": "policy",
+"domain": "review",
+"condition": "staleness",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_review/staleness_v3_2.json",
+"arm": "rootcause",
+"domain": "review",
+"condition": "staleness",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_review/misexec_v0_1.json",
+"arm": "blind",
+"domain": "review",
+"condition": "misexec",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_review/misexec_v0_1.json",
+"arm": "policy",
+"domain": "review",
+"condition": "misexec",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_review/misexec_v0_1.json",
+"arm": "rootcause",
+"domain": "review",
+"condition": "misexec",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_review/misexec_v0_2.json",
+"arm": "blind",
+"domain": "review",
+"condition": "misexec",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_review/misexec_v0_2.json",
+"arm": "policy",
+"domain": "review",
+"condition": "misexec",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_review/misexec_v0_2.json",
+"arm": "rootcause",
+"domain": "review",
+"condition": "misexec",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_review/misexec_v1_1.json",
+"arm": "blind",
+"domain": "review",
+"condition": "misexec",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_review/misexec_v1_1.json",
+"arm": "policy",
+"domain": "review",
+"condition": "misexec",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_review/misexec_v1_1.json",
+"arm": "rootcause",
+"domain": "review",
+"condition": "misexec",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_review/misexec_v1_2.json",
+"arm": "blind",
+"domain": "review",
+"condition": "misexec",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_review/misexec_v1_2.json",
+"arm": "policy",
+"domain": "review",
+"condition": "misexec",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_review/misexec_v1_2.json",
+"arm": "rootcause",
+"domain": "review",
+"condition": "misexec",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_review/misexec_v2_1.json",
+"arm": "blind",
+"domain": "review",
+"condition": "misexec",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_review/misexec_v2_1.json",
+"arm": "policy",
+"domain": "review",
+"condition": "misexec",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_review/misexec_v2_1.json",
+"arm": "rootcause",
+"domain": "review",
+"condition": "misexec",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_review/misexec_v2_2.json",
+"arm": "blind",
+"domain": "review",
+"condition": "misexec",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_review/misexec_v2_2.json",
+"arm": "policy",
+"domain": "review",
+"condition": "misexec",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_review/misexec_v2_2.json",
+"arm": "rootcause",
+"domain": "review",
+"condition": "misexec",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_review/misexec_v3_1.json",
+"arm": "blind",
+"domain": "review",
+"condition": "misexec",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_review/misexec_v3_1.json",
+"arm": "policy",
+"domain": "review",
+"condition": "misexec",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_review/misexec_v3_1.json",
+"arm": "rootcause",
+"domain": "review",
+"condition": "misexec",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_review/misexec_v3_2.json",
+"arm": "blind",
+"domain": "review",
+"condition": "misexec",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_review/misexec_v3_2.json",
+"arm": "policy",
+"domain": "review",
+"condition": "misexec",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_review/misexec_v3_2.json",
+"arm": "rootcause",
+"domain": "review",
+"condition": "misexec",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_review/forget-close_ticket_v0_1.json",
+"arm": "blind",
+"domain": "review",
+"condition": "forget:close_ticket",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_review/forget-close_ticket_v0_1.json",
+"arm": "policy",
+"domain": "review",
+"condition": "forget:close_ticket",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_review/forget-close_ticket_v0_1.json",
+"arm": "rootcause",
+"domain": "review",
+"condition": "forget:close_ticket",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_review/forget-close_ticket_v0_2.json",
+"arm": "blind",
+"domain": "review",
+"condition": "forget:close_ticket",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_review/forget-close_ticket_v0_2.json",
+"arm": "policy",
+"domain": "review",
+"condition": "forget:close_ticket",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_review/forget-close_ticket_v0_2.json",
+"arm": "rootcause",
+"domain": "review",
+"condition": "forget:close_ticket",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_review/forget-close_ticket_v1_1.json",
+"arm": "blind",
+"domain": "review",
+"condition": "forget:close_ticket",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_review/forget-close_ticket_v1_1.json",
+"arm": "policy",
+"domain": "review",
+"condition": "forget:close_ticket",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_review/forget-close_ticket_v1_1.json",
+"arm": "rootcause",
+"domain": "review",
+"condition": "forget:close_ticket",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_review/forget-close_ticket_v1_2.json",
+"arm": "blind",
+"domain": "review",
+"condition": "forget:close_ticket",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_review/forget-close_ticket_v1_2.json",
+"arm": "policy",
+"domain": "review",
+"condition": "forget:close_ticket",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_review/forget-close_ticket_v1_2.json",
+"arm": "rootcause",
+"domain": "review",
+"condition": "forget:close_ticket",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_review/forget-close_ticket_v2_1.json",
+"arm": "blind",
+"domain": "review",
+"condition": "forget:close_ticket",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_review/forget-close_ticket_v2_1.json",
+"arm": "policy",
+"domain": "review",
+"condition": "forget:close_ticket",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_review/forget-close_ticket_v2_1.json",
+"arm": "rootcause",
+"domain": "review",
+"condition": "forget:close_ticket",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_review/forget-close_ticket_v2_2.json",
+"arm": "blind",
+"domain": "review",
+"condition": "forget:close_ticket",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_review/forget-close_ticket_v2_2.json",
+"arm": "policy",
+"domain": "review",
+"condition": "forget:close_ticket",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_review/forget-close_ticket_v2_2.json",
+"arm": "rootcause",
+"domain": "review",
+"condition": "forget:close_ticket",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_review/forget-close_ticket_v3_1.json",
+"arm": "blind",
+"domain": "review",
+"condition": "forget:close_ticket",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_review/forget-close_ticket_v3_1.json",
+"arm": "policy",
+"domain": "review",
+"condition": "forget:close_ticket",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_review/forget-close_ticket_v3_1.json",
+"arm": "rootcause",
+"domain": "review",
+"condition": "forget:close_ticket",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_review/forget-close_ticket_v3_2.json",
+"arm": "blind",
+"domain": "review",
+"condition": "forget:close_ticket",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_review/forget-close_ticket_v3_2.json",
+"arm": "policy",
+"domain": "review",
+"condition": "forget:close_ticket",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_review/forget-close_ticket_v3_2.json",
+"arm": "rootcause",
+"domain": "review",
+"condition": "forget:close_ticket",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_incident/staleness_v0_1.json",
+"arm": "blind",
+"domain": "incident",
+"condition": "staleness",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_incident/staleness_v0_1.json",
+"arm": "policy",
+"domain": "incident",
+"condition": "staleness",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_incident/staleness_v0_1.json",
+"arm": "rootcause",
+"domain": "incident",
+"condition": "staleness",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_incident/staleness_v0_2.json",
+"arm": "blind",
+"domain": "incident",
+"condition": "staleness",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_incident/staleness_v0_2.json",
+"arm": "policy",
+"domain": "incident",
+"condition": "staleness",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_incident/staleness_v0_2.json",
+"arm": "rootcause",
+"domain": "incident",
+"condition": "staleness",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_incident/staleness_v1_1.json",
+"arm": "blind",
+"domain": "incident",
+"condition": "staleness",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_incident/staleness_v1_1.json",
+"arm": "policy",
+"domain": "incident",
+"condition": "staleness",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_incident/staleness_v1_1.json",
+"arm": "rootcause",
+"domain": "incident",
+"condition": "staleness",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_incident/staleness_v1_2.json",
+"arm": "blind",
+"domain": "incident",
+"condition": "staleness",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_incident/staleness_v1_2.json",
+"arm": "policy",
+"domain": "incident",
+"condition": "staleness",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_incident/staleness_v1_2.json",
+"arm": "rootcause",
+"domain": "incident",
+"condition": "staleness",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_incident/staleness_v2_1.json",
+"arm": "blind",
+"domain": "incident",
+"condition": "staleness",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_incident/staleness_v2_1.json",
+"arm": "policy",
+"domain": "incident",
+"condition": "staleness",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_incident/staleness_v2_1.json",
+"arm": "rootcause",
+"domain": "incident",
+"condition": "staleness",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_incident/staleness_v2_2.json",
+"arm": "blind",
+"domain": "incident",
+"condition": "staleness",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_incident/staleness_v2_2.json",
+"arm": "policy",
+"domain": "incident",
+"condition": "staleness",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_incident/staleness_v2_2.json",
+"arm": "rootcause",
+"domain": "incident",
+"condition": "staleness",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_incident/staleness_v3_1.json",
+"arm": "blind",
+"domain": "incident",
+"condition": "staleness",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_incident/staleness_v3_1.json",
+"arm": "policy",
+"domain": "incident",
+"condition": "staleness",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_incident/staleness_v3_1.json",
+"arm": "rootcause",
+"domain": "incident",
+"condition": "staleness",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_incident/staleness_v3_2.json",
+"arm": "blind",
+"domain": "incident",
+"condition": "staleness",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_incident/staleness_v3_2.json",
+"arm": "policy",
+"domain": "incident",
+"condition": "staleness",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_incident/staleness_v3_2.json",
+"arm": "rootcause",
+"domain": "incident",
+"condition": "staleness",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_incident/misexec_v0_1.json",
+"arm": "blind",
+"domain": "incident",
+"condition": "misexec",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_incident/misexec_v0_1.json",
+"arm": "policy",
+"domain": "incident",
+"condition": "misexec",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_incident/misexec_v0_1.json",
+"arm": "rootcause",
+"domain": "incident",
+"condition": "misexec",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_incident/misexec_v0_2.json",
+"arm": "blind",
+"domain": "incident",
+"condition": "misexec",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_incident/misexec_v0_2.json",
+"arm": "policy",
+"domain": "incident",
+"condition": "misexec",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_incident/misexec_v0_2.json",
+"arm": "rootcause",
+"domain": "incident",
+"condition": "misexec",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_incident/misexec_v1_1.json",
+"arm": "blind",
+"domain": "incident",
+"condition": "misexec",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_incident/misexec_v1_1.json",
+"arm": "policy",
+"domain": "incident",
+"condition": "misexec",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_incident/misexec_v1_1.json",
+"arm": "rootcause",
+"domain": "incident",
+"condition": "misexec",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_incident/misexec_v1_2.json",
+"arm": "blind",
+"domain": "incident",
+"condition": "misexec",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_incident/misexec_v1_2.json",
+"arm": "policy",
+"domain": "incident",
+"condition": "misexec",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_incident/misexec_v1_2.json",
+"arm": "rootcause",
+"domain": "incident",
+"condition": "misexec",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_incident/misexec_v2_1.json",
+"arm": "blind",
+"domain": "incident",
+"condition": "misexec",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_incident/misexec_v2_1.json",
+"arm": "policy",
+"domain": "incident",
+"condition": "misexec",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_incident/misexec_v2_1.json",
+"arm": "rootcause",
+"domain": "incident",
+"condition": "misexec",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_incident/misexec_v2_2.json",
+"arm": "blind",
+"domain": "incident",
+"condition": "misexec",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_incident/misexec_v2_2.json",
+"arm": "policy",
+"domain": "incident",
+"condition": "misexec",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_incident/misexec_v2_2.json",
+"arm": "rootcause",
+"domain": "incident",
+"condition": "misexec",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_incident/misexec_v3_1.json",
+"arm": "blind",
+"domain": "incident",
+"condition": "misexec",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_incident/misexec_v3_1.json",
+"arm": "policy",
+"domain": "incident",
+"condition": "misexec",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_incident/misexec_v3_1.json",
+"arm": "rootcause",
+"domain": "incident",
+"condition": "misexec",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_incident/misexec_v3_2.json",
+"arm": "blind",
+"domain": "incident",
+"condition": "misexec",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_incident/misexec_v3_2.json",
+"arm": "policy",
+"domain": "incident",
+"condition": "misexec",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_incident/misexec_v3_2.json",
+"arm": "rootcause",
+"domain": "incident",
+"condition": "misexec",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_incident/forget-close_incident_v0_1.json",
+"arm": "blind",
+"domain": "incident",
+"condition": "forget:close_incident",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_incident/forget-close_incident_v0_1.json",
+"arm": "policy",
+"domain": "incident",
+"condition": "forget:close_incident",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_incident/forget-close_incident_v0_1.json",
+"arm": "rootcause",
+"domain": "incident",
+"condition": "forget:close_incident",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_incident/forget-close_incident_v0_2.json",
+"arm": "blind",
+"domain": "incident",
+"condition": "forget:close_incident",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_incident/forget-close_incident_v0_2.json",
+"arm": "policy",
+"domain": "incident",
+"condition": "forget:close_incident",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_incident/forget-close_incident_v0_2.json",
+"arm": "rootcause",
+"domain": "incident",
+"condition": "forget:close_incident",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_incident/forget-close_incident_v1_1.json",
+"arm": "blind",
+"domain": "incident",
+"condition": "forget:close_incident",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_incident/forget-close_incident_v1_1.json",
+"arm": "policy",
+"domain": "incident",
+"condition": "forget:close_incident",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_incident/forget-close_incident_v1_1.json",
+"arm": "rootcause",
+"domain": "incident",
+"condition": "forget:close_incident",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_incident/forget-close_incident_v1_2.json",
+"arm": "blind",
+"domain": "incident",
+"condition": "forget:close_incident",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_incident/forget-close_incident_v1_2.json",
+"arm": "policy",
+"domain": "incident",
+"condition": "forget:close_incident",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_incident/forget-close_incident_v1_2.json",
+"arm": "rootcause",
+"domain": "incident",
+"condition": "forget:close_incident",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_incident/forget-close_incident_v2_1.json",
+"arm": "blind",
+"domain": "incident",
+"condition": "forget:close_incident",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_incident/forget-close_incident_v2_1.json",
+"arm": "policy",
+"domain": "incident",
+"condition": "forget:close_incident",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_incident/forget-close_incident_v2_1.json",
+"arm": "rootcause",
+"domain": "incident",
+"condition": "forget:close_incident",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_incident/forget-close_incident_v2_2.json",
+"arm": "blind",
+"domain": "incident",
+"condition": "forget:close_incident",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_incident/forget-close_incident_v2_2.json",
+"arm": "policy",
+"domain": "incident",
+"condition": "forget:close_incident",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_incident/forget-close_incident_v2_2.json",
+"arm": "rootcause",
+"domain": "incident",
+"condition": "forget:close_incident",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_incident/forget-close_incident_v3_1.json",
+"arm": "blind",
+"domain": "incident",
+"condition": "forget:close_incident",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_incident/forget-close_incident_v3_1.json",
+"arm": "policy",
+"domain": "incident",
+"condition": "forget:close_incident",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_incident/forget-close_incident_v3_1.json",
+"arm": "rootcause",
+"domain": "incident",
+"condition": "forget:close_incident",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_incident/forget-close_incident_v3_2.json",
+"arm": "blind",
+"domain": "incident",
+"condition": "forget:close_incident",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_incident/forget-close_incident_v3_2.json",
+"arm": "policy",
+"domain": "incident",
+"condition": "forget:close_incident",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_incident/forget-close_incident_v3_2.json",
+"arm": "rootcause",
+"domain": "incident",
+"condition": "forget:close_incident",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_reconcile/staleness_v0_1.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "staleness",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_reconcile/staleness_v0_1.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "staleness",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_reconcile/staleness_v0_1.json",
+"arm": "rootcause",
+"domain": "reconcile",
+"condition": "staleness",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_reconcile/staleness_v0_2.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "staleness",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_reconcile/staleness_v0_2.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "staleness",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_reconcile/staleness_v0_2.json",
+"arm": "rootcause",
+"domain": "reconcile",
+"condition": "staleness",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_reconcile/staleness_v1_1.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "staleness",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_reconcile/staleness_v1_1.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "staleness",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_reconcile/staleness_v1_1.json",
+"arm": "rootcause",
+"domain": "reconcile",
+"condition": "staleness",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_reconcile/staleness_v1_2.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "staleness",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_reconcile/staleness_v1_2.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "staleness",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_reconcile/staleness_v1_2.json",
+"arm": "rootcause",
+"domain": "reconcile",
+"condition": "staleness",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_reconcile/staleness_v2_1.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "staleness",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_reconcile/staleness_v2_1.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "staleness",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_reconcile/staleness_v2_1.json",
+"arm": "rootcause",
+"domain": "reconcile",
+"condition": "staleness",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_reconcile/staleness_v2_2.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "staleness",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_reconcile/staleness_v2_2.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "staleness",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_reconcile/staleness_v2_2.json",
+"arm": "rootcause",
+"domain": "reconcile",
+"condition": "staleness",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_reconcile/staleness_v3_1.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "staleness",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_reconcile/staleness_v3_1.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "staleness",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_reconcile/staleness_v3_1.json",
+"arm": "rootcause",
+"domain": "reconcile",
+"condition": "staleness",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_reconcile/staleness_v3_2.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "staleness",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_reconcile/staleness_v3_2.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "staleness",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_reconcile/staleness_v3_2.json",
+"arm": "rootcause",
+"domain": "reconcile",
+"condition": "staleness",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_reconcile/misexec_v0_1.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "misexec",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_reconcile/misexec_v0_1.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "misexec",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_reconcile/misexec_v0_1.json",
+"arm": "rootcause",
+"domain": "reconcile",
+"condition": "misexec",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_reconcile/misexec_v0_2.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "misexec",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_reconcile/misexec_v0_2.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "misexec",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_reconcile/misexec_v0_2.json",
+"arm": "rootcause",
+"domain": "reconcile",
+"condition": "misexec",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_reconcile/misexec_v1_1.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "misexec",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_reconcile/misexec_v1_1.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "misexec",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_reconcile/misexec_v1_1.json",
+"arm": "rootcause",
+"domain": "reconcile",
+"condition": "misexec",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_reconcile/misexec_v1_2.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "misexec",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_reconcile/misexec_v1_2.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "misexec",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_reconcile/misexec_v1_2.json",
+"arm": "rootcause",
+"domain": "reconcile",
+"condition": "misexec",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_reconcile/misexec_v2_1.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "misexec",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_reconcile/misexec_v2_1.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "misexec",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_reconcile/misexec_v2_1.json",
+"arm": "rootcause",
+"domain": "reconcile",
+"condition": "misexec",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_reconcile/misexec_v2_2.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "misexec",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_reconcile/misexec_v2_2.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "misexec",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_reconcile/misexec_v2_2.json",
+"arm": "rootcause",
+"domain": "reconcile",
+"condition": "misexec",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_reconcile/misexec_v3_1.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "misexec",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_reconcile/misexec_v3_1.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "misexec",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_reconcile/misexec_v3_1.json",
+"arm": "rootcause",
+"domain": "reconcile",
+"condition": "misexec",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_reconcile/misexec_v3_2.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "misexec",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_reconcile/misexec_v3_2.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "misexec",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_reconcile/misexec_v3_2.json",
+"arm": "rootcause",
+"domain": "reconcile",
+"condition": "misexec",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_reconcile/forget-submit_batch_v0_1.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "forget:submit_batch",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_reconcile/forget-submit_batch_v0_1.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "forget:submit_batch",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_reconcile/forget-submit_batch_v0_1.json",
+"arm": "rootcause",
+"domain": "reconcile",
+"condition": "forget:submit_batch",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_reconcile/forget-submit_batch_v0_2.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "forget:submit_batch",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_reconcile/forget-submit_batch_v0_2.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "forget:submit_batch",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_reconcile/forget-submit_batch_v0_2.json",
+"arm": "rootcause",
+"domain": "reconcile",
+"condition": "forget:submit_batch",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_reconcile/forget-submit_batch_v1_1.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "forget:submit_batch",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_reconcile/forget-submit_batch_v1_1.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "forget:submit_batch",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_reconcile/forget-submit_batch_v1_1.json",
+"arm": "rootcause",
+"domain": "reconcile",
+"condition": "forget:submit_batch",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_reconcile/forget-submit_batch_v1_2.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "forget:submit_batch",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_reconcile/forget-submit_batch_v1_2.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "forget:submit_batch",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_reconcile/forget-submit_batch_v1_2.json",
+"arm": "rootcause",
+"domain": "reconcile",
+"condition": "forget:submit_batch",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_reconcile/forget-submit_batch_v2_1.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "forget:submit_batch",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_reconcile/forget-submit_batch_v2_1.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "forget:submit_batch",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_reconcile/forget-submit_batch_v2_1.json",
+"arm": "rootcause",
+"domain": "reconcile",
+"condition": "forget:submit_batch",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_reconcile/forget-submit_batch_v2_2.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "forget:submit_batch",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_reconcile/forget-submit_batch_v2_2.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "forget:submit_batch",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_reconcile/forget-submit_batch_v2_2.json",
+"arm": "rootcause",
+"domain": "reconcile",
+"condition": "forget:submit_batch",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_reconcile/forget-submit_batch_v3_1.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "forget:submit_batch",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_reconcile/forget-submit_batch_v3_1.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "forget:submit_batch",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_reconcile/forget-submit_batch_v3_1.json",
+"arm": "rootcause",
+"domain": "reconcile",
+"condition": "forget:submit_batch",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_reconcile/forget-submit_batch_v3_2.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "forget:submit_batch",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_reconcile/forget-submit_batch_v3_2.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "forget:submit_batch",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_reconcile/forget-submit_batch_v3_2.json",
+"arm": "rootcause",
+"domain": "reconcile",
+"condition": "forget:submit_batch",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_reconcile/cdrop-1_v0_1.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "cdrop:1",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_reconcile/cdrop-1_v0_1.json",
+"arm": "deleak",
+"domain": "reconcile",
+"condition": "cdrop:1",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_reconcile/cdrop-1_v0_1.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "cdrop:1",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_reconcile/cdrop-1_v0_2.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "cdrop:1",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_reconcile/cdrop-1_v0_2.json",
+"arm": "deleak",
+"domain": "reconcile",
+"condition": "cdrop:1",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_reconcile/cdrop-1_v0_2.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "cdrop:1",
+"variant": 0
+},
+{
+"file": "experiments/decisions/states_reconcile/cdrop-1_v1_1.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "cdrop:1",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_reconcile/cdrop-1_v1_1.json",
+"arm": "deleak",
+"domain": "reconcile",
+"condition": "cdrop:1",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_reconcile/cdrop-1_v1_1.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "cdrop:1",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_reconcile/cdrop-1_v1_2.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "cdrop:1",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_reconcile/cdrop-1_v1_2.json",
+"arm": "deleak",
+"domain": "reconcile",
+"condition": "cdrop:1",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_reconcile/cdrop-1_v1_2.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "cdrop:1",
+"variant": 1
+},
+{
+"file": "experiments/decisions/states_reconcile/cdrop-1_v2_1.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "cdrop:1",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_reconcile/cdrop-1_v2_1.json",
+"arm": "deleak",
+"domain": "reconcile",
+"condition": "cdrop:1",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_reconcile/cdrop-1_v2_1.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "cdrop:1",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_reconcile/cdrop-1_v2_2.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "cdrop:1",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_reconcile/cdrop-1_v2_2.json",
+"arm": "deleak",
+"domain": "reconcile",
+"condition": "cdrop:1",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_reconcile/cdrop-1_v2_2.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "cdrop:1",
+"variant": 2
+},
+{
+"file": "experiments/decisions/states_reconcile/cdrop-1_v3_1.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "cdrop:1",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_reconcile/cdrop-1_v3_1.json",
+"arm": "deleak",
+"domain": "reconcile",
+"condition": "cdrop:1",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_reconcile/cdrop-1_v3_1.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "cdrop:1",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_reconcile/cdrop-1_v3_2.json",
+"arm": "blind",
+"domain": "reconcile",
+"condition": "cdrop:1",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_reconcile/cdrop-1_v3_2.json",
+"arm": "deleak",
+"domain": "reconcile",
+"condition": "cdrop:1",
+"variant": 3
+},
+{
+"file": "experiments/decisions/states_reconcile/cdrop-1_v3_2.json",
+"arm": "policy",
+"domain": "reconcile",
+"condition": "cdrop:1",
+"variant": 3
+}
+]
