@@ -47,7 +47,10 @@ property of the **fault type**, and it replicates across all five:
 
 > The sharp claim is the **deception gap**: for a whole class of faults, *more rule/spec observability
 > does not help* — the corrupted observation fools the auditor exactly as it fooled the agent, so
-> post-hoc attribution needs re-verifiable **world state**, not better logs. The two new shapes add a
+> post-hoc attribution needs re-verifiable **world state**, not better logs. It is **model × effort
+> invariant**: re-audited across Fable 5 / Opus 4.8 / Sonnet 5 × {medium, max}, blind staleness
+> attribution is 1/102 and oracle 0/99 — no model at any effort closes it; only the partial
+> root-cause *recovery* varies, and by model (Fable ~0.65 vs Opus/Sonnet ~0.25), not by effort. The two new shapes add a
 > limit: outcome-informed **root-cause** reasoning recovers deceptions on pick-then-finalize tasks but
 > **fails on both a diagnostic chain and an accumulation loop** (staleness 0/8 on each), where an
 > honest alternative explanation is equally available. Dumb baselines (grep/recency) always cry wolf (100%

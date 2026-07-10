@@ -89,6 +89,19 @@ def main() -> None:
         flag = "" if (bn and b / bn <= 0.15 and pn and p / pn <= 0.15) else "  <-- CHECK"
         print(f"  {tier:20} blind {b}/{bn}  oracle {p}/{pn}{flag}")
 
+    out = {}
+    for tier in tiers:
+        row = {}
+        for fam, arms in order:
+            for arm in arms:
+                a, n = agg(fam, arm, tier)
+                if n:
+                    row[f"{fam}:{arm}"] = {"attr": a, "n": n}
+        out[tier] = row
+    Path("results").mkdir(exist_ok=True)
+    Path("results/auditor_matrix.json").write_text(json.dumps(out, indent=2))
+    print("\nwrote results/auditor_matrix.json")
+
 
 if __name__ == "__main__":
     main()

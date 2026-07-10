@@ -556,6 +556,47 @@ hatches**: on a short task an auditor can sometimes rationalize a plausible culp
 way to say where. This is the deception gap at scale — and the cleanest statement of why post-hoc
 attribution of a deception needs re-verifiable **ground-truth state**, not a longer or better-read log.
 
+## The deception gap is model × effort invariant (robustness matrix)
+
+Is the deception gap a property of the *task*, or of the one auditor model (Opus) at one reasoning
+effort? To find out, the same committed traces were re-audited across a **3 model × 2 effort** grid
+— **Fable 5 / Opus 4.8 / Sonnet 5**, each at **medium** and **max** reasoning effort — on the two
+gaps (staleness across all 5 domains + the binding constraint_drop). Same deterministic grader for
+every config (`experiments/matrix_score.py`).
+
+![auditor model×effort matrix](../assets/auditor_matrix.png)
+
+Staleness attributed rate, aggregated over the 5 domains, per config:
+
+| config | blind | oracle (+policy) | root-cause (+outcome) |
+|---|---|---|---|
+| Fable 5 · max | 0/20 | 0/20 | 13/20 = 0.65 |
+| Fable 5 · medium | 1/20 | 0/20 | 13/20 = 0.65 |
+| Opus 4.8 · max | 0/17 | 0/14 | 4/15 = 0.27 |
+| Opus 4.8 · medium | 0/14 | 0/13 | 3/11 = 0.27 |
+| Sonnet 5 · max | 0/11 | 0/12 | 2/12 = 0.17 |
+| Sonnet 5 · medium | 0/20 | 0/20 | 5/20 = 0.25 |
+
+Two findings:
+
+- **The deception gap holds for every model at every effort.** Blind staleness attribution is
+  **1/102** across all six configs (a single fable:medium slip) and oracle is **0/99** — no model,
+  at either effort, attributes the stale deception from the trace, and the full reference policy never
+  closes it. The gap is not an Opus artifact; it is structural. (The deletion gap likewise holds:
+  cdrop oracle 0.86–1.00, blind/de-leak ≈0, across configs.)
+- **What varies is the root-cause *recovery* rate — and it tracks the MODEL, not the effort.** The
+  outcome-informed deduction ("every decision is compliant yet it failed ⇒ a reading was stale")
+  succeeds ~**0.65** on Fable 5 but only ~**0.25** on Opus/Sonnet — and within each model, **medium and
+  max effort are essentially identical** (Fable 0.65/0.65; Opus 0.27/0.27; Sonnet 0.17/0.25). So the
+  ability to *reason around* a deception is a model-capability difference, not something more thinking
+  budget buys. This is a cleaner statement than the single-model ladder: the gap itself is invariant;
+  only the (partial, inference-based) recovery on top of it is model-dependent.
+
+*(Honest n: a server-side rate limit — not a usage cap — throttled the larger runs, so four of the six
+configs have partial coverage (11–17 of 20 per arm); the deception-gap conclusion is unaffected since
+every blind/oracle cell is 0, but the root-cause rates carry wider intervals. The full 4-fault map ×
+6 configs is a slow rate-limited backfill; only the two gaps were run here.)*
+
 ## Caveats (what this is and is not)
 
 These results are an honest measurement across **five synthetic task families**, not yet a

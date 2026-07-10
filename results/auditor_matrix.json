@@ -1,0 +1,158 @@
+{
+  "fable:max": {
+    "staleness:blind": {
+      "attr": 0,
+      "n": 20
+    },
+    "staleness:policy": {
+      "attr": 0,
+      "n": 20
+    },
+    "staleness:rootcause": {
+      "attr": 13,
+      "n": 20
+    },
+    "cdrop:blind": {
+      "attr": 0,
+      "n": 12
+    },
+    "cdrop:deleak": {
+      "attr": 2,
+      "n": 12
+    },
+    "cdrop:policy": {
+      "attr": 12,
+      "n": 12
+    }
+  },
+  "fable:medium": {
+    "staleness:blind": {
+      "attr": 1,
+      "n": 20
+    },
+    "staleness:policy": {
+      "attr": 0,
+      "n": 20
+    },
+    "staleness:rootcause": {
+      "attr": 13,
+      "n": 20
+    },
+    "cdrop:blind": {
+      "attr": 4,
+      "n": 12
+    },
+    "cdrop:deleak": {
+      "attr": 1,
+      "n": 12
+    },
+    "cdrop:policy": {
+      "attr": 12,
+      "n": 12
+    }
+  },
+  "opus:max": {
+    "staleness:blind": {
+      "attr": 0,
+      "n": 17
+    },
+    "staleness:policy": {
+      "attr": 0,
+      "n": 14
+    },
+    "staleness:rootcause": {
+      "attr": 4,
+      "n": 15
+    },
+    "cdrop:blind": {
+      "attr": 0,
+      "n": 7
+    },
+    "cdrop:deleak": {
+      "attr": 0,
+      "n": 6
+    },
+    "cdrop:policy": {
+      "attr": 6,
+      "n": 7
+    }
+  },
+  "opus:medium": {
+    "staleness:blind": {
+      "attr": 0,
+      "n": 14
+    },
+    "staleness:policy": {
+      "attr": 0,
+      "n": 13
+    },
+    "staleness:rootcause": {
+      "attr": 3,
+      "n": 11
+    },
+    "cdrop:blind": {
+      "attr": 0,
+      "n": 11
+    },
+    "cdrop:deleak": {
+      "attr": 0,
+      "n": 12
+    },
+    "cdrop:policy": {
+      "attr": 11,
+      "n": 11
+    }
+  },
+  "sonnet:max": {
+    "staleness:blind": {
+      "attr": 0,
+      "n": 11
+    },
+    "staleness:policy": {
+      "attr": 0,
+      "n": 12
+    },
+    "staleness:rootcause": {
+      "attr": 2,
+      "n": 12
+    },
+    "cdrop:blind": {
+      "attr": 0,
+      "n": 2
+    },
+    "cdrop:deleak": {
+      "attr": 0,
+      "n": 3
+    },
+    "cdrop:policy": {
+      "attr": 3,
+      "n": 3
+    }
+  },
+  "sonnet:medium": {
+    "staleness:blind": {
+      "attr": 0,
+      "n": 20
+    },
+    "staleness:policy": {
+      "attr": 0,
+      "n": 20
+    },
+    "staleness:rootcause": {
+      "attr": 5,
+      "n": 20
+    },
+    "cdrop:blind": {
+      "attr": 2,
+      "n": 10
+    },
+    "cdrop:deleak": {
+      "attr": 0,
+      "n": 8
+    },
+    "cdrop:policy": {
+      "attr": 8,
+      "n": 8
+    }
+  }
+}

@@ -97,6 +97,50 @@ def main() -> None:
     if hpath.exists():
         _horizon_figure(json.loads(hpath.read_text()))
 
+    mpath = R / "auditor_matrix.json"
+    if mpath.exists():
+        _matrix_figure(json.loads(mpath.read_text()))
+
+
+def _matrix_figure(m: dict) -> None:
+    """Model×effort auditor matrix: does the staleness deception gap survive across configs?
+
+    Grouped bars per config: staleness blind / oracle / root-cause attributed rate. Blind and oracle
+    stay ≈0 for every model at every effort (the gap is model/effort-invariant); only root-cause
+    recovery varies — and by MODEL (Fable > Opus ≈ Sonnet), not by effort."""
+    configs = sorted(m, key=lambda t: (t.split(":")[0], t.split(":")[1]))
+
+    def rate(tier, key):
+        c = m[tier].get(key)
+        return (c["attr"] / c["n"]) if c else 0.0
+
+    fig, ax = plt.subplots(figsize=(9.5, 4.6))
+    xs = list(range(len(configs)))
+    w = 0.26
+    series = [("staleness:blind", BAD, "blind (trace only)"),
+              ("staleness:policy", GOOD, "oracle (+ full policy)"),
+              ("staleness:rootcause", "#7c3aed", "root-cause (+ outcome)")]
+    for i, (key, color, label) in enumerate(series):
+        vals = [rate(t, key) for t in configs]
+        bars = ax.bar([x + (i - 1) * w for x in xs], vals, width=w, color=color, label=label)
+        for b in bars:
+            ax.text(b.get_x() + b.get_width() / 2, b.get_height() + 0.02, f"{b.get_height():.2f}",
+                    ha="center", fontsize=7.5, fontweight="bold")
+    ax.set_xticks(xs)
+    ax.set_xticklabels(configs, rotation=18, ha="right", fontsize=9)
+    ax.set_ylim(0, 1.12)
+    ax.set_yticks([0, 0.5, 1.0])
+    ax.set_ylabel("staleness attributed rate")
+    ax.set_title("The deception gap is model × effort invariant\n"
+                 "blind & oracle ≈ 0 for every config; only root-cause recovery varies — by MODEL, "
+                 "not effort")
+    ax.spines[["top", "right"]].set_visible(False)
+    ax.legend(frameon=False, ncol=3, loc="upper center", fontsize=8.5)
+    fig.tight_layout()
+    out = ROOT / "assets" / "auditor_matrix.png"
+    fig.savefig(out, dpi=140, bbox_inches="tight")
+    print(f"wrote {out.relative_to(ROOT)}")
+
 
 def _horizon_figure(h: dict) -> None:
     """reconcile_long: attributing one stale approval in an N-txn trace (needle in a long trace).
