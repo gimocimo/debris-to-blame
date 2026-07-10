@@ -89,11 +89,13 @@ python3 scripts/make_figure.py     # regenerate the figure above from results/
 M2's exit bar (sham-controlled degradation + a measured attribution gap in ≥3 domains) is exceeded**:
 **five** multi-step domains (conference, scheduling, review, incident, reconcile) are wired into the
 interactive loop, with the deception gap replicating **5/5** and the deletion gap **3/3** where it
-bites (220 unit tests green; every number replays from committed data; audited by an external Codex
-review, findings fixed). Honest partials: the cross-*tier* panel exists only for conference cdrop;
-recovery is one domain; long-horizon (tens–hundreds of steps) and external validity remain open.
-Next: full 6-fault map + attribution-method re-ranking (Phase 3), external validity (Phase 2),
-cross-provider grader (Phase 4). See [`PROJECT_PLAN.md`](PROJECT_PLAN.md) (decision log),
+bites (269 unit tests green; every number replays from committed data; audited by an external Codex
+review, findings fixed). A sixth setting, `reconcile_long`, scales the loop to **~100-step** batches:
+in a long deceptive trace the stale needle is **unlocalizable** — blind sees nothing at any length,
+and an outcome-informed root-cause auditor recovers only "*a* receipt was stale" (~15%, horizon-flat),
+never which of the N transactions (genuine localization **0/8** at N=8/24/48). Honest partials: the
+cross-*tier* panel exists only for conference cdrop; recovery is one domain; a cross-family Codex
+grader pass is packaged and pending. See [`PROJECT_PLAN.md`](PROJECT_PLAN.md) (decision log),
 [`ROADMAP.md`](ROADMAP.md) (milestones), [`docs/results.md`](docs/results.md) (results + caveats).
 
 ### Design constraints

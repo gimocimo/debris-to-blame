@@ -1,0 +1,50 @@
+{
+  "8:blind": {
+    "genuine_loc": 0,
+    "mechanism": 0,
+    "named_trap_raw": 0,
+    "detect": 0,
+    "n": 8,
+    "chance": 0.125
+  },
+  "8:rootcause": {
+    "genuine_loc": 0,
+    "mechanism": 1,
+    "named_trap_raw": 2,
+    "detect": 3,
+    "n": 8,
+    "chance": 0.125
+  },
+  "24:blind": {
+    "genuine_loc": 0,
+    "mechanism": 0,
+    "named_trap_raw": 0,
+    "detect": 1,
+    "n": 8,
+    "chance": 0.041666666666666664
+  },
+  "24:rootcause": {
+    "genuine_loc": 0,
+    "mechanism": 2,
+    "named_trap_raw": 0,
+    "detect": 3,
+    "n": 8,
+    "chance": 0.041666666666666664
+  },
+  "48:blind": {
+    "genuine_loc": 0,
+    "mechanism": 0,
+    "named_trap_raw": 0,
+    "detect": 0,
+    "n": 8,
+    "chance": 0.020833333333333332
+  },
+  "48:rootcause": {
+    "genuine_loc": 0,
+    "mechanism": 1,
+    "named_trap_raw": 0,
+    "detect": 1,
+    "n": 8,
+    "chance": 0.020833333333333332
+  }
+}

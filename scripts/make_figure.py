@@ -93,6 +93,49 @@ def main() -> None:
     if rpath.exists():
         _recovery_figure(json.loads(rpath.read_text()))
 
+    hpath = R / "reconcile_long_horizon.json"
+    if hpath.exists():
+        _horizon_figure(json.loads(hpath.read_text()))
+
+
+def _horizon_figure(h: dict) -> None:
+    """reconcile_long: attributing one stale approval in an N-txn trace (needle in a long trace).
+
+    x = horizon N (log); y = rate. Blind detect ≈ 0 (deception invisible at any length); root-cause
+    recovers only the MECHANISM in the abstract ("a receipt was stale") at a low, horizon-flat rate,
+    and GENUINE localization (right txn AND reason) is 0 at every N — the needle is unfindable.
+    The raw named-trap line is confabulation-inflated (auditor invents a false 'blocked' theory that
+    coincidentally hits the trap) and only at the shortest horizon."""
+    ns = sorted({int(k.split(":")[0]) for k in h})
+
+    def series(arm: str, field: str):
+        return [h[f"{n}:{arm}"][field] / h[f"{n}:{arm}"]["n"] for n in ns]
+
+    fig, ax = plt.subplots(figsize=(7.4, 4.6))
+    ax.plot(ns, series("rootcause", "mechanism"), "-o", color="#e08a3c", lw=2,
+            label="root-cause names 'stale' mechanism (abstract)")
+    ax.plot(ns, series("rootcause", "genuine_loc"), "-o", color="#7c3aed", lw=2,
+            label="root-cause GENUINE localization (txn + reason)")
+    ax.plot(ns, series("rootcause", "named_trap_raw"), "--^", color="#b8a3e0", lw=1.4,
+            label="named trap txn (raw; incl. confabulation)")
+    ax.plot(ns, series("blind", "detect"), "-s", color=BAD, lw=1.6,
+            label="blind detects any problem")
+    ax.plot(ns, [1.0 / n for n in ns], ":", color="#6b7280", lw=1.5, label="chance = 1/N")
+    ax.set_xscale("log")
+    ax.set_xticks(ns)
+    ax.set_xticklabels([str(n) for n in ns])
+    ax.set_ylim(-0.03, 1.02)
+    ax.set_xlabel("batch length N (≈ 2N interactive steps)")
+    ax.set_ylabel("rate over 8 traces/length")
+    ax.set_title("reconcile_long — a stale needle in a long trace is unlocalizable\n"
+                 "blind sees nothing; root-cause recovers only 'a receipt was stale', not which")
+    ax.spines[["top", "right"]].set_visible(False)
+    ax.legend(frameon=False, fontsize=8, loc="upper right")
+    fig.tight_layout()
+    out = ROOT / "assets" / "reconcile_long_horizon.png"
+    fig.savefig(out, dpi=140, bbox_inches="tight")
+    print(f"wrote {out.relative_to(ROOT)}")
+
 
 def _bars(ax, labels, vals, colors, title):
     ax.bar(labels, vals, color=colors, width=0.62)
